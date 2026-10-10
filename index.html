@@ -1,17 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Teacher Cris</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Cris | Clases Particulares de Inglés Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-<h1>Teacher Cris</h1>
+    <!-- Header / Navegación -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-indigo-600 tracking-tight">Teacher Cris</span>
+            <a href="#contacto" class="bg-indigo-600 text-white px-5 py-2.5 rounded-full font-medium hover:bg-indigo-700 transition">Reserva tu Clase</a>
+        </div>
+    </header>
 
-<h2>CELTA | TOEIC 990 | C2 English</h2>
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="text-indigo-600 font-semibold tracking-wide uppercase text-sm">Clases de Inglés Online</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-6 leading-tight">
+                Habla inglés con confianza y a tu propio ritmo
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                Clases particulares y personalizadas para adultos y profesionales. Pierde el miedo a hablar, mejora tu fluidez y alcanza tus metas académicas o laborales.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#contacto" class="text-center bg-indigo-600 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-indigo-700 transition">
+                    Empezar Ahora
+                </a>
+                <a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="text-center bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-emerald-600 transition flex items-center justify-center gap-2">
+                    <i class="fab font-bold fa-whatsapp text-xl"></i> Hablar por WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                <img src="images/foto-cris.jpg" alt="Teacher Cris" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
 
-<p>Welcome to teachercris.online</p>
+    <!-- Ventajas / Especialidades -->
+    <section class="bg-white py-16 border-y border-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">¿En qué te puedo ayudar?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inglés de Conversación</h3>
+                    <p class="text-slate-600">Gana fluidez, mejora tu pronunciación y pierde la vergüenza de hablar en situaciones reales de la vida cotidiana.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Business English</h3>
+                    <p class="text-slate-600">Prepara tu currículum, entrevistas de trabajo, presentaciones profesionales y reuniones de negocios con éxito.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Preparación de Exámenes</h3>
+                    <p class="text-slate-600">Estrategias y apoyo estructurado para preparar tus exámenes oficiales (Cambridge, IELTS, EOI, etc.).</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p>Website under construction.</p>
+    <!-- Sobre Mí -->
+    <section class="max-w-4xl mx-auto px-4 py-16 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 mb-6">Sobre Mí</h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+            ¡Hola! Soy Cris. Mi objetivo es acompañarte en tu aprendizaje del inglés de una forma práctica, cercana y estructurada. Adaptamos las sesiones 100% a tus necesidades y ritmo de vida para que consigas resultados desde la primera clase.
+        </p>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="bg-indigo-900 text-white py-16">
+        <div class="max-w-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Reserva tu clase o pide información</h2>
+            <p class="text-indigo-200 text-center mb-8">Escríbeme un mensaje directo y me pondré en contacto contigo en menos de 24 horas.</p>
+            
+            <form action="https://formspree.io/f/TU_ID_FORMSPREE" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nombre completo</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Correo electrónico</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">¿Qué te gustaría mejorar?</label>
+                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Cuéntame un poco sobre tu nivel actual y tus objetivos..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-white text-indigo-900 font-bold py-3.5 rounded-lg hover:bg-indigo-50 transition">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <p>&copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online</p>
+    </footer>
 
 </body>
 </html>

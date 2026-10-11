@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Cris | C1 Advanced Pro Grammar Practice</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
+        .card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #4f46e5; position: relative; }
+        .brand-header { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; color: #4f46e5; letter-spacing: -0.5px; }
+        .question { font-size: 1.15rem; margin-bottom: 20px; min-height: 110px; display: flex; align-items: center; justify-content: center; line-height: 1.7; color: #2c3e50; text-align: left; background: #f9fbff; padding: 25px; border-radius: 12px; border: 1px solid #e1e8ed; }
+        .type-tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; color: white; text-transform: uppercase; cursor: help; }
+        .tag-mixed { background: #00a8ff; } .tag-inv { background: #e67e22; } .tag-nuance { background: #6c5ce7; }
+        input[type="text"] { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid #ced6e0; border-radius: 10px; box-sizing: border-box; outline: none; margin-bottom: 10px; }
+        #feedback { height: 30px; margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; }
+        .correct { color: #27ae60; } .wrong { color: #e74c3c; }
+        .ans-text, .hint-text { margin: 10px 0; font-weight: bold; color: #2f3542; display: none; padding: 15px; border-radius: 10px; }
+        .ans-text { background: #eef2f7; border: 1px dashed #2c3e50; }
+        .explanation-box { background: #fff9db; padding: 20px; border-radius: 10px; text-align: left; font-size: 0.95rem; margin-top: 15px; display: none; border-left: 5px solid #f1c40f; line-height: 1.6; max-height: 250px; overflow-y: auto; }
+        .explanation-header { color: #946c00; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+        .visible { display: block !important; }
+        .stats-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px; font-weight: 600; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; gap: 8px; }
+        button { padding: 12px 15px; cursor: pointer; border: none; border-radius: 8px; background: #4f46e5; color: white; font-weight: 600; flex: 1; transition: 0.2s; }
+        button:hover { background: #4338ca; }
+        .check-btn { background: #27ae60; width: 100%; margin-bottom: 15px; font-size: 1.1rem; flex: none; }
+        .check-btn:hover { background: #219653; }
+        #ruleModal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: left; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
+        #final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+<div id="ruleModal">    
+    <div class="modal-content">        
+        <span class="close-modal" onclick="closeModal()">&times;</span>        
+        <h3 id="modalTitle" style="margin-top:0;">Rule Reference</h3>        
+        <p id="modalText"></p>    </div>
+</div>
+<div class="card-container">    
+    <div id="final-screen">        
+        <h1 style="color: #27ae60;">Session Complete! 🎓</h1>        
+        <p id="final-stats" style="font-size: 1.2rem; color: #2c3e50;"></p>        
+        <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>    
+    </div>    
+    
+    <div class="brand-header">Teacher Cris <span style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block;">Advanced Grammar Practice</span></div>
+
+    <div class="stats-row">        
+        <div id="pg">Task 1 of 40</div>        
+        <div>            
+            <span id="score-display" style="margin-right: 15px; color: #27ae60;">Correct: 0</span>            
+            <span id="streak-count" style="color: #e67e22;">Streak: 0</span>        
+        </div>    
+    </div>        
+    <div id="tagDisplay" onclick="openModal()"></div>    
+    <div class="question" id="q">Loading...</div>        
+    <input type="text" id="userInput" placeholder="Type answer(s)..." autocomplete="off">    
+    <div id="feedback"></div>        
+    <button class="check-btn" onclick="checkAnswer()">Verify (Enter)</button>        
+    <div id="hintBox" class="hint-text"></div>    
+    <div id="a" class="ans-text"></div>    
+    <div id="expl" class="explanation-box"></div>    
+    <div class="controls">        
+        <button id="pBtn" onclick="prev()">← Previous</button>        
+        <button onclick="showHint()">Hint 💡</button>        
+        <button onclick="revealAnswer()">Show Answer 👁️</button>        
+        <button id="nBtn" onclick="next()">Next →</button>    
+    </div>
+</div>
+
+<script>    
+    const rules = {        
+        "tag-inv": { title: "Conditionals Inversion", text: "In formal English, we can replace 'if' by inverting the subject and the auxiliary verb.<br><br>• <b>1st:</b> 'Should you need' (If you should need).<br>• <b>2nd:</b> 'Were I you' (If I were you) or 'Were we to go'.<br>• <b>3rd:</b> 'Had I known' (If I had known)." },        
+        "tag-mixed": { title: "Mixed Conditionals", text: "Used when the 'if' time and 'result' time are different.<br><br>• <b>Mixed 3/2:</b> If [Past Hypothetical], then [Present Result]. (e.g. If I hadn't eaten so much, I wouldn't feel sick now).<br>• <b>Mixed 2/3:</b> If [Present/Permanent State], then [Past Result]. (e.g. If I were taller, I would have made the team last year)." },        
+        "tag-nuance": { title: "Pragmatic Nuance", text: "At C1 level, conditionals are used for more than just facts. They express:<br><br>• <b>Politeness:</b> 'If you will wait...'<br>• <b>Criticism:</b> 'If you would stop talking...'<br>• <b>Negotiation:</b> 'I'll help if it will make you happy.'" }    
+    };    
+    
+    const cards = [    
+        { q: "If you (will / can) take a seat in the waiting room, the dentist will call you.", a: ["will"], h: "Courtesy.", expl: "<strong>The Polite 'Will'.</strong> In professional English, 'will' here isn't about the future; it's a polite request for <em>willingness</em>. <br><br><strong>Note:</strong> It's like saying 'Si tiene a bien...' rather than a simple 'Si se sienta...'.", tag: "tag-nuance" },    
+        { q: "All right. I’ll give up smoking if it (make) you happy.", a: ["will make"], h: "Resultative.", expl: "<strong>Resultative 'Will'.</strong> Normally, we don't use 'will' after 'if'. However, if the 'if-clause' is actually the <em>result</em> of the first action, 'will' is required. <br><br><strong>Logic:</strong> 'I will quit now <em>on the condition that</em> it leads to your happiness later.'", tag: "tag-nuance" },    
+        { q: "If I (not meet) Julia last year, we (not be) married now.", a: ["hadn't met wouldn't be", "had not met would not be", "hadn't met would not be", "had not met wouldn't be"], h: "Past event, present state.", expl: "<strong>Mixed Conditional (3/2).</strong> This links a <em>past event</em> (meeting Julia) with a <em>present state</em> (being married). <br><br><strong>Spanish Tip:</strong> Matches 'Si no hubiera conocido... no estaríamos...'. Use Past Perfect for the past and 'would' for the now.", tag: "tag-mixed" },    
+        { q: "If Anastasia (not need) this book for her PhD, she (never buy) it.", a: ["didn't need would never have bought", "did not need would never have bought", "didn't need would never've bought"], h: "Status vs Action.", expl: "<strong>Mixed Conditional (2/3).</strong> This describes how a <em>permanent state</em> (not needing the book) would have changed a <em>specific past action</em> (buying it). <br><br><strong>Logic:</strong> Use the 2nd conditional for the 'always' part and 3rd for the 'back then' part.", tag: "tag-mixed" },    
+        { q: "Had she (ask) me, I (tell) her to go home.", a: ["asked would have told", "asked would've told"], h: "3rd Inversion.", expl: "<strong>3rd Conditional Inversion.</strong> A very formal version of 'If she had asked'. <br><br><strong>Structure:</strong> We delete 'If' and move 'Had' to the front. This is high-level 'Exam English' and is very common in C1 Reading and Use of English parts.", tag: "tag-inv" },    
+        { q: "Were we (close) the department, many would lose their jobs.", a: ["to close"], h: "2nd Inversion.", expl: "<strong>2nd Conditional Inversion.</strong> Using 'Were + subject + to-infinitive' makes a hypothesis sound very remote or unlikely. <br><br><strong>Style:</strong> It is much more formal than 'If we closed...'. Common in business reports or legal contexts.", tag: "tag-inv" },    
+        { q: "Should the tax inspector (enquire), show him these receipts.", a: ["enquire"], h: "1st Inversion.", expl: "<strong>1st Conditional Inversion.</strong> 'Should' replaces 'If' to mean 'In the unlikely event that...'. <br><br><strong>Grammar Catch:</strong> 'Should' is a modal, so the verb must be the <em>base form</em> (enquire). Avoid saying 'Should he enquires'!", tag: "tag-inv" },    
+        { q: "Arsenal played well. (Otherwise / If not), they would have lost.", a: ["otherwise"], h: "Linking logic.", expl: "<strong>Cohesive Adverbs.</strong> 'Otherwise' is a sophisticated way to say 'if that hadn't happened'. It connects the previous sentence to a hypothetical result without repeating all the words.", tag: "tag-nuance" },    
+        { q: "(But for) your help, I would have been in trouble.", a: ["but for"], h: "Concise formal.", expl: "<strong>Prepositional Conditionals.</strong> 'But for' is a formal preposition meaning 'If it hadn't been for'. <br><br><strong>Rule:</strong> It must be followed by a noun phrase (your help), making your writing much more concise.", tag: "tag-nuance" },    
+        { q: "If you (concentrate) yesterday, you (know) the answer now.", a: ["had been concentrating would know", "had concentrated would know"], h: "Past process.", expl: "<strong>Mixed Continuous.</strong> The Past Perfect Continuous emphasizes that the 'if' part was a <em>process</em> or an <em>ongoing failure</em> to focus throughout the day yesterday.", tag: "tag-mixed" },    
+        { q: "If the petrol engine (not be) invented, there (be) plenty of oil left.", a: ["hadn't been would be", "had not been would be", "hadn't been would've been", "had not been would've been"], h: "Historical hypothetical.", expl: "<strong>Mixed Conditional (3/2).</strong> This links a <em>historical fact</em> (the invention) with a <em>hypothetical present reality</em> (how much oil we have today).", tag: "tag-mixed" },    
+        { q: "If you (stop) moaning for a while, we (might start) to enjoy the holiday.", a: ["would stop might start"], h: "Criticism.", expl: "<strong>'Would' for Volition.</strong> We use 'would' in the if-clause here to express <em>annoyance</em>. You are essentially requesting that they change their attitude. <br><br><strong>Grammar Note:</strong> Ensure both verbs are typed for the answer to be accepted.", tag: "tag-nuance" },    
+        { q: "We'd better hurry if we (be) to get there by lunchtime.", a: ["are"], h: "Objectives.", expl: "<strong>'Be to' for Purpose.</strong> A high-level way to express a goal. <br><br><strong>The Logic:</strong> You are saying 'If our <em>objective</em> is to get there...'. It's much more formal than 'If we want to get there'.", tag: "tag-nuance" },    
+        { q: "Provided you (train) in a committed way, you'll reach your goal.", a: ["train"], h: "Alternative If.", expl: "<strong>Conditional Conjunctions.</strong> 'Provided (that)' or 'Providing' is used for strong conditions or 'guarantees'. It is more restrictive and formal than a simple 'if'.", tag: "tag-nuance" },    
+        { q: "Suppose you (win) the lottery. What (you do)?", a: ["won would you do"], h: "Mental experiment.", expl: "<strong>Hypothetical Supposition.</strong> 'Suppose' or 'Imagine' act as triggers for the 2nd conditional. They invite the listener to enter a completely imaginary world.", tag: "tag-nuance" },    
+        { q: "If it (not be) for the dog, I (not get) any exercise.", a: ["weren't wouldn't get", "weren't would not get", "wasn't wouldn't get", "wasn't would not get"], h: "Essential cause.", expl: "<strong>The 'If it weren't for' Structure.</strong> This is the idiomatic sibling of 'But for'. It highlights the <em>one thing</em> that makes the present reality possible. <br><br><strong>C1 Nuance:</strong> Using 'were' instead of 'was' is much better for formal exams.", tag: "tag-nuance" },    
+        { q: "I’d appreciate it if you (can) hand in the report by Thursday.", a: ["could"], h: "Softening.", expl: "<strong>Distance for Politeness.</strong> Using the past form 'could' (even though we mean the future) creates 'grammatical distance'. This makes a professional request sound less aggressive.", tag: "tag-nuance" },    
+        { q: "Even if I (have) some spare cash now, I (not book) that holiday.", a: ["had wouldn't book", "had would not book"], h: "Concession.", expl: "<strong>Concessive Conditionals.</strong> 'Even if' tells the reader that the result ('wouldn't book') will stay the same, no matter what happens with the money.", tag: "tag-nuance" },    
+        { q: "If you (not reduce) fossil fuels, global warming (worsen).", a: ["don't reduce will worsen", "do not reduce will worsen"], h: "Prediction.", expl: "<strong>First Conditional Logic.</strong> Standard cause and effect. At C1, the difficulty isn't the grammar, but using precise vocabulary like 'worsen' and 'fossil fuels' correctly.", tag: "tag-nuance" },    
+        { q: "We'd ____ (lie) on the beach right now if we hadn't missed the flight.", a: ["be lying"], h: "Current continuous result.", expl: "<strong>Mixed Conditional (Continuous).</strong> The 'if' is in the past (missed flight), but the result is an <em>action that would be in progress right now</em> (lying on the beach).", tag: "tag-mixed" },    
+        { q: "Were it (not be) for your help, I (be) in trouble now.", a: ["not be would be"], h: "Formal Inversion.", expl: "<strong>Inverted Negative.</strong> This is a classic C1 'trap'. In this formal inversion, the word 'not' <em>cannot</em> be contracted. You must say 'Were it not...' rather than 'Weren't it...'.", tag: "tag-inv" },    
+        { q: "If I (realise) the risk, I (not invest).", a: ["had realised wouldn't have invested", "had realised would not have invested", "had realized wouldn't have invested", "had realized would not have invested"], h: "Past regret.", expl: "<strong>Standard 3rd Conditional.</strong> Classic 'regret' structure. <br><br><strong>Spelling:</strong> Both '-ise' (UK) and '-ize' (US) are correct, but stay consistent within a single piece of writing!", tag: "tag-mixed" },    
+        { q: "I wish I (have) more energy, I (tidy up) the garden.", a: ["had would tidy up"], h: "Present desire.", expl: "<strong>Wish + 2nd Conditional.</strong> 'I wish' acts as the 'if' clause. We shift the tense back to the past ('had') to show that the energy is currently imaginary, not real.", tag: "tag-nuance" },    
+        { q: "If she (ask) me, I (tell) her to go home.", a: ["had asked would have told", "had asked would've told"], h: "Imaginary past.", expl: "<strong>Standard 3rd Conditional.</strong> A complete look at a hypothetical past. <br><br><strong>Spanish Tip:</strong> 'Si ella me hubiera preguntado, yo le habría dicho...'.", tag: "tag-mixed" },    
+        { q: "If you (not leave) tomorrow, we (can have) more time together.", a: ["weren't leaving could have", "were not leaving could have"], h: "Future plan.", expl: "<strong>Mixed Conditional (Future/Past).</strong> This links a <em>future plan</em> (leaving tomorrow) with a <em>hypothetical current outcome</em> (having more time together).", tag: "tag-mixed" },    
+        { q: "If anybody (stop) you, show them this pass.", a: ["stops"], h: "Instructions.", expl: "<strong>Operational 1st Conditional.</strong> Simple 'if + present' used for giving directions or orders for a likely future situation.", tag: "tag-nuance" },    
+        { q: "Female bears (not attack) unless they (have) cubs.", a: ["don't attack have", "do not attack have"], h: "Biological facts.", expl: "<strong>Zero Conditional.</strong> Used for universal truths. 'Unless' means 'if... not'. <br><br><strong>Meaning:</strong> 'They only attack <em>if</em> they have cubs'.", tag: "tag-nuance" },    
+        { q: "I'll finish this even (if) it (kill) me.", a: ["if kills"], h: "Extreme resolve.", expl: "<strong>Emphatic Concession.</strong> 'Even if' shows that the speaker's determination is stronger than any possible obstacle or danger.", tag: "tag-nuance" },    
+        { q: "Suppose you (had) to go to hospital, who (look) after the kids?", a: ["had would look"], h: "What-if scenario.", expl: "<strong>Problem Solving.</strong> The 2nd conditional is often used with 'Suppose' to test imaginary scenarios and find potential solutions before they happen.", tag: "tag-nuance" },    
+        { q: "If I (be) fitter, I (play) football every weekend.", a: ["were would play", "was would play"], h: "Subjunctive advice.", expl: "<strong>The Subjunctive 'Were'.</strong> While 'was' is okay in speech, 'were' is the standard for C1 exams to show a state that is 100% hypothetical.", tag: "tag-nuance" },    
+        { q: "If it (not snow), we (not get) lost yesterday.", a: ["hadn't snowed wouldn't have got", "had not snowed would not have got", "hadn't snowed would not have got", "had not snowed wouldn't have got"], h: "Past chain.", expl: "<strong>3rd Conditional Logic.</strong> Looking at a chain of past events to find the 'cause' of a past problem. <br><br><strong>Structure:</strong> Past Perfect + Would Have + Participle.", tag: "tag-mixed" },    
+        { q: "I (can get) better results if I (take) photos earlier.", a: ["could have got had taken", "could've got had taken"], h: "Past capability.", expl: "<strong>Modals in the 3rd Conditional.</strong> 'Could have' replaces 'would have' to show that a better result was <em>possible</em>, even if it didn't happen.", tag: "tag-mixed" },    
+        { q: "If the weather (not improve), the holiday (be) ruined.", a: ["hadn't improved would have been", "had not improved would have been", "hadn't improved would've been", "had not improved would've been"], h: "Historical sequence.", expl: "<strong>3rd Conditional Sequence.</strong> We are evaluating a completed past situation. Use the 3rd conditional to show the 'Alternative History'.", tag: "tag-mixed" },    
+        { q: "If you (cook) it in butter, it might taste better.", a: ["cooked"], h: "Advice.", expl: "<strong>Soft Suggestion.</strong> Using the 2nd conditional ('If you cooked...') makes the advice sound less bossy and more like a gentle suggestion.", tag: "tag-nuance" },    
+        { q: "Provided that you (finish) your work, you can go.", a: ["finish"], h: "Stipulation.", expl: "<strong>Conditional Permission.</strong> 'Provided that' is a high-level way to set a specific rule or 'stipulation' for someone's freedom.", tag: "tag-nuance" },    
+        { q: "How (you communicate) if you (not speak) the language?", a: ["would you communicate didn't speak", "would you communicate did not speak"], h: "Hypothetical query.", expl: "<strong>Abstract Hypothesis.</strong> Used for asking 'what if' about general situations that aren't tied to one specific moment in time.", tag: "tag-nuance" },    
+        { q: "Should you (need) help, don't hesitate to call.", a: ["need"], h: "Polite professional.", expl: "<strong>Formal Offering.</strong> This inversion is the 'gold standard' for business emails. It's the most elegant way to say 'If you need help...'.", tag: "tag-inv" },    
+        { q: "If you (will / can) wait a moment, I'll find him.", a: ["will"], h: "Service courtesy.", expl: "<strong>The 'Willingness' Will.</strong> A polite service-industry phrase. You aren't predicting the future; you are asking if the person is <em>willing</em> to wait.", tag: "tag-nuance" },    
+        { q: "If I (be) you, I (not go) there.", a: ["were wouldn't go", "were would not go"], h: "Subjunctive advice.", expl: "<strong>The 'Were' Subjunctive.</strong> In Spanish, you would use 'Si yo fuera...'. In English, 'If I were...' is the exact equivalent and the correct choice for C1 exams.", tag: "tag-nuance" },    
+        { q: "Had I (known), I (act) differently.", a: ["known would have acted", "known would've acted"], h: "Past Inversion.", expl: "<strong>Formal Regret.</strong> This is the highest level of 'Conditional Inversion'. It combines 3rd conditional regret with an elegant, literary structure.", tag: "tag-inv" },    
+        { q: "If the company (not go) bankrupt last year, you (work) here today.", a: ["hadn't gone would be working", "had not gone would be working", "hadn't gone would work", "had not gone would work"], h: "Past cause, present progress.", expl: "<strong>Mixed (3/2) Continuous.</strong> 1. Past Perfect for the past event. 2. 'Would be' for the present. 3. '-ing' because it's an ongoing job. <br><br><strong>Spanish Tip:</strong> Use 'estarías trabajando' (would be working) to sound like a native C1 speaker.", tag: "tag-mixed" },    
+        { q: "If I (be) more organized, I (not lose) my keys yesterday.", a: ["were would not have lost", "were wouldn't have lost", "was wouldn't have lost", "was would not have lost"], h: "Permanent trait, past result.", expl: "<strong>Mixed (2/3).</strong> This links a <em>general character trait</em> to a <em>specific past mistake</em>. <br><br><strong>Logic:</strong> 2nd conditional for the 'who I am' part and 3rd for the 'what happened' part.", tag: "tag-mixed" },    
+        { q: "If they (finish) the bridge already, we (not have) to take the ferry now.", a: ["had finished wouldn't have", "had finished would not have"], h: "Completed past, current necessity.", expl: "<strong>Mixed (3/2) Obligation.</strong> Here, a completed past action (finishing the bridge) would have removed a <em>current obligation</em> (having to take the ferry).", tag: "tag-mixed" },    
+        { q: "If you (not be) so brave, you (not save) that boy last week.", a: ["weren't wouldn't have saved", "weren't would not have saved", "were not wouldn't have saved", "were not would not have saved", "wasn't wouldn't have saved", "was not would not have saved"], h: "Quality vs Action.", expl: "<strong>Mixed (2/3).</strong> Being brave is a quality (2nd cond); saving the boy was a past act (3rd cond). <br><br>.", tag: "tag-mixed" },    
+        { q: "I (not be) in this mess if I (listen) to your advice.", a: ["wouldn't be had listened", "would not be had listened", "wouldn't be had listened to", "would not be had listened to"], h: "Present state, past failure.", expl: "<strong>Mixed (3/2).</strong> This is the classic 'Regret' structure. The 'if' part is the past failure to listen, and the main clause is the current 'mess' you are in.", tag: "tag-mixed" }
+    ];    
+    
+    let idx = 0; 
+    let streak = 0; 
+    let score = 0; 
+    let solvedThisIdx = false;    
+    
+    function openModal() {        
+        const tag = cards[idx].tag;        
+        document.getElementById('modalTitle').innerText = rules[tag].title;        
+        document.getElementById('modalText').innerHTML = rules[tag].text;        
+        document.getElementById('ruleModal').style.display = 'flex';    
+    }    
+    
+    function closeModal() { 
+        document.getElementById('ruleModal').style.display = 'none'; 
+    }    
+    
+    function update() {        
+        if (idx >= cards.length) {            
+            document.getElementById('final-screen').style.display = 'flex';            
+            document.getElementById('final-stats').innerText = `Tasks completed: ${score}/${cards.length} | Streak: ${streak}`;            
+            return;        
+        }        
+        const card = cards[idx];        
+        document.getElementById('q').innerText = card.q;        
+        document.getElementById('a').innerText = "Accepted: " + card.a[0];        
+        document.getElementById('expl').innerHTML = "<span class='explanation-header'>The Logic Behind the Answer:</span>" + card.expl;        
+        document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${card.tag.split('-')[1].toUpperCase()} (Click for Rule ℹ️)</span>`;        
+        document.getElementById('a').classList.remove('visible');        
+        document.getElementById('expl').classList.remove('visible');        
+        document.getElementById('hintBox').classList.remove('visible');        
+        document.getElementById('feedback').innerText = '';        
+        document.getElementById('userInput').value = '';        
+        document.getElementById('pg').innerText = `Task ${idx + 1} of ${cards.length}`;        
+        solvedThisIdx = false;        
+        document.getElementById('pBtn').disabled = idx === 0;    
+    }    
+    
+    function checkAnswer() {        
+        const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
+        if(!u) return;        
+        const card = cards[idx];                
+        const isCorrect = card.a.some(ans => {            
+            const normalizedAns = ans.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();            
+            return u === normalizedAns;        });        
+        if (isCorrect) {            
+            document.getElementById('feedback').innerText = "CORRECT! ✨";            
+            document.getElementById('feedback').className = 'correct';            
+            document.getElementById('a').classList.add('visible');            
+            document.getElementById('expl').classList.add('visible');            
+            if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }        
+        } else {            
+            document.getElementById('feedback').innerText = "TRY AGAIN ❌";            
+            document.getElementById('feedback').className = 'wrong';            
+            streak = 0;        
+        }        
+        document.getElementById('streak-count').innerText = `Streak: ${streak}`;        
+        document.getElementById('score-display').innerText = `Correct: ${score}`;    
+    }    
+    
+    function showHint() {         
+        document.getElementById('hintBox').innerText = "💡 " + cards[idx].h;        
+        document.getElementById('hintBox').classList.add('visible');     
+    }        
+    
+    function revealAnswer() {         
+        document.getElementById('a').classList.add('visible');         
+        document.getElementById('expl').classList.add('visible');        
+        streak = 0; 
+        document.getElementById('streak-count').innerText = `Streak: 0`;    
+    }    
+    
+    function next() {         
+        if (idx < cards.length - 1) {             
+            idx++;             
+            update();         
+        } else {             
+            idx++;             
+            update();         
+        }     }        
+    
+    function prev() { 
+        if (idx > 0) { 
+            idx--; 
+            update(); 
+        } 
+    }    
+    
+    document.getElementById('userInput').addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') checkAnswer(); 
+    });    
+    
+    update();
+</script>
+</body>
+</html>

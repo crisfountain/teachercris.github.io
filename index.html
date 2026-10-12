@@ -1,131 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Cris | Advanced English & Exam Preparation (C1/C2)</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Teacher Cris | Clases Particulares de Inglés Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-sm">
-                    TC
-                </div>
-                <div>
-                    <span class="text-lg font-extrabold text-slate-900 tracking-tight block">Teacher Cris</span>
-                    <span class="text-xs font-medium text-indigo-600 block">Advanced Academic & Professional English</span>
-                </div>
-            </div>
-            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                <a href="#about" class="hover:text-indigo-600 transition">About Me</a>
-                <a href="#resources" class="hover:text-indigo-600 transition">Interactive Apps</a>
-                <a href="mailto:contact@teachercris.online" class="bg-indigo-50 text-indigo-600 px-4 py-2 rounded-xl hover:bg-indigo-100 transition">Get in Touch</a>
-            </nav>
+    <!-- Header / Navegación -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-indigo-600 tracking-tight">Teacher Cris</span>
+            <a href="#contacto" class="bg-indigo-600 text-white px-5 py-2.5 rounded-full font-medium hover:bg-indigo-700 transition">Reserva tu Clase</a>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow">
-        
-        <!-- Hero Section -->
-        <section class="max-w-5xl mx-auto px-6 pt-16 pb-12 text-center">
-            <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full mb-6">
-                C1 / C2 Proficiency & Exam Mastery
-            </span>
-            <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-6 leading-tight">
-                Master High-Level English for <span class="text-indigo-600">Professional & Academic Success</span>
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="text-indigo-600 font-semibold tracking-wide uppercase text-sm">Clases de Inglés Online</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-6 leading-tight">
+                Habla inglés con confianza y a tu propio ritmo
             </h1>
-            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Rigorous grammar precision, contrastive linguistics, and advanced interactive tools designed specifically for ambitious learners and professionals.
+            <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                Clases particulares y personalizadas para adultos y profesionales. Profesor titulado con certificación <strong>CELTA (Cambridge)</strong> y nivel <strong>C2 Proficient</strong>.
             </p>
-        </section>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#contacto" class="text-center bg-indigo-600 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-indigo-700 transition">
+                    Empezar Ahora
+                </a>
+                <a href="https://wa.me/34621390976?text=Hola%20Cris,%20he%20visto%20tu%20web%20y%20me%20gustaría%20recibir%20más%20información%20sobre%20tus%20clases%20de%20inglés." target="_blank" class="text-center bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-emerald-600 transition flex items-center justify-center gap-2">
+                    <i class="fab font-bold fa-whatsapp text-xl"></i> Hablar por WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                <img src="images/profile.png" alt="Teacher Cris" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
 
-        <!-- About Me / Teacher Bio Section (Con Foto y Perfil) -->
-        <section id="about" class="max-w-4xl mx-auto px-6 py-12">
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center gap-8">
-                <!-- Contenedor de la Foto (Sustituye la ruta de la imagen o pon tu archivo foto.jpg) -->
-                <div class="shrink-0">
-                    <div class="w-36 h-36 md:w-44 md:h-44 rounded-2xl bg-slate-200 overflow-hidden border-4 border-indigo-50 shadow-inner flex items-center justify-center text-slate-400">
-                        <!-- Aquí puedes poner <img src="tu-foto.jpg" alt="Teacher Cris" class="w-full h-full object-cover"> -->
-                        <i class="fas fa-user-tie text-5xl text-indigo-300"></i>
+    <!-- Ventajas / Especialidades -->
+    <section class="bg-white py-16 border-y border-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">¿En qué te puedo ayudar?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-comments"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-3">Inglés de Conversación</h3>
+                    <p class="text-slate-600">Gana fluidez, mejora tu pronunciación y pierde la vergüenza de hablar en situaciones reales con un método práctico.</p>
                 </div>
-                <!-- Biografía y Presentación -->
-                <div class="text-center md:text-left">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Meet Teacher Cris</h2>
-                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-4">Cambridge & IELTS Specialist | Independent Software Builder</p>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        Specializing in C1/C2 Cambridge and IELTS exam preparation, I combine years of international teaching experience with independent educational software development to build high-performance learning environments.
-                    </p>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4 text-xs font-semibold text-slate-500">
-                        <span class="bg-slate-100 px-3 py-1.5 rounded-lg"><i class="fas fa-graduation-cap text-indigo-600 mr-1.5"></i> Cambridge C1/C2 Expert</span>
-                        <span class="bg-slate-100 px-3 py-1.5 rounded-lg"><i class="fas fa-code text-indigo-600 mr-1.5"></i> Web App Creator</span>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-briefcase"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-3">Business English</h3>
+                    <p class="text-slate-600">Prepara entrevistas de trabajo, presentaciones y reuniones de negocios con un enfoque profesional y directo.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Exámenes Oficiales</h3>
+                    <p class="text-slate-600">Preparación experta para Cambridge (First, Advanced), IELTS, TOEFL y TOEIC con alta tasa de aprobados.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Interactive Practice Hub Section -->
-        <section id="resources" class="max-w-5xl mx-auto px-6 py-12 pb-24">
-            <div class="flex items-center justify-between mb-8 border-b border-slate-200 pb-4">
-                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Interactive Practice Hub</h2>
-                <span class="text-sm font-semibold text-slate-500">Self-Paced Mini Apps</span>
+    <!-- Sobre Mí y Credenciales -->
+    <section class="max-w-5xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-6 text-center">Sobre Mí y Experiencia</h2>
+        <p class="text-lg text-slate-600 leading-relaxed text-center max-w-3xl mx-auto mb-12">
+            ¡Hola! Soy Cris. Cuento com una sólida trayectoria internacional que incluye 11 años de docencia en Tailandia y 2 años en España, ayudando a estudiantes y profesionales a alcanzar sus metas con total seguridad.
+        </p>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-certificate"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">CELTA</h4>
+                <p class="text-sm text-slate-500">University of Cambridge</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-award"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">C2 Proficient</h4>
+                <p class="text-sm text-slate-500">Certificación EF SET</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-globe-asia"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">13 Años de Experiencia</h4>
+                <p class="text-sm text-slate-500">11 Tailandia + 2 España</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-star"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">TOEIC 990</h4>
+                <p class="text-sm text-slate-500">Maximum Score (Perfecto)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Recursos e Herramientas Interactivas -->
+    <section id="recursos" class="bg-slate-100 py-16 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-indigo-600 font-semibold tracking-wide uppercase text-sm">Aprende y Practica</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Recursos Interactivos Gratis</h2>
+                <p class="text-slate-600 mt-2 max-w-2xl mx-auto">Pon a prueba tu nivel de inglés con herramientas prácticas diseñadas para pulir tu gramática y vocabulario de nivel avanzado.</p>
             </div>
 
-            <!-- Grid de Tarjetas de Recursos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Tarjeta 1: Conditionals App -->
+            <div class="grid md:grid-cols-2 gap-8">
+               <!-- Tarjeta: Quiz de Condicionales C1/C2 -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Grammar C1 / C2</span>
-                            <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Exercises</span>
+                            <span class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Gramática C1 / C2</span>
+                            <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Retos</span>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Advanced Conditionals Masterclass</h3>
                         <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                            Conquer complex mixed conditionals, inversions, and hypothetical structures with rigorous contextual challenges.
+                            Domina condicionales mixtos, inversiones formales (<em>Had I known, Were we to...</em>) y matices de cortesía con feedback instantáneo y explicaciones gramaticales.
                         </p>
                     </div>
                     <a href="conditionals.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
-                        <i class="fas fa-gamepad"></i> Practice Now
+                        <i class="fas fa-gamepad"></i> Practicar Ahora
                     </a>
                 </div>
 
-                <!-- Tarjeta 2: Multi-Word Verbs App -->
+                <!-- Tarjeta: Quiz de Multi-Word Verbs C1/C2 -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
                     <div>
                         <div class="flex justify-between items-start mb-4">
-                            <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Vocabulary C1 / C2</span>
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Vocabulario C1 / C2</span>
                             <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 90 Verbs</span>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Advanced Multi-Word Verbs</h3>
                         <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                            Master complex phrasal verbs, dependent prepositions, and advanced semantic nuances with two exhaustive practice lists.
+                            Domina phrasal verbs complejos, preposiciones dependientes y matices semánticos avanzados con dos listas de práctica exhaustivas y explicaciones detalladas.
                         </p>
                     </div>
                     <a href="multi-word-verbs.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
-                        <i class="fas fa-gamepad"></i> Practice Now
+                        <i class="fas fa-gamepad"></i> Practicar Ahora
                     </a>
                 </div>
-
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Contacto / Formulario -->
+    <section id="contacto" class="bg-indigo-900 text-white py-16">
+        <div class="max-w-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Reserva tu clase o pide información</h2>
+            <p class="text-indigo-200 text-center mb-8">Escríbeme un mensaje directo y me pondré en contacto contigo en menos de 24 horas.</p>
+            
+            <form action="https://formspree.io/f/mdeazwne" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nombre completo</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Correo electrónico</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">¿Qué te gustaría mejorar?</label>
+                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Cuéntame un poco sobre tu nivel actual y tus objetivos..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-white text-indigo-900 font-bold py-3.5 rounded-lg hover:bg-indigo-50 transition">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-8">
-        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-sm text-slate-500">
-            <p>&copy; 2026 Teacher Cris (<code class="text-xs bg-slate-100 px-2 py-1 rounded">teachercris.online</code>). All rights reserved.</p>
-            <p class="mt-4 md:mt-0 font-medium">Designed for Advanced English Learners</p>
-        </div>
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <p>&copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online</p>
     </footer>
 
 </body>

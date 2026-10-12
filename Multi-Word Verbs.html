@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Cris | Advanced Multi-Word Verbs Practice</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
+        .card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #4f46e5; position: relative; }
+        
+        /* Quiz Selector Tabs */
+        .quiz-tabs { display: flex; gap: 8px; margin-bottom: 20px; background-color: #f1f5f9; padding: 6px; border-radius: 12px; }
+        .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-weight: 600; font-size: 0.9rem; color: #64748b; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+        .tab-btn.active { background-color: #ffffff; color: #4f46e5; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+        .brand-header { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; color: #4f46e5; letter-spacing: -0.5px; }
+        .question { font-size: 1.15rem; margin-bottom: 20px; min-height: 110px; display: flex; align-items: center; justify-content: center; line-height: 1.7; color: #2c3e50; text-align: left; background: #f9fbff; padding: 25px; border-radius: 12px; border: 1px solid #e1e8ed; }
+        
+        .type-tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; color: white; text-transform: uppercase; cursor: help; }
+        .tag-phrasal { background: #0284c7; } 
+        .tag-nuance { background: #d97706; } 
+        .tag-preposition { background: #7c3aed; } 
+        .tag-idiom { background: #16a34a; }
+
+        input[type="text"] { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid #ced6e0; border-radius: 10px; box-sizing: border-box; outline: none; margin-bottom: 10px; }
+        #feedback { height: 30px; margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; }
+        .correct { color: #27ae60; } .wrong { color: #e74c3c; }
+        
+        .ans-text, .hint-text { margin: 10px 0; font-weight: bold; color: #2f3542; display: none; padding: 15px; border-radius: 10px; text-align: left; }
+        .ans-text { background: #eef2f7; border: 1px dashed #2c3e50; }
+        .hint-text { background: #fffbe3; border-left: 4px solid #f1c40f; color: #7d6608; }
+
+        .explanation-box { background: #fff9db; padding: 20px; border-radius: 10px; text-align: left; font-size: 0.95rem; margin-top: 15px; display: none; border-left: 5px solid #f1c40f; line-height: 1.6; max-height: 250px; overflow-y: auto; }
+        .explanation-header { color: #946c00; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+        .visible { display: block !important; }
+        
+        .stats-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px; font-weight: 600; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; gap: 8px; }
+        
+        button { padding: 12px 15px; cursor: pointer; border: none; border-radius: 8px; background: #4f46e5; color: white; font-weight: 600; flex: 1; transition: 0.2s; }
+        button:hover { background: #4338ca; }
+        .check-btn { background: #27ae60; width: 100%; margin-bottom: 15px; font-size: 1.1rem; flex: none; }
+        .check-btn:hover { background: #219653; }
+
+        #ruleModal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: left; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
+        
+        #final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div id="ruleModal">    
+    <div class="modal-content">        
+        <span class="close-modal" onclick="closeModal()">&times;</span>        
+        <h3 id="modalTitle" style="margin-top:0;">Category Reference</h3>        
+        <p id="modalText"></p>    </div>
+</div>
+
+<div class="card-container">    
+    <div id="final-screen">        
+        <h1 style="color: #27ae60;">Session Complete! 🎓</h1>        
+        <p id="final-stats" style="font-size: 1.2rem; color: #2c3e50;"></p>        
+        <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>    
+    </div>    
+
+    <!-- Botón de Retorno Estilizado -->
+    <div style="text-align: left; margin-bottom: 15px;">
+        <a href="index.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
+            ← Volver a teachercris.online
+        </a>
+    </div>
+
+    <!-- Quiz Selector Tabs -->
+    <div class="quiz-tabs">
+        <button id="tabA" class="tab-btn active" onclick="switchQuiz('A')">Quiz A (List A - 45 Verbs)</button>
+        <button id="tabB" class="tab-btn" onclick="switchQuiz('B')">Quiz B (List B - 45 Verbs)</button>
+    </div>
+
+    <div class="brand-header">
+        Teacher Cris 
+        <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Advanced Multi-Word Verbs Practice (Quiz A)</span>
+    </div>
+
+    <div class="stats-row">        
+        <div id="pg">Task 1 of 45</div>        
+        <div>            
+            <span id="score-display" style="margin-right: 15px; color: #27ae60;">Correct: 0</span>            
+            <span id="streak-count" style="color: #e67e22;">Streak: 0</span>        
+        </div>    
+    </div>        
+
+    <div id="tagDisplay" onclick="openModal()"></div>    
+    <div class="question" id="q">Loading...</div>        
+    
+    <input type="text" id="userInput" placeholder="Type answer(s)..." autocomplete="off">    
+    <div id="feedback"></div>        
+    
+    <button class="check-btn" onclick="checkAnswer()">Verify (Enter)</button>        
+    
+    <div id="hintBox" class="hint-text"></div>    
+    <div id="a" class="ans-text"></div>    
+    <div id="expl" class="explanation-box"></div>    
+    
+    <div class="controls">        
+        <button id="pBtn" onclick="prev()">← Previous</button>        
+        <button onclick="showHint()">Hint 💡</button>        
+        <button onclick="revealAnswer()">Show Answer 👁️</button>        
+        <button id="nBtn" onclick="next()">Next →</button>    
+    </div>
+</div>
+
+<script>    
+    const rules = {        
+        "tag-phrasal": { title: "Essential Phrasal Verbs", text: "Multi-word verbs where particles modify core meanings in C1-C2 contexts.<br><br>• <b>Particle shift:</b> Small changes in particles drastically alter meaning (e.g. <i>back up</i> vs <i>back down</i>)." },        
+        "tag-nuance": { title: "Pragmatic & Semantic Nuance", text: "Verbs used to express subtle stylistic differences, registers, or specific temporal conditions in professional discourse." },        
+        "tag-preposition": { title: "Dependent Prepositions", text: "Verbs that require specific prepositions (unlike direct translations from Spanish).<br><br>• <i>Depend <b>on</b></i> (not of).<br>• <i>Insist <b>on</b></i> (not in)." },
+        "tag-idiom": { title: "Idiomatic Collocations", text: "Figurative expressions and deeply embedded multi-word combinations native speakers use effortlessly." }
+    };    
+
+    const quizA = [
+        { q: "Before running the critical database migration, always ensure you ___ all user records to an off-site server.", a: ["back up"], h: "To create a duplicate copy of data stored separately.", expl: "<b>The Logic Behind the Answer:</b> 'Back up' (two words) is the required phrasal verb meaning to make a duplicate copy of digital data.<br><br><b>Spanish Tip:</b> Spanish speakers often say <i>hacer una copia de seguridad</i> or use the anglicism <i>respaldar</i>. Do NOT accept or write the single-word noun <i>backup</i> when a verb is required.", tag: "tag-phrasal" },
+        { q: "The government was forced to step in and ___ the struggling airline with a multi-million dollar loan.", a: ["bail out", "bail...out"], h: "To rescue financially.", expl: "<strong>The Logic Behind the Answer:</strong> 'Bail out' means to rescue a person or business from financial hardship by providing money.<br><br><strong>Spanish Tip:</strong> In Spanish, this corresponds to <i>rescatar económicamente</i>. Spanish learners often try to use 'rescue' in financial contexts, but 'bail out' is the standard C1 financial phrasal verb.", tag: "tag-phrasal" },
+        { q: "Despite facing severe supply chain disruptions last quarter, the manufacturing firm managed to ___ quickly.", a: ["bounce back"], h: "To recover rapidly after a setback.", expl: "<strong>The Logic Behind the Answer:</strong> 'Bounce back' signifies recovering or regaining success after a setback or failure.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>recuperarse</i> or <i>reponerse</i>. Notice how English uses the physical metaphor of a ball bouncing back, whereas Spanish relies on reflexive verbs.", tag: "tag-nuance" },
+        { q: "The annual international festival aims to ___ people from diverse cultural backgrounds.", a: ["bring together"], h: "To unite or foster friendly relations.", expl: "<strong>The Logic Behind the Answer:</strong> 'Bring together' means to cause individuals or groups to connect and establish friendly relations.<br><br><strong>Spanish Tip:</strong> Translates to <i>unir</i> or <i>reunir</i>. Avoid literal translations like 'bring united' (traer unidos).", tag: "tag-phrasal" },
+        { q: "I need to ___ my conversational German before attending the trade fair in Frankfurt next month.", a: ["brush up on", "brush up"], h: "To refresh or improve previously learned knowledge.", expl: "<strong>The Logic Behind the Answer:</strong> 'Brush up on' means to review and improve skill or knowledge that has been partially forgotten over time.<br><br><strong>Spanish Tip:</strong> Corresponds to <i>dar un repaso a</i> or <i>desempolvar</i>. Remember that 'on' is required when followed by an object ('brush up on French').", tag: "tag-preposition" },
+        { q: "It takes years of consistent training and proper nutrition to ___ endurance for a marathon.", a: ["build up"], h: "To gradually increase or strengthen.", expl: "<strong>The Logic Behind the Answer:</strong> 'Build up' means to increase, strengthen, or develop over time.<br><br><strong>Spanish Tip:</strong> Translates as <i>desarrollar</i>, <i>aumentar</i> or <i>ir acumulando</i>. Avoid using 'construct' when talking about stamina or confidence.", tag: "tag-phrasal" },
+        { q: "While walking through the airport terminal in London, I happened to ___ an old university colleague.", a: ["bump into", "run into"], h: "To meet someone unexpectedly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Bump into' means to chance upon or encounter someone without prior arrangement.<br><br><strong>Spanish Tip:</strong> Translates to <i>tropezarse con</i> or <i>encontrarse con por casualidad</i>. Do not use 'tropezar' literally without 'into' when speaking English.", tag: "tag-phrasal" },
+        { q: "It took several months for the minimalist fashion trend to ___ among younger consumers.", a: ["catch on"], h: "To become popular or widely accepted.", expl: "<strong>The Logic Behind the Answer:</strong> 'Catch on' means to become trendy or popular among a group of people.<br><br><strong>Spanish Tip:</strong> In Spanish: <i>ponerse de moda</i> or <i>arraigar</i>. Note that 'catch on' can also mean to understand something after a delay, depending on context.", tag: "tag-nuance" },
+        { q: "After missing two weeks of lectures due to illness, Sophia worked tirelessly to ___ with her classmates.", a: ["catch up"], h: "To reach the same level as others.", expl: "<b>The Logic Behind the Answer:</b> 'Catch up' means to reach the same standard or position as others ahead of you.<br><br><b>Spanish Tip:</b> Translates to <i>ponerse al día</i>. Note that 'with' is already provided in the prompt sentence ('with her classmates'), so enter only the phrasal verb 'catch up'.", tag: "tag-preposition" },
+        { q: "The supervisor drops by the lab twice a day to ___ the progress of the ongoing experiment.", a: ["check up on", "check on"], h: "To inspect or monitor progress.", expl: "<strong>The Logic Behind the Answer:</strong> 'Check up on' means to investigate or monitor how someone or something is progressing.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>supervisar</i> or <i>comprobar cómo va</i>. Spanish learners often omit 'up' or 'on', but C1 usage demands 'check up on' for monitoring people/tasks.", tag: "tag-preposition" },
+        { q: "You should definitely ___ the new art gallery downtown; their modern exhibit is outstanding.", a: ["check out"], h: "To inspect, visit, or get information about something.", expl: "<strong>The Logic Behind the Answer:</strong> 'Check out' means to examine or visit something to verify its quality or suitability.<br><br><strong>Spanish Tip:</strong> Translates to <i>curiosear</i>, <i>echar un vistazo a</i> or <i>visitar</i>. Don't confuse this with checking out of a hotel.", tag: "tag-phrasal" },
+        { q: "In job interviews, candidates who articulate their accomplishments calmly tend to ___ as confident and capable.", a: ["come across"], h: "To make a particular impression.", expl: "<strong>The Logic Behind the Answer:</strong> 'Come across' means to give a specific impression or appear to be a certain type of person.<br><br><strong>Spanish Tip:</strong> Translates to <i>dar la impresión de ser</i> or <i>caer (bien/mal)</i>. Spanish speakers often incorrectly say 'appear as' instead of the natural 'come across as'.", tag: "tag-nuance" },
+        { q: "When her grandfather passed away, she unexpectedly ___ a sizable fortune and a country estate.", a: ["came into"], h: "To inherit property or money.", expl: "<b>The Logic Behind the Answer:</b> 'Came into' (past simple) is strictly required because the sentence context describes a completed past event ('passed away', 'unexpectedly').<br><br><b>Spanish Tip:</b> In Spanish, this is <i>heredar</i>. Make sure to conjugate the verb into the past tense ('came into') rather than leaving it in the base infinitive.", tag: "tag-phrasal" },
+        { q: "During the merger negotiations, both legal teams ___ formidable regulatory obstacles.", a: ["came up against"], h: "To encounter or face a difficult problem.", expl: "<b>The Logic Behind the Answer:</b> 'Came up against' is required in the past simple to match the past timeframe of the completed negotiations.<br><br><b>Spanish Tip:</b> Equivalent to <i>enfrentarse a</i> or <i>toparse con</i>. Always check that your answer matches the tense dictated by the sentence context.", tag: "tag-phrasal" },
+        { q: "The R&D team spent three weeks brainstorming before they managed to ___ an innovative solution.", a: ["come up with"], h: "To devise, produce, or suggest an idea.", expl: "<strong>The Logic Behind the Answer:</strong> 'Come up with' means to propose or conceive an original idea, plan, or solution.<br><br><strong>Spanish Tip:</strong> Translates to <i>proponer</i>, <i>inventar</i>, or <i>dar con</i>. A classic error is saying 'propose an idea' when 'come up with' is much more idiomatic at C1-C2 level.", tag: "tag-phrasal" },
+        { q: "Unforeseen administrative expenses can slowly ___ and exceed the approved quarterly budget.", a: ["creep up"], h: "To increase gradually without being noticed.", expl: "<strong>The Logic Behind the Answer:</strong> 'Creep up' describes costs or numbers rising gradually and insidiously.<br><br><strong>Spanish Tip:</strong> Translates to <i>ir aumentando gradualmente</i> or <i>subir sigilosamente</i>. 'Creep' evokes the image of stealthy movement.", tag: "tag-nuance" },
+        { q: "Environmental degradation is an urgent global issue that ___ socioeconomic and political boundaries.", a: ["cuts across", "cut across"], h: "To affect or transcend different groups.", expl: "<strong>The Logic Behind the Answer:</strong> 'Cut across' means to affect or be relevant to diverse groups, social classes, or domains.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>trascender</i> or <i>afectar a todos los sectores</i>. Don't confuse with taking a shortcut across a field.", tag: "tag-nuance" },
+        { q: "Elderly citizens often ___ social security payments and community support to maintain their quality of life.", a: ["depend on", "depend upon"], h: "To rely on someone or something.", expl: "<strong>The Logic Behind the Answer:</strong> 'Depend on' means to rely upon for support or sustenance.<br><br><strong>Spanish Tip:</strong> CRITICAL SPANISH ERROR! Spanish uses <i>depender DE</i>, leading students to say 'depend OF'. In English, it is ALWAYS <b>depend ON</b> or <b>upon</b>.", tag: "tag-preposition" },
+        { q: "Many scientific terms in modern medicine are directly ___ Ancient Greek and Latin roots.", a: ["derived from", "derive from"], h: "To originate or stem from a source.", expl: "<strong>The Logic Behind the Answer:</strong> 'Derive from' indicates the historical or logical source from which something originates.<br><br><strong>Spanish Tip:</strong> Translates to <i>derivar de</i> or <i>provenir de</i>.", tag: "tag-preposition" },
+        { q: "Chemical plants must strictly follow international protocols when they ___ toxic chemical waste.", a: ["dispose of"], h: "To discard or get rid of.", expl: "<strong>The Logic Behind the Answer:</strong> 'Dispose of' means to eliminate, discard, or destroy unwanted waste or property.<br><br><strong>Spanish Tip:</strong> Spanish speakers often think of <i>disponer de</i> (to have at one's disposal). However, English 'dispose OF' means <i>deshacerse de</i> or <i>eliminar</i>.", tag: "tag-preposition" },
+        { q: "To resolve the crisis, the negotiator had to ___ her extensive past experience in international diplomacy.", a: ["draw on", "draw upon"], h: "To use available skills, knowledge, or resources.", expl: "<strong>The Logic Behind the Answer:</strong> 'Draw on' means to utilize existing knowledge, expertise, or reserves to accomplish a task.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>recurrir a</i> or <i>hacer uso de</i>.", tag: "tag-phrasal" },
+        { q: "Constant self-doubt and unaddressed guilt can slowly ___ a professional's self-esteem.", a: ["eat away at"], h: "To erode or destroy gradually.", expl: "<strong>The Logic Behind the Answer:</strong> 'Eat away at' means to erode, consume, or destroy something progressively.<br><br><strong>Spanish Tip:</strong> Translates as <i>carcomer</i> or <i>consumir poco a poco</i>.", tag: "tag-preposition" },
+        { q: "Retail sales usually ___ sharply immediately after the peak holiday shopping season ends.", a: ["fall off"], h: "To decrease or decline in quantity or quality.", expl: "<strong>The Logic Behind the Answer:</strong> 'Fall off' refers to a noticeable decline or drop in volume, quality, or frequency.", tag: "tag-phrasal" },
+        { q: "Moving to a foreign country as a teenager can be daunting if you struggle to ___ with local peers.", a: ["fit in"], h: "To feel accepted by a group.", expl: "<strong>The Logic Behind the Answer:</strong> 'Fit in' means to feel comfortable and accepted within a social group or environment.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>encajar</i> or <i>integrarse</i>.", tag: "tag-nuance" },
+        { q: "Emergency responders worked for hours to ___ the trapped passengers ___ of the wrecked vehicle.", a: ["get...out", "get out"], h: "To extract, rescue, or escape.", expl: "<strong>The Logic Behind the Answer:</strong> 'Get (someone/something) out' means to rescue or remove from a confined space or difficult situation.", tag: "tag-phrasal" },
+        { q: "Recently, my brother has ___ amateur astronomy, spending every clear night studying the stars.", a: ["gotten into", "got into"], h: "To become interested or involved in a hobby.", expl: "<b>The Logic Behind the Answer:</b> 'Gotten into' (US) or 'got into' (UK) is required after the auxiliary verb 'has' to form the present perfect ('has gotten/got into').<br><br><b>Spanish Tip:</b> Translates to <i>aficionarse a</i> or <i>engancharse a</i>. Never use the base form 'get' after 'has'.", tag: "tag-phrasal" },
+        { q: "No matter how clearly I presented the evidence, I couldn't ___ to the stubborn board members.", a: ["get through"], h: "To succeed in making someone understand.", expl: "<b>The Logic Behind the Answer:</b> 'Get through' means to make someone comprehend or accept a point despite resistance.<br><br><b>Spanish Tip:</b> Translates to <i>hacer entender a</i>. Notice that the preposition 'to' is already written in the prompt ('to the stubborn board members'), so enter only 'get through'.", tag: "tag-preposition" },
+        { q: "Residents panicked when they heard an unannounced firework ___ in the central plaza late at night.", a: ["go off"], h: "To explode, detonate, or ring suddenly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Go off' means to detonate (bombs, fireworks) or sound loudly (alarms, clocks).", tag: "tag-nuance" },
+        { q: "Policy experts from around the globe met in Geneva to ___ the ethics of artificial intelligence.", a: ["grapple with"], h: "To struggle to solve or understand a complex problem.", expl: "<strong>The Logic Behind the Answer:</strong> 'Grapple with' means to confront and work hard to resolve a complex, tough challenge.", tag: "tag-nuance" },
+        { q: "Cybersecurity firms were alarmed when sophisticated attackers managed to ___ the financial institution's main server.", a: ["hack into"], h: "To gain unauthorized digital access.", expl: "<strong>The Logic Behind the Answer:</strong> 'Hack into' means to break into a computer system or network without authorization.", tag: "tag-preposition" },
+        { q: "Lack of adequate funding should not ___ talented students from pursuing higher education degrees.", a: ["hold back"], h: "To hinder, restrain, or prevent progress.", expl: "<strong>The Logic Behind the Answer:</strong> 'Hold back' means to impede development or prevent someone from achieving potential.", tag: "tag-phrasal" },
+        { q: "With final exams approaching next week, medical students need to ___ and study uninterrupted.", a: ["knuckle down"], h: "To start focusing and working hard.", expl: "<strong>The Logic Behind the Answer:</strong> 'Knuckle down' means to apply oneself earnestly and work with intense concentration.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>hincar los codos</i> or <i>ponerse manos a la obra</i>.", tag: "tag-phrasal" },
+        { q: "The revised corporate manual clearly ___ the company's anti-discrimination guidelines and policies.", a: ["lays out"], h: "To explain or present clearly in detail.", expl: "<b>The Logic Behind the Answer:</b> 'Lays out' requires 3rd-person singular present agreement to match the subject 'The revised corporate manual'.<br><br><b>Spanish Tip:</b> Translates to <i>exponer</i> or <i>detallar</i>. Remember to add the '-s' suffix for third-person singular subjects in the present simple.", tag: "tag-phrasal" },
+        { q: "Economic analysts project that inflation rates will finally ___ by the fourth quarter of the year.", a: ["level off", "level out"], h: "To stabilize after a period of fluctuation.", expl: "<strong>The Logic Behind the Answer:</strong> 'Level off' means to stop increasing or decreasing and remain steady.", tag: "tag-nuance" },
+        { q: "After months of persistent stagnation, the local employment market is starting to ___ again.", a: ["look up"], h: "To improve or show signs of positive growth.", expl: "<strong>The Logic Behind the Answer:</strong> 'Look up' (intransitive) means that a situation or condition is improving.", tag: "tag-nuance" },
+        { q: "Instead of focusing on their assigned group project, the pupils began to ___ in the library.", a: ["mess about", "mess around"], h: "To waste time or act foolishly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Mess about/around' means to spend time foolishly without purpose or to misbehave.", tag: "tag-phrasal" },
+        { q: "Detectives worked around the clock to ___ the sequence of events leading up to the crime.", a: ["piece together"], h: "To assemble facts or evidence to comprehend the whole.", expl: "<strong>The Logic Behind the Answer:</strong> 'Piece together' means to gather disparate facts or clues to form a clear understanding.", tag: "tag-phrasal" },
+        { q: "Fraudulent phone callers often attempt to ___ gullible senior citizens by pretending to be bank agents.", a: ["prey on", "prey upon"], h: "To exploit or target vulnerable individuals.", expl: "<strong>The Logic Behind the Answer:</strong> 'Prey on/upon' means to target, exploit, or victimize vulnerable people.", tag: "tag-preposition" },
+        { q: "At the board meeting, the marketing director ___ a bold plan to rebrand the entire product line.", a: ["put forward"], h: "To offer or propose a suggestion for debate.", expl: "<strong>The Logic Behind the Answer:</strong> 'Put forward' means to offer a proposal or argument for formal consideration.", tag: "tag-phrasal" },
+        { q: "Unexpected legal complications severely ___ the construction schedule for the new bridge.", a: ["set back"], h: "To delay or slow down progress.", expl: "<strong>The Logic Behind the Answer:</strong> 'Set back' means to delay the progress or completion of something.", tag: "tag-phrasal" },
+        { q: "After traveling continuously for a decade, the journalist decided to ___ in Vienna and buy an apartment.", a: ["settle down"], h: "To establish a permanent home and stable lifestyle.", expl: "<strong>The Logic Behind the Answer:</strong> 'Settle down' means to adopt a permanent, stable lifestyle in a fixed location.", tag: "tag-phrasal" },
+        { q: "Employees must have the courage to ___ autocratic management when unreasonable demands are made.", a: ["stand up to"], h: "To resist or defend oneself against a powerful entity.", expl: "<strong>The Logic Behind the Answer:</strong> 'Stand up to' means to resist or confront someone powerful in defense of one's rights.", tag: "tag-phrasal" },
+        { q: "Psychologists believe that many chronic anxiety issues ___ unresolved childhood trauma.", a: ["stem from"], h: "To originate as a logical or biological result.", expl: "<strong>The Logic Behind the Answer:</strong> 'Stem from' indicates the root cause or source from which a situation arises.", tag: "tag-preposition" },
+        { q: "It can be surprisingly easy to ___ a conversation with a fellow traveler during a long flight.", a: ["strike up"], h: "To initiate a conversation or relationship.", expl: "<strong>The Logic Behind the Answer:</strong> 'Strike up' means to initiate or start (a friendship, conversation, or acquaintance).", tag: "tag-phrasal" },
+        { q: "When she joined the research lab, she decided to ___ her new project with total dedication.", a: ["throw herself into", "throw himself into", "throw yourself into"], h: "To engage in an activity with immense enthusiasm.", expl: "<strong>The Logic Behind the Answer:</strong> 'Throw yourself into' means to start doing something with energy and passion.", tag: "tag-nuance" }
+    ];
+
+    const quizB = [
+        { q: "Startup companies that fail to control operational costs often ___ their capital in less than six months.", a: ["burn through"], h: "To spend resources or money rapidly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Burn through' means to exhaust or spend financial capital at a rapid pace.", tag: "tag-phrasal" },
+        { q: "Due to severe thunderstorm warnings, organizers had no choice but to ___ the outdoor concert.", a: ["call off"], h: "To cancel a planned event or activity.", expl: "<strong>The Logic Behind the Answer:</strong> 'Call off' means to cancel an event that was previously scheduled.", tag: "tag-phrasal" },
+        { q: "The luxury resort was specially developed to ___ wealthy clients seeking complete privacy.", a: ["cater for", "cater to"], h: "To provide what is required by a specific group.", expl: "<strong>The Logic Behind the Answer:</strong> 'Cater for/to' means to supply services or needs targeted at a specific clientele.", tag: "tag-preposition" },
+        { q: "Before the health inspectors arrived, the restaurant staff spent hours trying to ___ the kitchen.", a: ["clean up"], h: "To make a space completely clean and orderly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Clean up' means to make a person or area completely clean and neat.", tag: "tag-phrasal" },
+        { q: "After dinner was finished, the children were asked to ___ their dishes and wipe the dining table.", a: ["clear away"], h: "To remove objects to tidy a space.", expl: "<strong>The Logic Behind the Answer:</strong> 'Clear away' means to remove items from a surface to leave it clean and uncluttered.", tag: "tag-phrasal" },
+        { q: "Despite months of meticulous preparation, the risky business proposal didn't quite ___ as expected.", a: ["come off"], h: "To succeed or occur as planned.", expl: "<strong>The Logic Behind the Answer:</strong> 'Come off' means to succeed or achieve the desired result.", tag: "tag-nuance" },
+        { q: "It took several agonizing minutes for the unconscious boxer to ___ after the heavy blow.", a: ["come round", "come around"], h: "To regain consciousness.", expl: "<strong>The Logic Behind the Answer:</strong> 'Come round' means to recover consciousness after fainting or anesthesia.", tag: "tag-nuance" },
+        { q: "If a senior management position should ___ during the restructuring, I urge you to apply immediately.", a: ["come up"], h: "To become available or arise.", expl: "<strong>The Logic Behind the Answer:</strong> 'Come up' means to arise or become available unexpectedly.", tag: "tag-phrasal" },
+        { q: "Corrupt officials attempted to ___ the financial scandal by shredding key auditing documents.", a: ["cover up"], h: "To conceal or hide wrongdoing.", expl: "<strong>The Logic Behind the Answer:</strong> 'Cover up' means to hide mistakes, crimes, or illegal acts from public view.", tag: "tag-phrasal" },
+        { q: "On chilly winter evenings, I love nothing more than to ___ on the sofa with a compelling novel.", a: ["curl up"], h: "To sit/lie comfortably with knees drawn in.", expl: "<strong>The Logic Behind the Answer:</strong> 'Curl up' means to adopt a cozy position with limbs drawn close to the body.", tag: "tag-nuance" },
+        { q: "Dr. Aris decided to ___ himself entirely to researching rare neurological disorders.", a: ["devote"], h: "To dedicate all time and energy to a cause.", expl: "<b>The Logic Behind the Answer:</b> 'Devote' is the verb required following 'decided to'.<br><br><b>Spanish Tip:</b> In Spanish: <i>dedicarse por entero a</i>. Since the sentence prompt already contains 'himself' and 'to' ('himself entirely to'), do not type reflexive pronouns or prepositions in the blank.", tag: "tag-preposition" },
+        { q: "Progressive tax reforms aim to ___ outdated loopholes that benefit only high-net-worth individuals.", a: ["do away with"], h: "To abolish, eliminate, or get rid of.", expl: "<strong>The Logic Behind the Answer:</strong> 'Do away with' means to abolish, dismantle, or eliminate a rule or system.", tag: "tag-phrasal" },
+        { q: "The comedian's hilarious commentary caused the audience members to ___ in laughter.", a: ["double up"], h: "To bend over or collapse from intense laughter.", expl: "<strong>The Logic Behind the Answer:</strong> 'Double up' means to bend your body forward because of violent laughter or pain.", tag: "tag-idiom" },
+        { q: "Corporate attorneys were instructed to ___ a comprehensive contract before the deadline.", a: ["draw up"], h: "To prepare a formal written document or contract.", expl: "<strong>The Logic Behind the Answer:</strong> 'Draw up' means to draft or formulate a formal legal document, contract, or plan.", tag: "tag-phrasal" },
+        { q: "Good leaders learn from past mistakes without continuing to ___ them endlessly.", a: ["dwell on", "dwell upon"], h: "To obsess or keep thinking about unpleasant things.", expl: "<strong>The Logic Behind the Answer:</strong> 'Dwell on' means to linger obsessively over negative past events or grievances.", tag: "tag-preposition" },
+        { q: "After working a fourteen-hour shift at the hospital, Maria didn't ___ attending the dinner party.", a: ["feel up to"], h: "To have the physical/mental strength or energy for something.", expl: "<strong>The Logic Behind the Answer:</strong> 'Feel up to' means to have the requisite energy, stamina, or inclination.", tag: "tag-phrasal" },
+        { q: "At age eighteen, he left his rural village for London and had to learn to ___ for himself.", a: ["fend"], h: "To manage and survive independently.", expl: "<strong>The Logic Behind the Answer:</strong> 'Fend for oneself' means to manage one's life, needs, and survival without external assistance.", tag: "tag-idiom" },
+        { q: "I just need ten more minutes to ___ this summary report before handing it to the director.", a: ["finish off"], h: "To complete the final details of a task.", expl: "<strong>The Logic Behind the Answer:</strong> 'Finish off' means to complete the remaining portion or final details of a task.", tag: "tag-phrasal" },
+        { q: "Could you please contact the agency and ___ a face-to-face interview for Thursday morning?", a: ["fix up"], h: "To arrange or organize a meeting/appointment.", expl: "<strong>The Logic Behind the Answer:</strong> 'Fix up' means to organize, schedule, or arrange an event or appointment.", tag: "tag-phrasal" },
+        { q: "In severe arctic conditions, entire harbors can ___ completely, blocking maritime navigation.", a: ["freeze over"], h: "To become entirely covered with a layer of ice.", expl: "<strong>The Logic Behind the Answer:</strong> 'Freeze over' describes a body of water becoming completely coated in ice.", tag: "tag-nuance" },
+        { q: "Please leave your contact details with my secretary and I will ___ you as soon as possible.", a: ["get back to"], h: "To reply or return communication later.", expl: "<strong>The Logic Behind the Answer:</strong> 'Get back to (someone)' means to follow up or reply to someone at a later time.", tag: "tag-phrasal" },
+        { q: "When major cloud servers ___, thousands of global websites experience immediate downtime.", a: ["go down"], h: "To cease functioning (computer/system).", expl: "<strong>The Logic Behind the Answer:</strong> 'Go down' refers to computers, servers, or networks failing or crashing.", tag: "tag-nuance" },
+        { q: "University candidates must ___ their research proposals to the faculty office before 5:00 PM.", a: ["hand in"], h: "To submit an assignment or document to authority.", expl: "<strong>The Logic Behind the Answer:</strong> 'Hand in' means to submit homework, reports, or legal documents to an authority.", tag: "tag-phrasal" },
+        { q: "It has been over six months since I last ___ my former roommate living in Madrid.", a: ["heard from"], h: "To receive communication from someone.", expl: "<strong>The Logic Behind the Answer:</strong> 'Hear from' means to receive news, letters, phone calls, or messages from a person.", tag: "tag-preposition" },
+        { q: "___! Did you just say that the flight was canceled, or merely delayed?", a: ["Hold on"], h: "To pause, wait, or stop in surprise/confusion.", expl: "<strong>The Logic Behind the Answer:</strong> 'Hold on' is used as an exclamation to ask someone to wait or clarify surprising news.", tag: "tag-idiom" },
+        { q: "Why do you always ___ bringing up controversial political topics during family dinners?", a: ["insist on", "insist upon"], h: "To demand or persist stubbornly in doing something.", expl: "<b>The Logic Behind the Answer:</b> 'Insist on/upon' requires the dependent preposition 'on' or 'upon' before a gerund ('bringing up').<br><br><b>Spanish Tip:</b> CRITICAL PREPOSITION ERROR! Spanish uses <i>insistir EN</i>, which causes learners to say 'insist IN'. In English, it is ALWAYS <b>insist ON</b> or <b>upon</b>.", tag: "tag-preposition" },
+        { q: "Heavy snowstorms and icy roads managed to ___ workers ___ traveling to the headquarters.", a: ["keep...from", "keep from"], h: "To prevent or stop someone from doing something.", expl: "<strong>The Logic Behind the Answer:</strong> 'Keep (someone) from (doing something)' means to prevent someone from acting.", tag: "tag-preposition" },
+        { q: "Pain relief medication usually takes about twenty minutes to ___ after ingestion.", a: ["kick in"], h: "To take effect or begin functioning.", expl: "<strong>The Logic Behind the Answer:</strong> 'Kick in' means to begin taking effect (used for laws, drugs, measures, or systems).", tag: "tag-phrasal" },
+        { q: "Uncertain economic times and tough choices undoubtedly ___ for the newly elected president.", a: ["lie ahead"], h: "To await or exist in the future.", expl: "<strong>The Logic Behind the Answer:</strong> 'Lie ahead' means to exist in the future (especially challenges or events).", tag: "tag-nuance" },
+        { q: "The administrative security system will automatically ___ users who enter an incorrect password three times.", a: ["lock out"], h: "To prevent access or participation.", expl: "<strong>The Logic Behind the Answer:</strong> 'Lock out' means to deny digital or physical entry/access to someone.", tag: "tag-phrasal" },
+        { q: "Students are required to ___ to the portal daily to check announcements and deadlines.", a: ["log on", "log in"], h: "To connect to a system or website.", expl: "<b>The Logic Behind the Answer:</b> 'Log on' or 'log in' means to authenticate and connect to a network or website.<br><br><b>Spanish Tip:</b> Translates as <i>iniciar sesión</i> or <i>conectarse</i>. The preposition 'to' is already present in the prompt ('to the portal'), so enter only 'log on' or 'log in'.", tag: "tag-phrasal" },
+        { q: "Many seasoned executives ___ setbacks not as failures, but as invaluable learning opportunities.", a: ["look on", "look upon"], h: "To consider or regard someone/something in a specific way.", expl: "<b>The Logic Behind the Answer:</b> 'Look on' or 'look upon' means to perceive or categorize something mentally.<br><br><b>Spanish Tip:</b> Equivalent to <i>considerar</i> or <i>ver algo como</i>. Since 'as' is already in the sentence ('not as failures'), enter only 'look on' or 'look upon'.", tag: "tag-preposition" },
+        { q: "Having finished discussing the financial budget, the chairman suggested we ___ to the next item.", a: ["move on"], h: "To proceed to a new topic or stage.", expl: "<strong>The Logic Behind the Answer:</strong> 'Move on' means to transition to a new topic, activity, or stage in life.", tag: "tag-nuance" },
+        { q: "It suddenly ___ to me that I had left my passport sitting on the kitchen counter.", a: ["occurred"], h: "To enter someone's mind or thought process.", expl: "<b>The Logic Behind the Answer:</b> 'Occurred' (past simple) is required to describe a sudden realization in the past.<br><br><b>Spanish Tip:</b> Translates to <i>ocurrírsele a alguien</i>. Notice the double 'r' spelling in past tense (<b>occurred</b>). The preposition 'to' is already written in the prompt ('to me').", tag: "tag-preposition" },
+        { q: "Subscribers must actively ___ if they wish to receive the company's monthly promotional newsletter.", a: ["opt in"], h: "To choose to participate or join.", expl: "<strong>The Logic Behind the Answer:</strong> 'Opt in' means to choose explicitly to participate in a scheme or mailing list.", tag: "tag-phrasal" },
+        { q: "It felt deeply demoralizing to be ___ for promotion in favor of a far less experienced colleague.", a: ["passed over"], h: "To ignore or overlook someone for promotion/recognition.", expl: "<b>The Logic Behind the Answer:</b> 'Passed over' (past participle) is required following 'to be' in this passive voice construction.<br><br><b>Spanish Tip:</b> Translates as <i>pasar por alto a alguien</i>. Passive voice ('to be passed over') strictly requires the past participle.", tag: "tag-nuance" },
+        { q: "Unexpected error messages kept trying to ___ on the screen while I was attempting to save the file.", a: ["pop up"], h: "To appear or happen suddenly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Pop up' means to emerge suddenly or unexpectedly.", tag: "tag-phrasal" },
+        { q: "Our company has always ___ itself on delivering exceptional customer service around the clock.", a: ["prided"], h: "To take pride or satisfaction in a specific quality.", expl: "<b>The Logic Behind the Answer:</b> 'Prided' (past participle) is required after 'has always' in the present perfect ('has always prided').<br><br><b>Spanish Tip:</b> Translates to <i>enorgullecerse de</i>. Since 'itself' and 'on' are already in the sentence, enter only the past participle 'prided'.", tag: "tag-preposition" },
+        { q: "Could you please ___ three copies of the meeting agenda before the conference begins?", a: ["print out"], h: "To produce a paper document from a digital file.", expl: "<strong>The Logic Behind the Answer:</strong> 'Print out' means to generate a hard copy of a digital document on paper.", tag: "tag-phrasal" },
+        { q: "Dedicated team members vowed to ___ the complex restructuring project ___ despite all difficulties.", a: ["see...through", "see through"], h: "To persevere with a project until completion.", expl: "<strong>The Logic Behind the Answer:</strong> 'See (something) through' means to continue working on something until it is finished.", tag: "tag-phrasal" },
+        { q: "The newly appointed CEO intends to ___ the corporate structure by replacing traditional hierarchies.", a: ["shake up"], h: "To make significant organizational or structural changes.", expl: "<strong>The Logic Behind the Answer:</strong> 'Shake up' means to introduce radical structural or organizational changes.", tag: "tag-nuance" },
+        { q: "Users must ___ with their verified username and password before accessing private account settings.", a: ["sign in"], h: "To log in to an account or website.", expl: "<strong>The Logic Behind the Answer:</strong> 'Sign in' means to log into a digital service or record arrival on a physical roster.", tag: "tag-phrasal" },
+        { q: "It took several hours for the painful reality of the tragic news to fully ___.", a: ["sink in"], h: "To gradually be fully understood or realized.", expl: "<strong>The Logic Behind the Answer:</strong> 'Sink in' means to be fully absorbed and comprehended mentally over time.", tag: "tag-nuance" },
+        { q: "The driver was instructed to ___ as the vehicle approached the congested pedestrian zone.", a: ["slow down"], h: "To reduce speed or velocity.", expl: "<strong>The Logic Behind the Answer:</strong> 'Slow down' means to reduce the rate of movement or pace of activity.", tag: "tag-phrasal" },
+        { q: "To meet the tight production deadline, the factory had to ___ its manufacturing assembly line.", a: ["speed up"], h: "To accelerate or increase rate of operation.", expl: "<strong>The Logic Behind the Answer:</strong> 'Speed up' means to accelerate or cause something to happen faster.", tag: "tag-phrasal" }
+    ];
+
+    let currentQuizType = 'A';
+    let currentData = quizA;
+    let idx = 0; 
+    let streak = 0; 
+    let score = 0; 
+    let solvedThisIdx = false;    
+
+    function openModal() {        
+        const tag = currentData[idx].tag;        
+        document.getElementById('modalTitle').innerText = rules[tag].title;        
+        document.getElementById('modalText').innerHTML = rules[tag].text;        
+        document.getElementById('ruleModal').style.display = 'flex';    
+    }    
+
+    function closeModal() { 
+        document.getElementById('ruleModal').style.display = 'none'; 
+    }    
+
+    function update() {        
+        if (idx >= currentData.length) {            
+            document.getElementById('final-screen').style.display = 'flex';            
+            document.getElementById('final-stats').innerText = `Tasks completed: ${score}/${currentData.length} | Streak: ${streak}`;            
+            return;        
+        }        
+        const card = currentData[idx];        
+        document.getElementById('q').innerText = card.q;        
+        document.getElementById('a').innerText = "Accepted: " + card.a[0];        
+        document.getElementById('expl').innerHTML = "<span class='explanation-header'>The Logic Behind the Answer:</span>" + card.expl;        
+        document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${card.tag.split('-')[1].toUpperCase()} (Click for Category ℹ️)</span>`;        
+        document.getElementById('a').classList.remove('visible');        
+        document.getElementById('expl').classList.remove('visible');        
+        document.getElementById('hintBox').classList.remove('visible');        
+        document.getElementById('feedback').innerText = '';        
+        document.getElementById('userInput').value = '';        
+        document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;        
+        solvedThisIdx = false;        
+        document.getElementById('pBtn').disabled = idx === 0;    
+    }    
+
+    function checkAnswer() {        
+        const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
+        if(!u) return;        
+        const card = currentData[idx];                
+        const isCorrect = card.a.some(ans => {            
+            const normalizedAns = ans.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();            
+            return u === normalizedAns;        });        
+        if (isCorrect) {            
+            document.getElementById('feedback').innerText = "CORRECT! ✨";            
+            document.getElementById('feedback').className = 'correct';            
+            document.getElementById('a').classList.add('visible');            
+            document.getElementById('expl').classList.add('visible');            
+            if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }        
+        } else {            
+            document.getElementById('feedback').innerText = "TRY AGAIN ❌";            
+            document.getElementById('feedback').className = 'wrong';            
+            streak = 0;        
+        }        
+        document.getElementById('streak-count').innerText = `Streak: ${streak}`;        
+        document.getElementById('score-display').innerText = `Correct: ${score}`;    
+    }    
+
+    function showHint() {
+        document.getElementById('hintBox').innerText = "💡 " + currentData[idx].h;        
+        document.getElementById('hintBox').classList.add('visible');     
+    }        
+
+    function revealAnswer() {         
+        document.getElementById('a').classList.add('visible');         
+        document.getElementById('expl').classList.add('visible');        
+        streak = 0; 
+        document.getElementById('streak-count').innerText = `Streak: 0`;    
+    }    
+
+    function next() {         
+        if (idx < currentData.length - 1) {             
+            idx++;             
+            update();         
+        } else {             
+            idx++;             
+            update();         
+        }     
+    }        
+
+    function prev() { 
+        if (idx > 0) { 
+            idx--; 
+            update(); 
+        } 
+    }    
+
+    function switchQuiz(type) {
+        currentQuizType = type;
+        currentData = (type === 'A') ? quizA : quizB;
+        idx = 0;
+        score = 0;
+        streak = 0;
+        solvedThisIdx = false;
+
+        document.getElementById("tabA").className = (type === 'A') ? "tab-btn active" : "tab-btn";
+        document.getElementById("tabB").className = (type === 'B') ? "tab-btn active" : "tab-btn";
+        document.getElementById("subTitle").innerText = `Advanced Multi-Word Verbs Practice (Quiz ${type})`;
+        
+        document.getElementById('final-screen').style.display = 'none';
+        update();
+    }
+
+    document.getElementById('userInput').addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') checkAnswer(); 
+    });    
+
+    update();
+</script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Cris | Advanced Dependent Prepositions Practice</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
+        .card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #2563eb; position: relative; }
+        
+        /* Quiz Selector Tabs */
+        .quiz-tabs { display: flex; gap: 8px; margin-bottom: 20px; background-color: #f1f5f9; padding: 6px; border-radius: 12px; }
+        .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-weight: 600; font-size: 0.9rem; color: #64748b; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+        .tab-btn.active { background-color: #ffffff; color: #2563eb; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+        .brand-header { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; color: #2563eb; letter-spacing: -0.5px; }
+        .question { font-size: 1.15rem; margin-bottom: 20px; min-height: 110px; display: flex; align-items: center; justify-content: center; line-height: 1.7; color: #2c3e50; text-align: left; background: #f9fbff; padding: 25px; border-radius: 12px; border: 1px solid #e1e8ed; }
+        
+        .type-tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; color: white; text-transform: uppercase; cursor: help; }
+        .tag-verb { background: #2563eb; } 
+        .tag-adjective { background: #d97706; } 
+        .tag-noun { background: #7c3aed; } 
+
+        input[type="text"] { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid #ced6e0; border-radius: 10px; box-sizing: border-box; outline: none; margin-bottom: 10px; }
+        #feedback { height: 30px; margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; }
+        .correct { color: #27ae60; } .wrong { color: #e74c3c; }
+        
+        .ans-text, .hint-text { margin: 10px 0; font-weight: bold; color: #2f3542; display: none; padding: 15px; border-radius: 10px; text-align: left; }
+        .ans-text { background: #eef2f7; border: 1px dashed #2c3e50; }
+        .hint-text { background: #fffbe3; border-left: 4px solid #f1c40f; color: #7d6608; }
+
+        .explanation-box { background: #fff9db; padding: 20px; border-radius: 10px; text-align: left; font-size: 0.95rem; margin-top: 15px; display: none; border-left: 5px solid #f1c40f; line-height: 1.6; max-height: 250px; overflow-y: auto; }
+        .explanation-header { color: #946c00; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+        .visible { display: block !important; }
+        
+        .stats-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px; font-weight: 600; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; gap: 8px; }
+        
+        button { padding: 12px 15px; cursor: pointer; border: none; border-radius: 8px; background: #2563eb; color: white; font-weight: 600; flex: 1; transition: 0.2s; }
+        button:hover { background: #1d4ed8; }
+        .check-btn { background: #27ae60; width: 100%; margin-bottom: 15px; font-size: 1.1rem; flex: none; }
+        .check-btn:hover { background: #219653; }
+
+        #ruleModal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: left; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
+        
+        #final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div id="ruleModal">    
+    <div class="modal-content">        
+        <span class="close-modal" onclick="closeModal()">&times;</span>        
+        <h3 id="modalTitle" style="margin-top:0;">Category Reference</h3>        
+        <p id="modalText"></p>    
+    </div>
+</div>
+
+<div class="card-container">    
+    <div id="final-screen">        
+        <h1 style="color: #27ae60;">Session Complete! 🎓</h1>        
+        <p id="final-stats" style="font-size: 1.2rem; color: #2c3e50;"></p>        
+        <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>    
+    </div>    
+
+    <!-- Botón de Retorno Estilizado -->
+    <div style="text-align: left; margin-bottom: 15px;">
+        <a href="index.html" style="text-decoration: none; color: #2563eb; background: #eff6ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+            ← Volver a teachercris.online
+        </a>
+    </div>
+
+    <!-- Quiz Selector Tabs -->
+    <div class="quiz-tabs">
+        <button id="tabA" class="tab-btn active" onclick="switchQuiz('A')">Quiz A (Verbs & Adjectives)</button>
+        <button id="tabB" class="tab-btn" onclick="switchQuiz('B')">Quiz B (Adjectives & Nouns)</button>
+    </div>
+
+    <div class="brand-header">
+        Teacher Cris 
+        <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Advanced Dependent Prepositions Practice (Quiz A)</span>
+    </div>
+
+    <div class="stats-row">        
+        <div id="pg">Task 1 of 22</div>        
+        <div>            
+            <span id="score-display" style="margin-right: 15px; color: #27ae60;">Correct: 0</span>            
+            <span id="streak-count" style="color: #e67e22;">Streak: 0</span>        
+        </div>    
+    </div>        
+
+    <div id="tagDisplay" onclick="openModal()"></div>    
+    <div class="question" id="q">Loading...</div>        
+    
+    <input type="text" id="userInput" placeholder="Type preposition..." autocomplete="off">    
+    <div id="feedback"></div>        
+    
+    <button class="check-btn" onclick="checkAnswer()">Verify (Enter)</button>        
+    
+    <div id="hintBox" class="hint-text"></div>    
+    <div id="a" class="ans-text"></div>    
+    <div id="expl" class="explanation-box"></div>    
+    
+    <div class="controls">        
+        <button id="pBtn" onclick="prev()">← Previous</button>        
+        <button onclick="showHint()">Hint 💡</button>        
+        <button onclick="revealAnswer()">Show Answer 👁️</button>        
+        <button id="nBtn" onclick="next()">Next →</button>    
+    </div>
+</div>
+
+<script>    
+    const rules = {        
+        "tag-verb": { title: "Verb + Preposition", text: "Verbs that require specific prepositions due to fixed structural chunks rather than pure logic.<br><br>• <i>Depend <b>on</b></i> (leaning on a condition).<br>• <i>Insist <b>on</b></i> (pressing downward)." },        
+        "tag-adjective": { title: "Adjective + Preposition", text: "Adjectives paired with fixed particles to establish a specific mental orientation or perspective.<br><br>• <i>Married <b>to</b></i> (directional bond).<br>• <i>Good <b>at</b></i> (target coordinate)." },        
+        "tag-noun": { title: "Noun + Preposition", text: "Nouns linked to prepositions that govern state, trust, threat, or relational direction.<br><br>• <i>A threat <b>to</b></i>.<br>• <i>Confidence <b>in</b></i>." }
+    };    
+
+    const quizA = [
+        { q: "Whether the new regional branch opens next autumn will strictly depend ___ the board's approval of the revised budget.", a: ["on", "upon"], h: "Visualizes a physical or metaphorical weight resting/leaning on a base.", expl: "<b>Indivisible Chunk:</b> depend on / depend upon<br><br><b>Meaning & Contrast:</b> English visualizes a weight resting on a base. Spanish uses 'depender de' (descending from a source), but English requires leaning *on* the condition.", tag: "tag-verb" },
+        { q: "Despite facing strong opposition from several committee members, the director insisted ___ implementing the new workplace policies immediately.", a: ["on", "upon"], h: "Projects sustained downwards pressure placed on a point of focus.", expl: "<b>Indivisible Chunk:</b> insist on / insist upon<br><br><b>Meaning & Contrast:</b> English projects sustained downward pressure. Spanish uses 'insistir en' (containment inside an idea). Avoid saying 'insist in'.", tag: "tag-verb" },
+        { q: "The managing editor warmly congratulated the investigative journalist ___ winning the prestigious international press award.", a: ["on"], h: "Visualizes placing praise or a token directly on top of the achievement.", expl: "<b>Indivisible Chunk:</b> congratulate [someone] on [something]<br><br><b>Meaning & Contrast:</b> English places praise directly on top of the achievement. Spanish uses 'felicitar por' (focusing on cause).", tag: "tag-verb" },
+        { q: "Due to unexpected severe weather conditions, event organizers had no choice but to substitute the outdoor gala ___ a smaller indoor reception.", a: ["for"], h: "Visualizes destination aimed for a target replacement.", expl: "<b>Indivisible Chunk:</b> substitute [X] for [Y]<br><br><b>Meaning & Contrast:</b> English visualizes destination for a replacement. Spanish uses 'sustituir [Algo] por [Otro]'; Spanish speakers frequently reverse this logic.", tag: "tag-verb" },
+        { q: "The legal team worked through the night to prevent key evidence ___ being accidentally destroyed during the audit.", a: ["from"], h: "Builds a protective barrier to keep the action away.", expl: "<b>Indivisible Chunk:</b> prevent [someone/something] from [verb-ing]<br><br><b>Meaning & Contrast:</b> English builds a protective barrier to keep action away. Spanish uses 'impedir/evitar que' with a subjunctive clause.", tag: "tag-verb" },
+        { q: "The panel of international judges consisted ___ experts drawn from five distinct scientific disciplines.", a: ["of"], h: "Visualizes intrinsic constituent parts making up a whole.", expl: "<b>Indivisible Chunk:</b> consist of<br><br><b>Meaning & Contrast:</b> English visualizes intrinsic parts making up a whole using 'of' to mark material essence. Spanish uses 'consistir en'.", tag: "tag-verb" },
+        { q: "The department manager spent nearly half of the quarterly budget ___ upgrading the office's software infrastructure.", a: ["on"], h: "Views expenditure as laying out funds directly on a surface/project.", expl: "<b>Indivisible Chunk:</b> spend [time/money] on [something]<br><br><b>Meaning & Contrast:</b> English views expenditure as laying funds directly on a project. Spanish uses 'gastar en' (inside).", tag: "tag-verb" },
+        { q: "After a turbulent negotiation phase, both pharmaceutical companies finally succeeded ___ reaching a mutually beneficial distribution agreement.", a: ["in"], h: "Visualizes operating or arriving in a domain of success.", expl: "<b>Indivisible Chunk:</b> succeed in + [verb-ing]<br><br><b>Meaning & Contrast:</b> English visualizes operating in a domain of success. Spanish uses 'tener éxito en' or a direct transitive verb. Avoid 'succeed to'.", tag: "tag-verb" },
+        { q: "The regulatory commission accused the pharmaceutical firm ___ deliberately manipulating trial results to accelerate approval.", a: ["of"], h: "Visualizes pulling a charge out of a person's conduct.", expl: "<b>Indivisible Chunk:</b> accuse [someone] of [something]<br><br><b>Meaning & Contrast:</b> English pulls a charge out of conduct. Spanish uses 'acusar de'; learners frequently make transfer errors like 'accuse for'.", tag: "tag-verb" },
+        { q: "Financial advisors strongly discourage their clients ___ making speculative investments during periods of high market volatility.", a: ["from"], h: "Visualizes steering motion away from a trajectory.", expl: "<b>Indivisible Chunk:</b> discourage [someone] from [verb-ing]<br><br><b>Meaning & Contrast:</b> English steers motion away from a path. Spanish uses 'disuadir de', leading to transfer errors like 'discourage to do'.", tag: "tag-verb" },
+        { q: "Political leaders were sternly warned not to interfere ___ the independent judicial proceedings of the international tribunal.", a: ["with", "in"], h: "Coming into friction alongside an ongoing process, disturbing its flow.", expl: "<b>Indivisible Chunk:</b> interfere with [something]<br><br><b>Meaning & Contrast:</b> Interfere with visualizes friction alongside an ongoing process. Spanish uses 'interferir en'.", tag: "tag-verb" },
+        { q: "The architecture of the newly constructed museum strikingly reminds visitors ___ the historical monuments of ancient Rome.", a: ["of"], h: "Draws a memory out of the source object.", expl: "<b>Indivisible Chunk:</b> remind [someone] of [something]<br><br><b>Meaning & Contrast:</b> English draws a memory out of the source object. Spanish uses 'recordar a' (directional).", tag: "tag-verb" },
+        { q: "Many rural communities across the region continue to suffer ___ a severe lack of modern healthcare infrastructure.", a: ["from"], h: "Visualizes distress emanating from an external condition.", expl: "<b>Indivisible Chunk:</b> suffer from<br><br><b>Meaning & Contrast:</b> English visualizes distress emanating from an external condition. Spanish often uses 'padecer/sufrir' directly without a preposition.", tag: "tag-verb" },
+        { q: "During the press conference, the spokesperson refused to comment ___ the ongoing police investigation.", a: ["on", "upon"], h: "Visualizes focusing remarks directly on top of a subject surface.", expl: "<b>Indivisible Chunk:</b> comment on<br><br><b>Meaning & Contrast:</b> English focuses remarks directly on top of a subject surface. Spanish uses 'comentar' transitively.", tag: "tag-verb" },
+        { q: "The lead researcher spent months attempting to approve ___ the proposed ethical guidelines for human trials.", a: ["of"], h: "Extracting a favorable evaluation out of something.", expl: "<b>Indivisible Chunk:</b> approve of<br><br><b>Meaning & Contrast:</b> Approve of means having a favorable opinion, whereas approve without of means formally sanctioning. Spanish uses 'aprobar' transitively.", tag: "tag-verb" },
+        { q: "After twenty years of dedicated research, the immunologist is effectively married ___ her groundbreaking work on autoimmune diseases.", a: ["to"], h: "Conceptualizes a directional connection or bond targeted to another entity.", expl: "<b>Indivisible Chunk:</b> married to<br><br><b>Meaning & Contrast:</b> English conceptualizes a directional bond targeted to an entity. Spanish uses 'casado/a con' (mutual company).", tag: "tag-adjective" },
+        { q: "She has always been exceptionally good ___ synthesizing complex statistical data into actionable business insights.", a: ["at"], h: "Pinpoints a precise target coordinate where skill is applied.", expl: "<b>Indivisible Chunk:</b> good at / brilliant at / adept at<br><br><b>Meaning & Contrast:</b> English pinpoints a precise coordinate where skill is applied. Spanish uses 'bueno/a en' (inside a field).", tag: "tag-adjective" },
+        { q: "The corporate board remained remarkably indifferent ___ the growing public criticism regarding their environmental record.", a: ["to"], h: "Establishes an orientation aimed to an external stimulus showing zero responsiveness.", expl: "<b>Indivisible Chunk:</b> indifferent to<br><br><b>Meaning & Contrast:</b> English establishes an orientation aimed to an external stimulus showing zero responsiveness. Spanish uses 'indiferente a / ante'.", tag: "tag-adjective" },
+        { q: "Unregulated industrial runoff is directly responsible ___ the catastrophic decline in local freshwater fish populations.", a: ["for"], h: "Visualizes standing in front of or answering for a consequence.", expl: "<b>Indivisible Chunk:</b> responsible for<br><br><b>Meaning & Contrast:</b> English visualizes standing to answer for a consequence. Spanish uses 'responsable de' (looking backward to origin).", tag: "tag-adjective" },
+        { q: "Deeply absorbed ___ his research on quantum computing, the theoretical physicist completely lost track of time.", a: ["in"], h: "Visualizes complete immersion or containment in a liquid or surrounding medium.", expl: "<b>Indivisible Chunk:</b> absorbed in<br><br><b>Meaning & Contrast:</b> English visualizes complete immersion in a medium. Don't confuse with 'obsessed with'.", tag: "tag-adjective" },
+        { q: "Senior corporate executives must be fully aware ___ the potential geopolitical risks before finalizing the multi-billion dollar merger.", a: ["of"], h: "Visualizes conscious knowledge radiating out of a reality.", expl: "<b>Indivisible Chunk:</b> aware of<br><br><b>Meaning & Contrast:</b> English visualizes conscious knowledge radiating out of a reality. Spanish uses 'consciente de'; avoid 'aware about'.", tag: "tag-adjective" },
+        { q: "The new AI processing unit is capable ___ executing billions of complex mathematical calculations per millisecond.", a: ["of"], h: "Measures potential capacity stemming out of an entity.", expl: "<b>Indivisible Chunk:</b> capable of + [verb-ing]<br><br><b>Meaning & Contrast:</b> English measures potential capacity stemming out of an entity. Spanish uses 'capaz de'; avoid infinitives like 'capable to execute'.", tag: "tag-adjective" }
+    ];
+
+    const quizB = [
+        { q: "Environmental analysts were sharply critical ___ the government's decision to subsidize fossil fuel extraction.", a: ["of"], h: "Directs evaluation or judgment coming out of an observer onto a subject.", expl: "<b>Indivisible Chunk:</b> critical of<br><br><b>Meaning & Contrast:</b> English directs evaluation coming out of an observer onto a subject. Spanish uses 'crítico con'.", tag: "tag-adjective" },
+        { q: "The selection tribunal found that the interviewing panel had been unfairly prejudiced ___ candidates from non-traditional backgrounds.", a: ["against"], h: "Projects a hostile force or barrier leaning directly against a target.", expl: "<b>Indivisible Chunk:</b> prejudiced against<br><br><b>Meaning & Contrast:</b> English projects a hostile barrier leaning directly against a target. Spanish uses 'prejuzgado contra'.", tag: "tag-adjective" },
+        { q: "Modern optical sensors are extraordinarily sensitive ___ minor variations in ambient environmental light.", a: ["to"], h: "Projects receptivity pointing to an incoming stimulus or signal.", expl: "<b>Indivisible Chunk:</b> sensitive to<br><br><b>Meaning & Contrast:</b> English projects receptivity pointing to an incoming stimulus. Note the false friend: sensitive (sensible) vs sensible (sensato).", tag: "tag-adjective" },
+        { q: "Although he was deeply disappointed ___ the election results, the candidate delivered a gracious concession speech.", a: ["with", "at", "by"], h: "Visualizes being accompanied or impacted by an unsatisfactory outcome.", expl: "<b>Indivisible Chunk:</b> disappointed with / at / by<br><br><b>Meaning & Contrast:</b> English visualizes being impacted by an outcome. Spanish uses 'decepcionado con/por'; never use 'disappointed from'.", tag: "tag-adjective" },
+        { q: "Young entrepreneurs are often obsessed ___ finding scalable business models before establishing steady revenue.", a: ["with"], h: "Visualizes a mental fixation that lingers constantly alongside a person.", expl: "<b>Indivisible Chunk:</b> obsessed with<br><br><b>Meaning & Contrast:</b> English visualizes a mental fixation lingering alongside a person. Spanish uses 'obsesionado con'.", tag: "tag-adjective" },
+        { q: "The candidate's extensive international experience makes her uniquely suited ___ the diplomatic post in Geneva.", a: ["to", "for"], h: "Visualizes a tailored fit pointing directional alignment to a position.", expl: "<b>Indivisible Chunk:</b> suited to / suited for<br><br><b>Meaning & Contrast:</b> English visualizes a tailored fit pointing alignment to a position. Spanish uses 'adecuado/a para'.", tag: "tag-adjective" },
+        { q: "After working twelve-hour shifts for six consecutive weeks, the medical staff became thoroughly tired ___ administrative delays.", a: ["of"], h: "Visualizes physical or mental exhaustion stemming out of a repetitive situation.", expl: "<b>Indivisible Chunk:</b> tired of<br><br><b>Meaning & Contrast:</b> English visualizes exhaustion stemming out of a situation. Spanish uses 'cansado de'; avoid 'tired for'.", tag: "tag-adjective" },
+        { q: "The lead developer was extremely proud ___ the team's ability to deploy the software patch without any server downtime.", a: ["of"], h: "Visualizes pride radiating out of an achievement or person.", expl: "<b>Indivisible Chunk:</b> proud of<br><br><b>Meaning & Contrast:</b> English visualizes pride radiating out of an achievement. Spanish uses 'orgulloso de'.", tag: "tag-adjective" },
+        { q: "Rising ocean temperatures pose an immediate and severe threat ___ coastal marine ecosystems worldwide.", a: ["to"], h: "Visualizes a directed vector or arrow pointing to a target that receives impact.", expl: "<b>Indivisible Chunk:</b> a threat to<br><br><b>Meaning & Contrast:</b> English visualizes a directed vector pointing to a target. Spanish uses 'una amenaza para'.", tag: "tag-noun" },
+        { q: "Financial institutions operating within the European Union must strictly maintain compliance ___ updated anti-money laundering regulations.", a: ["with"], h: "Visualizes moving or acting alongside in harmony/company with a set of rules.", expl: "<b>Indivisible Chunk:</b> compliance with<br><br><b>Meaning & Contrast:</b> English visualizes moving alongside in harmony with rules. Spanish uses 'cumplimiento de'.", tag: "tag-noun" },
+        { q: "Throughout the prolonged crisis, the chief negotiator demonstrated an extraordinary capacity ___ maintaining calm under extreme pressure.", a: ["for"], h: "Visualizes an internal space or volume built for carrying out a purpose.", expl: "<b>Indivisible Chunk:</b> capacity for<br><br><b>Meaning & Contrast:</b> English visualizes an internal space built for carrying out a purpose. Spanish uses 'capacidad de/para'.", tag: "tag-noun" },
+        { q: "Public confidence ___ the domestic banking system plummeted following the unexpected collapse of two major lenders.", a: ["in"], h: "Visualizes trust anchored deep inside an institution or person.", expl: "<b>Indivisible Chunk:</b> confidence in<br><br><b>Meaning & Contrast:</b> English visualizes trust anchored deep inside an institution. Spanish uses 'confianza en'; avoid 'confidence on'.", tag: "tag-noun" },
+        { q: "The minister faced widespread criticism ___ his handling of the emergency evacuation during the recent flash floods.", a: ["of"], h: "Links the critique as belonging to or originating out of the target's actions.", expl: "<b>Indivisible Chunk:</b> criticism of<br><br><b>Meaning & Contrast:</b> English links critique as originating out of the target's actions. Spanish uses 'críticas a/hacia'.", tag: "tag-noun" },
+        { q: "The university has earned an enviable international reputation ___ academic excellence in biotechnology research.", a: ["for"], h: "Visualizes standing or renown awarded for a specific trait or achievement.", expl: "<b>Indivisible Chunk:</b> reputation for<br><br><b>Meaning & Contrast:</b> English visualizes renown awarded for a specific trait. Spanish uses 'reputación por'.", tag: "tag-noun" },
+        { q: "Rebuilding consumer trust ___ autonomous vehicle technology will require years of verified safety data.", a: ["in"], h: "Visualizes placing faith securely inside a system or person.", expl: "<b>Indivisible Chunk:</b> trust in<br><br><b>Meaning & Contrast:</b> English places faith securely inside a system. Spanish uses 'fe en'.", tag: "tag-noun" },
+        { q: "The keynote speaker paid close attention ___ the audience's non-verbal reactions throughout her lecture.", a: ["to"], h: "Visualizes directing cognitive focus pointing to a target.", expl: "<b>Indivisible Chunk:</b> attention to<br><br><b>Meaning & Contrast:</b> English visualizes directing cognitive focus pointing to a target. Spanish uses 'atención a'.", tag: "tag-noun" },
+        { q: "Despite the lack of empirical evidence, the community held an unwavering belief ___ the traditional healing methods.", a: ["in"], h: "Visualizes conviction residing deep inside a core principle or entity.", expl: "<b>Indivisible Chunk:</b> belief in<br><br><b>Meaning & Contrast:</b> English visualizes conviction residing deep inside a core principle. Spanish uses 'creencia en'.", tag: "tag-noun" },
+        { q: "The team encountered immense difficulty ___ obtaining the necessary permits from the local municipal council.", a: ["in", "with"], h: "Visualizes experiencing friction inside an ongoing process or task.", expl: "<b>Indivisible Chunk:</b> difficulty in / difficulty with<br><br><b>Meaning & Contrast:</b> English visualizes friction inside an ongoing task. Spanish uses 'dificultad para'.", tag: "tag-noun" },
+        { q: "The committee held a lengthy discussion ___ the economic implications of the proposed tariff increases.", a: ["about", "on"], h: "Visualizes surrounding or encompassing a topic from all sides.", expl: "<b>Indivisible Chunk:</b> discussion about / discussion on<br><br><b>Meaning & Contrast:</b> English visualizes surrounding a topic from all sides. Spanish uses 'discusión sobre'; never use 'discussion of'.", tag: "tag-noun" },
+        { q: "Having previous experience ___ managing cross-functional remote teams is an essential prerequisite for this position.", a: ["in", "of"], h: "Visualizes possessing practical wisdom acquired inside a domain or field.", expl: "<b>Indivisible Chunk:</b> experience in / experience of<br><br><b>Meaning & Contrast:</b> English visualizes practical wisdom acquired inside a domain. Spanish uses 'experiencia en'.", tag: "tag-noun" },
+        { q: "The white paper provides valuable information ___ the latest regulatory changes affecting renewable energy projects.", a: ["on", "about"], h: "Visualizes data or knowledge resting directly on top of a subject area.", expl: "<b>Indivisible Chunk:</b> information on / information about<br><br><b>Meaning & Contrast:</b> English visualizes data resting directly on top of a subject area. Spanish uses 'información sobre'.", tag: "tag-noun" },
+        { q: "Engineers are currently working to solve the systemic problem ___ recurring voltage fluctuations in the power grid.", a: ["of", "with"], h: "Links the defect as belonging directly to the system.", expl: "<b>Indivisible Chunk:</b> problem of / problem with<br><br><b>Meaning & Contrast:</b> English links the defect as belonging directly to the system. Spanish uses 'el problema de/con'.", tag: "tag-noun" },
+        { q: "There is an urgent need for more research into the relationship ___ environmental stress and cognitive performance.", a: ["between"], h: "Visualizes a conceptual bridge spanning the space between two distinct entities.", expl: "<b>Indivisible Chunk:</b> relationship between<br><br><b>Meaning & Contrast:</b> English visualizes a conceptual bridge spanning between two distinct entities. Spanish uses 'relación entre'.", tag: "tag-noun" }
+    ];
+
+    let currentQuizType = 'A';
+    let currentData = quizA;
+    let idx = 0; 
+    let streak = 0; 
+    let score = 0; 
+    let solvedThisIdx = false;    
+
+    function openModal() {        
+        const tag = currentData[idx].tag;        
+        document.getElementById('modalTitle').innerText = rules[tag].title;        
+        document.getElementById('modalText').innerHTML = rules[tag].text;        
+        document.getElementById('ruleModal').style.display = 'flex';    
+    }    
+
+    function closeModal() { 
+        document.getElementById('ruleModal').style.display = 'none'; 
+    }    
+
+    function update() {        
+        if (idx >= currentData.length) {            
+            document.getElementById('final-screen').style.display = 'flex';            
+            document.getElementById('final-stats').innerText = `Tasks completed: ${score}/${currentData.length} | Streak: ${streak}`;            
+            return;        
+        }        
+        const card = currentData[idx];        
+        document.getElementById('q').innerText = card.q;        
+        document.getElementById('a').innerText = "Accepted: " + card.a[0];        
+        document.getElementById('expl').innerHTML = "<span class='explanation-header'>Meaning & Contrast (English vs. Spanish):</span>" + card.expl;        
+        
+        let tagName = card.tag.split('-')[1].toUpperCase();
+        document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${tagName} (Click for Category ℹ️)</span>`;        
+        
+        document.getElementById('a').classList.remove('visible');        
+        document.getElementById('expl').classList.remove('visible');        
+        document.getElementById('hintBox').classList.remove('visible');        
+        document.getElementById('feedback').innerText = '';        
+        document.getElementById('userInput').value = '';        
+        document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;        
+        solvedThisIdx = false;        
+        document.getElementById('pBtn').disabled = idx === 0;    
+    }    
+
+    function checkAnswer() {        
+        const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
+        if(!u) return;        
+        const card = currentData[idx];                
+        const isCorrect = card.a.some(ans => {            
+            const normalizedAns = ans.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();            
+            return u === normalizedAns;        });        
+        if (isCorrect) {            
+            document.getElementById('feedback').innerText = "CORRECT! ✨";            
+            document.getElementById('feedback').className = 'correct';            
+            document.getElementById('a').classList.add('visible');            
+            document.getElementById('expl').classList.add('visible');            
+            if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }        
+        } else {            
+            document.getElementById('feedback').innerText = "TRY AGAIN ❌";            
+            document.getElementById('feedback').className = 'wrong';            
+            streak = 0;        
+        }        
+        document.getElementById('streak-count').innerText = `Streak: ${streak}`;        
+        document.getElementById('score-display').innerText = `Correct: ${score}`;    
+    }    
+
+    function showHint() {
+        document.getElementById('hintBox').innerText = "💡 " + currentData[idx].h;        
+        document.getElementById('hintBox').classList.add('visible');     
+    }        
+
+    function revealAnswer() {         
+        document.getElementById('a').classList.add('visible');         
+        document.getElementById('expl').classList.add('visible');        
+        streak = 0; 
+        document.getElementById('streak-count').innerText = `Streak: 0`;    
+    }    
+
+    function next() {         
+        if (idx < currentData.length - 1) {             
+            idx++;             
+            update();         
+        } else {             
+            idx++;             
+            update();         
+        }     
+    }        
+
+    function prev() { 
+        if (idx > 0) { 
+            idx--; 
+            update(); 
+        } 
+    }    
+
+    function switchQuiz(type) {
+        currentQuizType = type;
+        currentData = (type === 'A') ? quizA : quizB;
+        idx = 0;
+        score = 0;
+        streak = 0;
+        solvedThisIdx = false;
+
+        document.getElementById("tabA").className = (type === 'A') ? "tab-btn active" : "tab-btn";
+        document.getElementById("tabB").className = (type === 'B') ? "tab-btn active" : "tab-btn";
+        document.getElementById("subTitle").innerText = `Advanced Dependent Prepositions Practice (Quiz ${type})`;
+        
+        document.getElementById('final-screen').style.display = 'none';
+        update();
+    }
+
+    document.getElementById('userInput').addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') checkAnswer(); 
+    });    
+
+    update();
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Cris | Present Perfect Master</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
+        .card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #2563eb; position: relative; }
+        
+        /* Quiz Selector Tabs */
+        .quiz-tabs { display: flex; gap: 8px; margin-bottom: 20px; background-color: #f1f5f9; padding: 6px; border-radius: 12px; }
+        .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-weight: 600; font-size: 0.9rem; color: #64748b; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+        .tab-btn.active { background-color: #ffffff; color: #2563eb; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+        .brand-header { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; color: #2563eb; letter-spacing: -0.5px; }
+        .question { font-size: 1.15rem; margin-bottom: 20px; min-height: 110px; display: flex; align-items: center; justify-content: center; line-height: 1.7; color: #2c3e50; text-align: left; background: #f9fbff; padding: 25px; border-radius: 12px; border: 1px solid #e1e8ed; }
+        
+        .type-tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; color: white; text-transform: uppercase; cursor: help; }
+        .tag-verb { background: #2563eb; } 
+
+        input[type="text"] { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid #ced6e0; border-radius: 10px; box-sizing: border-box; outline: none; margin-bottom: 10px; }
+        #feedback { height: 30px; margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; }
+        .correct { color: #27ae60; } .wrong { color: #e74c3c; }
+        
+        .ans-text, .hint-text { margin: 10px 0; font-weight: bold; color: #2f3542; display: none; padding: 15px; border-radius: 10px; text-align: left; }
+        .ans-text { background: #eef2f7; border: 1px dashed #2c3e50; }
+        .hint-text { background: #fffbe3; border-left: 4px solid #f1c40f; color: #7d6608; }
+
+        .explanation-box { background: #fff9db; padding: 20px; border-radius: 10px; text-align: left; font-size: 0.95rem; margin-top: 15px; display: none; border-left: 5px solid #f1c40f; line-height: 1.6; max-height: 250px; overflow-y: auto; }
+        .explanation-header { color: #946c00; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+        .visible { display: block !important; }
+        
+        .stats-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px; font-weight: 600; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; gap: 8px; }
+        
+        button { padding: 12px 15px; cursor: pointer; border: none; border-radius: 8px; background: #2563eb; color: white; font-weight: 600; flex: 1; transition: 0.2s; }
+        button:hover { background: #1d4ed8; }
+        .check-btn { background: #27ae60; width: 100%; margin-bottom: 15px; font-size: 1.1rem; flex: none; }
+        .check-btn:hover { background: #219653; }
+
+        #ruleModal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: left; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
+        
+        #final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div id="ruleModal">    
+    <div class="modal-content">        
+        <span class="close-modal" onclick="closeModal()">&times;</span>        
+        <h3 id="modalTitle" style="margin-top:0;">Category Reference</h3>        
+        <p id="modalText"></p>    
+    </div>
+</div>
+
+<div class="card-container">    
+    <div id="final-screen">        
+        <h1 style="color: #27ae60;">Session Complete! 🎓</h1>        
+        <p id="final-stats" style="font-size: 1.2rem; color: #2c3e50;"></p>        
+        <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>    
+    </div>    
+
+    <!-- Return to dashboard link -->
+    <div style="text-align: left; margin-bottom: 15px;">
+        <a href="index.html" style="text-decoration: none; color: #2563eb; background: #eff6ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+            ← Volver a teachercris.online
+        </a>
+    </div>
+
+    <!-- Quiz Selector Tabs split to avoid token memory issues -->
+    <div class="quiz-tabs">
+        <button id="tabA" class="tab-btn active" onclick="switchQuiz('A')">Quiz A (Tasks 1-22)</button>
+        <button id="tabB" class="tab-btn" onclick="switchQuiz('B')">Quiz B (Tasks 23-45)</button>
+    </div>
+
+    <div class="brand-header">
+        Teacher Cris 
+        <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Present Perfect Master Practice (Quiz A)</span>
+    </div>
+
+    <div class="stats-row">        
+        <div id="pg">Task 1 of 22</div>        
+        <div>            
+            <span id="score-display" style="margin-right: 15px; color: #27ae60;">Correct: 0</span>            
+            <span id="streak-count" style="color: #e67e22;">Streak: 0</span>        
+        </div>    
+    </div>        
+
+    <div id="tagDisplay" onclick="openModal()"></div>    
+    <div class="question" id="q">Loading...</div>        
+    
+    <input type="text" id="userInput" placeholder="Type correct verb phrase aspect..." autocomplete="off">    
+    <div id="feedback"></div>        
+    
+    <button class="check-btn" onclick="checkAnswer()">Verify (Enter)</button>        
+    
+    <div id="hintBox" class="hint-text"></div>    
+    <div id="a" class="ans-text"></div>    
+    <div id="expl" class="explanation-box"></div>    
+    
+    <div class="controls">        
+        <button id="pBtn" onclick="prev()">← Previous</button>        
+        <button onclick="showHint()">Hint 💡</button>        
+        <button onclick="revealAnswer()">Show Answer 👁️</button>        
+        <button id="nBtn" onclick="next()">Next →</button>    
+    </div>
+</div>
+
+<script>    
+    const rules = {        
+        "tag-verb": { title: "Present Perfect Structure", text: "Verbs that require the Present Perfect or Present Perfect Continuous aspect to connect a historical point of origin to ongoing present states, explicitly avoiding simple aspect L1 transfer errors.<br><br>• <i>Has worked for</i> (Accumulated duration).<br>• <i>Has been since</i> (Temporal milestone boundary)." }
+    };    
+
+    const quizA = [
+        { q: "Dr. Aris ___ at the research institute for over twelve years, leading groundbreaking work on genomic sequencing.", a: ["has worked", "has been working"], h: "Visualize an action that originated in the past and continues seamlessly into the present moment over a measured duration.", expl: "<b>Indivisible Chunk:</b> has worked for / has been working for<br><br><b>Meaning & Contrast:</b> While Spanish speakers naturally use the present simple ('trabaja desde hace') to describe ongoing states, English strictly requires the present perfect to bridge past origin with present continuity over a duration marked by 'for'.", tag: "tag-verb" },
+        { q: "The international trade alliance ___ in effect since January 2020, boosting bilateral exports across Europe.", a: ["has been"], h: "Anchor an ongoing state back to a specific starting point in time rather than a measured duration.", expl: "<b>Indivisible Chunk:</b> has been since<br><br><b>Meaning & Contrast:</b> Spanish speakers often incorrectly transfer the present indicative with 'desde' ('está en vigor desde'). In English, any state spanning from a fixed historical calendar mark ('since January 2020') up to now demands the present perfect.", tag: "tag-verb" },
+        { q: "Our senior engineering team ___ on this aerospace project for six consecutive months without a single day off.", a: ["has worked", "has been working", "have worked", "have been working"], h: "Focus on continuous activity extending over an accumulated period of time.", expl: "<b>Indivisible Chunk:</b> has been working for<br><br><b>Meaning & Contrast:</b> Spanish uses 'lleva trabajando seis meses'. English avoids using 'carry' for duration and instead pairs the present perfect continuous with 'for' to measure accumulated duration.", tag: "tag-verb" },
+        { q: "The chief executive officer ___ in charge of corporate communications since the restructuring took place.", a: ["has been"], h: "Connect a continuous leadership role directly to a specific past event serving as the starting mark.", expl: "<b>Indivisible Chunk:</b> has been since<br><br><b>Meaning & Contrast:</b> Spanish L1 learners frequently say 'is in charge since'. English requires 'has been' because 'since' introduces the exact event ('the restructuring took place') marking the inception of the state.", tag: "tag-verb" },
+        { q: "Global stock markets ___ remarkable volatility for the past three fiscal quarters.", a: ["have experienced", "have been experiencing"], h: "Measure the duration of market fluctuations stretching over a defined block of time up to the present.", expl: "<b>Indivisible Chunk:</b> have experienced for<br><br><b>Meaning & Contrast:</b> Spanish uses 'experimentan desde hace tres trimestres'. English views 'the past three quarters' as a bounded timeframe extending to now, requiring 'have experienced' with 'for'.", tag: "tag-verb" },
+        { q: "Professor Harrison ___ economic policy at Oxford University since he published his seminal treatise in 2015.", a: ["has taught", "has been teaching"], h: "Trace an academic tenure from a specific landmark year of publication up to the current academic term.", expl: "<b>Indivisible Chunk:</b> has taught since / has been teaching since<br><br><b>Meaning & Contrast:</b> Spanish uses 'enseña desde que publicó'. In English, 'since' sets a temporal anchor in the past, forcing the main clause into the present perfect.", tag: "tag-verb" },
+        { q: "The pharmaceutical board ___ the clinical trial data for two weeks, but no official verdict has been released.", a: ["has reviewed", "has been reviewing", "have reviewed", "have been reviewing"], h: "Emphasize an ongoing investigative activity taking place across a multi-day span.", expl: "<b>Indivisible Chunk:</b> has been reviewing for<br><br><b>Meaning & Contrast:</b> Spanish speakers lean toward present simple ('revisan desde hace dos semanas'). English requires present perfect continuous combined with 'for' to quantify the timeframe.", tag: "tag-verb" },
+        { q: "Ever since the regulatory reforms were enacted, compliance officers ___ strict oversight across all branches.", a: ["have maintained", "have been maintaining"], h: "Link continuous oversight to the exact historical moment the new regulations were passed.", expl: "<b>Indivisible Chunk:</b> have maintained since<br><br><b>Meaning & Contrast:</b> Spanish uses 'mantiene desde que'. In English, 'ever since' strongly triggers the present perfect to show unbroken continuity from the past trigger event to the present.", tag: "tag-verb" },
+        { q: "The historic hotel ___ owned by the same founding family for more than a century.", a: ["has been"], h: "Express an uninterrupted state of ownership covering an extensive period of one hundred years.", expl: "<b>Indivisible Chunk:</b> has been owned for<br><br><b>Meaning & Contrast:</b> Spanish uses 'es propiedad de... desde hace un siglo'. English utilizes 'has been' with 'for' to bridge the century-long duration into present reality.", tag: "tag-verb" },
+        { q: "Renewable energy investments ___ rapidly across Scandinavian nations since the dawn of the decade.", a: ["have grown", "have been growing"], h: "Track the growth curve of energy investments starting from a fixed calendar milestone.", expl: "<b>Indivisible Chunk:</b> have been growing since<br><br><b>Meaning & Contrast:</b> Spanish speakers tend to say 'crecen desde'. In English, 'since the dawn of the decade' marks the starting point, making present perfect continuous mandatory.", tag: "tag-verb" },
+        { q: "The software development firm ___ its core server infrastructure for nearly five hours.", a: ["has been upgrading", "has upgraded"], h: "Represent an ongoing technical maintenance process measured across a five-hour span.", expl: "<b>Indivisible Chunk:</b> has been upgrading for<br><br><b>Meaning & Contrast:</b> Spanish uses 'lleva actualizando cinco horas'. English avoids using 'carry' for duration and relies entirely on present perfect continuous paired with 'for'.", tag: "tag-verb" },
+        { q: "Public interest in autonomous transportation ___ significantly since the international motor show.", a: ["has increased", "has been increasing"], h: "Identify a shift in public attention that began at a specific promotional event.", expl: "<b>Indivisible Chunk:</b> has increased since<br><br><b>Meaning & Contrast:</b> Spanish speakers incorrectly use the present tense ('aumenta desde'). English requires 'has increased' because 'since' anchors the beginning of the trend at the motor show.", tag: "tag-verb" },
+        { q: "The lead archeologist ___ artifact excavations in the Valley of the Kings for three consecutive seasons.", a: ["has directed", "has been directing"], h: "Describe professional leadership extending across multiple archaeological seasons.", expl: "<b>Indivisible Chunk:</b> has been directing for<br><br><b>Meaning & Contrast:</b> Spanish uses 'dirige desde hace tres temporadas'. English mandates the present perfect continuous with 'for' to express accumulated duration in an active project.", tag: "tag-verb" },
+        { q: "Substantial funding for urban reforestation ___ available since the green initiative was approved.", a: ["has been"], h: "Indicate continuous financial availability triggered by a legislative milestone.", expl: "<b>Indivisible Chunk:</b> has been since<br><br><b>Meaning & Contrast:</b> Spanish uses 'está disponible desde que'. English uses 'has been' combined with 'since' to connect the legislative approval to ongoing present funding.", tag: "tag-verb" },
+        { q: "The diplomatic envoys ___ peaceful resolution strategies for four grueling weeks.", a: ["have negotiated", "have been negotiating"], h: "Highlight the extended duration of diplomatic talks reaching up to the current session.", expl: "<b>Indivisible Chunk:</b> have been negotiating for<br><br><b>Meaning & Contrast:</b> Spanish uses 'negocian desde hace cuatro semanas'. English demands the present perfect paired with 'for' when quantifying the duration of ongoing efforts.", tag: "tag-verb" },
+        { q: "Dr. Vance ___ a column on behavioral economics for the Sunday Times since last summer.", a: ["has written", "has been writing"], h: "Reference a recurring journalism activity that began in a specific previous season.", expl: "<b>Indivisible Chunk:</b> has been writing since<br><br><b>Meaning & Contrast:</b> Spanish uses 'escribe desde el verano pasado'. English mandates the present perfect continuous with 'since' to mark the origin of the ongoing contribution.", tag: "tag-verb" },
+        { q: "The environmental agency ___ atmospheric carbon levels in the region for twenty-five years.", a: ["has monitored", "has been monitoring"], h: "Focus on a long-term scientific tracking process evaluated over a quarter-century block.", expl: "<b>Indivisible Chunk:</b> has been monitoring for<br><br><b>Meaning & Contrast:</b> Spanish speakers mistakenly use present simple ('monitorea desde hace'). In English, a quarter-century duration demands 'has monitored' or 'has been monitoring' with 'for'.", tag: "tag-verb" },
+        { q: "Automotive battery technology ___ unprecedented advancements since the breakthrough in solid-state cells.", a: ["has seen", "has undergone", "has experienced"], h: "Connect technological progress directly to a specific scientific discovery that triggered it.", expl: "<b>Indivisible Chunk:</b> has seen since<br><br><b>Meaning & Contrast:</b> Spanish uses 'experimenta desde el avance'. In English, 'since' designates the landmark discovery, requiring the present perfect in the main clause.", tag: "tag-verb" },
+        { q: "The regional hospital system ___ with severe staffing shortages for several months.", a: ["has struggled", "has been struggling"], h: "Describe an ongoing operational difficulty measured across several recent months.", expl: "<b>Indivisible Chunk:</b> has been struggling for<br><br><b>Meaning & Contrast:</b> Spanish uses 'sufre/lucha desde hace varios meses'. English uses the present perfect continuous with 'for' to measure ongoing operational strain.", tag: "tag-verb" },
+        { q: "Our company headquarters ___ located in Frankfurt since the corporate merger in 2012.", a: ["have been", "has been"], h: "Point to the static geographic location established at a fixed calendar date.", expl: "<b>Indivisible Chunk:</b> has been located since<br><br><b>Meaning & Contrast:</b> Spanish uses 'está ubicada desde'. English strictly requires 'has been' when 'since' identifies the historical point of relocation.", tag: "tag-verb" },
+        { q: "The investigative journalist ___ the offshore banking network for nearly a year.", a: ["has investigated", "has been investigating"], h: "Measure the duration of an active media investigation stretching close to twelve months.", expl: "<b>Indivisible Chunk:</b> has been investigating for<br><br><b>Meaning & Contrast:</b> Spanish uses 'investiga desde hace casi un año'. English avoids the simple present and uses the present perfect continuous with 'for'.", tag: "tag-verb" },
+        { q: "Heavy snowstorms ___ travel across the alpine passes since early yesterday morning.", a: ["have disrupted", "have been disrupting"], h: "Link weather disruption to a specific timestamp in the recent past.", expl: "<b>Indivisible Chunk:</b> have disrupted since<br><br><b>Meaning & Contrast:</b> Spanish uses 'interrumpen desde ayer'. In English, 'since early yesterday morning' specifies the precise time boundary, requiring the present perfect.", tag: "tag-verb" }
+    ];
+
+    const quizB = [
+        { q: "The non-profit foundation ___ food relief to refugee camps for over half a decade.", a: ["has provided", "has been providing"], h: "Quantify humanitarian relief efforts over a five-year period up to the present.", expl: "<b>Indivisible Chunk:</b> has been providing for<br><br><b>Meaning & Contrast:</b> Spanish uses 'proporciona desde hace media década'. English demands 'has been providing' with 'for' to measure continuous active support.", tag: "tag-verb" },
+        { q: "Tensions between the negotiating factions ___ noticeably since the press conference concluded.", a: ["have eased", "have been easing"], h: "Show a gradual improvement in relations starting immediately after a specific event.", expl: "<b>Indivisible Chunk:</b> have eased since<br><br><b>Meaning & Contrast:</b> Spanish uses 'se relajan desde que concluyó'. In English, the conclusion of the press conference serves as the 'since' anchor, requiring present perfect.", tag: "tag-verb" },
+        { q: "The legal department ___ the contract draft for three business days without reaching a conclusion.", a: ["has scrutinized", "has been scrutinizing", "have scrutinized", "have been scrutinizing"], h: "Measure detailed legal analysis across a three-day work window.", expl: "<b>Indivisible Chunk:</b> has been scrutinizing for<br><br><b>Meaning & Contrast:</b> Spanish uses 'escruta desde hace tres días'. English requires the present perfect continuous with 'for' to express ongoing intensive review.", tag: "tag-verb" },
+        { q: "The museum's rare manuscript collection ___ on public display since the ceremonial opening.", a: ["has been"], h: "State the ongoing public exhibition of artifacts since a formal ceremony.", expl: "<b>Indivisible Chunk:</b> has been on display since<br><br><b>Meaning & Contrast:</b> Spanish speakers incorrectly state 'está en exhibición desde'. English mandates 'has been' when linked to a past event by 'since'.", tag: "tag-verb" },
+        { q: "Financial analysts ___ the potential economic fallout of the new policy for weeks.", a: ["have debated", "have been debating"], h: "Highlight continuous professional debate taking place across multiple weeks.", expl: "<b>Indivisible Chunk:</b> have been debating for<br><br><b>Meaning & Contrast:</b> Spanish uses 'debaten desde hace semanas'. English requires 'have been debating' with 'for' to represent ongoing discourse over time.", tag: "tag-verb" },
+        { q: "Cybersecurity defense systems ___ automatically updated every hour since the malware threat emerged.", a: ["have been"], h: "Refer to repeated automated updates instituted when a specific threat first appeared.", expl: "<b>Indivisible Chunk:</b> have been updated since<br><br><b>Meaning & Contrast:</b> Spanish uses 'se actualizan desde que surgió'. In English, 'since the threat emerged' sets the starting point, demanding present perfect passive.", tag: "tag-verb" },
+        { q: "The theatrical production company ___ rehearsals for the broadway revival for two months.", a: ["has conducted", "has been conducting"], h: "Quantify active artistic rehearsals spanning a sixty-day timeframe.", expl: "<b>Indivisible Chunk:</b> has been conducting for<br><br><b>Meaning & Contrast:</b> Spanish uses 'lleva realizando ensayos durante dos meses'. English strictly uses present perfect continuous with 'for' to mark duration.", tag: "tag-verb" },
+        { q: "Architectural plans for the new transport hub ___ under official review since last November.", a: ["have been"], h: "Indicate an ongoing administrative state originating in a specific past month.", expl: "<b>Indivisible Chunk:</b> have been under review since<br><br><b>Meaning & Contrast:</b> Spanish uses 'están bajo revisión desde'. English uses 'have been' because 'since last November' marks the exact origin date.", tag: "tag-verb" },
+        { q: "The research team ___ sample data from deep-sea trenches for several weeks.", a: ["has collected", "has been collecting"], h: "Measure scientific data gathering conducted across a multi-week expedition.", expl: "<b>Indivisible Chunk:</b> has been collecting for<br><br><b>Meaning & Contrast:</b> Spanish uses 'recolecta desde hace semanas'. English requires the present perfect continuous paired with 'for' to measure activity duration.", tag: "tag-verb" },
+        { q: "Consumer confidence in the banking sector ___ steady since the government guarantee was announced.", a: ["has remained"], h: "Show a sustained level of confidence starting at the official government announcement.", expl: "<b>Indivisible Chunk:</b> has remained steady since<br><br><b>Meaning & Contrast:</b> Spanish uses 'permanece estable desde'. English requires 'has remained' because 'since' ties the ongoing state to the past announcement.", tag: "tag-verb" },
+        { q: "The committee members ___ the proposed zoning amendments for hours without reaching consensus.", a: ["have discussed", "have been discussing"], h: "Emphasize an extended, uninterrupted deliberation taking place over several hours.", expl: "<b>Indivisible Chunk:</b> have been discussing for<br><br><b>Meaning & Contrast:</b> Spanish uses 'discuten desde hace horas'. English demands the present perfect continuous with 'for' when measuring active debate duration.", tag: "tag-verb" },
+        { q: "High-speed rail connectivity ___ regional commerce across the province since its launch in 2018.", a: ["has transformed", "has been transforming"], h: "Trace economic transformation back to the exact year of rail line inauguration.", expl: "<b>Indivisible Chunk:</b> has transformed since<br><br><b>Meaning & Contrast:</b> Spanish speakers tend to say 'transforma desde 2018'. English requires present perfect because 'since' pinpoints the launch year.", tag: "tag-verb" },
+        { q: "The chief archivist ___ rare historical manuscripts for the national library for over a decade.", a: ["has cataloged", "has been cataloging", "has catalogued", "has been cataloguing"], h: "Quantify a specialized professional task spanning a ten-year duration.", expl: "<b>Indivisible Chunk:</b> has been cataloging for<br><br><b>Meaning & Contrast:</b> Spanish uses 'cataloga desde hace más de una década'. English mandates present perfect continuous combined with 'for'.", tag: "tag-verb" },
+        { q: "The urban district ___ rapid gentrification since the university constructed its new campus.", a: ["has experienced", "has undergone"], h: "Link social neighborhood changes to a major construction milestone.", expl: "<b>Indivisible Chunk:</b> has experienced since<br><br><b>Meaning & Contrast:</b> Spanish uses 'experimenta desde que la universidad construyó'. In English, 'since' establishes the starting milestone, requiring present perfect.", tag: "tag-verb" },
+        { q: "Volunteers ___ emergency relief packages for flood victims for forty-eight continuous hours.", a: ["have prepared", "have been preparing", "have assembled", "have been assembling"], h: "Highlight exhaustive physical volunteer effort measured over a two-day timeframe.", expl: "<b>Indivisible Chunk:</b> have been preparing for<br><br><b>Meaning & Contrast:</b> Spanish uses 'preparan desde hace 48 horas'. English demands present perfect continuous with 'for' to reflect uninterrupted duration.", tag: "tag-verb" },
+        { q: "Strict data privacy standards ___ enforced across all corporate divisions since Q1.", a: ["have been"], h: "Mark the corporate compliance enforcement starting at the first quarter.", expl: "<b>Indivisible Chunk:</b> have been enforced since<br><br><b>Meaning & Contrast:</b> Spanish uses 'se aplican desde el primer trimestre'. English uses 'have been' because 'since Q1' anchors the continuous policy.", tag: "tag-verb" },
+        { q: "The clinical trial participants ___ daily symptom journals for three full months.", a: ["have maintained", "have been maintaining", "have kept", "have been keeping"], h: "Measure patient record-keeping over a ninety-day clinical trial window.", expl: "<b>Indivisible Chunk:</b> have been keeping for<br><br><b>Meaning & Contrast:</b> Spanish uses 'mantiene un diario desde hace tres meses'. English mandates present perfect continuous paired with 'for'.", tag: "tag-verb" },
+        { q: "Interest rates in the eurozone ___ at historic lows since the central bank intervention.", a: ["have stayed", "have remained"], h: "Show financial rate stability tied to a major central bank policy event.", expl: "<b>Indivisible Chunk:</b> have remained since<br><br><b>Meaning & Contrast:</b> Spanish uses 'se mantienen desde la intervención'. English uses present perfect because 'since' ties the ongoing state to the past intervention.", tag: "tag-verb" },
+        { q: "Software engineers ___ to resolve the critical database bug for over twenty-four hours.", a: ["have labored", "have been laboring", "have worked", "have been working", "have tried", "have been trying"], h: "Emphasize intensive technical troubleshooting spanning a full twenty-four hour period.", expl: "<b>Indivisible Chunk:</b> have been working for<br><br><b>Meaning & Contrast:</b> Spanish uses 'llevan intentando 24 horas'. English relies on present perfect continuous with 'for' to measure continuous troubleshooting.", tag: "tag-verb" },
+        { q: "The international space station ___ continuous human habitation since November 2000.", a: ["has supported", "has seen", "has hosted"], h: "Trace unbroken human presence in space from a specific historical month.", expl: "<b>Indivisible Chunk:</b> has hosted since<br><br><b>Meaning & Contrast:</b> Spanish uses 'alberga desde noviembre de 2000'. English mandates present perfect because 'since' introduces the fixed starting date.", tag: "tag-verb" },
+        { q: "The marketing department ___ user engagement metrics across social media platforms for weeks.", a: ["has tracked", "has been tracking"], h: "Measure analytical tracking conducted across multiple consecutive weeks.", expl: "<b>Indivisible Chunk:</b> has been tracking for<br><br><b>Meaning & Contrast:</b> Spanish uses 'rastrea desde hace semanas'. English demands present perfect continuous with 'for' to quantify analytical activity.", tag: "tag-verb" },
+        { q: "A diplomatic stalemate ___ progress in the peace negotiations since the summit collapsed.", a: ["has hindered", "has blocked", "has stalled"], h: "Link political gridlock directly to the moment the peace summit broke down.", expl: "<b>Indivisible Chunk:</b> has stalled since<br><br><b>Meaning & Contrast:</b> Spanish uses 'bloquea desde que colapsó la cumbre'. In English, 'since the summit collapsed' forms the anchor, requiring present perfect.", tag: "tag-verb" },
+        { q: "The university language center ___ intensive English immersion courses for over thirty years.", a: ["has offered", "has been offering"], h: "Measure educational course provision spanning a three-decade period.", expl: "<b>Indivisible Chunk:</b> has offered for / has been offering for<br><br><b>Meaning & Contrast:</b> Spanish speakers incorrectly say 'ofrece desde hace 30 años'. English requires present perfect combined with 'for' to express thirty years of operation.", tag: "tag-verb" }
+    ];
+
+    let currentQuizType = 'A';
+    let currentData = quizA;
+    let idx = 0; 
+    let streak = 0; 
+    let score = 0; 
+    let solvedThisIdx = false;    
+
+    function openModal() {        
+        const tag = currentData[idx].tag;        
+        document.getElementById('modalTitle').innerText = rules[tag].title;        
+        document.getElementById('modalText').innerHTML = rules[tag].text;        
+        document.getElementById('ruleModal').style.display = 'flex';    
+    }    
+
+    function closeModal() { 
+        document.getElementById('ruleModal').style.display = 'none'; 
+    }    
+
+    function update() {        
+        if (idx >= currentData.length) {            
+            document.getElementById('final-screen').style.display = 'flex';            
+            document.getElementById('final-stats').innerText = `Tasks completed: ${score}/${currentData.length} | Streak: ${streak}`;            
+            return;        
+        }        
+        const card = currentData[idx];        
+        document.getElementById('q').innerText = card.q;        
+        document.getElementById('a').innerText = "Accepted forms: " + card.a.join(" / ");        
+        document.getElementById('expl').innerHTML = "<span class='explanation-header'>Meaning & Contrast (English vs. Spanish):</span>" + card.expl;        
+        
+        let tagName = "PRESENT PERFECT";
+        document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${tagName} (Click for Category ℹ️)</span>`;        
+        
+        document.getElementById('a').classList.remove('visible');        
+        document.getElementById('expl').classList.remove('visible');        
+        document.getElementById('hintBox').classList.remove('visible');        
+        document.getElementById('feedback').innerText = '';        
+        document.getElementById('userInput').value = '';        
+        document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;        
+        solvedThisIdx = false;        
+        document.getElementById('pBtn').disabled = idx === 0;    
+    }    
+
+    function checkAnswer() {        
+        const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
+        if(!u) return;        
+        const card = currentData[idx];                
+        const isCorrect = card.a.some(ans => {            
+            const normalizedAns = ans.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();            
+            return u === normalizedAns;        
+        });        
+        if (isCorrect) {            
+            document.getElementById('feedback').innerText = "CORRECT! ✨";            
+            document.getElementById('feedback').className = 'correct';            
+            document.getElementById('a').classList.add('visible');            
+            document.getElementById('expl').classList.add('visible');            
+            if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }        
+        } else {            
+            document.getElementById('feedback').innerText = "TRY AGAIN ❌";            
+            document.getElementById('feedback').className = 'wrong';            
+            streak = 0;        
+        }        
+        document.getElementById('streak-count').innerText = `Streak: ${streak}`;        
+        document.getElementById('score-display').innerText = `Correct: ${score}`;    
+    }    
+
+    function showHint() {
+        document.getElementById('hintBox').innerText = "💡 " + currentData[idx].h;        
+        document.getElementById('hintBox').classList.add('visible');     
+    }        
+
+    function revealAnswer() {         
+        document.getElementById('a').classList.add('visible');         
+        document.getElementById('expl').classList.add('visible');        
+        streak = 0; 
+        document.getElementById('streak-count').innerText = `Streak: 0`;    
+    }    
+
+    function next() {         
+        if (idx < currentData.length - 1) {             
+            idx++;             
+            update();         
+        } else {             
+            idx++;             
+            update();         
+        }     
+    }        
+
+    function prev() { 
+        if (idx > 0) { 
+            idx--; 
+            update(); 
+        } 
+    }    
+
+    function switchQuiz(type) {
+        currentQuizType = type;
+        currentData = (type === 'A') ? quizA : quizB;
+        idx = 0;
+        score = 0;
+        streak = 0;
+        solvedThisIdx = false;
+
+        document.getElementById("tabA").className = (type === 'A') ? "tab-btn active" : "tab-btn";
+        document.getElementById("tabB").className = (type === 'B') ? "tab-btn active" : "tab-btn";
+        document.getElementById("subTitle").innerText = `Present Perfect Master Practice (Quiz ${type})`;
+        
+        document.getElementById('final-screen').style.display = 'none';
+        update();
+    }
+
+    document.getElementById('userInput').addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') checkAnswer(); 
+    });    
+
+    update();
+</script>
+</body>
+</html>

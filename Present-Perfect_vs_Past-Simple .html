@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Perfect vs Past Simple Master | Teacher Cris</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+</style>
+</head>
+<body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-blue-100">
+
+<!-- Main Card -->
+<div class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-t-[5px] border-blue-600 border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all">
+
+  <!-- Top Bar -->
+  <div class="flex justify-between items-center mb-6">
+    <a href="https://teachercris.online" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50/90 hover:bg-blue-100 border border-blue-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs">
+      &larr; Volver a teachercris.online
+    </a>
+
+    <div class="flex items-center gap-2">
+      <button id="btn-audio" class="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Listen to English pronunciation">
+        <i class="fas fa-volume-up"></i>
+      </button>
+      <button id="btn-sound" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition" title="Toggle sound effects">
+        <span id="sound-label" class="text-xs font-bold text-emerald-600">FX ON</span>
+      </button>
+      <button id="btn-reset" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Reset progress">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz Switcher Tabs -->
+  <div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
+    <button id="tab-quiz-a" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition">
+      Quiz A (Tasks 1-22)
+    </button>
+    <button id="tab-quiz-b" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition">
+      Quiz B (Tasks 23-45)
+    </button>
+  </div>
+
+  <!-- Center Brand Title -->
+  <div class="text-center mb-6">
+    <h1 class="text-blue-600 font-extrabold text-3xl sm:text-4xl tracking-tight">
+      Teacher Cris
+    </h1>
+    <p id="quiz-subtitle" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+      Present Perfect Master Practice (Quiz A)
+    </p>
+  </div>
+
+  <!-- Task progress & Score row -->
+  <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
+    <span id="task-counter" class="text-slate-500">Task 1 of 22</span>
+    <div class="flex items-center gap-4">
+      <span class="text-slate-700">Correct: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Streak: <strong id="streak-display" class="text-amber-600 font-bold">0</strong></span>
+    </div>
+  </div>
+
+  <!-- Centered Aspect Pill Button -->
+  <div class="flex justify-center mb-6">
+    <button id="btn-category" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5">
+      <span id="category-pill-text">PRESENT PERFECT</span> (CLICK FOR CATEGORY <i class="fas fa-info-circle"></i>)
+    </button>
+  </div>
+
+  <!-- Question Box -->
+  <div class="border border-slate-200 rounded-2xl p-6 sm:p-9 bg-white min-h-[140px] flex items-center justify-center text-center mb-5 shadow-2xs">
+    <p id="pregunta-texto" class="text-base sm:text-lg text-slate-800 leading-relaxed font-normal text-left sm:text-center select-text">
+      <!-- Injected by JS -->
+    </p>
+  </div>
+
+  <!-- Tactical Hint Box -->
+  <div id="pista-box" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700">
+    <div class="flex items-center gap-2 font-bold text-amber-900 mb-1">
+      <span>💡 Tactical Hint:</span>
+    </div>
+    <p id="pista-texto" class="italic text-slate-700"></p>
+  </div>
+
+  <!-- Multiple Choice Options Container -->
+  <div id="opciones-contenedor" class="space-y-3 mb-5">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- Big Green Verify Button -->
+  <button id="btn-verify" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+    Verify (Enter)
+  </button>
+
+  <!-- Feedback Box -->
+  <div id="feedback-box" class="hidden p-5 rounded-2xl mb-5 border transition-all duration-300">
+    <div class="flex justify-between items-start mb-2">
+      <p id="feedback-titulo" class="font-bold text-base sm:text-lg"></p>
+      <span id="feedback-target-badge" class="hidden text-xs bg-rose-200 text-rose-900 px-2.5 py-1 rounded-md font-semibold"></span>
+    </div>
+    <p id="feedback-explicacion" class="text-xs sm:text-sm leading-relaxed mb-3 text-slate-700"></p>
+    <p id="feedback-alert" class="text-xs sm:text-sm font-medium border-t pt-2.5 border-slate-200/80 text-slate-800"></p>
+    <p id="feedback-chunk" class="text-xs font-bold text-blue-600 uppercase tracking-wider mt-2.5"></p>
+  </div>
+
+  <!-- Bottom Buttons Row -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <button id="btn-prev" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      &larr; Previous
+    </button>
+    <button id="btn-hint" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      Hint 💡
+    </button>
+    <button id="btn-show-answer" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      Show Answer 👁
+    </button>
+    <button id="btn-next" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      Next &rarr;
+    </button>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="mt-6 text-center text-xs text-slate-400">
+  Teacher Cris · Present Perfect & Past Simple Master Practice
+</div>
+
+<!-- Category Modal -->
+<div id="modal-category" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+  <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-hidden shadow-2xl border border-slate-200 flex flex-col">
+    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-blue-50/50">
+      <div class="flex items-center gap-2">
+        <span id="modal-aspect-badge" class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+        <span class="text-xs text-slate-500 font-semibold">Aspect Overview</span>
+      </div>
+      <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div id="modal-content" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-700"></div>
+    <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex justify-end">
+      <button id="btn-modal-return" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">
+        Got it (Return to Task)
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const dataset = [
+  {
+    "id": 1,
+    "q": "The archaeological team ___ a remarkably preserved Roman villa near Seville last month.",
+    "options": ["discovered", "has discovered", "have discovered", "discovers"],
+    "correct": 0,
+    "h": "Look closely at the explicit time marker 'last month' at the very end.",
+    "expl": "The time frame is completely closed and finished ('last month'), which strictly mandates the use of the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: While Spanish speakers frequently use the present perfect for recent discoveries, English strictly forbids the present perfect whenever a closed past time marker (such as 'last month', 'yesterday', or 'ago') is present, requiring the Past Simple.",
+    "chunk": "discovered [...] last month",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 2,
+    "q": "Dr. Ramirez ___ three groundbreaking research papers on renewable energy so far this year.",
+    "options": ["published", "has published", "is publishing", "publishes"],
+    "correct": 1,
+    "h": "The phrase 'so far this year' indicates the time period is still open and ongoing.",
+    "expl": "Because the current year is not finished, we use the Present Perfect to indicate an accumulated experience up to now.",
+    "alert": "💡 L1 Contrastive Analysis: When a time frame remains open and unfinished ('so far this year'), Cambridge English standards strictly require the Present Perfect to connect accumulated actions to the present moment.",
+    "chunk": "has published [...] so far this year",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 3,
+    "q": "I ___ my passport! I've searched everywhere, but I still can't find it anywhere in the house.",
+    "options": ["lost", "have lost", "am losing", "had lost"],
+    "correct": 1,
+    "h": "Focus on the present result: the passport is missing right now at this exact moment.",
+    "expl": "The Present Perfect is required here because a past action has an immediate, critical consequence in the present reality.",
+    "alert": "💡 L1 Contrastive Analysis: In English, the exact time of the loss is irrelevant compared to its present result (the passport is missing right now). Whenever a past action has an active, visible consequence now, English demands the Present Perfect.",
+    "chunk": "have lost my passport",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 4,
+    "q": "My grandfather ___ in a traditional fishing village for forty years before moving to the city in 2005.",
+    "options": ["lived", "has lived", "is living", "lives"],
+    "correct": 0,
+    "h": "Did the living period end when he moved away in 2005?",
+    "expl": "The state is fully completed and belongs entirely to the past, so 'for forty years' requires the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often associate duration ('for') exclusively with the Present Perfect. However, if the duration took place entirely within a closed past period that has ended, English strictly requires the Past Simple.",
+    "chunk": "lived [...] for forty years before",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 5,
+    "q": "A: Have you ever visited the Prado Museum? B: Yes, I ___ there two years ago during a summer trip.",
+    "options": ["have gone", "went", "have been going", "go"],
+    "correct": 1,
+    "h": "Notice the shift from general experience in the question to a specific details marker ('two years ago').",
+    "expl": "Once a specific time details marker is introduced in the conversation, you must immediately shift to the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: In English, general life experiences are introduced with the Present Perfect ('Have you ever visited?'), but as soon as specific past details or dates ('two years ago') are given, you must immediately shift to the Past Simple.",
+    "chunk": "went there two years ago",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 6,
+    "q": "The corporate legal department ___ the revised compliance guidelines yesterday afternoon.",
+    "options": ["has distributed", "distributed", "distributes", "have distributed"],
+    "correct": 1,
+    "h": "Check the exact hour or day marker at the end of the clause.",
+    "expl": "'Yesterday afternoon' is a finished time frame, which strictly locks the sentence into the Past Simple structure.",
+    "alert": "💡 L1 Contrastive Analysis: Closed past time expressions ('yesterday afternoon') form a temporal wall that prohibits the Present Perfect in English. Use the Past Simple exclusively.",
+    "chunk": "distributed [...] yesterday",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 7,
+    "q": "The IT network infrastructure ___ stable since the major server upgrade last weekend.",
+    "options": ["remained", "is remaining", "has remained", "remains"],
+    "correct": 2,
+    "h": "The word 'since' marks the precise starting point of an ongoing state connected to the present.",
+    "expl": "An action that started at a point in the past and continues to be true right now requires the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Unlike Spanish, which can use the present indicative with 'desde', English mandates the Present Perfect whenever 'since' anchors an ongoing state originating in the past.",
+    "chunk": "has remained stable since",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 8,
+    "q": "Oh look! The construction workers ___ paving the new bicycle lane down the main avenue.",
+    "options": ["just finished", "have just finished", "finish recently", "had just finished"],
+    "correct": 1,
+    "h": "The words 'Oh look!' draw attention to an action completed a very short moment ago with visible evidence.",
+    "expl": "Actions that have just occurred and have immediate visual relevance in the present require 'have/has just + participle'.",
+    "alert": "💡 L1 Contrastive Analysis: The phrase 'just finished' in English translates the immediate past ('acabar de hacer algo') by embedding 'just' inside the Present Perfect.",
+    "chunk": "have just finished",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 9,
+    "q": "Our current logistics manager ___ for three different global transport companies in her entire career.",
+    "options": ["worked", "works", "has worked", "was working"],
+    "correct": 2,
+    "h": "Is her career over, or is it an ongoing experience up to the present day?",
+    "expl": "Her career is an open, unfinished time frame, making the accumulated experience a perfect fit for the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: As long as a career or life frame remains open, accumulated professional experience up to the present must be expressed using the Present Perfect.",
+    "chunk": "has worked [...] in her entire career",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 10,
+    "q": "When I was a university student in Barcelona, I ___ in a small shared apartment near the campus.",
+    "options": ["lived", "have lived", "am living", "was lived"],
+    "correct": 0,
+    "h": "Identify the completed past time frame introduced by 'When I was a university student'.",
+    "expl": "The period of being a student is completely finished, so the Past Simple ('lived') is required.",
+    "alert": "💡 L1 Contrastive Analysis: A completed life stage ('When I was a university student') defines a closed historical period, requiring the Past Simple rather than the Present Perfect.",
+    "chunk": "lived [...] when I was a student",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 11,
+    "q": "The lead developer ___ the new software update two days ago, but some users are still reporting minor bugs.",
+    "options": ["has released", "released", "releases", "was releasing"],
+    "correct": 1,
+    "h": "Identify the time marker 'two days ago', which points to a completed moment in the past.",
+    "expl": "Time expressions with 'ago' always refer to a completed past moment and strictly require the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Time expressions ending with 'ago' ('two days ago') always specify a closed point in past time, making the Past Simple compulsory in English.",
+    "chunk": "released [...] two days ago",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 12,
+    "q": "Our research team ___ over five hundred patient samples in total this month.",
+    "options": ["analyzed", "has analyzed", "analyzes", "was analyzing"],
+    "correct": 1,
+    "h": "The month is still ongoing, representing an unfinished time frame.",
+    "expl": "'This month' is an open time period that includes the present moment, requiring the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: As long as the current time container ('this month') remains open, actions completed within it take the Present Perfect.",
+    "chunk": "has analyzed [...] this month",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 13,
+    "q": "In 2019, the national government ___ new tax incentives to support clean energy startups.",
+    "options": ["has introduced", "introduced", "introduces", "was introducing"],
+    "correct": 1,
+    "h": "Notice the specific calendar year 'In 2019'.",
+    "expl": "A specific past calendar year represents a closed historical period, mandating the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: A specific historical calendar year ('In 2019') acts as a closed time container, restricting the verb strictly to the Past Simple.",
+    "chunk": "introduced in 2019",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 14,
+    "q": "Look at the kitchen! Maria ___ a delicious chocolate cake for tonight's dinner party.",
+    "options": ["baked", "has baked", "bakes", "was baking"],
+    "correct": 1,
+    "h": "The result (the cake) is visible and fresh right now in the kitchen.",
+    "expl": "The Present Perfect is used when a recently completed action has direct visual impact on the present.",
+    "alert": "💡 L1 Contrastive Analysis: Present result is paramount in English: seeing the freshly baked cake resting in the kitchen right now requires the Present Perfect.",
+    "chunk": "has baked a cake",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 15,
+    "q": "The company directors ___ an emergency board meeting last night to address the crisis.",
+    "options": ["have held", "held", "hold", "were holding"],
+    "correct": 1,
+    "h": "Identify the closed past time expression 'last night'.",
+    "expl": "'Last night' is a completed time frame that locks the verb into the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Specific past periods like 'last night' are closed time windows that strictly require the Past Simple in English.",
+    "chunk": "held [...] last night",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 16,
+    "q": "I ___ to the financial director twice today, but she hasn't made a final decision yet.",
+    "options": ["spoke", "have spoken", "speak", "was speaking"],
+    "correct": 1,
+    "h": "'Today' is an unfinished time period that continues right now.",
+    "expl": "Repeated actions within an unfinished time frame ('today') require the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Because 'today' is an unfinished time container that includes the current moment, actions occurring within it take the Present Perfect.",
+    "chunk": "have spoken [...] twice today",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 17,
+    "q": "The historic cathedral in the city center ___ completely in a fire in 1845.",
+    "options": ["was destroyed", "has been destroyed", "is destroyed", "destroyed"],
+    "correct": 0,
+    "h": "Look at the specific past historical date 'in 1845'.",
+    "expl": "Historical facts associated with specific dates require the Past Simple in the passive voice.",
+    "alert": "💡 L1 Contrastive Analysis: Historical facts about ancient landmarks require the Past Simple because the construction took place in a closed, finished era.",
+    "chunk": "was destroyed [...] in 1845",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 18,
+    "q": "So far, our customer support department ___ more than two hundred inquiries today.",
+    "options": ["received", "has received", "receives", "is receiving"],
+    "correct": 1,
+    "h": "The phrase 'so far' measures accumulated progress up to the present moment.",
+    "expl": "'So far' signals an ongoing timeframe leading up to now, requiring the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: In English, 'this morning' uses the Past Simple if that morning period is already over, but uses the Present Perfect if it is still morning right now.",
+    "chunk": "has received [...] so far",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 19,
+    "q": "The famous novelist ___ five international bestseller awards during his lifetime before passing away in 2010.",
+    "options": ["won", "has won", "wins", "had been winning"],
+    "correct": 0,
+    "h": "The author passed away in 2010, so his life is a completed past timeframe.",
+    "expl": "Because the person's life has ended, all lifetime achievements are expressed in the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: General statements about lifetime travel experience without a specific date strictly require the Present Perfect.",
+    "chunk": "won [...] during his lifetime",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 20,
+    "q": "We ___ a reservation at the restaurant for 8:00 PM tonight, so we don't need to queue.",
+    "options": ["made", "have made", "make", "were making"],
+    "correct": 1,
+    "h": "The reservation is active and valid right now in the present.",
+    "expl": "The Present Perfect expresses a past action that creates a valid present situation.",
+    "alert": "💡 L1 Contrastive Analysis: Historical events tied to deceased historical figures ('wrote over 100 plays') belong to closed past time, requiring the Past Simple.",
+    "chunk": "have made a reservation",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 21,
+    "q": "When did you ___ your new smartphone?",
+    "options": ["buy", "bought", "have bought", "buying"],
+    "correct": 0,
+    "h": "Questions starting with 'When' ask about a specific point in past time.",
+    "expl": "Questions with 'When did you...' explicitly seek a past timestamp and require the base verb after 'did'.",
+    "alert": "💡 L1 Contrastive Analysis: Announcing fresh, newly breaking news without specifying a date uses the Present Perfect to highlight present relevance.",
+    "chunk": "When did you buy",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 22,
+    "q": "The financial markets ___ significantly since the central bank announced the interest rate drop.",
+    "options": ["recovered", "have recovered", "recover", "are recovering"],
+    "correct": 1,
+    "h": "'Since' introduces the starting event of a trend that continues up to now.",
+    "expl": "An action or trend that originated at a past moment and continues until now takes the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Completed events in a specific year ('in 2014') are closed past facts, demanding the Past Simple.",
+    "chunk": "have recovered [...] since",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 23,
+    "q": "She ___ her first marathon in under four hours last autumn.",
+    "options": ["has completed", "completed", "completes", "was completing"],
+    "correct": 1,
+    "h": "'Last autumn' is a closed past season.",
+    "expl": "'Last autumn' is a finished time period, requiring the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: The particle 'already' embeds inside the Present Perfect ('has already arrived') to signal that an event occurred earlier than expected.",
+    "chunk": "completed [...] last autumn",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 24,
+    "q": "I'm afraid Mr. Henderson isn't here; he ___ out to meet a client.",
+    "options": ["went", "has gone", "has been", "goes"],
+    "correct": 1,
+    "h": "He has gone and is still away right now at this moment.",
+    "expl": "'Has gone' indicates that someone has left and has not yet returned to the current location.",
+    "alert": "💡 L1 Contrastive Analysis: Specific historic time frames ('during the 19th century') are closed past periods that require the Past Simple.",
+    "chunk": "has gone out",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 25,
+    "q": "A: How many times have you been to Paris? B: I ___ there three times in my life.",
+    "options": ["went", "have been", "was", "have gone"],
+    "correct": 1,
+    "h": "The answer refers to lifetime experience up to the present moment.",
+    "expl": "Lifetime experiences without specific dates require 'have been'.",
+    "alert": "💡 L1 Contrastive Analysis: Cumulative lifetime experiences ('in my life') up to the present moment take the Present Perfect in English.",
+    "chunk": "have been there three times",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 26,
+    "q": "The storm yesterday evening ___ power outages across the northern coastal towns.",
+    "options": ["has caused", "caused", "causes", "was caused"],
+    "correct": 1,
+    "h": "'Yesterday evening' is a finished past time marker.",
+    "expl": "'Yesterday evening' refers to a closed past timeframe, mandating the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: A specific past storm event ('yesterday evening') is a closed past time frame that requires the Past Simple.",
+    "chunk": "caused [...] yesterday evening",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 27,
+    "q": "I ___ never eaten traditional Japanese sushi before, but I really enjoyed it tonight!",
+    "options": ["did", "have", "was", "had"],
+    "correct": 1,
+    "h": "'Never' combines with the Present Perfect to express lifetime experience.",
+    "expl": "'Have never eaten' expresses a lack of experience up to the present or recent event.",
+    "alert": "💡 L1 Contrastive Analysis: Negative lifetime experience using 'never' up to the present moment requires the Present Perfect.",
+    "chunk": "have never eaten",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 28,
+    "q": "The train to London ___ from platform 4 five minutes ago.",
+    "options": ["has departed", "departed", "departs", "was departing"],
+    "correct": 1,
+    "h": "'Five minutes ago' is a specific past time marker with 'ago'.",
+    "expl": "Time expressions with 'ago' strictly require the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Exact past time intervals ('five minutes ago') specify closed past moments, mandating the Past Simple.",
+    "chunk": "departed [...] ago",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 29,
+    "q": "Great news! Our team ___ the contract for the international construction project!",
+    "options": ["won", "has won", "wins", "was winning"],
+    "correct": 1,
+    "h": "'Great news!' introduces a fresh, recent event with present news value.",
+    "expl": "Announcing fresh news of present interest takes the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Shared achievements announced as recent accomplishments without a specific past date take the Present Perfect.",
+    "chunk": "has won the contract",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 30,
+    "q": "The ancient Romans ___ extensive road networks across Europe two thousand years ago.",
+    "options": ["have built", "built", "build", "were building"],
+    "correct": 1,
+    "h": "The ancient Romans represent a closed historical civilization.",
+    "expl": "Historical actions performed by past civilizations require the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Actions performed by ancient civilizations belong to completed history and must be expressed in the Past Simple.",
+    "chunk": "built [...] two thousand years ago",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 31,
+    "q": "I ___ my keys on the kitchen counter this morning, but now they are gone.",
+    "options": ["left", "have left", "leave", "was leaving"],
+    "correct": 0,
+    "h": "'This morning' here refers to a completed past moment earlier today.",
+    "expl": "When 'this morning' refers to a finished time period earlier in the day, the Past Simple is used.",
+    "alert": "💡 L1 Contrastive Analysis: Setting an object down at a specific past moment earlier today ('this morning') uses the Past Simple when referring to that closed action.",
+    "chunk": "left [...] this morning",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 32,
+    "q": "The international diplomatic summit ___ remarkable progress over the past forty-eight hours.",
+    "options": ["achieved", "has achieved", "achieves", "was achieving"],
+    "correct": 1,
+    "h": "'Over the past forty-eight hours' connects the recent timeframe to the present.",
+    "expl": "Timeframes extending up to the present ('over the past 48 hours') take the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Time periods stretching continuously up to the present moment ('over the past 48 hours') require the Present Perfect.",
+    "chunk": "has achieved [...] over the past",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 33,
+    "q": "When I was young, my family ___ to the seaside every summer holiday.",
+    "options": ["has gone", "went", "goes", "have been going"],
+    "correct": 1,
+    "h": "'When I was young' defines a finished past period of childhood habits.",
+    "expl": "Past habits tied to a completed stage of life require the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Childhood habits and routine states ('When I was young') are finished past routines that take the Past Simple.",
+    "chunk": "went [...] when I was young",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 34,
+    "q": "The medical researchers ___ a novel compound that inhibits bacterial growth.",
+    "options": ["discovered", "have discovered", "discover", "were discovering"],
+    "correct": 1,
+    "h": "The discovery is a recent scientific breakthrough with present importance.",
+    "expl": "Presenting recent scientific discoveries without a specific past date uses the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Scientific breakthroughs announced without a specific calendar date use the Present Perfect to highlight current significance.",
+    "chunk": "have discovered a novel compound",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 35,
+    "q": "The firm ___ fifty new staff members during the expansion phase in 2021.",
+    "options": ["has hired", "hired", "hires", "was hiring"],
+    "correct": 1,
+    "h": "'In 2021' specifies a closed calendar year in the past.",
+    "expl": "Specific past calendar years mandate the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: A specific past corporate milestone ('in 2021') is a closed historical event, requiring the Past Simple.",
+    "chunk": "hired [...] in 2021",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 36,
+    "q": "I ___ three emails to the support team so far, but nobody has replied yet.",
+    "options": ["sent", "have sent", "send", "was sending"],
+    "correct": 1,
+    "h": "'So far' tracks cumulative actions up to the present moment.",
+    "expl": "Cumulative actions measured 'so far' require the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: The time marker 'so far' indicates an open, accumulating count up to now, demanding the Present Perfect.",
+    "chunk": "have sent [...] so far",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 37,
+    "q": "The famous painter ___ his final masterpiece shortly before his death in 1890.",
+    "options": ["completed", "has completed", "completes", "was completed"],
+    "correct": 0,
+    "h": "The painter's life ended in 1890.",
+    "expl": "Actions completed during the lifetime of someone who has passed away require the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Actions completed by historical figures before their death belong to closed past history, requiring the Past Simple.",
+    "chunk": "completed [...] shortly before his death",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 38,
+    "q": "Our company ___ its official annual sustainability report this afternoon.",
+    "options": ["published", "has published", "publishes", "was publishing"],
+    "correct": 1,
+    "h": "'This afternoon' is the current ongoing period.",
+    "expl": "Actions completed within an ongoing current time frame ('this afternoon') take the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Official publication completed within an ongoing time frame ('this afternoon') takes the Present Perfect.",
+    "chunk": "has published [...] this afternoon",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 39,
+    "q": "The severe earthquake ___ the coastal region at 5:00 AM yesterday.",
+    "options": ["has struck", "struck", "strikes", "was striking"],
+    "correct": 1,
+    "h": "'At 5:00 AM yesterday' provides an exact past timestamp.",
+    "expl": "Exact past timestamps ('at 5:00 AM yesterday') strictly mandate the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Exact timestamped past events ('at 5:00 AM yesterday') are closed past moments requiring the Past Simple.",
+    "chunk": "struck at 5:00 AM yesterday",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 40,
+    "q": "Scientists ___ significant evidence of subsurface liquid water on Mars recently.",
+    "options": ["found", "have found", "find", "were finding"],
+    "correct": 1,
+    "h": "'Recently' connects recent findings to current scientific understanding.",
+    "expl": "'Recently' pairs naturally with the Present Perfect to highlight current relevance.",
+    "alert": "💡 L1 Contrastive Analysis: The adverb 'recently' connects fresh discoveries directly to present scientific knowledge, taking the Present Perfect.",
+    "chunk": "have found [...] recently",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 41,
+    "q": "The factory ___ manufacturing operations last month after thirty years of production.",
+    "options": ["has ceased", "ceased", "ceases", "was ceasing"],
+    "correct": 1,
+    "h": "'Last month' marks a closed past month.",
+    "expl": "'Last month' is a finished time frame requiring the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Corporate events that ended in a finished month ('last month') are closed past facts requiring the Past Simple.",
+    "chunk": "ceased [...] last month",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 42,
+    "q": "I ___ to six different European countries in my life.",
+    "options": ["traveled", "have traveled", "travel", "was traveling"],
+    "correct": 1,
+    "h": "The sentence describes lifetime travel experience.",
+    "expl": "Expressing lifetime travel experience up to now requires the Present Perfect.",
+    "alert": "💡 L1 Contrastive Analysis: Quantifying international travel experience accumulated across a lifetime requires the Present Perfect.",
+    "chunk": "have traveled [...] in my life",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 43,
+    "q": "The police ___ two suspects in connection with the bank robbery last night.",
+    "options": ["have arrested", "arrested", "arrest", "were arresting"],
+    "correct": 1,
+    "h": "'Last night' is a closed past timeframe.",
+    "expl": "'Last night' strictly requires the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Police operations conducted during a specific closed past period ('last night') require the Past Simple.",
+    "chunk": "arrested [...] last night",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 44,
+    "q": "Look! Someone ___ an umbrella under the table in the coffee shop.",
+    "options": ["left", "has left", "leaves", "was leaving"],
+    "correct": 1,
+    "h": "The umbrella is physically present right now under the table.",
+    "expl": "The Present Perfect is used because the left item is right there in front of us now.",
+    "alert": "💡 L1 Contrastive Analysis: Observing a misplaced item resting in front of you right now emphasizes present evidence, requiring the Present Perfect.",
+    "chunk": "has left an umbrella",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 45,
+    "q": "The team ___ the final project report ten minutes ago.",
+    "options": ["has submitted", "submitted", "submits", "was submitting"],
+    "correct": 1,
+    "h": "'Ten minutes ago' has the closed time marker 'ago'.",
+    "expl": "Time expressions with 'ago' always take the Past Simple.",
+    "alert": "💡 L1 Contrastive Analysis: Submitting work at a precise past interval ('ten minutes ago') specifies a closed past moment, requiring the Past Simple.",
+    "chunk": "submitted [...] minutes ago",
+    "targetAspect": "PAST SIMPLE"
+  }
+];
+
+const QUIZ_A = dataset.slice(0, 22);
+const QUIZ_B = dataset.slice(22, 45);
+
+let currentQuizMode = 'A';
+let localIndex = 0;
+let selectedOption = null;
+let isAnswerVerified = false;
+let score = 0;
+let streak = 0;
+let solvedTasks = {};
+let soundEnabled = true;
+
+// Audio Synth
+let audioCtx = null;
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const now = audioCtx.currentTime;
+    if (type === 'correct') {
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc1.type = 'sine'; osc1.frequency.setValueAtTime(523.25, now); osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+      osc2.type = 'triangle'; osc2.frequency.setValueAtTime(659.25, now + 0.08); osc2.frequency.exponentialRampToValueAtTime(783.99, now + 0.22);
+      gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.18, now + 0.05); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      osc1.connect(gain); osc2.connect(gain); gain.connect(audioCtx.destination);
+      osc1.start(now); osc2.start(now + 0.08); osc1.stop(now + 0.35); osc2.stop(now + 0.35);
+    } else if (type === 'incorrect') {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.setValueAtTime(260, now); osc.frequency.setValueAtTime(220, now + 0.12);
+      gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.16, now + 0.03); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.28);
+    }
+  } catch(e) {}
+}
+
+function getBritishFemaleVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || !voices.length) return null;
+
+  const preferredFemaleVoices = [
+    'Google UK English Female',
+    'Microsoft Libby Online (Natural) - English (United Kingdom)',
+    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
+    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
+    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
+    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
+    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+  ];
+
+  for (const name of preferredFemaleVoices) {
+    const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
+    if (found) return found;
+  }
+
+  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+  const enGbFemale = voices.find(v => {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase();
+    const name = (v.name || '').toLowerCase();
+    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
+    return isUK && !maleKeywords.some(m => name.includes(m));
+  });
+  if (enGbFemale) return enGbFemale;
+
+  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+  if (anyGb) return anyGb;
+
+  const anyFemaleEnglish = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+  });
+  if (anyFemaleEnglish) return anyFemaleEnglish;
+
+  return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+}
+
+function speakCurrentSentence() {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  const sentence = currentList[localIndex].q.replace(/___+/g, ', ');
+  const utterance = new SpeechSynthesisUtterance(sentence);
+  utterance.lang = 'en-GB';
+
+  const voice = getBritishFemaleVoice();
+  if (voice) {
+    utterance.voice = voice;
+  }
+
+  utterance.rate = 0.98;
+  utterance.pitch = 1.05;
+  window.speechSynthesis.speak(utterance);
+}
+
+function getCurrentChallenge() {
+  const list = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  return list[localIndex];
+}
+
+function renderTask() {
+  const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  const current = currentList[localIndex];
+  
+  selectedOption = null;
+  isAnswerVerified = false;
+
+  // Header & Counts
+  document.getElementById('task-counter').innerText = `Task ${localIndex + 1} of ${currentList.length}`;
+  document.getElementById('score-display').innerText = score;
+  document.getElementById('streak-display').innerText = streak;
+  document.getElementById('quiz-subtitle').innerText = `Present Perfect Master Practice (${currentQuizMode === 'A' ? 'Quiz A' : 'Quiz B'})`;
+
+  // Aspect Category Pill
+  const aspect = current.targetAspect || 'PRESENT PERFECT';
+  document.getElementById('category-pill-text').innerText = aspect;
+
+  // Question & Hint
+  document.getElementById('pregunta-texto').innerText = current.q;
+  document.getElementById('pista-texto').innerText = current.h;
+  document.getElementById('pista-box').classList.add('hidden');
+
+  // Feedback Box & Verify Button
+  document.getElementById('feedback-box').classList.add('hidden');
+  const btnVerify = document.getElementById('btn-verify');
+  btnVerify.innerText = 'Verify (Enter)';
+  btnVerify.disabled = true;
+
+  // Render Options
+  const container = document.getElementById('opciones-contenedor');
+  container.innerHTML = '';
+  current.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-semibold text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition flex justify-between items-center shadow-xs cursor-pointer';
+    btn.innerHTML = `<span class="text-sm sm:text-base">${opt}</span><i class="far fa-circle text-slate-300"></i>`;
+    btn.onclick = () => selectOption(idx);
+    container.appendChild(btn);
+  });
+
+  // Prev / Next button state
+  document.getElementById('btn-prev').disabled = (localIndex === 0);
+  document.getElementById('btn-prev').classList.toggle('opacity-50', localIndex === 0);
+}
+
+function selectOption(idx) {
+  if (isAnswerVerified) return;
+  selectedOption = idx;
+  const container = document.getElementById('opciones-contenedor');
+  const buttons = container.children;
+
+  Array.from(buttons).forEach((btn, i) => {
+    if (i === idx) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-blue-600 font-bold text-blue-900 bg-blue-50/80 transition flex justify-between items-center shadow-xs cursor-pointer';
+      btn.querySelector('i').className = 'fas fa-check-circle text-blue-600';
+    } else {
+      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-semibold text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition flex justify-between items-center shadow-xs cursor-pointer';
+      btn.querySelector('i').className = 'far fa-circle text-slate-300';
+    }
+  });
+
+  document.getElementById('btn-verify').disabled = false;
+}
+
+function verifyAnswer() {
+  if (selectedOption === null) return;
+  if (isAnswerVerified) {
+    nextTask();
+    return;
+  }
+
+  isAnswerVerified = true;
+  const current = getCurrentChallenge();
+  const isCorrect = (selectedOption === current.correct);
+
+  const container = document.getElementById('opciones-contenedor');
+  const buttons = container.children;
+
+  Array.from(buttons).forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === current.correct) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.querySelector('i').className = 'fas fa-check-circle text-emerald-600';
+    } else if (i === selectedOption && !isCorrect) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.querySelector('i').className = 'fas fa-times-circle text-rose-500';
+    } else {
+      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-default';
+      btn.querySelector('i').className = 'far fa-circle text-slate-200';
+    }
+  });
+
+  if (isCorrect) {
+    playSound('correct');
+    if (!solvedTasks[current.id]) {
+      score++;
+      solvedTasks[current.id] = true;
+      document.getElementById('score-display').innerText = score;
+    }
+    streak++;
+    document.getElementById('streak-display').innerText = streak;
+  } else {
+    playSound('incorrect');
+    streak = 0;
+    document.getElementById('streak-display').innerText = streak;
+  }
+
+  // Feedback Box
+  const feedbackBox = document.getElementById('feedback-box');
+  const feedbackTitulo = document.getElementById('feedback-titulo');
+  const feedbackTarget = document.getElementById('feedback-target-badge');
+  const feedbackExplicacion = document.getElementById('feedback-explicacion');
+  const feedbackAlert = document.getElementById('feedback-alert');
+  const feedbackChunk = document.getElementById('feedback-chunk');
+
+  if (isCorrect) {
+    feedbackBox.className = 'p-5 rounded-2xl mb-5 border bg-emerald-50/90 border-emerald-200 block transition-all';
+    feedbackTitulo.innerText = 'Excellent!';
+    feedbackTitulo.className = 'font-bold text-base sm:text-lg text-emerald-800';
+    feedbackTarget.classList.add('hidden');
+  } else {
+    feedbackBox.className = 'p-5 rounded-2xl mb-5 border bg-rose-50/90 border-rose-200 block transition-all';
+    feedbackTitulo.innerText = 'Key Distinction / Take Note!';
+    feedbackTitulo.className = 'font-bold text-base sm:text-lg text-rose-800';
+    feedbackTarget.innerText = `Target: ${current.options[current.correct]}`;
+    feedbackTarget.classList.remove('hidden');
+  }
+
+  feedbackExplicacion.innerText = current.expl;
+  feedbackAlert.innerText = current.alert;
+  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
+
+  // Update button to Next
+  const btnVerify = document.getElementById('btn-verify');
+  btnVerify.innerText = 'Next Challenge → (Enter)';
+  btnVerify.disabled = false;
+}
+
+function nextTask() {
+  const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  if (localIndex < currentList.length - 1) {
+    localIndex++;
+    renderTask();
+  } else {
+    if (currentQuizMode === 'A') {
+      if (confirm('Quiz A completed! Ready to move to Quiz B (Tasks 23-45)?')) {
+        switchQuiz('B');
+      }
+    } else {
+      alert(`Congratulations! You completed all 45 tasks! Final Score: ${score} / 45.`);
+    }
+  }
+}
+
+function prevTask() {
+  if (localIndex > 0) {
+    localIndex--;
+    renderTask();
+  }
+}
+
+function switchQuiz(mode) {
+  currentQuizMode = mode;
+  localIndex = 0;
+  
+  if (mode === 'A') {
+    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition';
+    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition';
+  } else {
+    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition';
+    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition';
+  }
+
+  renderTask();
+}
+
+function showAnswer() {
+  const current = getCurrentChallenge();
+  selectOption(current.correct);
+  verifyAnswer();
+  streak = 0;
+  document.getElementById('streak-display').innerText = streak;
+}
+
+// Event Listeners
+document.getElementById('btn-verify').onclick = verifyAnswer;
+document.getElementById('btn-next').onclick = nextTask;
+document.getElementById('btn-prev').onclick = prevTask;
+document.getElementById('btn-hint').onclick = () => {
+  document.getElementById('pista-box').classList.toggle('hidden');
+};
+document.getElementById('btn-show-answer').onclick = showAnswer;
+document.getElementById('tab-quiz-a').onclick = () => switchQuiz('A');
+document.getElementById('tab-quiz-b').onclick = () => switchQuiz('B');
+document.getElementById('btn-audio').onclick = speakCurrentSentence;
+document.getElementById('btn-sound').onclick = () => {
+  soundEnabled = !soundEnabled;
+  document.getElementById('sound-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
+  document.getElementById('sound-label').className = soundEnabled ? 'text-xs font-bold text-emerald-600' : 'text-xs font-bold text-slate-400';
+};
+document.getElementById('btn-reset').onclick = () => {
+  if (confirm('Restart from Task 1 and reset score?')) {
+    score = 0;
+    streak = 0;
+    solvedTasks = {};
+    localIndex = 0;
+    renderTask();
+  }
+};
+
+// Keyboard listener
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    if (isAnswerVerified) {
+      nextTask();
+    } else if (selectedOption !== null) {
+      verifyAnswer();
+    }
+  }
+});
+
+// Category Modal handlers
+const modal = document.getElementById('modal-category');
+document.getElementById('btn-category').onclick = () => {
+  const current = getCurrentChallenge();
+  const aspect = current.targetAspect || 'PRESENT PERFECT';
+  document.getElementById('modal-aspect-badge').innerText = aspect;
+  
+  const content = document.getElementById('modal-content');
+  if (aspect === 'PRESENT PERFECT') {
+    content.innerHTML = `
+      <div>
+        <h3 class="font-bold text-slate-900 text-base mb-1">Present Perfect (have / has + past participle)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">Used when an action occurred in the past but has a <strong>direct connection to the present moment</strong>, accumulated life experience, or an unfinished timeframe.</p>
+      </div>
+      <div class="bg-blue-50/60 p-4 rounded-2xl border border-blue-100 space-y-2 text-xs">
+        <p class="font-bold text-blue-950 uppercase tracking-wider text-[11px]">Key Cambridge Triggers:</p>
+        <p class="text-slate-700">• <strong>Unfinished Time:</strong> <em>this week, this year, so far today</em></p>
+        <p class="text-slate-700">• <strong>Life Experience:</strong> <em>ever, never, in my life, three times</em></p>
+        <p class="text-slate-700">• <strong>Present Result:</strong> <em>"I have lost my passport!" (it is missing right now)</em></p>
+        <p class="text-slate-700">• <strong>Immediate Past:</strong> <em>have just finished, recently</em></p>
+        <p class="text-slate-700">• <strong>Starting Point / Duration:</strong> <em>since Monday, for ten years (ongoing)</em></p>
+      </div>
+      <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200 text-xs text-amber-950">
+        <p class="font-bold mb-1">💡 Key Cambridge Rule:</p>
+        <p class="leading-relaxed">Never use the Present Perfect with finished past time markers like <em>yesterday</em>, <em>last week</em>, or <em>ago</em>!</p>
+      </div>
+    `;
+  } else {
+    content.innerHTML = `
+      <div>
+        <h3 class="font-bold text-slate-900 text-base mb-1">Past Simple (V2 / did + base form)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">Used for actions completed in a <strong>closed, finished time period</strong>. The connection to the present is completely severed.</p>
+      </div>
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+        <p class="font-bold text-slate-900 uppercase tracking-wider text-[11px]">Strict Past Simple Markers:</p>
+        <p class="text-slate-700">• <strong>Explicit Past Markers:</strong> <em>yesterday, last month, last autumn</em></p>
+        <p class="text-slate-700">• <strong>The "-ago" Law:</strong> <em>two days ago, ten minutes ago</em></p>
+        <p class="text-slate-700">• <strong>Specific Dates/Years:</strong> <em>in 2019, in 1845, at 5:00 AM yesterday</em></p>
+        <p class="text-slate-700">• <strong>Completed Life Stage:</strong> <em>when I was a student, during his lifetime</em></p>
+      </div>
+      <div class="bg-blue-50/60 p-3.5 rounded-2xl border border-blue-100 text-xs text-blue-900">
+        <p class="font-bold mb-1">Cambridge Formula:</p>
+        <p class="font-mono text-slate-700">Subject + Verb-ed / Irregular 2nd form (e.g. discovered, went, held, struck)</p>
+      </div>
+    `;
+  }
+  modal.classList.remove('hidden');
+};
+
+document.getElementById('btn-close-modal').onclick = () => modal.classList.add('hidden');
+document.getElementById('btn-modal-return').onclick = () => modal.classList.add('hidden');
+modal.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
+
+// Initial Load
+renderTask();
+</script>
+</body>
+</html>

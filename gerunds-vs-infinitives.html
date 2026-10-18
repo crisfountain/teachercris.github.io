@@ -77,9 +77,9 @@
       </div>
     </div>
 
-    <!-- Enunciado de la Pregunta -->
+    <!-- Enunciado de la Pregunta (Fluido y alineado correctamente) -->
     <div class="mb-6 sm:mb-8">
-      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center min-h-[5rem] flex items-center justify-center">
+      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center">
         Cargando reto...
       </div>
     </div>
@@ -696,289 +696,24 @@ function playSound(type) {
   } catch(e) {}
 }
 
-// British English Text-to-Speech
-let britishVoice = null;
-function findBritishVoice() {
+// British Female Voice Text-to-Speech
+let britishFemaleVoice = null;
+function findBritishFemaleVoice() {
   if (!('speechSynthesis' in window)) return null;
   const voices = window.speechSynthesis.getVoices();
-  const ukVoices = voices.filter(v => 
-    v.lang === 'en-GB' || 
-    v.lang === 'en_GB' || 
-    v.lang.toLowerCase().startsWith('en-gb') ||
-    v.name.toLowerCase().includes('united kingdom') ||
-    v.name.toLowerCase().includes('uk english') ||
-    v.name.toLowerCase().includes('british')
-  );
-  if (ukVoices.length > 0) {
-    britishVoice = ukVoices.find(v => v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Daniel') || v.name.includes('Libby')) || ukVoices[0];
-  } else {
-    britishVoice = voices.find(v => v.lang.startsWith('en')) || null;
-  }
-  return britishVoice;
-}
-
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = findBritishVoice;
-  findBritishVoice();
-}
-
-function speakBritish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-GB';
-  utterance.rate = 0.92;
-  const voice = britishVoice || findBritishVoice();
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.speak(utterance);
-}
-
-function getCompletedSentence() {
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  return current.q.replace('___', current.options[current.correct]);
-}
-
-function switchQuizMode(mode) {
-  currentMode = mode;
-  currentIndex = 0;
-  score = 0;
-  streak = 0;
   
-  const tabA = document.getElementById('tab-quiz-a');
-  const tabB = document.getElementById('tab-quiz-b');
-  const sub = document.getElementById('subtitulo-quiz');
-
-  if (mode === 'A') {
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
-    sub.innerText = 'Gerunds vs Infinitives Master Practice (Quiz A)';
-  } else {
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
-    sub.innerText = 'Gerunds vs Infinitives Master Practice (Quiz B)';
-  }
-  loadChallenge();
-}
-
-function loadChallenge() {
-  const dataset = getCurrentDataset();
-  if (currentIndex >= dataset.length) {
-    showFinalSummary();
-    return;
-  }
-
-  isAnswerChecked = false;
-  selectedOption = null;
-  const current = dataset[currentIndex];
-
-  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-  document.getElementById('barra-progreso').style.width = `${((currentIndex + 1) / dataset.length) * 100}%`;
-
-  const btnCat = document.getElementById('btn-categoria');
-  btnCat.innerText = (current.category || 'Standard').toUpperCase() + ' (CLICK FOR HINT)';
-
-  // Render question with prominent blank
-  const parts = current.q.split('___');
-  const qHtml = parts[0] + '<span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs">___</span>' + (parts[1] || '');
-  document.getElementById('pregunta-texto').innerHTML = qHtml;
-
-  const pista = document.getElementById('pista-texto');
-  pista.innerText = current.h;
-  pista.classList.add('hidden');
-
-  const feedbackBox = document.getElementById('feedback-box');
-  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
-  document.getElementById('btn-verificar').classList.remove('hidden');
-
-  const container = document.getElementById('opciones-contenedor');
-  container.innerHTML = '';
-
-  current.options.forEach((opt, idx) => {
-    const div = document.createElement('div');
-    div.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer bg-white';
-    div.innerHTML = `
-      <div class="flex items-center justify-between w-full">
-        <span class="text-base">${opt}</span>
-        <input type="radio" name="quiz-option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
-      </div>
-    `;
-    div.onclick = () => {
-      if (isAnswerChecked) return;
-      selectedOption = idx;
-      playSound('click');
-      div.querySelector('input').checked = true;
-      Array.from(container.children).forEach(el => el.classList.remove('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500'));
-      div.classList.add('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500');
-    };
-    container.appendChild(div);
-  });
-}
-
-function verifyAnswer() {
-  if (selectedOption === null || isAnswerChecked) return;
-  isAnswerChecked = true;
-
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  const isCorrect = (selectedOption === current.correct);
-
-  if (isCorrect) {
-    score++;
-    streak++;
-    bestStreak = Math.max(bestStreak, streak);
-    playSound('success');
-  } else {
-    streak = 0;
-    playSound('error');
-  }
-
-  const slot = document.getElementById('blank-slot');
-  if (slot) {
-    slot.innerText = current.options[current.correct];
-    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200';
-  }
-
-  if (soundEnabled) {
-    speakBritish(getCompletedSentence());
-  }
-
-  const items = document.getElementById('opciones-contenedor').children;
-  Array.from(items).forEach((div, idx) => {
-    div.onclick = null;
-    const input = div.querySelector('input');
-    input.disabled = true;
-    if (idx === current.correct) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs';
-    } else if (idx === selectedOption && !isCorrect) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs';
-    } else {
-      div.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-not-allowed';
-    }
+  // Buscar prioritariamente voces británicas femeninas (Libby, Hazel, Serena, Zira, etc. o etiquetas female)
+  const ukFemaleVoices = voices.filter(v => {
+    const lang = (v.lang || '').toLowerCase();
+    const name = (v.name || '').toLowerCase();
+    const isUK = lang.includes('en-gb') || lang.includes('en_gb');
+    const isFemale = name.includes('female') || name.includes('libby') || name.includes('hazel') || name.includes('serena') || name.includes('susan') || name.includes('kate') || name.includes('emma') || name.includes('amy');
+    return isUK && isFemale;
   });
 
-  const feedbackBox = document.getElementById('feedback-box');
-  const feedbackTitulo = document.getElementById('feedback-titulo');
-  const feedbackExplicacion = document.getElementById('feedback-explicacion');
-  const feedbackAlert = document.getElementById('feedback-alert');
-  const feedbackChunk = document.getElementById('feedback-chunk');
-
-  if (isCorrect) {
-    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
-    feedbackTitulo.innerText = '¡Correcto / Excellent!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
-  } else {
-    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
-    feedbackTitulo.innerText = '¡Toma nota / Take Note!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
+  if (ukFemaleVoices.length > 0) {
+    britishFemaleVoice = ukFemaleVoices[0];
+    return britishFemaleVoice;
   }
 
-  feedbackExplicacion.innerHTML = current.expl;
-  feedbackAlert.innerText = current.alert;
-  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
-
-  feedbackBox.classList.remove('hidden');
-  document.getElementById('btn-verificar').classList.add('hidden');
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-}
-
-document.getElementById('btn-verificar').onclick = verifyAnswer;
-
-document.getElementById('btn-siguiente').onclick = () => {
-  currentIndex++;
-  loadChallenge();
-};
-
-document.getElementById('btn-anterior').onclick = () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    loadChallenge();
-  }
-};
-
-document.getElementById('btn-categoria').onclick = () => {
-  document.getElementById('pista-texto').classList.toggle('hidden');
-};
-
-document.getElementById('btn-pista-inferior').onclick = () => {
-  document.getElementById('pista-texto').classList.toggle('hidden');
-};
-
-document.getElementById('btn-mostrar-respuesta').onclick = () => {
-  if (isAnswerChecked) return;
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  selectedOption = current.correct;
-  const items = document.getElementById('opciones-contenedor').children;
-  if (items[current.correct]) {
-    items[current.correct].querySelector('input').checked = true;
-  }
-  verifyAnswer();
-};
-
-document.getElementById('btn-restart').onclick = () => {
-  currentIndex = 0;
-  score = 0;
-  streak = 0;
-  loadChallenge();
-};
-
-document.getElementById('btn-audio-sentence').onclick = () => {
-  speakBritish(getCompletedSentence());
-};
-
-document.getElementById('btn-audio-toggle').onclick = () => {
-  soundEnabled = !soundEnabled;
-  document.getElementById('audio-status-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
-};
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    if (!isAnswerChecked) {
-      verifyAnswer();
-    } else {
-      currentIndex++;
-      loadChallenge();
-    }
-  }
-});
-
-function showFinalSummary() {
-  const dataset = getCurrentDataset();
-  const main = document.querySelector('main');
-  const percentage = Math.round((score / dataset.length) * 100);
-  const missed = dataset.length - score;
-
-  main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in">
-      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">
-        🏆
-      </div>
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">
-        Has completado con éxito este bloque de Gerunds vs Infinitives.
-      </p>
-      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
-        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">
-          ${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span>
-        </div>
-      </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">
-        Reiniciar Práctica
-      </button>
-    </div>
-  `;
-}
-
-// Inicialización segura del DOM
-document.addEventListener('DOMContentLoaded', () => {
-  loadChallenge();
-});
-</script>
-</body>
-</html>
+  // Si no hay ninguna explícitamente femenina, buscar

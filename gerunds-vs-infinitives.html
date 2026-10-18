@@ -79,7 +79,8 @@
 
     <!-- Enunciado de la Pregunta -->
     <div class="mb-6 sm:mb-8">
-      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center">
+      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center min-h-[5rem] flex items-center justify-center">
+        Cargando reto...
       </div>
     </div>
 
@@ -483,4 +484,501 @@ const rawDataset = [
     "q": "Please remember ___ off the office lights before you leave the building tonight.",
     "options": ["to turn", "turning", "turn", "turned"],
     "correct": 0,
-    "h": "Is this a duty/task to perform in the future, or a
+    "h": "Is this a duty/task to perform in the future, or a memory of a past event?",
+    "expl": "'Remember + to + infinitive' means remembering to perform a duty or task. 'Remember + gerund' means recalling a past memory.",
+    "alert": "💡 L1 Contrastive Analysis: In English, 'remember to do' looks forward to a task that needs doing. 'Remember doing' looks back at a completed memory.",
+    "chunk": "remember to turn",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 34,
+    "q": "I clearly remember ___ my car keys on the kitchen table, but now they are gone.",
+    "options": ["leaving", "to leave", "leave", "left"],
+    "correct": 0,
+    "h": "Is the speaker recalling a past memory or being reminded to do a task?",
+    "expl": "'Remember + gerund (-ing)' expresses recalling a past action or memory after it happened.",
+    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often try to use 'remember to leave' for past memories. English strictly uses 'remember + -ing' for past memories ('remember leaving').",
+    "chunk": "remember leaving",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 35,
+    "q": "He stopped ___ a quick phone call to his assistant before entering the conference hall.",
+    "options": ["to make", "making", "make", "made"],
+    "correct": 0,
+    "h": "Did he pause another activity in order to make a call, or did he quit making calls altogether?",
+    "expl": "'Stop + to + infinitive' means pausing one activity in order to perform another. 'Stop + gerund' means ceasing an action completely.",
+    "alert": "💡 L1 Contrastive Analysis: English 'stop to do' means pausing work in order to perform a second action. Using 'stop making' would mean he quit making phone calls entirely!",
+    "chunk": "stop to make",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 36,
+    "q": "The doctor advised him to stop ___ sugary energy drinks if he wants to improve his health.",
+    "options": ["drinking", "to drink", "drink", "drank"],
+    "correct": 0,
+    "h": "Is he quitting the habit completely, or pausing work in order to drink?",
+    "expl": "'Stop + gerund (-ing)' means quitting or terminating a habit or continuous action.",
+    "alert": "💡 L1 Contrastive Analysis: Quitting a habit equals 'stop drinking'. Saying 'stop to drink' means pausing work to take a sip!",
+    "chunk": "stop drinking",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 37,
+    "q": "We regret ___ you that your application for the senior research fellowship was unsuccessful.",
+    "options": ["to inform", "informing", "inform", "informed"],
+    "correct": 0,
+    "h": "Is this a formal announcement of bad news, or remorse over a past mistake?",
+    "expl": "'Regret + to + infinitive' (usually with inform, say, tell) is a formal expression used to deliver bad news. 'Regret + gerund' means feeling remorse for a past action.",
+    "alert": "💡 L1 Contrastive Analysis: Formal business letters use 'regret to inform'. Using 'regret informing' would mean you feel sorry you told them!",
+    "chunk": "regret to inform",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 38,
+    "q": "He deeply regrets ___ those harsh words to his colleague during yesterday's heated debate.",
+    "options": ["saying", "to say", "say", "said"],
+    "correct": 0,
+    "h": "Does he feel remorse for an action completed in the past?",
+    "expl": "'Regret + gerund (-ing)' expresses remorse or sadness about something done in the past.",
+    "alert": "💡 L1 Contrastive Analysis: Feeling remorse for past words translates to 'regret saying'.",
+    "chunk": "regret saying",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 39,
+    "q": "Don't forget ___ the oven off after you finish baking the cake.",
+    "options": ["to switch", "switching", "switch", "switched"],
+    "correct": 0,
+    "h": "Is this a reminder for a future obligation?",
+    "expl": "'Forget + to + infinitive' means failing to perform a necessary task or duty.",
+    "alert": "💡 L1 Contrastive Analysis: 'Forget to do' means forgetting an obligation. 'Forget doing' means losing the memory of a past event.",
+    "chunk": "forget to switch",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 40,
+    "q": "I will never forget ___ the famous Nobel laureate speak live in Stockholm.",
+    "options": ["hearing", "to hear", "hear", "heard"],
+    "correct": 0,
+    "h": "Is this an unforgettable memory from the past?",
+    "expl": "'Forget + gerund (-ing)' (usually in negative sentences like 'never forget') refers to an unforgettable past experience.",
+    "alert": "💡 L1 Contrastive Analysis: Recalling an unforgettable memory translates to 'never forget hearing'.",
+    "chunk": "never forget hearing",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 41,
+    "q": "If the computer freezes, try ___ the system by holding down the power button for ten seconds.",
+    "options": ["restarting", "to restart", "restart", "restarted"],
+    "correct": 0,
+    "h": "Is this testing an experimental method to solve a problem, or attempting a difficult physical task?",
+    "expl": "'Try + gerund (-ing)' means experimenting with a method to see if it solves a problem. 'Try + to + infinitive' means making an effort to achieve something difficult.",
+    "alert": "💡 L1 Contrastive Analysis: 'Try restarting' means experimenting with an option to see if it works. 'Try to restart' implies struggling against physical difficulty.",
+    "chunk": "try restarting",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 42,
+    "q": "She tried ___ the heavy wooden oak door, but it was locked firmly from the inside.",
+    "options": ["to open", "opening", "open", "opened"],
+    "correct": 0,
+    "h": "Did she exert physical effort to accomplish a difficult task?",
+    "expl": "'Try + to + infinitive' expresses making an effort to accomplish a challenging task.",
+    "alert": "💡 L1 Contrastive Analysis: Making an effort to accomplish a difficult physical task equals 'try to open'.",
+    "chunk": "try to open",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 43,
+    "q": "The project proposal needs ___ by the chief financial officer before we can proceed.",
+    "options": ["approving", "to approve", "approve", "approved"],
+    "correct": 0,
+    "h": "Does the subject ('proposal') require a passive action performed upon it?",
+    "expl": "'Need + gerund (-ing)' has a passive meaning equivalent to 'need to be done' ('needs approving' = 'needs to be approved').",
+    "alert": "💡 L1 Contrastive Analysis: 'Needs approving' is a common Cambridge structure equivalent to 'needs to be approved'.",
+    "chunk": "need approving",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 44,
+    "q": "I meant ___ you earlier today, but my meeting ran over by two hours.",
+    "options": ["to call", "calling", "call", "called"],
+    "correct": 0,
+    "h": "Did the speaker intend to make a phone call?",
+    "expl": "'Mean + to + infinitive' means to intend or plan to do something. ('Mean + gerund' means to involve or signify).",
+    "alert": "💡 L1 Contrastive Analysis: Having the intention to make a call translates to 'mean to call'.",
+    "chunk": "mean to call",
+    "category": "Meaning Change"
+  },
+  {
+    "id": 45,
+    "q": "Taking on this international promotion will mean ___ to another country.",
+    "options": ["relocating", "to relocate", "relocate", "relocated"],
+    "correct": 0,
+    "h": "Does taking the promotion involve or signify a consequence?",
+    "expl": "'Mean + gerund (-ing)' means involving or signifying a logical consequence.",
+    "alert": "💡 L1 Contrastive Analysis: When 'mean' signifies involving or entailing a consequence, English requires the gerund ('mean relocating').",
+    "chunk": "mean relocating",
+    "category": "Meaning Change"
+  }
+];
+
+// Distribución determinista de opciones
+const SHUFFLE_OFFSETS = [
+  1, 2, 0, 3, 2, 1, 3, 0, 2, 1, 0, 3,
+  2, 0, 1, 3, 1, 2, 0, 3, 2, 0, 1, 3,
+  0, 2, 1, 3, 2, 0, 1, 3, 1, 2, 0, 3,
+  2, 0, 1, 3, 2, 1, 0, 3, 1
+];
+
+const processedDataset = rawDataset.map((item, idx) => {
+  const correctVal = item.options[0];
+  const others = item.options.slice(1);
+  const targetIdx = SHUFFLE_OFFSETS[idx % SHUFFLE_OFFSETS.length] % 4;
+  const newOpts = [];
+  let ptr = 0;
+  for (let i = 0; i < 4; i++) {
+    if (i === targetIdx) newOpts.push(correctVal);
+    else newOpts.push(others[ptr++]);
+  }
+  return { ...item, options: newOpts, correct: targetIdx };
+});
+
+const quizA = processedDataset.slice(0, 22);
+const quizB = processedDataset.slice(22);
+
+let currentMode = 'A';
+let currentIndex = 0;
+let score = 0;
+let streak = 0;
+let bestStreak = 0;
+let selectedOption = null;
+let isAnswerChecked = false;
+let soundEnabled = true;
+
+function getCurrentDataset() {
+  return currentMode === 'A' ? quizA : quizB;
+}
+
+// Web Audio synthesizer for tactile sound FX
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const now = ctx.currentTime;
+    if (type === 'success') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    } else if (type === 'error') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(260, now);
+      osc.frequency.exponentialRampToValueAtTime(190, now + 0.18);
+      gain.gain.setValueAtTime(0.16, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+    } else if (type === 'click') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, now);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    }
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + (type === 'click' ? 0.08 : type === 'success' ? 0.35 : 0.28));
+  } catch(e) {}
+}
+
+// British English Text-to-Speech
+let britishVoice = null;
+function findBritishVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  const ukVoices = voices.filter(v => 
+    v.lang === 'en-GB' || 
+    v.lang === 'en_GB' || 
+    v.lang.toLowerCase().startsWith('en-gb') ||
+    v.name.toLowerCase().includes('united kingdom') ||
+    v.name.toLowerCase().includes('uk english') ||
+    v.name.toLowerCase().includes('british')
+  );
+  if (ukVoices.length > 0) {
+    britishVoice = ukVoices.find(v => v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Daniel') || v.name.includes('Libby')) || ukVoices[0];
+  } else {
+    britishVoice = voices.find(v => v.lang.startsWith('en')) || null;
+  }
+  return britishVoice;
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = findBritishVoice;
+  findBritishVoice();
+}
+
+function speakBritish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-GB';
+  utterance.rate = 0.92;
+  const voice = britishVoice || findBritishVoice();
+  if (voice) utterance.voice = voice;
+  window.speechSynthesis.speak(utterance);
+}
+
+function getCompletedSentence() {
+  const dataset = getCurrentDataset();
+  const current = dataset[currentIndex];
+  return current.q.replace('___', current.options[current.correct]);
+}
+
+function switchQuizMode(mode) {
+  currentMode = mode;
+  currentIndex = 0;
+  score = 0;
+  streak = 0;
+  
+  const tabA = document.getElementById('tab-quiz-a');
+  const tabB = document.getElementById('tab-quiz-b');
+  const sub = document.getElementById('subtitulo-quiz');
+
+  if (mode === 'A') {
+    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
+    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
+    sub.innerText = 'Gerunds vs Infinitives Master Practice (Quiz A)';
+  } else {
+    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
+    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
+    sub.innerText = 'Gerunds vs Infinitives Master Practice (Quiz B)';
+  }
+  loadChallenge();
+}
+
+function loadChallenge() {
+  const dataset = getCurrentDataset();
+  if (currentIndex >= dataset.length) {
+    showFinalSummary();
+    return;
+  }
+
+  isAnswerChecked = false;
+  selectedOption = null;
+  const current = dataset[currentIndex];
+
+  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
+  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
+  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+  document.getElementById('barra-progreso').style.width = `${((currentIndex + 1) / dataset.length) * 100}%`;
+
+  const btnCat = document.getElementById('btn-categoria');
+  btnCat.innerText = (current.category || 'Standard').toUpperCase() + ' (CLICK FOR HINT)';
+
+  // Render question with prominent blank
+  const parts = current.q.split('___');
+  const qHtml = parts[0] + '<span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs">___</span>' + (parts[1] || '');
+  document.getElementById('pregunta-texto').innerHTML = qHtml;
+
+  const pista = document.getElementById('pista-texto');
+  pista.innerText = current.h;
+  pista.classList.add('hidden');
+
+  const feedbackBox = document.getElementById('feedback-box');
+  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
+  document.getElementById('btn-verificar').classList.remove('hidden');
+
+  const container = document.getElementById('opciones-contenedor');
+  container.innerHTML = '';
+
+  current.options.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer bg-white';
+    div.innerHTML = `
+      <div class="flex items-center justify-between w-full">
+        <span class="text-base">${opt}</span>
+        <input type="radio" name="quiz-option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
+      </div>
+    `;
+    div.onclick = () => {
+      if (isAnswerChecked) return;
+      selectedOption = idx;
+      playSound('click');
+      div.querySelector('input').checked = true;
+      Array.from(container.children).forEach(el => el.classList.remove('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500'));
+      div.classList.add('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500');
+    };
+    container.appendChild(div);
+  });
+}
+
+function verifyAnswer() {
+  if (selectedOption === null || isAnswerChecked) return;
+  isAnswerChecked = true;
+
+  const dataset = getCurrentDataset();
+  const current = dataset[currentIndex];
+  const isCorrect = (selectedOption === current.correct);
+
+  if (isCorrect) {
+    score++;
+    streak++;
+    bestStreak = Math.max(bestStreak, streak);
+    playSound('success');
+  } else {
+    streak = 0;
+    playSound('error');
+  }
+
+  const slot = document.getElementById('blank-slot');
+  if (slot) {
+    slot.innerText = current.options[current.correct];
+    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200';
+  }
+
+  if (soundEnabled) {
+    speakBritish(getCompletedSentence());
+  }
+
+  const items = document.getElementById('opciones-contenedor').children;
+  Array.from(items).forEach((div, idx) => {
+    div.onclick = null;
+    const input = div.querySelector('input');
+    input.disabled = true;
+    if (idx === current.correct) {
+      div.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs';
+    } else if (idx === selectedOption && !isCorrect) {
+      div.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs';
+    } else {
+      div.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-not-allowed';
+    }
+  });
+
+  const feedbackBox = document.getElementById('feedback-box');
+  const feedbackTitulo = document.getElementById('feedback-titulo');
+  const feedbackExplicacion = document.getElementById('feedback-explicacion');
+  const feedbackAlert = document.getElementById('feedback-alert');
+  const feedbackChunk = document.getElementById('feedback-chunk');
+
+  if (isCorrect) {
+    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
+    feedbackTitulo.innerText = '¡Correcto / Excellent!';
+    feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
+  } else {
+    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
+    feedbackTitulo.innerText = '¡Toma nota / Take Note!';
+    feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
+  }
+
+  feedbackExplicacion.innerHTML = current.expl;
+  feedbackAlert.innerText = current.alert;
+  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
+
+  feedbackBox.classList.remove('hidden');
+  document.getElementById('btn-verificar').classList.add('hidden');
+  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
+  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+}
+
+document.getElementById('btn-verificar').onclick = verifyAnswer;
+
+document.getElementById('btn-siguiente').onclick = () => {
+  currentIndex++;
+  loadChallenge();
+};
+
+document.getElementById('btn-anterior').onclick = () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    loadChallenge();
+  }
+};
+
+document.getElementById('btn-categoria').onclick = () => {
+  document.getElementById('pista-texto').classList.toggle('hidden');
+};
+
+document.getElementById('btn-pista-inferior').onclick = () => {
+  document.getElementById('pista-texto').classList.toggle('hidden');
+};
+
+document.getElementById('btn-mostrar-respuesta').onclick = () => {
+  if (isAnswerChecked) return;
+  const dataset = getCurrentDataset();
+  const current = dataset[currentIndex];
+  selectedOption = current.correct;
+  const items = document.getElementById('opciones-contenedor').children;
+  if (items[current.correct]) {
+    items[current.correct].querySelector('input').checked = true;
+  }
+  verifyAnswer();
+};
+
+document.getElementById('btn-restart').onclick = () => {
+  currentIndex = 0;
+  score = 0;
+  streak = 0;
+  loadChallenge();
+};
+
+document.getElementById('btn-audio-sentence').onclick = () => {
+  speakBritish(getCompletedSentence());
+};
+
+document.getElementById('btn-audio-toggle').onclick = () => {
+  soundEnabled = !soundEnabled;
+  document.getElementById('audio-status-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
+};
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (!isAnswerChecked) {
+      verifyAnswer();
+    } else {
+      currentIndex++;
+      loadChallenge();
+    }
+  }
+});
+
+function showFinalSummary() {
+  const dataset = getCurrentDataset();
+  const main = document.querySelector('main');
+  const percentage = Math.round((score / dataset.length) * 100);
+  const missed = dataset.length - score;
+
+  main.innerHTML = `
+    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in">
+      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">
+        🏆
+      </div>
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
+      <p class="text-slate-600 mb-6 max-w-md mx-auto">
+        Has completado con éxito este bloque de Gerunds vs Infinitives.
+      </p>
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
+        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">
+          ${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span>
+        </div>
+      </div>
+      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">
+        Reiniciar Práctica
+      </button>
+    </div>
+  `;
+}
+
+// Inicialización segura del DOM
+document.addEventListener('DOMContentLoaded', () => {
+  loadChallenge();
+});
+</script>
+</body>
+</html>

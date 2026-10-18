@@ -15,108 +15,103 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
 
-<!-- Header -->
+<!-- Header / Barra de Navegación superior -->
 <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
   <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <a href="#" onclick="location.reload()" class="text-indigo-600 font-bold flex items-center gap-2 hover:text-indigo-700 transition">
-        <i class="fas fa-arrow-left"></i> Teacher Cris Essentials
-      </a>
-      <span class="hidden sm:inline-block text-xs font-semibold bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-full border border-indigo-100">
-        Gerunds vs Infinitives
-      </span>
-    </div>
+    <a href="index.html" class="text-indigo-600 font-bold flex items-center gap-2 hover:text-indigo-700 transition">
+      <i class="fas fa-arrow-left"></i> Volver a teachercris.online
+    </a>
 
-    <div class="flex items-center gap-2 sm:gap-3">
-      <!-- Voice Indicator (British English) -->
-      <span class="inline-flex items-center gap-1.5 text-xs font-medium bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200">
-        <span class="text-sm">🇬🇧</span> British TTS
-      </span>
-      <span class="text-xs sm:text-sm font-semibold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
-        B1 / B2 Standard
-      </span>
+    <div class="flex items-center gap-3">
+      <!-- Botón de Audio y Sonido FX -->
+      <button id="btn-audio-toggle" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition">
+        <i class="fas fa-volume-up"></i> <span id="audio-status-label">FX ON</span>
+      </button>
+      <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition" title="Reiniciar">
+        <i class="fas fa-redo-alt"></i>
+      </button>
     </div>
   </div>
 </header>
 
 <!-- Main App Container -->
 <main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
+  <div class="text-center mb-6">
+    <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
+    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">Gerunds vs Infinitives Master Practice</p>
+  </div>
+
   <div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200">
     
     <!-- Progress Bar & Score -->
     <div class="flex justify-between items-center mb-4 text-sm text-slate-500">
       <div class="flex items-center gap-2">
-        <span id="progreso-texto" class="font-bold text-indigo-600">Challenge 1 of 45</span>
-        <span id="categoria-badge" class="hidden sm:inline-block text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"></span>
+        <span id="progreso-texto" class="font-bold text-indigo-600">Task 1 of 45</span>
       </div>
       <div class="flex items-center gap-3">
-        <span id="streak-badge" class="hidden text-xs font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full"></span>
-        <span id="puntuacion" class="font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">Score: 0</span>
+        <span id="streak-badge" class="font-semibold text-amber-600">Streak: 0</span>
+        <span id="puntuacion" class="font-semibold text-emerald-600">Correct: 0</span>
       </div>
     </div>
 
     <!-- Progress Bar -->
-    <div class="w-full bg-slate-100 h-2.5 rounded-full mb-8 overflow-hidden">
+    <div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
       <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
+    </div>
+
+    <!-- Category Pill Toggle Button -->
+    <div class="mb-6 text-center">
+      <button id="btn-categoria" class="bg-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-xs cursor-default">
+        CATEGORY (CLICK FOR HINT)
+      </button>
     </div>
 
     <!-- Challenge Statement -->
     <div class="mb-6 sm:mb-8">
-      <div class="flex items-center justify-between mb-1">
-        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">
-          Choose the correct verb form (Gerund or Infinitive):
-        </span>
-        <button id="btn-audio-sentence" class="text-xs flex items-center gap-1 text-slate-500 hover:text-indigo-600 transition p-1 rounded-md" title="Listen in British English">
-          <i class="fas fa-volume-up"></i> <span>🇬🇧 Listen (UK)</span>
-        </button>
-      </div>
-
       <div class="relative">
-        <p id="pregunta-texto" class="text-lg sm:text-xl font-bold text-slate-900 mt-2 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs">
+        <p id="pregunta-texto" class="text-lg sm:text-xl font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs">
         </p>
       </div>
     </div>
 
-    <!-- Tactical Hint -->
-    <div class="mb-6">
-      <button id="btn-pista" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition flex items-center gap-1.5 focus:outline-none">
-        <i class="far fa-lightbulb text-amber-500"></i> Need a tactical hint?
-      </button>
-      <div id="pista-texto" class="hidden text-sm text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200/80 p-3.5 rounded-xl animate-fade-in">
-        <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
-      </div>
-    </div>
-
     <!-- Multiple Choice Options -->
-    <div id="opciones-contenedor" class="space-y-3 mb-8"></div>
+    <div id="opciones-contenedor" class="space-y-3 mb-6"></div>
+
+    <!-- Verify Button (Acción de comprobar) -->
+    <button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
+      Verify (Enter)
+    </button>
 
     <!-- Feedback Container -->
-    <div id="feedback-box" class="hidden p-5 rounded-2xl mb-8 border transition-all duration-300">
-      <div class="flex items-center justify-between mb-2">
-        <p id="feedback-titulo" class="font-bold text-lg"></p>
-        <button id="btn-audio-feedback" class="text-xs font-semibold text-indigo-700 bg-white/80 hover:bg-white px-2.5 py-1 rounded-lg border border-slate-200 flex items-center gap-1.5 transition">
-          <i class="fas fa-volume-up"></i> 🇬🇧 Read Sentence
-        </button>
-      </div>
+    <div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
+      <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
       <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
       <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
-      <div class="flex flex-wrap items-center justify-between gap-2 mt-3 pt-2 border-t border-slate-200/50">
-        <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider bg-white/70 px-2.5 py-1 rounded-md border border-indigo-100"></p>
-        <span class="text-[11px] text-slate-400">Press Enter for next</span>
-      </div>
+      <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
     </div>
 
-    <!-- Next Button -->
-    <button id="btn-siguiente" class="hidden w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition flex items-center justify-center gap-2 shadow-lg cursor-pointer">
-      <span>Next Challenge</span> <i class="fas fa-chevron-right"></i>
-    </button>
+    <!-- Botonera Inferior: Previous | Hint | Show Answer | Next -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
+      <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+        <i class="fas fa-chevron-left"></i> Previous
+      </button>
+      <button id="btn-pista" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+        Hint <i class="far fa-lightbulb"></i>
+      </button>
+      <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+        Show Answer <i class="fas fa-eye"></i>
+      </button>
+      <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+        Next <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
   </div>
 </main>
 
 <footer class="mt-auto py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-500">
-  <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-    <p class="font-semibold text-slate-700">Teacher Cris Essentials Unified Series</p>
-    <p class="text-slate-400">Present Perfect vs Past Simple • Gerunds vs Infinitives • B1/B2 Master</p>
+  <div class="max-w-4xl mx-auto px-4">
+    <p class="font-semibold text-slate-700">Teacher Cris • Gerunds vs Infinitives Master Practice</p>
   </div>
 </footer>
 
@@ -125,12 +120,7 @@ const rawDataset = [
   {
     "id": 1,
     "q": "She is extremely interested in ___ more about international sustainable architecture.",
-    "options": [
-      "learning",
-      "to learn",
-      "learn",
-      "learned"
-    ],
+    "options": ["learning", "to learn", "learn", "learned"],
     "correct": 0,
     "h": "Identify the preposition 'in' directly preceding the blank space.",
     "expl": "In English, all prepositions (in, on, at, about, of, for, with, without) must be followed by the gerund (-ing) form when followed by a verb.",
@@ -141,12 +131,7 @@ const rawDataset = [
   {
     "id": 2,
     "q": "We are all really looking forward to ___ you at the annual international conference next week.",
-    "options": [
-      "meeting",
-      "meet",
-      "to meet",
-      "met"
-    ],
+    "options": ["meeting", "meet", "to meet", "met"],
     "correct": 0,
     "h": "Recognize that 'to' in 'look forward to' acts as a preposition, not part of an infinitive.",
     "expl": "In the phrasal verb 'look forward to', 'to' is a preposition. Therefore, it must be followed by a gerund (-ing).",
@@ -157,12 +142,7 @@ const rawDataset = [
   {
     "id": 3,
     "q": "Before ___ the final project proposal, make sure to proofread all statistical figures.",
-    "options": [
-      "submitting",
-      "to submit",
-      "submit",
-      "submitted"
-    ],
+    "options": ["submitting", "to submit", "submit", "submitted"],
     "correct": 0,
     "h": "Notice the time preposition 'before' standing right before the action.",
     "expl": "Time prepositions like 'before', 'after', and 'since' require a gerund (-ing) when directly introducing a verb clause without a subject.",
@@ -173,12 +153,7 @@ const rawDataset = [
   {
     "id": 4,
     "q": "He apologized for ___ late to the executive board meeting yesterday afternoon.",
-    "options": [
-      "arriving",
-      "to arrive",
-      "arrive",
-      "arrived"
-    ],
+    "options": ["arriving", "to arrive", "arrive", "arrived"],
     "correct": 0,
     "h": "Spot the dependent preposition 'for' following the verb 'apologized'.",
     "expl": "The verb 'apologize' pairs with the preposition 'for', which strictly governs the gerund (-ing) form of the following verb.",
@@ -189,12 +164,7 @@ const rawDataset = [
   {
     "id": 5,
     "q": "The corporate director succeeded in ___ the merger agreement despite tough negotiations.",
-    "options": [
-      "finalizing",
-      "to finalize",
-      "finalize",
-      "finalized"
-    ],
+    "options": ["finalizing", "to finalize", "finalize", "finalized"],
     "correct": 0,
     "h": "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
     "expl": "The verb phrase 'succeed in' requires a gerund (-ing) to describe the accomplished action.",
@@ -205,12 +175,7 @@ const rawDataset = [
   {
     "id": 6,
     "q": "After ___ the detailed report, the auditor requested additional bank statements.",
-    "options": [
-      "reading",
-      "to read",
-      "read",
-      "have read"
-    ],
+    "options": ["reading", "to read", "read", "have read"],
     "correct": 0,
     "h": "Identify the preposition 'after' placed at the head of the sentence clause.",
     "expl": "Prepositions introduced at the start of introductory time clauses take the gerund (-ing) form.",
@@ -221,12 +186,7 @@ const rawDataset = [
   {
     "id": 7,
     "q": "She left the office without ___ goodbye to her colleagues.",
-    "options": [
-      "saying",
-      "to say",
-      "say",
-      "said"
-    ],
+    "options": ["saying", "to say", "say", "said"],
     "correct": 0,
     "h": "Look for the preposition 'without' describing the condition of her departure.",
     "expl": "The preposition 'without' must always be followed by a gerund (-ing).",
@@ -237,12 +197,7 @@ const rawDataset = [
   {
     "id": 8,
     "q": "They talked about ___ a new regional branch in South America next year.",
-    "options": [
-      "opening",
-      "to open",
-      "open",
-      "opened"
-    ],
+    "options": ["opening", "to open", "open", "opened"],
     "correct": 0,
     "h": "Find the preposition 'about' following the verb 'talked'.",
     "expl": "Prepositions such as 'about' always take the gerund (-ing) when followed by a verb.",
@@ -253,12 +208,7 @@ const rawDataset = [
   {
     "id": 9,
     "q": "The manager praised the team for ___ such outstanding results this quarter.",
-    "options": [
-      "achieving",
-      "to achieve",
-      "achieve",
-      "achieved"
-    ],
+    "options": ["achieving", "to achieve", "achieve", "achieved"],
     "correct": 0,
     "h": "Identify 'for' as the preposition indicating the reason for praise.",
     "expl": "The pattern 'praise someone for' requires the gerund (-ing) for the action being commended.",
@@ -269,12 +219,7 @@ const rawDataset = [
   {
     "id": 10,
     "q": "Instead of ___ a new car, he decided to rent one for his holiday road trip.",
-    "options": [
-      "buying",
-      "to buy",
-      "buy",
-      "bought"
-    ],
+    "options": ["buying", "to buy", "buy", "bought"],
     "correct": 0,
     "h": "Notice the prepositional phrase 'instead of' at the start of the contrast clause.",
     "expl": "'Instead of' is a compound preposition and must be followed by a gerund (-ing).",
@@ -285,12 +230,7 @@ const rawDataset = [
   {
     "id": 11,
     "q": "Dr. Aris is tired of ___ the same administrative excuses every single week.",
-    "options": [
-      "hearing",
-      "to hear",
-      "hear",
-      "heard"
-    ],
+    "options": ["hearing", "to hear", "hear", "heard"],
     "correct": 0,
     "h": "Spot the adjective-preposition pair 'tired of'.",
     "expl": "The adjective structure 'tired of' takes a gerund (-ing) to express weariness with a repeated action.",
@@ -301,12 +241,7 @@ const rawDataset = [
   {
     "id": 12,
     "q": "He insists on ___ every single contract document personally.",
-    "options": [
-      "signing",
-      "to sign",
-      "sign",
-      "signed"
-    ],
+    "options": ["signing", "to sign", "sign", "signed"],
     "correct": 0,
     "h": "Focus on the dependent preposition 'on' following 'insists'.",
     "expl": "The verb 'insist' pairs with the preposition 'on', which demands a gerund (-ing).",
@@ -317,28 +252,18 @@ const rawDataset = [
   {
     "id": 13,
     "q": "Do you mind ___ the window? It is getting quite warm in this room.",
-    "options": [
-      "opening",
-      "to open",
-      "open",
-      "opened"
-    ],
+    "options": ["opening", "to open", "open", "opened"],
     "correct": 0,
     "h": "Recall which verb form follows polite requests with 'mind'.",
     "expl": "The verb 'mind' (in polite requests or questions) is strictly followed by the gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often try to use 'to + infinitive' (*'mind to open'*). English grammar strictly requires 'mind' + gerund ('mind opening').",
+    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often try to use 'to + infinitive' ('mind to open'). English grammar strictly requires 'mind' + gerund ('mind opening').",
     "chunk": "mind opening",
     "category": "Verbs + Gerund"
   },
   {
     "id": 14,
     "q": "The team decided to avoid ___ risky financial investments during the crisis.",
-    "options": [
-      "making",
-      "to make",
-      "make",
-      "made"
-    ],
+    "options": ["making", "to make", "make", "made"],
     "correct": 0,
     "h": "Identify the verb 'avoid' which governs the following verb form.",
     "expl": "The verb 'avoid' must always be followed by a gerund (-ing), never an infinitive.",
@@ -349,12 +274,7 @@ const rawDataset = [
   {
     "id": 15,
     "q": "She strongly suggested ___ a professional translator for the legal proceedings.",
-    "options": [
-      "hiring",
-      "to hire",
-      "hire",
-      "hired"
-    ],
+    "options": ["hiring", "to hire", "hire", "hired"],
     "correct": 0,
     "h": "Look at the verb 'suggest' directly followed by an action verb.",
     "expl": "When 'suggest' is directly followed by a verb (without a 'that' clause or personal pronoun), it takes a gerund (-ing).",
@@ -365,12 +285,7 @@ const rawDataset = [
   {
     "id": 16,
     "q": "The suspect admitted ___ the confidential files from the corporate network.",
-    "options": [
-      "downloading",
-      "to download",
-      "download",
-      "downloaded"
-    ],
+    "options": ["downloading", "to download", "download", "downloaded"],
     "correct": 0,
     "h": "Identify the verb 'admitted' followed by an acknowledged action.",
     "expl": "The verb 'admit' takes a gerund (-ing) when acknowledging a past action.",
@@ -381,12 +296,7 @@ const rawDataset = [
   {
     "id": 17,
     "q": "I really enjoy ___ in the park early in the morning before work.",
-    "options": [
-      "running",
-      "to run",
-      "run",
-      "ran"
-    ],
+    "options": ["running", "to run", "run", "ran"],
     "correct": 0,
     "h": "Focus on the preference verb 'enjoy'.",
     "expl": "The verb 'enjoy' is always followed by a gerund (-ing).",
@@ -397,12 +307,7 @@ const rawDataset = [
   {
     "id": 18,
     "q": "The company postponed ___ the new smartphone model due to technical glitches.",
-    "options": [
-      "launching",
-      "to launch",
-      "launch",
-      "launched"
-    ],
+    "options": ["launching", "to launch", "launch", "launched"],
     "correct": 0,
     "h": "Identify the delay verb 'postponed'.",
     "expl": "The verb 'postpone' (like 'put off') is strictly followed by a gerund (-ing).",
@@ -413,12 +318,7 @@ const rawDataset = [
   {
     "id": 19,
     "q": "He denied ___ any involvement in the financial embezzlement scheme.",
-    "options": [
-      "having",
-      "to have",
-      "have",
-      "had"
-    ],
+    "options": ["having", "to have", "have", "had"],
     "correct": 0,
     "h": "Look at the verb 'denied' governing the clause.",
     "expl": "The verb 'deny' takes a gerund (-ing) [or perfect gerund 'having had'].",
@@ -429,12 +329,7 @@ const rawDataset = [
   {
     "id": 20,
     "q": "She cannot help ___ nervous whenever she has to deliver a public presentation.",
-    "options": [
-      "feeling",
-      "to feel",
-      "feel",
-      "felt"
-    ],
+    "options": ["feeling", "to feel", "feel", "felt"],
     "correct": 0,
     "h": "Spot the fixed idiomatic expression 'cannot help'.",
     "expl": "The idiomatic expression 'cannot help' (meaning unable to prevent an emotion/action) is strictly followed by a gerund (-ing).",
@@ -445,12 +340,7 @@ const rawDataset = [
   {
     "id": 21,
     "q": "You should consider ___ for the senior management role before the deadline.",
-    "options": [
-      "applying",
-      "to apply",
-      "apply",
-      "applied"
-    ],
+    "options": ["applying", "to apply", "apply", "applied"],
     "correct": 0,
     "h": "Identify the deliberation verb 'consider'.",
     "expl": "The verb 'consider' takes a gerund (-ing) when contemplating an action.",
@@ -461,12 +351,7 @@ const rawDataset = [
   {
     "id": 22,
     "q": "The chief executive finished ___ the annual speech just before midnight.",
-    "options": [
-      "writing",
-      "to write",
-      "write",
-      "wrote"
-    ],
+    "options": ["writing", "to write", "write", "wrote"],
     "correct": 0,
     "h": "Look at the completion verb 'finished'.",
     "expl": "The verb 'finish' is followed by a gerund (-ing) to indicate the end of an activity.",
@@ -477,12 +362,7 @@ const rawDataset = [
   {
     "id": 23,
     "q": "The board of directors decided ___ the proposal for the new factory.",
-    "options": [
-      "to accept",
-      "accepting",
-      "accept",
-      "accepted"
-    ],
+    "options": ["to accept", "accepting", "accept", "accepted"],
     "correct": 0,
     "h": "Identify the decision verb 'decided'.",
     "expl": "The verb 'decide' is followed by 'to + infinitive' when expressing a choice to do something.",
@@ -493,12 +373,7 @@ const rawDataset = [
   {
     "id": 24,
     "q": "She promised ___ the confidential documents as soon as she arrived at her desk.",
-    "options": [
-      "to send",
-      "sending",
-      "send",
-      "sent"
-    ],
+    "options": ["to send", "sending", "send", "sent"],
     "correct": 0,
     "h": "Spot the commitment verb 'promised'.",
     "expl": "The verb 'promise' requires 'to + infinitive' when offering a commitment.",
@@ -509,12 +384,7 @@ const rawDataset = [
   {
     "id": 25,
     "q": "We cannot afford ___ such an expensive software license at this point in time.",
-    "options": [
-      "to purchase",
-      "purchasing",
-      "purchase",
-      "purchased"
-    ],
+    "options": ["to purchase", "purchasing", "purchase", "purchased"],
     "correct": 0,
     "h": "Focus on the financial verb 'afford'.",
     "expl": "The verb 'afford' (usually with can/cannot) is strictly followed by 'to + infinitive'.",
@@ -525,12 +395,7 @@ const rawDataset = [
   {
     "id": 26,
     "q": "The candidate refused ___ the controversial questions raised during the interview.",
-    "options": [
-      "to answer",
-      "answering",
-      "answer",
-      "answered"
-    ],
+    "options": ["to answer", "answering", "answer", "answered"],
     "correct": 0,
     "h": "Identify the rejection verb 'refused'.",
     "expl": "The verb 'refuse' takes 'to + infinitive' to express unwillingness to perform an action.",
@@ -541,12 +406,7 @@ const rawDataset = [
   {
     "id": 27,
     "q": "The IT team managed ___ the server network before business hours resumed.",
-    "options": [
-      "to restore",
-      "restoring",
-      "restore",
-      "restored"
-    ],
+    "options": ["to restore", "restoring", "restore", "restored"],
     "correct": 0,
     "h": "Look at the achievement verb 'managed'.",
     "expl": "The verb 'manage' (meaning to succeed in doing something difficult) requires 'to + infinitive'.",
@@ -557,12 +417,7 @@ const rawDataset = [
   {
     "id": 28,
     "q": "He agreed ___ the junior developers with their weekly coding assignments.",
-    "options": [
-      "to assist",
-      "assisting",
-      "assist",
-      "assisted"
-    ],
+    "options": ["to assist", "assisting", "assist", "assisted"],
     "correct": 0,
     "h": "Identify the agreement verb 'agreed'.",
     "expl": "The verb 'agree' takes 'to + infinitive' when consenting to do something.",
@@ -573,12 +428,7 @@ const rawDataset = [
   {
     "id": 29,
     "q": "The young entrepreneur hopes ___ expanding her online retail business across Europe next spring.",
-    "options": [
-      "to start",
-      "starting",
-      "start",
-      "started"
-    ],
+    "options": ["to start", "starting", "start", "started"],
     "correct": 0,
     "h": "Notice the intention/expectation verb 'hopes'.",
     "expl": "The verb 'hope' is followed by 'to + infinitive' to express future desires.",
@@ -589,12 +439,7 @@ const rawDataset = [
   {
     "id": 30,
     "q": "They offer ___ specialized training programs for all newly hired corporate employees.",
-    "options": [
-      "to provide",
-      "providing",
-      "provide",
-      "provided"
-    ],
+    "options": ["to provide", "providing", "provide", "provided"],
     "correct": 0,
     "h": "Identify the willingness verb 'offer'.",
     "expl": "The verb 'offer' is followed by 'to + infinitive' when expressing readiness to do something.",
@@ -605,12 +450,7 @@ const rawDataset = [
   {
     "id": 31,
     "q": "The legal department advised us not ___ the contract without thorough legal review.",
-    "options": [
-      "to sign",
-      "signing",
-      "sign",
-      "signed"
-    ],
+    "options": ["to sign", "signing", "sign", "signed"],
     "correct": 0,
     "h": "Look at the recommendation verb 'advised' followed by an object pronoun and negative marker 'not'.",
     "expl": "The verb structure 'advise someone (not) to do something' strictly takes 'to + infinitive'.",
@@ -621,12 +461,7 @@ const rawDataset = [
   {
     "id": 32,
     "q": "She claims ___ discovered a revolutionary method for desalinating seawater efficiently.",
-    "options": [
-      "to have",
-      "having",
-      "have",
-      "had"
-    ],
+    "options": ["to have", "having", "have", "had"],
     "correct": 0,
     "h": "Identify the assertion verb 'claims'.",
     "expl": "The verb 'claim' takes 'to + infinitive' (or perfect infinitive 'to have done') when asserting a fact.",
@@ -637,12 +472,7 @@ const rawDataset = [
   {
     "id": 33,
     "q": "Please remember ___ off the office lights before you leave the building tonight.",
-    "options": [
-      "to turn",
-      "turning",
-      "turn",
-      "turned"
-    ],
+    "options": ["to turn", "turning", "turn", "turned"],
     "correct": 0,
     "h": "Is this a duty/task to perform in the future, or a memory of a past event?",
     "expl": "'Remember + to + infinitive' means remembering to perform a duty or task. 'Remember + gerund' means recalling a past memory.",
@@ -653,12 +483,7 @@ const rawDataset = [
   {
     "id": 34,
     "q": "I clearly remember ___ my car keys on the kitchen table, but now they are gone.",
-    "options": [
-      "leaving",
-      "to leave",
-      "leave",
-      "left"
-    ],
+    "options": ["leaving", "to leave", "leave", "left"],
     "correct": 0,
     "h": "Is the speaker recalling a past memory or being reminded to do a task?",
     "expl": "'Remember + gerund (-ing)' expresses recalling a past action or memory after it happened.",
@@ -669,12 +494,7 @@ const rawDataset = [
   {
     "id": 35,
     "q": "He stopped ___ a quick phone call to his assistant before entering the conference hall.",
-    "options": [
-      "to make",
-      "making",
-      "make",
-      "made"
-    ],
+    "options": ["to make", "making", "make", "made"],
     "correct": 0,
     "h": "Did he pause another activity in order to make a call, or did he quit making calls altogether?",
     "expl": "'Stop + to + infinitive' means pausing one activity in order to perform another. 'Stop + gerund' means ceasing an action completely.",
@@ -685,12 +505,7 @@ const rawDataset = [
   {
     "id": 36,
     "q": "The doctor advised him to stop ___ sugary energy drinks if he wants to improve his health.",
-    "options": [
-      "drinking",
-      "to drink",
-      "drink",
-      "drank"
-    ],
+    "options": ["drinking", "to drink", "drink", "drank"],
     "correct": 0,
     "h": "Is he quitting the habit completely, or pausing work in order to drink?",
     "expl": "'Stop + gerund (-ing)' means quitting or terminating a habit or continuous action.",
@@ -701,12 +516,7 @@ const rawDataset = [
   {
     "id": 37,
     "q": "We regret ___ you that your application for the senior research fellowship was unsuccessful.",
-    "options": [
-      "to inform",
-      "informing",
-      "inform",
-      "informed"
-    ],
+    "options": ["to inform", "informing", "inform", "informed"],
     "correct": 0,
     "h": "Is this a formal announcement of bad news, or remorse over a past mistake?",
     "expl": "'Regret + to + infinitive' (usually with inform, say, tell) is a formal expression used to deliver bad news. 'Regret + gerund' means feeling remorse for a past action.",
@@ -717,12 +527,7 @@ const rawDataset = [
   {
     "id": 38,
     "q": "He deeply regrets ___ those harsh words to his colleague during yesterday's heated debate.",
-    "options": [
-      "saying",
-      "to say",
-      "say",
-      "said"
-    ],
+    "options": ["saying", "to say", "say", "said"],
     "correct": 0,
     "h": "Does he feel remorse for an action completed in the past?",
     "expl": "'Regret + gerund (-ing)' expresses remorse or sadness about something done in the past.",
@@ -733,12 +538,7 @@ const rawDataset = [
   {
     "id": 39,
     "q": "Don't forget ___ the oven off after you finish baking the cake.",
-    "options": [
-      "to switch",
-      "switching",
-      "switch",
-      "switched"
-    ],
+    "options": ["to switch", "switching", "switch", "switched"],
     "correct": 0,
     "h": "Is this a reminder for a future obligation?",
     "expl": "'Forget + to + infinitive' means failing to perform a necessary task or duty.",
@@ -749,12 +549,7 @@ const rawDataset = [
   {
     "id": 40,
     "q": "I will never forget ___ the famous Nobel laureate speak live in Stockholm.",
-    "options": [
-      "hearing",
-      "to hear",
-      "hear",
-      "heard"
-    ],
+    "options": ["hearing", "to hear", "hear", "heard"],
     "correct": 0,
     "h": "Is this an unforgettable memory from the past?",
     "expl": "'Forget + gerund (-ing)' (usually in negative sentences like 'never forget') refers to an unforgettable past experience.",
@@ -765,12 +560,7 @@ const rawDataset = [
   {
     "id": 41,
     "q": "If the computer freezes, try ___ the system by holding down the power button for ten seconds.",
-    "options": [
-      "restarting",
-      "to restart",
-      "restart",
-      "restarted"
-    ],
+    "options": ["restarting", "to restart", "restart", "restarted"],
     "correct": 0,
     "h": "Is this testing an experimental method to solve a problem, or attempting a difficult physical task?",
     "expl": "'Try + gerund (-ing)' means experimenting with a method to see if it solves a problem. 'Try + to + infinitive' means making an effort to achieve something difficult.",
@@ -781,12 +571,7 @@ const rawDataset = [
   {
     "id": 42,
     "q": "She tried ___ the heavy wooden oak door, but it was locked firmly from the inside.",
-    "options": [
-      "to open",
-      "opening",
-      "open",
-      "opened"
-    ],
+    "options": ["to open", "opening", "open", "opened"],
     "correct": 0,
     "h": "Did she exert physical effort to accomplish a difficult task?",
     "expl": "'Try + to + infinitive' expresses making an effort to accomplish a challenging task.",
@@ -797,12 +582,7 @@ const rawDataset = [
   {
     "id": 43,
     "q": "The project proposal needs ___ by the chief financial officer before we can proceed.",
-    "options": [
-      "approving",
-      "to approve",
-      "approve",
-      "approved"
-    ],
+    "options": ["approving", "to approve", "approve", "approved"],
     "correct": 0,
     "h": "Does the subject ('proposal') require a passive action performed upon it?",
     "expl": "'Need + gerund (-ing)' has a passive meaning equivalent to 'need to be done' ('needs approving' = 'needs to be approved').",
@@ -813,12 +593,7 @@ const rawDataset = [
   {
     "id": 44,
     "q": "I meant ___ you earlier today, but my meeting ran over by two hours.",
-    "options": [
-      "to call",
-      "calling",
-      "call",
-      "called"
-    ],
+    "options": ["to call", "calling", "call", "called"],
     "correct": 0,
     "h": "Did the speaker intend to make a phone call?",
     "expl": "'Mean + to + infinitive' means to intend or plan to do something. ('Mean + gerund' means to involve or signify).",
@@ -829,316 +604,7 @@ const rawDataset = [
   {
     "id": 45,
     "q": "Taking on this international promotion will mean ___ to another country.",
-    "options": [
-      "relocating",
-      "to relocate",
-      "relocate",
-      "relocated"
-    ],
+    "options": ["relocating", "to relocate", "relocate", "relocated"],
     "correct": 0,
     "h": "Does taking the promotion involve or signify a consequence?",
-    "expl": "'Mean + gerund (-ing)' means involving or signifying a logical consequence.",
-    "alert": "💡 L1 Contrastive Analysis: When 'mean' signifies involving or entailing a consequence, English requires the gerund ('mean relocating').",
-    "chunk": "mean relocating",
-    "category": "Meaning Change"
-  }
-];
-
-// Deterministic option distribution offsets
-const SHUFFLE_OFFSETS = [
-  1, 2, 0, 3, 2, 1, 3, 0, 2, 1, 0, 3,
-  2, 0, 1, 3, 1, 2, 0, 3, 2, 0, 1, 3,
-  0, 2, 1, 3, 2, 0, 1, 3, 1, 2, 0, 3,
-  2, 0, 1, 3, 2, 1, 0, 3, 1
-];
-
-// Build distributed dataset
-const dataset = rawDataset.map((item, idx) => {
-  const correctVal = item.options[0];
-  const others = item.options.slice(1);
-  const targetIdx = SHUFFLE_OFFSETS[idx % SHUFFLE_OFFSETS.length] % 4;
-  const newOpts = [];
-  let ptr = 0;
-  for (let i = 0; i < 4; i++) {
-    if (i === targetIdx) newOpts.push(correctVal);
-    else newOpts.push(others[ptr++]);
-  }
-  return {
-    ...item,
-    options: newOpts,
-    correct: targetIdx
-  };
-});
-
-let currentIndex = 0;
-let score = 0;
-let streak = 0;
-let bestStreak = 0;
-let optionSelected = false;
-
-// Web Audio synthesizer for tactile sound
-function playSound(type) {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const now = ctx.currentTime;
-    if (type === 'success') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(587.33, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-      gain.gain.setValueAtTime(0.18, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.35);
-    } else {
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(260, now);
-      osc.frequency.exponentialRampToValueAtTime(190, now + 0.18);
-      gain.gain.setValueAtTime(0.16, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.28);
-    }
-  } catch(e) {}
-}
-
-// British English Text-to-Speech
-let britishVoice = null;
-function findBritishVoice() {
-  if (!('speechSynthesis' in window)) return null;
-  const voices = window.speechSynthesis.getVoices();
-  const ukVoices = voices.filter(v => 
-    v.lang === 'en-GB' || 
-    v.lang === 'en_GB' || 
-    v.lang.toLowerCase().startsWith('en-gb') ||
-    v.name.toLowerCase().includes('united kingdom') ||
-    v.name.toLowerCase().includes('uk english') ||
-    v.name.toLowerCase().includes('british')
-  );
-  if (ukVoices.length > 0) {
-    britishVoice = ukVoices.find(v => v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Daniel') || v.name.includes('Libby')) || ukVoices[0];
-  } else {
-    britishVoice = voices.find(v => v.lang.startsWith('en')) || null;
-  }
-  return britishVoice;
-}
-
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = findBritishVoice;
-  findBritishVoice();
-}
-
-function speakBritish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-GB';
-  utterance.rate = 0.92;
-  const voice = britishVoice || findBritishVoice();
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.speak(utterance);
-}
-
-function getCompletedSentence() {
-  const current = dataset[currentIndex];
-  return current.q.replace('___', current.options[current.correct]);
-}
-
-function loadChallenge() {
-  if (currentIndex >= dataset.length) {
-    showFinalSummary();
-    return;
-  }
-
-  optionSelected = false;
-  const current = dataset[currentIndex];
-
-  document.getElementById('progreso-texto').innerText = `Challenge ${currentIndex + 1} of ${dataset.length}`;
-  document.getElementById('categoria-badge').innerText = current.category || 'Standard';
-  document.getElementById('puntuacion').innerText = `Score: ${score}`;
-  document.getElementById('barra-progreso').style.width = `${((currentIndex + 1) / dataset.length) * 100}%`;
-
-  if (streak > 1) {
-    document.getElementById('streak-badge').innerText = `🔥 ${streak} Streak`;
-    document.getElementById('streak-badge').classList.remove('hidden');
-  } else {
-    document.getElementById('streak-badge').classList.add('hidden');
-  }
-
-  // Render question with prominent blank
-  const parts = current.q.split('___');
-  const qHtml = parts[0] + '<span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs">_____</span>' + (parts[1] || '');
-  document.getElementById('pregunta-texto').innerHTML = qHtml;
-
-  // Reset hint
-  document.getElementById('pista-contenido').innerText = current.h;
-  document.getElementById('pista-texto').classList.add('hidden');
-
-  // Reset feedback
-  document.getElementById('feedback-box').className = 'hidden p-5 rounded-2xl mb-8 border transition-all duration-300';
-  document.getElementById('btn-siguiente').classList.add('hidden');
-
-  // Options
-  const container = document.getElementById('opciones-contenedor');
-  container.innerHTML = '';
-
-  current.options.forEach((opt, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer';
-    btn.innerHTML = `<div class="flex items-center gap-3"><span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0">${idx + 1}</span><span class="text-base">${opt}</span></div><i class="far fa-circle text-slate-300 text-lg"></i>`;
-    btn.onclick = () => checkAnswer(idx);
-    container.appendChild(btn);
-  });
-}
-
-function checkAnswer(selectedIdx) {
-  if (optionSelected) return;
-  optionSelected = true;
-
-  const current = dataset[currentIndex];
-  const isCorrect = (selectedIdx === current.correct);
-
-  if (isCorrect) {
-    score++;
-    streak++;
-    bestStreak = Math.max(bestStreak, streak);
-    playSound('success');
-  } else {
-    streak = 0;
-    playSound('error');
-  }
-
-  // Update blank slot
-  const slot = document.getElementById('blank-slot');
-  if (slot) {
-    slot.innerText = current.options[current.correct];
-    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200';
-  }
-
-  const buttons = document.getElementById('opciones-contenedor').children;
-  Array.from(buttons).forEach((btn, idx) => {
-    btn.disabled = true;
-    if (idx === current.correct) {
-      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs';
-      btn.querySelector('i').className = 'fas fa-check-circle text-emerald-600 text-lg';
-    } else if (idx === selectedIdx && !isCorrect) {
-      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs';
-      btn.querySelector('i').className = 'fas fa-times-circle text-rose-500 text-lg';
-    } else {
-      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-not-allowed';
-    }
-  });
-
-  // Feedback Box
-  const feedbackBox = document.getElementById('feedback-box');
-  const feedbackTitulo = document.getElementById('feedback-titulo');
-  const feedbackExplicacion = document.getElementById('feedback-explicacion');
-  const feedbackAlert = document.getElementById('feedback-alert');
-  const feedbackChunk = document.getElementById('feedback-chunk');
-
-  if (isCorrect) {
-    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
-    feedbackTitulo.innerText = 'Excellent / Correct!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
-  } else {
-    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
-    feedbackTitulo.innerText = 'Take Note / Key Distinction!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
-  }
-
-  feedbackExplicacion.innerHTML = current.expl;
-  feedbackAlert.innerText = current.alert;
-  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
-
-  feedbackBox.classList.remove('hidden');
-  document.getElementById('btn-siguiente').classList.remove('hidden');
-  document.getElementById('puntuacion').innerText = `Score: ${score}`;
-}
-
-document.getElementById('btn-pista').onclick = () => {
-  document.getElementById('pista-texto').classList.toggle('hidden');
-};
-
-document.getElementById('btn-siguiente').onclick = () => {
-  currentIndex++;
-  loadChallenge();
-};
-
-document.getElementById('btn-audio-sentence').onclick = () => {
-  speakBritish(getCompletedSentence());
-};
-
-document.getElementById('btn-audio-feedback').onclick = () => {
-  speakBritish(getCompletedSentence());
-};
-
-window.addEventListener('keydown', (e) => {
-  if (!optionSelected) {
-    if (['1','2','3','4'].includes(e.key)) {
-      checkAnswer(parseInt(e.key) - 1);
-    } else if (e.key.toLowerCase() === 'h') {
-      document.getElementById('pista-texto').classList.toggle('hidden');
-    }
-  } else {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      document.getElementById('btn-siguiente').click();
-    }
-  }
-});
-
-function showFinalSummary() {
-  const main = document.querySelector('main');
-  const percentage = Math.round((score / dataset.length) * 100);
-  const missed = dataset.length - score;
-
-  main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in">
-      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">
-        🏆
-      </div>
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Module Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">
-        You have worked through the Gerunds vs. Infinitives B1/B2 challenges from Teacher Cris Essentials!
-      </p>
-      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
-        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">
-          ${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span>
-        </div>
-        <div class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">
-          ${percentage >= 90 ? '🏆 C2 Mastery Level' : percentage >= 75 ? '🌟 B2 Solid Proficiency' : '📘 B1 Review Recommended'}
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-3 max-w-md mx-auto mb-8 text-center">
-        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
-          <span class="text-xs text-emerald-700 font-semibold block">Correct</span>
-          <span class="text-xl font-bold text-emerald-800">${score}</span>
-        </div>
-        <div class="p-3 rounded-xl bg-rose-50 border border-rose-100">
-          <span class="text-xs text-rose-700 font-semibold block">Missed</span>
-          <span class="text-xl font-bold text-rose-800">${missed}</span>
-        </div>
-        <div class="p-3 rounded-xl bg-amber-50 border border-amber-100">
-          <span class="text-xs text-amber-700 font-semibold block">Best Streak</span>
-          <span class="text-xl font-bold text-amber-800">🔥 ${bestStreak}</span>
-        </div>
-      </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">
-        Restart Module (All 45)
-      </button>
-    </div>
-  `;
-}
-
-loadChallenge();
-</script>
-</body>
-</html>
+    "expl": "'Mean + gerund (-ing)' means involving or

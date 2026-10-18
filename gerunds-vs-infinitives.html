@@ -79,7 +79,8 @@
 
     <!-- Enunciado de la Pregunta -->
     <div class="mb-6 sm:mb-8">
-      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1">
+      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1.5">
+        Cargando reto...
       </div>
     </div>
 
@@ -133,7 +134,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Identify the preposition 'in' directly preceding the blank space.",
     "expl": "In English, all prepositions (in, on, at, about, of, for, with, without) must be followed by the gerund (-ing) form when followed by a verb.",
-    "alert": "💡 L1 Contrastive Analysis: While Spanish speakers naturally use the infinitive after prepositions, English strictly forbids the infinitive after a preposition, requiring the gerund ('interested in learning' instead of 'interested in learn').",
+    "alert": "L1 Contrastive Analysis: While Spanish speakers naturally use the infinitive after prepositions, English strictly forbids the infinitive after a preposition, requiring the gerund.",
     "chunk": "interested in learning",
     "category": "Prepositions + Gerund"
   },
@@ -144,7 +145,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Recognize that 'to' in 'look forward to' acts as a preposition, not part of an infinitive.",
     "expl": "In the phrasal verb 'look forward to', 'to' is a preposition. Therefore, it must be followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish learners frequently make the transfer mistake of using the base infinitive ('look forward to meet'). Always remember that 'to' here is a preposition requiring '-ing'.",
+    "alert": "L1 Contrastive Analysis: Spanish learners frequently make the transfer mistake of using the base infinitive. Always remember that 'to' here is a preposition requiring '-ing'.",
     "chunk": "look forward to meeting",
     "category": "Prepositions + Gerund"
   },
@@ -155,7 +156,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Notice the time preposition 'before' standing right before the action.",
     "expl": "Time prepositions like 'before', 'after', and 'since' require a gerund (-ing) when directly introducing a verb clause without a subject.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use the infinitive after time prepositions ('before to submit'). In English, prepositions like 'before' demand the gerund ('before submitting').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers tend to use the infinitive after time prepositions. In English, prepositions like 'before' demand the gerund.",
     "chunk": "before submitting",
     "category": "Prepositions + Gerund"
   },
@@ -166,7 +167,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Spot the dependent preposition 'for' following the verb 'apologized'.",
     "expl": "The verb 'apologize' pairs with the preposition 'for', which strictly governs the gerund (-ing) form of the following verb.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use the infinitive after 'for' ('apologize for to arrive'). English mandates 'apologize for' + gerund ('apologized for arriving').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers tend to use the infinitive after 'for'. English mandates 'apologize for' + gerund.",
     "chunk": "apologize for arriving",
     "category": "Prepositions + Gerund"
   },
@@ -177,7 +178,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
     "expl": "The verb phrase 'succeed in' requires a gerund (-ing) to describe the accomplished action.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often attempt an infinitive structure after 'in'. English strictly pairs 'succeed in' with '-ing' ('succeeded in finalizing').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers often attempt an infinitive structure after 'in'. English strictly pairs 'succeed in' with '-ing'.",
     "chunk": "succeed in finalizing",
     "category": "Prepositions + Gerund"
   },
@@ -188,7 +189,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Identify the preposition 'after' placed at the head of the sentence clause.",
     "expl": "Prepositions introduced at the start of introductory time clauses take the gerund (-ing) form.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers frequently transfer infinitive structures after 'after' ('after to read'). In English, 'after' as a preposition must be followed by a gerund ('after reading').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers frequently transfer infinitive structures after 'after'. In English, 'after' as a preposition must be followed by a gerund.",
     "chunk": "after reading",
     "category": "Prepositions + Gerund"
   },
@@ -199,7 +200,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Look for the preposition 'without' describing the condition of her departure.",
     "expl": "The preposition 'without' must always be followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often say 'without to say' due to L1 literal translation. English requires 'without' + gerund ('without saying').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers often say 'without to say' due to L1 literal translation. English requires 'without' + gerund.",
     "chunk": "without saying",
     "category": "Prepositions + Gerund"
   },
@@ -210,7 +211,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Find the preposition 'about' following the verb 'talked'.",
     "expl": "Prepositions such as 'about' always take the gerund (-ing) when followed by a verb.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often attempt to place an infinitive after 'about' ('talk about to open'). In English, 'about' requires '-ing' ('talked about opening').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers often attempt to place an infinitive after 'about'. In English, 'about' requires '-ing'.",
     "chunk": "talk about opening",
     "category": "Prepositions + Gerund"
   },
@@ -221,7 +222,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Identify 'for' as the preposition indicating the reason for praise.",
     "expl": "The pattern 'praise someone for' requires the gerund (-ing) for the action being commended.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use an infinitive after 'for' when giving reasons. English strictly uses 'for' + gerund ('for achieving').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers tend to use an infinitive after 'for' when giving reasons. English strictly uses 'for' + gerund.",
     "chunk": "praise for achieving",
     "category": "Prepositions + Gerund"
   },
@@ -232,7 +233,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Notice the prepositional phrase 'instead of' at the start of the contrast clause.",
     "expl": "'Instead of' is a compound preposition and must be followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers naturally use infinitives after 'of'. English requires 'instead of' + gerund ('instead of buying').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers naturally use infinitives after 'of'. English requires 'instead of' + gerund.",
     "chunk": "instead of buying",
     "category": "Prepositions + Gerund"
   },
@@ -243,7 +244,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Spot the adjective-preposition pair 'tired of'.",
     "expl": "The adjective structure 'tired of' takes a gerund (-ing) to express weariness with a repeated action.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use an infinitive after 'tired of' ('tired of to hear'). English strictly mandates 'tired of' + gerund ('tired of hearing').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers tend to use an infinitive after 'tired of'. English strictly mandates 'tired of' + gerund.",
     "chunk": "tired of hearing",
     "category": "Prepositions + Gerund"
   },
@@ -254,7 +255,7 @@ const rawDataset = [
     "correct": 0,
     "h": "Focus on the dependent preposition 'on' following 'insists'.",
     "expl": "The verb 'insist' pairs with the preposition 'on', which demands a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers naturally lean toward infinitive forms after prepositions ('insist on to sign'). In English, 'insist on' requires '-ing' ('insists on signing').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers naturally lean toward infinitive forms after prepositions. In English, 'insist on' requires '-ing'.",
     "chunk": "insist on signing",
     "category": "Prepositions + Gerund"
   },
@@ -265,10 +266,87 @@ const rawDataset = [
     "correct": 0,
     "h": "Recall which verb form follows polite requests with 'mind'.",
     "expl": "The verb 'mind' (in polite requests or questions) is strictly followed by the gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often try to use 'to + infinitive' ('mind to open'). English grammar strictly requires 'mind' + gerund ('mind opening').",
+    "alert": "L1 Contrastive Analysis: Spanish speakers often try to use 'to + infinitive' after mind. English grammar strictly requires 'mind' + gerund.",
     "chunk": "mind opening",
     "category": "Verbs + Gerund"
   },
   {
     "id": 14,
-    "q":
+    "q": "The team decided to avoid ___ risky financial investments during the crisis.",
+    "options": ["making", "to make", "make", "made"],
+    "correct": 0,
+    "h": "Identify the verb 'avoid' which governs the following verb form.",
+    "expl": "The verb 'avoid' must always be followed by a gerund (-ing), never an infinitive.",
+    "alert": "L1 Contrastive Analysis: Spanish uses the infinitive after 'avoid'. In English, 'avoid' strictly takes the gerund.",
+    "chunk": "avoid making",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 15,
+    "q": "She strongly suggested ___ a professional translator for the legal proceedings.",
+    "options": ["hiring", "to hire", "hire", "hired"],
+    "correct": 0,
+    "h": "Look at the verb 'suggest' directly followed by an action verb.",
+    "expl": "When 'suggest' is directly followed by a verb (without a 'that' clause or personal pronoun), it takes a gerund (-ing).",
+    "alert": "L1 Contrastive Analysis: Spanish speakers often incorrectly say 'suggest to hire'. In English, 'suggest' never takes a direct 'to + infinitive'.",
+    "chunk": "suggest hiring",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 16,
+    "q": "The suspect admitted ___ the confidential files from the corporate network.",
+    "options": ["downloading", "to download", "download", "downloaded"],
+    "correct": 0,
+    "h": "Identify the verb 'admitted' followed by an acknowledged action.",
+    "expl": "The verb 'admit' takes a gerund (-ing) when acknowledging a past action.",
+    "alert": "L1 Contrastive Analysis: Spanish uses the infinitive after 'admit'. English requires 'admit' + gerund.",
+    "chunk": "admit downloading",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 17,
+    "q": "I really enjoy ___ in the park early in the morning before work.",
+    "options": ["running", "to run", "run", "ran"],
+    "correct": 0,
+    "h": "Focus on the preference verb 'enjoy'.",
+    "expl": "The verb 'enjoy' is always followed by a gerund (-ing).",
+    "alert": "L1 Contrastive Analysis: Spanish speakers often use prepositions like 'enjoy of' + infinitive. English requires 'enjoy' + gerund without any preposition.",
+    "chunk": "enjoy running",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 18,
+    "q": "The company postponed ___ the new smartphone model due to technical glitches.",
+    "options": ["launching", "to launch", "launch", "launched"],
+    "correct": 0,
+    "h": "Identify the delay verb 'postponed'.",
+    "expl": "The verb 'postpone' (like 'put off') is strictly followed by a gerund (-ing).",
+    "alert": "L1 Contrastive Analysis: Spanish uses the infinitive after verbs of delaying. English requires 'postpone' + gerund.",
+    "chunk": "postpone launching",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 19,
+    "q": "He denied ___ any involvement in the financial embezzlement scheme.",
+    "options": ["having", "to have", "have", "had"],
+    "correct": 0,
+    "h": "Look at the verb 'denied' governing the clause.",
+    "expl": "The verb 'deny' takes a gerund (-ing).",
+    "alert": "L1 Contrastive Analysis: Spanish uses the infinitive after 'deny'. In English, 'deny' takes the gerund.",
+    "chunk": "deny having",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 20,
+    "q": "She cannot help ___ nervous whenever she has to deliver a public presentation.",
+    "options": ["feeling", "to feel", "feel", "felt"],
+    "correct": 0,
+    "h": "Spot the fixed idiomatic expression 'cannot help'.",
+    "expl": "The idiomatic expression 'cannot help' is strictly followed by a gerund (-ing).",
+    "alert": "L1 Contrastive Analysis: Spanish uses the infinitive in similar expressions. English uses 'cannot help' + gerund.",
+    "chunk": "cannot help feeling",
+    "category": "Verbs + Gerund"
+  },
+  {
+    "id": 21,
+    "q": "You should consider

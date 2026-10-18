@@ -15,32 +15,28 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
 
-<!-- Header / Barra Superior con TTS y FX -->
-<header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
-  <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
-    <a href="index.html" class="text-indigo-600 font-bold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
-      <i class="fas fa-arrow-left"></i> Volver a teachercris.online
-    </a>
-
-    <div class="flex items-center gap-2 sm:gap-3">
-      <!-- Botón Text-to-Speech (British English) -->
-      <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
-        <i class="fas fa-volume-up"></i> <span>🇬🇧 Listen (UK)</span>
-      </button>
-      <button id="btn-audio-toggle" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer">
-        <i class="fas fa-headphones"></i> <span id="audio-status-label">FX ON</span>
-      </button>
-      <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reiniciar">
-        <i class="fas fa-redo-alt"></i>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- Main Container -->
+<!-- Main App Container (Todo unificado dentro de la tarjeta blanca) -->
 <main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
   <div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200">
     
+    <!-- Header interno unificado: Volver y Controles de Audio/FX -->
+    <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+      <a href="index.html" class="text-indigo-600 font-semibold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
+        ← Volver a teachercris.online
+      </a>
+      <div class="flex items-center gap-2">
+        <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
+          <i class="fas fa-volume-up"></i> <span>Listen (UK)</span>
+        </button>
+        <button id="btn-audio-toggle" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fas fa-headphones"></i> <span id="audio-status-label">FX ON</span>
+        </button>
+        <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reiniciar">
+          <i class="fas fa-redo-alt"></i>
+        </button>
+      </div>
+    </div>
+
     <!-- Pestañas Quiz A / Quiz B -->
     <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
       <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer">
@@ -170,225 +166,4 @@ const rawDataset = [
     "correct": 0,
     "h": "Spot the dependent preposition 'for' following the verb 'apologized'.",
     "expl": "The verb 'apologize' pairs with the preposition 'for', which strictly governs the gerund (-ing) form of the following verb.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use the infinitive after 'for' ('apologize for to arrive'). English mandates 'apologize for' + gerund ('apologized for arriving').",
-    "chunk": "apologize for arriving",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 5,
-    "q": "The corporate director succeeded in ___ the merger agreement despite tough negotiations.",
-    "options": ["finalizing", "to finalize", "finalize", "finalized"],
-    "correct": 0,
-    "h": "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
-    "expl": "The verb phrase 'succeed in' requires a gerund (-ing) to describe the accomplished action.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often attempt an infinitive structure after 'in'. English strictly pairs 'succeed in' with '-ing' ('succeeded in finalizing').",
-    "chunk": "succeed in finalizing",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 6,
-    "q": "After ___ the detailed report, the auditor requested additional bank statements.",
-    "options": ["reading", "to read", "read", "have read"],
-    "correct": 0,
-    "h": "Identify the preposition 'after' placed at the head of the sentence clause.",
-    "expl": "Prepositions introduced at the start of introductory time clauses take the gerund (-ing) form.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers frequently transfer infinitive structures after 'after' ('after to read'). In English, 'after' as a preposition must be followed by a gerund ('after reading').",
-    "chunk": "after reading",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 7,
-    "q": "She left the office without ___ goodbye to her colleagues.",
-    "options": ["saying", "to say", "say", "said"],
-    "correct": 0,
-    "h": "Look for the preposition 'without' describing the condition of her departure.",
-    "expl": "The preposition 'without' must always be followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often say 'without to say' due to L1 literal translation. English requires 'without' + gerund ('without saying').",
-    "chunk": "without saying",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 8,
-    "q": "They talked about ___ a new regional branch in South America next year.",
-    "options": ["opening", "to open", "open", "opened"],
-    "correct": 0,
-    "h": "Find the preposition 'about' following the verb 'talked'.",
-    "expl": "Prepositions such as 'about' always take the gerund (-ing) when followed by a verb.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often attempt to place an infinitive after 'about' ('talk about to open'). In English, 'about' requires '-ing' ('talked about opening').",
-    "chunk": "talk about opening",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 9,
-    "q": "The manager praised the team for ___ such outstanding results this quarter.",
-    "options": ["achieving", "to achieve", "achieve", "achieved"],
-    "correct": 0,
-    "h": "Identify 'for' as the preposition indicating the reason for praise.",
-    "expl": "The pattern 'praise someone for' requires the gerund (-ing) for the action being commended.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use an infinitive after 'for' when giving reasons. English strictly uses 'for' + gerund ('for achieving').",
-    "chunk": "praise for achieving",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 10,
-    "q": "Instead of ___ a new car, he decided to rent one for his holiday road trip.",
-    "options": ["buying", "to buy", "buy", "bought"],
-    "correct": 0,
-    "h": "Notice the prepositional phrase 'instead of' at the start of the contrast clause.",
-    "expl": "'Instead of' is a compound preposition and must be followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers naturally use infinitives after 'of'. English requires 'instead of' + gerund ('instead of buying').",
-    "chunk": "instead of buying",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 11,
-    "q": "Dr. Aris is tired of ___ the same administrative excuses every single week.",
-    "options": ["hearing", "to hear", "hear", "heard"],
-    "correct": 0,
-    "h": "Spot the adjective-preposition pair 'tired of'.",
-    "expl": "The adjective structure 'tired of' takes a gerund (-ing) to express weariness with a repeated action.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use an infinitive after 'tired of' ('tired of to hear'). English strictly mandates 'tired of' + gerund ('tired of hearing').",
-    "chunk": "tired of hearing",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 12,
-    "q": "He insists on ___ every single contract document personally.",
-    "options": ["signing", "to sign", "sign", "signed"],
-    "correct": 0,
-    "h": "Focus on the dependent preposition 'on' following 'insists'.",
-    "expl": "The verb 'insist' pairs with the preposition 'on', which demands a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers naturally lean toward infinitive forms after prepositions ('insist on to sign'). In English, 'insist on' requires '-ing' ('insists on signing').",
-    "chunk": "insist on signing",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "id": 13,
-    "q": "Do you mind ___ the window? It is getting quite warm in this room.",
-    "options": ["opening", "to open", "open", "opened"],
-    "correct": 0,
-    "h": "Recall which verb form follows polite requests with 'mind'.",
-    "expl": "The verb 'mind' (in polite requests or questions) is strictly followed by the gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often try to use 'to + infinitive' ('mind to open'). English grammar strictly requires 'mind' + gerund ('mind opening').",
-    "chunk": "mind opening",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 14,
-    "q": "The team decided to avoid ___ risky financial investments during the crisis.",
-    "options": ["making", "to make", "make", "made"],
-    "correct": 0,
-    "h": "Identify the verb 'avoid' which governs the following verb form.",
-    "expl": "The verb 'avoid' must always be followed by a gerund (-ing), never an infinitive.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive after 'avoid'. In English, 'avoid' strictly takes the gerund ('avoid making').",
-    "chunk": "avoid making",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 15,
-    "q": "She strongly suggested ___ a professional translator for the legal proceedings.",
-    "options": ["hiring", "to hire", "hire", "hired"],
-    "correct": 0,
-    "h": "Look at the verb 'suggest' directly followed by an action verb.",
-    "expl": "When 'suggest' is directly followed by a verb (without a 'that' clause or personal pronoun), it takes a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often incorrectly say 'suggest to hire'. In English, 'suggest' never takes a direct 'to + infinitive' ('suggested hiring').",
-    "chunk": "suggest hiring",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 16,
-    "q": "The suspect admitted ___ the confidential files from the corporate network.",
-    "options": ["downloading", "to download", "download", "downloaded"],
-    "correct": 0,
-    "h": "Identify the verb 'admitted' followed by an acknowledged action.",
-    "expl": "The verb 'admit' takes a gerund (-ing) when acknowledging a past action.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive after 'admit'. English requires 'admit' + gerund ('admitted downloading').",
-    "chunk": "admit downloading",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 17,
-    "q": "I really enjoy ___ in the park early in the morning before work.",
-    "options": ["running", "to run", "run", "ran"],
-    "correct": 0,
-    "h": "Focus on the preference verb 'enjoy'.",
-    "expl": "The verb 'enjoy' is always followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often use prepositions like 'enjoy of' + infinitive. English requires 'enjoy' + gerund without any preposition ('enjoy running').",
-    "chunk": "enjoy running",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 18,
-    "q": "The company postponed ___ the new smartphone model due to technical glitches.",
-    "options": ["launching", "to launch", "launch", "launched"],
-    "correct": 0,
-    "h": "Identify the delay verb 'postponed'.",
-    "expl": "The verb 'postpone' (like 'put off') is strictly followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive after verbs of delaying. English requires 'postpone' + gerund ('postponed launching').",
-    "chunk": "postpone launching",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 19,
-    "q": "He denied ___ any involvement in the financial embezzlement scheme.",
-    "options": ["having", "to have", "have", "had"],
-    "correct": 0,
-    "h": "Look at the verb 'denied' governing the clause.",
-    "expl": "The verb 'deny' takes a gerund (-ing) [or perfect gerund 'having had'].",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive after 'deny'. In English, 'deny' takes the gerund ('denied having').",
-    "chunk": "deny having",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 20,
-    "q": "She cannot help ___ nervous whenever she has to deliver a public presentation.",
-    "options": ["feeling", "to feel", "feel", "felt"],
-    "correct": 0,
-    "h": "Spot the fixed idiomatic expression 'cannot help'.",
-    "expl": "The idiomatic expression 'cannot help' (meaning unable to prevent an emotion/action) is strictly followed by a gerund (-ing).",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive in similar expressions ('cannot avoid to feel'). English uses 'cannot help' + gerund ('cannot help feeling').",
-    "chunk": "cannot help feeling",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 21,
-    "q": "You should consider ___ for the senior management role before the deadline.",
-    "options": ["applying", "to apply", "apply", "applied"],
-    "correct": 0,
-    "h": "Identify the deliberation verb 'consider'.",
-    "expl": "The verb 'consider' takes a gerund (-ing) when contemplating an action.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive after 'consider'. English strictly mandates 'consider' + gerund ('consider applying').",
-    "chunk": "consider applying",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 22,
-    "q": "The chief executive finished ___ the annual speech just before midnight.",
-    "options": ["writing", "to write", "write", "wrote"],
-    "correct": 0,
-    "h": "Look at the completion verb 'finished'.",
-    "expl": "The verb 'finish' is followed by a gerund (-ing) to indicate the end of an activity.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses 'finish of' + infinitive. English uses 'finish' + gerund without prepositions ('finished writing').",
-    "chunk": "finish writing",
-    "category": "Verbs + Gerund"
-  },
-  {
-    "id": 23,
-    "q": "The board of directors decided ___ the proposal for the new factory.",
-    "options": ["to accept", "accepting", "accept", "accepted"],
-    "correct": 0,
-    "h": "Identify the decision verb 'decided'.",
-    "expl": "The verb 'decide' is followed by 'to + infinitive' when expressing a choice to do something.",
-    "alert": "💡 L1 Contrastive Analysis: While Spanish uses a simple infinitive, English strictly requires the infinitive marker 'to' ('decided to accept').",
-    "chunk": "decide to accept",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "id": 24,
-    "q": "She promised ___ the confidential documents as soon as she arrived at her desk.",
-    "options": ["to send", "sending", "send", "sent"],
-    "correct": 0,
-    "h": "Spot the commitment verb 'promised'.",
-    "expl": "The verb 'promise' requires 'to + infinitive' when offering a commitment.",
-    "alert": "💡 L1 Contrastive Analysis: Both languages use infinitives here, but English requires the marker 'to' before the verb ('promised to send').",
-    "chunk
+    "alert": "💡 L1 Contrastive Analysis: Spanish speakers tend to use the infinitive after 'for' ('apologize for to arrive'). English mandates '

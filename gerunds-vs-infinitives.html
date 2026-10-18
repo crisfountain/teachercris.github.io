@@ -125,7 +125,6 @@
 </footer>
 
 <script>
-// Base de datos completa de 45 preguntas dividida en Quiz A (22) y Quiz B (23)
 const quizA = [
   {
     q: "She is extremely interested in ___ more about international sustainable architecture.",
@@ -149,7 +148,7 @@ const quizA = [
   },
   {
     q: "Before ___ the final project proposal, make sure to proofread all statistical figures.",
-    options": ["submitting", "to submit", "submit", "submitted"],
+    options: ["submitting", "to submit", "submit", "submitted"],
     correct: 0,
     h: "Notice the time preposition 'before' standing right before the action.",
     expl: "Time prepositions like 'before' and 'after' require a gerund (-ing) when directly introducing a verb clause.",
@@ -169,7 +168,7 @@ const quizA = [
   },
   {
     q: "The corporate director succeeded in ___ the merger agreement despite tough negotiations.",
-    options": ["finalizing", "to finalize", "finalize", "finalized"],
+    options: ["finalizing", "to finalize", "finalize", "finalized"],
     correct: 0,
     h: "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
     expl: "The verb phrase 'succeed in' requires a gerund (-ing) to describe the accomplished action.",
@@ -179,11 +178,11 @@ const quizA = [
   },
   {
     q: "After ___ the detailed report, the auditor requested additional bank statements.",
-    options": ["reading", "to read", "read", "have read"],
+    options: ["reading", "to read", "read", "have read"],
     correct: 0,
     h: "Identify the preposition 'after' placed at the head of the sentence clause.",
     expl: "Prepositions introduced at the start of introductory time clauses take the gerund (-ing) form.",
-    "alert": "L1 Contrastive Analysis: In English, 'after' as a preposition must be followed by a gerund ('after reading').",
+    alert: "L1 Contrastive Analysis: In English, 'after' as a preposition must be followed by a gerund ('after reading').",
     chunk: "after reading",
     category: "Prepositions + Gerund"
   },
@@ -195,36 +194,36 @@ const quizA = [
     expl: "The preposition 'without' must always be followed by a gerund (-ing).",
     alert: "L1 Contrastive Analysis: English requires 'without' + gerund ('without saying').",
     chunk: "without saying",
-    category: "Prepositions + Gerund"
+    category": "Prepositions + Gerund"
   },
   {
     q: "They talked about ___ a new regional branch in South America next year.",
-    options": ["opening", "to open", "open", "opened"],
+    options: ["opening", "to open", "open", "opened"],
     correct: 0,
     h: "Find the preposition 'about' following the verb 'talked'.",
     expl: "Prepositions such as 'about' always take the gerund (-ing) when followed by a verb.",
     alert: "L1 Contrastive Analysis: 'About' requires '-ing' ('talked about opening').",
-    chunk: "talk about opening",
-    category: "Prepositions + Gerund"
+    chunk": "talk about opening",
+    category": "Prepositions + Gerund"
   },
   {
     q: "The manager praised the team for ___ such outstanding results this quarter.",
-    options": ["achieving", "to achieve", "achieve", "achieved"],
+    options: ["achieving", "to achieve", "achieve", "achieved"],
     correct: 0,
     h: "Identify 'for' as the preposition indicating the reason for praise.",
     expl: "The pattern 'praise someone for' requires the gerund (-ing) for the action being commended.",
     alert: "L1 Contrastive Analysis: English strictly uses 'for' + gerund ('for achieving').",
-    chunk: "praise for achieving",
+    chunk": "praise for achieving",
     category": "Prepositions + Gerund"
   },
   {
     q: "Instead of ___ a new car, he decided to rent one for his holiday road trip.",
-    options": ["buying", "to buy", "buy", "bought"],
+    options: ["buying", "to buy", "buy", "bought"],
     correct: 0,
     h: "Notice the prepositional phrase 'instead of' at the start of the contrast clause.",
     expl: "'Instead of' is a compound preposition and must be followed by a gerund (-ing).",
     alert: "L1 Contrastive Analysis: English requires 'instead of' + gerund ('instead of buying').",
-    chunk: "instead of buying",
+    chunk": "instead of buying",
     category": "Prepositions + Gerund"
   },
   {
@@ -234,7 +233,7 @@ const quizA = [
     h: "Spot the adjective-preposition pair 'tired of'.",
     expl: "The adjective structure 'tired of' takes a gerund (-ing) to express weariness with a repeated action.",
     alert: "L1 Contrastive Analysis: English strictly mandates 'tired of' + gerund ('tired of hearing').",
-    chunk: "tired of hearing",
+    chunk": "tired of hearing",
     category": "Prepositions + Gerund"
   },
   {
@@ -253,4 +252,164 @@ const quizA = [
     correct: 0,
     h: "Recall which verb form follows polite requests with 'mind'.",
     expl: "The verb 'mind' (in polite requests) is strictly followed by the gerund (-ing).",
-    alert: "L1 Contrastive Analysis: English grammar strictly requires
+    alert: "L1 Contrastive Analysis: English grammar strictly requires 'mind' + gerund ('mind opening').",
+    chunk": "mind opening",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "The team decided to avoid ___ risky financial investments during the crisis.",
+    options": ["making", "to make", "make", "made"],
+    correct: 0,
+    h: "Identify the verb 'avoid' which governs the following verb form.",
+    expl: "The verb 'avoid' must always be followed by a gerund (-ing), never an infinitive.",
+    alert: "L1 Contrastive Analysis: In English, 'avoid' strictly takes the gerund ('avoid making').",
+    chunk": "avoid making",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "She strongly suggested ___ a professional translator for the legal proceedings.",
+    options": ["hiring", "to hire", "hire", "hired"],
+    correct: 0,
+    h: "Look at the verb 'suggest' directly followed by an action verb.",
+    expl: "When 'suggest' is directly followed by a verb, it takes a gerund (-ing).",
+    alert: "L1 Contrastive Analysis: In English, 'suggest' never takes a direct 'to + infinitive' ('suggested hiring').",
+    chunk": "suggest hiring",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "The suspect admitted ___ the confidential files from the corporate network.",
+    options": ["downloading", "to download", "download", "downloaded"],
+    correct: 0,
+    h: "Identify the verb 'admitted' followed by an acknowledged action.",
+    expl: "The verb 'admit' takes a gerund (-ing) when acknowledging a past action.",
+    alert: "L1 Contrastive Analysis: English requires 'admit' + gerund ('admitted downloading').",
+    chunk": "admit downloading",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "I really enjoy ___ in the park early in the morning before work.",
+    options": ["running", "to run", "run", "ran"],
+    correct: 0,
+    h: "Focus on the preference verb 'enjoy'.",
+    expl: "The verb 'enjoy' is always followed by a gerund (-ing).",
+    alert: "L1 Contrastive Analysis: English requires 'enjoy' + gerund without any preposition ('enjoy running').",
+    chunk": "enjoy running",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "The company postponed ___ the new smartphone model due to technical glitches.",
+    options": ["launching", "to launch", "launch", "launched"],
+    correct: 0,
+    h: "Identify the delay verb 'postponed'.",
+    expl: "The verb 'postpone' (like 'put off') is strictly followed by a gerund (-ing).",
+    alert: "L1 Contrastive Analysis: English requires 'postpone' + gerund ('postponed launching').",
+    chunk": "postpone launching",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "He denied ___ any involvement in the financial embezzlement scheme.",
+    options": ["having", "to have", "have", "had"],
+    correct: 0,
+    h: "Look at the verb 'denied' governing the clause.",
+    expl: "The verb 'deny' takes a gerund (-ing).",
+    alert: "L1 Contrastive Analysis: In English, 'deny' takes the gerund ('denied having').",
+    chunk": "deny having",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "She cannot help ___ nervous whenever she has to deliver a public presentation.",
+    options": ["feeling", "to feel", "feel", "felt"],
+    correct: 0,
+    h: "Spot the fixed idiomatic expression 'cannot help'.",
+    expl: "The idiomatic expression 'cannot help' is strictly followed by a gerund (-ing).",
+    alert: "L1 Contrastive Analysis: English uses 'cannot help' + gerund ('cannot help feeling').",
+    chunk": "cannot help feeling",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "You should consider ___ for the senior management role before the deadline.",
+    options": ["applying", "to apply", "apply", "applied"],
+    correct: 0,
+    h: "Identify the deliberation verb 'consider'.",
+    expl: "The verb 'consider' takes a gerund (-ing) when contemplating an action.",
+    alert: "L1 Contrastive Analysis: English strictly mandates 'consider' + gerund ('consider applying').",
+    chunk": "consider applying",
+    category": "Verbs + Gerund"
+  },
+  {
+    q: "The chief executive finished ___ the annual speech just before midnight.",
+    options": ["writing", "to write", "write", "wrote"],
+    correct: 0,
+    h: "Look at the completion verb 'finished'.",
+    expl: "The verb 'finish' is followed by a gerund (-ing) to indicate the end of an activity.",
+    alert: "L1 Contrastive Analysis: English uses 'finish' + gerund without prepositions ('finished writing').",
+    chunk": "finish writing",
+    category": "Verbs + Gerund"
+  }
+];
+
+const quizB = [
+  {
+    q: "The board of directors decided ___ the proposal for the new factory.",
+    options": ["to accept", "accepting", "accept", "accepted"],
+    correct: 0,
+    h: "Identify the decision verb 'decided'.",
+    expl: "The verb 'decide' is followed by 'to + infinitive' when expressing a choice to do something.",
+    alert: "L1 Contrastive Analysis: English strictly requires the infinitive marker 'to' ('decided to accept').",
+    chunk": "decide to accept",
+    category": "Verbs + Infinitive"
+  },
+  {
+    q: "She promised ___ the confidential documents as soon as she arrived at her desk.",
+    options": ["to send", "sending", "send", "sent"],
+    correct: 0,
+    h: "Spot the commitment verb 'promised'.",
+    expl: "The verb 'promise' requires 'to + infinitive' when offering a commitment.",
+    alert: "L1 Contrastive Analysis: English requires the marker 'to' before the verb ('promised to send').",
+    chunk": "promise to send",
+    category": "Verbs + Infinitive"
+  },
+  {
+    q: "We cannot afford ___ such an expensive software license at this point in time.",
+    options": ["to purchase", "purchasing", "purchase", "purchased"],
+    correct: 0,
+    h: "Focus on the financial verb 'afford'.",
+    expl: "The verb 'afford' (usually with can/cannot) is strictly followed by 'to + infinitive'.",
+    alert: "L1 Contrastive Analysis: English requires 'afford' + 'to + infinitive' ('afford to purchase').",
+    chunk": "afford to purchase",
+    category": "Verbs + Infinitive"
+  },
+  {
+    q: "The candidate refused ___ the controversial questions raised during the interview.",
+    options": ["to answer", "answering", "answer", "answered"],
+    correct: 0,
+    h: "Identify the rejection verb 'refused'.",
+    expl: "The verb 'refuse' takes 'to + infinitive' to express unwillingness to perform an action.",
+    alert: "L1 Contrastive Analysis: English uses 'refuse' + 'to + infinitive' ('refused to answer').",
+    chunk": "refuse to answer",
+    category": "Verbs + Infinitive"
+  },
+  {
+    q: "The IT team managed ___ the server network before business hours resumed.",
+    options": ["to restore", "restoring", "restore", "restored"],
+    correct: 0,
+    h: "Look at the achievement verb 'managed'.",
+    expl: "The verb 'manage' (meaning to succeed in doing something difficult) requires 'to + infinitive'.",
+    alert: "L1 Contrastive Analysis: English mandates 'manage' + 'to + infinitive' ('managed to restore').",
+    chunk": "manage to restore",
+    category": "Verbs + Infinitive"
+  },
+  {
+    q: "He agreed ___ the junior developers with their weekly coding assignments.",
+    options": ["to assist", "assisting", "assist", "assisted"],
+    correct: 0,
+    h: "Identify the agreement verb 'agreed'.",
+    expl: "The verb 'agree' takes 'to + infinitive' when consenting to do something.",
+    alert: "L1 Contrastive Analysis: English strictly uses 'agree' + 'to + infinitive' ('agreed to assist').",
+    chunk": "agree to assist",
+    category": "Verbs + Infinitive"
+  },
+  {
+    q: "The young entrepreneur hopes ___ expanding her online retail business across Europe next spring.",
+    options": ["to start", "starting", "start", "started"],
+    correct: 0,

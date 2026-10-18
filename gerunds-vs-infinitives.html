@@ -19,7 +19,7 @@
 <main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
   <div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200">
     
-    <!-- Header interno unificado: Volver y Controles de Audio/FX -->
+    <!-- Unified Internal Header -->
     <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
       <a href="index.html" class="text-indigo-600 font-semibold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
         ← Volver a teachercris.online
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <!-- Pestañas Quiz A / Quiz B -->
+    <!-- Quiz A / Quiz B Tabs -->
     <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
       <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer">
         Quiz A (Tasks 1-22)
@@ -47,13 +47,13 @@
       </button>
     </div>
 
-    <!-- Título Principal -->
+    <!-- Title -->
     <div class="text-center mb-6">
       <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
-      <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">Gerunds vs Infinitives Master Practice (Quiz A)</p>
+      <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ A)</p>
     </div>
 
-    <!-- Progreso y Estadísticas -->
+    <!-- Progress Stats -->
     <div class="flex justify-between items-center mb-4 text-sm text-slate-500">
       <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
       <div class="flex items-center gap-3">
@@ -67,7 +67,7 @@
       <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
     </div>
 
-    <!-- Botón de Categoría / Pista -->
+    <!-- Hint Button -->
     <div class="mb-6 text-center">
       <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
         PREPOSITIONS + GERUND (CLICK FOR HINT)
@@ -77,17 +77,16 @@
       </div>
     </div>
 
-    <!-- Enunciado de la Pregunta -->
+    <!-- Question Container -->
     <div class="mb-6 sm:mb-8">
       <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1.5">
-        Cargando reto...
       </div>
     </div>
 
-    <!-- Opciones de Respuesta -->
+    <!-- Options Container -->
     <div id="opciones-contenedor" class="space-y-3 mb-6"></div>
 
-    <!-- Botón Verificar -->
+    <!-- Verify Button -->
     <button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
       Verify (Enter)
     </button>
@@ -100,7 +99,7 @@
       <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
     </div>
 
-    <!-- Botonera Inferior -->
+    <!-- Navigation Footer -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
       <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
         <i class="fas fa-chevron-left"></i> Previous
@@ -131,433 +130,4 @@ const rawDataset = [
     "q": "She is extremely interested in ___ more about international sustainable architecture.",
     "options": ["learning", "to learn", "learn", "learned"],
     "correct": 0,
-    "h": "Identify the preposition 'in' directly preceding the blank space.",
-    "expl": "All prepositions must be followed by the gerund (-ing) form when followed by a verb.",
-    "alert": "L1 Contrastive Analysis: English strictly forbids the infinitive after a preposition, requiring the gerund.",
-    "chunk": "interested in learning",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "We are all really looking forward to ___ you at the conference next week.",
-    "options": ["meeting", "meet", "to meet", "met"],
-    "correct": 0,
-    "h": "Recognize that 'to' in 'look forward to' acts as a preposition.",
-    "expl": "In the phrasal verb 'look forward to', 'to' is a preposition requiring a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: Always remember that 'to' here is a preposition requiring '-ing'.",
-    "chunk": "look forward to meeting",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "Before ___ the final project proposal, make sure to proofread all figures.",
-    "options": ["submitting", "to submit", "submit", "submitted"],
-    "correct": 0,
-    "h": "Notice the time preposition 'before' standing right before the action.",
-    "expl": "Time prepositions like 'before' and 'after' require a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: Prepositions like 'before' demand the gerund.",
-    "chunk": "before submitting",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "He apologized for ___ late to the executive board meeting.",
-    "options": ["arriving", "to arrive", "arrive", "arrived"],
-    "correct": 0,
-    "h": "Spot the dependent preposition 'for' following the verb 'apologized'.",
-    "expl": "The verb 'apologize' pairs with 'for', governing the gerund (-ing) form.",
-    "alert": "L1 Contrastive Analysis: English mandates 'apologize for' + gerund.",
-    "chunk": "apologize for arriving",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "The corporate director succeeded in ___ the merger agreement.",
-    "options": ["finalizing", "to finalize", "finalize", "finalized"],
-    "correct": 0,
-    "h": "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
-    "expl": "The verb phrase 'succeed in' requires a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English strictly pairs 'succeed in' with '-ing'.",
-    "chunk": "succeed in finalizing",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "After ___ the detailed report, the auditor requested additional statements.",
-    "options": ["reading", "to read", "read", "have read"],
-    "correct": 0,
-    "h": "Identify the preposition 'after' placed at the head of the sentence.",
-    "expl": "Introductory time prepositions take the gerund (-ing) form.",
-    "alert": "L1 Contrastive Analysis: 'After' as a preposition must be followed by a gerund.",
-    "chunk": "after reading",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "She left the office without ___ goodbye to her colleagues.",
-    "options": ["saying", "to say", "say", "said"],
-    "correct": 0,
-    "h": "Look for the preposition 'without' describing her departure.",
-    "expl": "The preposition 'without' must always be followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English requires 'without' + gerund.",
-    "chunk": "without saying",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "They talked about ___ a new regional branch next year.",
-    "options": ["opening", "to open", "open", "opened"],
-    "correct": 0,
-    "h": "Find the preposition 'about' following the verb 'talked'.",
-    "expl": "Prepositions such as 'about' always take the gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: 'About' requires '-ing'.",
-    "chunk": "talk about opening",
-    "category": "Prepositions + Gerund"
-  },
-  {
-    "q": "The board of directors decided ___ the proposal for the new factory.",
-    "options": ["to accept", "accepting", "accept", "accepted"],
-    "correct": 0,
-    "h": "Identify the decision verb 'decided'.",
-    "expl": "The verb 'decide' is followed by 'to + infinitive'.",
-    "alert": "L1 Contrastive Analysis: English strictly requires the infinitive marker 'to'.",
-    "chunk": "decide to accept",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "q": "She promised ___ the confidential documents immediately.",
-    "options": ["to send", "sending", "send", "sent"],
-    "correct": 0,
-    "h": "Spot the commitment verb 'promised'.",
-    "expl": "The verb 'promise' requires 'to + infinitive'.",
-    "alert": "L1 Contrastive Analysis: English requires 'to' before the verb.",
-    "chunk": "promise to send",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "q": "We cannot afford ___ such an expensive software license.",
-    "options": ["to purchase", "purchasing", "purchase", "purchased"],
-    "correct": 0,
-    "h": "Focus on the financial verb 'afford'.",
-    "expl": "The verb 'afford' is strictly followed by 'to + infinitive'.",
-    "alert": "L1 Contrastive Analysis: English requires 'afford' + 'to + infinitive'.",
-    "chunk": "afford to purchase",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "q": "Please remember ___ off the lights before you leave tonight.",
-    "options": ["to turn", "turning", "turn", "turned"],
-    "correct": 0,
-    "h": "Is this a duty/task to perform in the future?",
-    "expl": "'Remember + to + infinitive' means remembering to perform a task.",
-    "alert": "L1 Contrastive Analysis: Looks forward to a task that needs doing.",
-    "chunk": "remember to turn",
-    "category": "Meaning Change"
-  },
-  {
-    "q": "I clearly remember ___ my keys on the table, but now they are gone.",
-    "options": ["leaving", "to leave", "leave", "left"],
-    "correct": 0,
-    "h": "Is the speaker recalling a past memory?",
-    "expl": "'Remember + gerund' expresses recalling a past action.",
-    "alert": "L1 Contrastive Analysis: Uses '-ing' for completed past memories.",
-    "chunk": "remember leaving",
-    "category": "Meaning Change"
-  },
-  {
-    "q": "He stopped ___ a quick phone call before entering the hall.",
-    "options": ["to make", "making", "make", "made"],
-    "correct": 0,
-    "h": "Did he pause an activity in order to make a call?",
-    "expl": "'Stop + to + infinitive' means pausing one activity to perform another.",
-    "alert": "L1 Contrastive Analysis: Pausing work to do a second action.",
-    "chunk": "stop to make",
-    "category": "Meaning Change"
-  },
-  {
-    "q": "The doctor advised him to stop ___ sugary drinks.",
-    "options": ["drinking", "to drink", "drink", "drank"],
-    "correct": 0,
-    "h": "Is he quitting the habit completely?",
-    "expl": "'Stop + gerund' means quitting a habit.",
-    "alert": "L1 Contrastive Analysis: Quitting a habit equals 'stop drinking'.",
-    "chunk": "stop drinking",
-    "category": "Meaning Change"
-  }
-];
-
-const quizA = rawDataset.slice(0, 8);
-const quizB = rawDataset.slice(8);
-
-let currentMode = 'A';
-let currentIndex = 0;
-let score = 0;
-let streak = 0;
-let selectedOption = null;
-let isAnswerChecked = false;
-let soundEnabled = true;
-
-function getCurrentDataset() {
-  return currentMode === 'A' ? quizA : quizB;
-}
-
-function playSound(type) {
-  if (!soundEnabled) return;
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const now = ctx.currentTime;
-    if (type === 'success') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(587.33, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-      gain.gain.setValueAtTime(0.18, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-    } else if (type === 'error') {
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(260, now);
-      osc.frequency.exponentialRampToValueAtTime(190, now + 0.18);
-      gain.gain.setValueAtTime(0.16, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-    } else if (type === 'click') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(400, now);
-      gain.gain.setValueAtTime(0.05, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-    }
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(now);
-    osc.stop(now + 0.3);
-  } catch(e) {}
-}
-
-let britishFemaleVoice = null;
-function findBritishFemaleVoice() {
-  if (!('speechSynthesis' in window)) return null;
-  const voices = window.speechSynthesis.getVoices();
-  const ukFemaleVoices = voices.filter(v => {
-    const lang = (v.lang || '').toLowerCase();
-    const name = (v.name || '').toLowerCase();
-    return (lang.includes('en-gb') || lang.includes('en_gb')) && (name.includes('female') || name.includes('libby') || name.includes('hazel') || name.includes('serena') || name.includes('susan') || name.includes('kate'));
-  });
-  if (ukFemaleVoices.length > 0) return ukFemaleVoices[0];
-  const ukVoices = voices.filter(v => (v.lang || '').toLowerCase().includes('en-gb'));
-  if (ukVoices.length > 0) return ukVoices[0];
-  return voices.find(v => v.lang.startsWith('en')) || null;
-}
-
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = findBritishFemaleVoice;
-  findBritishFemaleVoice();
-}
-
-function speakBritish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-GB';
-  utterance.rate = 0.92;
-  const voice = britishFemaleVoice || findBritishFemaleVoice();
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.speak(utterance);
-}
-
-function getCompletedSentence() {
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  return current.q.replace('___', current.options[current.correct]);
-}
-
-function switchQuizMode(mode) {
-  currentMode = mode;
-  currentIndex = 0;
-  score = 0;
-  streak = 0;
-  
-  const tabA = document.getElementById('tab-quiz-a');
-  const tabB = document.getElementById('tab-quiz-b');
-  const sub = document.getElementById('subtitulo-quiz');
-
-  if (mode === 'A') {
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
-    sub.innerText = 'Gerunds vs Infinitives Master Practice (Quiz A)';
-  } else {
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
-    sub.innerText = 'Gerunds vs Infinitives Master Practice (Quiz B)';
-  }
-  loadChallenge();
-}
-
-function loadChallenge() {
-  const dataset = getCurrentDataset();
-  if (currentIndex >= dataset.length) {
-    showFinalSummary();
-    return;
-  }
-
-  isAnswerChecked = false;
-  selectedOption = null;
-  const current = dataset[currentIndex];
-
-  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-  document.getElementById('barra-progreso').style.width = `${((currentIndex + 1) / dataset.length) * 100}%`;
-
-  const btnCat = document.getElementById('btn-categoria');
-  btnCat.innerText = (current.category || 'Standard').toUpperCase() + ' (CLICK FOR HINT)';
-
-  const parts = current.q.split('___');
-  let qHtml = '';
-  if (parts.length === 2) {
-    qHtml = `<span>${parts[0]}</span><span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span><span>${parts[1]}</span>`;
-  } else {
-    qHtml = current.q.replace('___', '<span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span>');
-  }
-  document.getElementById('pregunta-texto').innerHTML = qHtml;
-
-  const pista = document.getElementById('pista-texto');
-  pista.innerText = current.h;
-  pista.classList.add('hidden');
-
-  const feedbackBox = document.getElementById('feedback-box');
-  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
-  document.getElementById('btn-verificar').classList.remove('hidden');
-
-  const container = document.getElementById('opciones-contenedor');
-  container.innerHTML = '';
-
-  current.options.forEach((opt, idx) => {
-    const div = document.createElement('div');
-    div.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer bg-white';
-    div.innerHTML = `
-      <div class="flex items-center justify-between w-full">
-        <span class="text-base">${opt}</span>
-        <input type="radio" name="quiz-option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
-      </div>
-    `;
-    div.onclick = () => {
-      if (isAnswerChecked) return;
-      selectedOption = idx;
-      playSound('click');
-      div.querySelector('input').checked = true;
-      Array.from(container.children).forEach(el => el.classList.remove('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500'));
-      div.classList.add('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500');
-    };
-    container.appendChild(div);
-  });
-}
-
-function verifyAnswer() {
-  if (selectedOption === null || isAnswerChecked) return;
-  isAnswerChecked = true;
-
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  const isCorrect = (selectedOption === current.correct);
-
-  if (isCorrect) {
-    score++;
-    streak++;
-    playSound('success');
-  } else {
-    streak = 0;
-    playSound('error');
-  }
-
-  const slot = document.getElementById('blank-slot');
-  if (slot) {
-    slot.innerText = current.options[current.correct];
-    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200 align-middle';
-  }
-
-  const items = document.getElementById('opciones-contenedor').children;
-  Array.from(items).forEach((div, idx) => {
-    div.onclick = null;
-    const input = div.querySelector('input');
-    input.disabled = true;
-    if (idx === current.correct) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs';
-    } else if (idx === selectedOption && !isCorrect) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs';
-    } else {
-      div.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-not-allowed';
-    }
-  });
-
-  const feedbackBox = document.getElementById('feedback-box');
-  const feedbackTitulo = document.getElementById('feedback-titulo');
-  const feedbackExplicacion = document.getElementById('feedback-explicacion');
-  const feedbackAlert = document.getElementById('feedback-alert');
-  const feedbackChunk = document.getElementById('feedback-chunk');
-
-  if (isCorrect) {
-    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
-    feedbackTitulo.innerText = '¡Correcto / Excellent!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
-  } else {
-    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
-    feedbackTitulo.innerText = '¡Toma nota / Take Note!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
-  }
-
-  feedbackExplicacion.innerHTML = current.expl;
-  feedbackAlert.innerText = current.alert;
-  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
-
-  feedbackBox.classList.remove('hidden');
-  document.getElementById('btn-verificar').classList.add('hidden');
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-}
-
-document.getElementById('btn-verificar').onclick = verifyAnswer;
-document.getElementById('btn-siguiente').onclick = () => { currentIndex++; loadChallenge(); };
-document.getElementById('btn-anterior').onclick = () => { if (currentIndex > 0) { currentIndex--; loadChallenge(); } };
-document.getElementById('btn-categoria').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
-document.getElementById('btn-pista-inferior').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
-document.getElementById('btn-mostrar-respuesta').onclick = () => {
-  if (isAnswerChecked) return;
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  selectedOption = current.correct;
-  const items = document.getElementById('opciones-contenedor').children;
-  if (items[current.correct]) items[current.correct].querySelector('input').checked = true;
-  verifyAnswer();
-};
-document.getElementById('btn-restart').onclick = () => { currentIndex = 0; score = 0; streak = 0; loadChallenge(); };
-document.getElementById('btn-audio-sentence').onclick = () => { speakBritish(getCompletedSentence()); };
-document.getElementById('btn-audio-toggle').onclick = () => {
-  soundEnabled = !soundEnabled;
-  document.getElementById('audio-status-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
-};
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    if (!isAnswerChecked) verifyAnswer();
-    else { currentIndex++; loadChallenge(); }
-  }
-});
-
-function showFinalSummary() {
-  const dataset = getCurrentDataset();
-  const main = document.querySelector('main');
-  main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in">
-      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">Has completado con éxito este bloque.</p>
-      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
-        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span></div>
-      </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Reiniciar Práctica</button>
-    </div>
-  `;
-}
-
-// Carga directa inmediata sin bloqueadores
-loadChallenge();
-</script>
-</body>
-</html>
+    "h": "Identify the preposition 'in' directly preceding

@@ -15,15 +15,14 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
 
-<!-- Header / Barra de Navegación superior -->
+<!-- Header Superior idéntico -->
 <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
-  <div class="max-w-4xl mx-auto px-4 py-3.5 flex justify-between items-center">
-    <a href="index.html" class="text-indigo-600 font-bold flex items-center gap-2 hover:text-indigo-700 transition">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+    <a href="index.html" class="text-indigo-600 font-bold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
       <i class="fas fa-arrow-left"></i> Volver a teachercris.online
     </a>
 
-    <div class="flex items-center gap-3">
-      <!-- Botón de Audio y Sonido FX -->
+    <div class="flex items-center gap-2">
       <button id="btn-audio-toggle" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition">
         <i class="fas fa-volume-up"></i> <span id="audio-status-label">FX ON</span>
       </button>
@@ -34,23 +33,33 @@
   </div>
 </header>
 
-<!-- Main App Container -->
+<!-- Contenedor Principal idéntico -->
 <main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
-  <div class="text-center mb-6">
-    <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
-    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">Gerunds vs Infinitives Master Practice</p>
-  </div>
-
-  <div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200">
+  
+  <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200">
     
-    <!-- Progress Bar & Score -->
-    <div class="flex justify-between items-center mb-4 text-sm text-slate-500">
-      <div class="flex items-center gap-2">
-        <span id="progreso-texto" class="font-bold text-indigo-600">Task 1 of 45</span>
-      </div>
+    <!-- Pestañas de Quiz (Quiz A y Quiz B) -->
+    <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
+      <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600">
+        Quiz A (Tasks 1-22)
+      </button>
+      <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600">
+        Quiz B (Tasks 23-45)
+      </button>
+    </div>
+
+    <!-- Título Principal -->
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
+      <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">Gerunds vs Infinitives Master Practice (Quiz A)</p>
+    </div>
+
+    <!-- Progreso y Estadísticas -->
+    <div class="flex justify-between items-center mb-2 text-sm text-slate-500">
+      <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
       <div class="flex items-center gap-3">
-        <span id="streak-badge" class="font-semibold text-amber-600">Streak: 0</span>
-        <span id="puntuacion" class="font-semibold text-emerald-600">Correct: 0</span>
+        <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
+        <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
       </div>
     </div>
 
@@ -59,30 +68,31 @@
       <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
     </div>
 
-    <!-- Category Pill Toggle Button -->
+    <!-- Botón de Categoría / Pista -->
     <div class="mb-6 text-center">
-      <button id="btn-categoria" class="bg-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-xs cursor-default">
-        CATEGORY (CLICK FOR HINT)
+      <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
+        PREPOSITIONS + GERUND (CLICK FOR HINT)
       </button>
-    </div>
-
-    <!-- Challenge Statement -->
-    <div class="mb-6 sm:mb-8">
-      <div class="relative">
-        <p id="pregunta-texto" class="text-lg sm:text-xl font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs">
-        </p>
+      <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
+        <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
       </div>
     </div>
 
-    <!-- Multiple Choice Options -->
+    <!-- Enunciado de la Pregunta -->
+    <div class="mb-6 sm:mb-8">
+      <p id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center">
+      </p>
+    </div>
+
+    <!-- Opciones de Respuesta -->
     <div id="opciones-contenedor" class="space-y-3 mb-6"></div>
 
-    <!-- Verify Button (Acción de comprobar) -->
+    <!-- Botón Verificar -->
     <button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
       Verify (Enter)
     </button>
 
-    <!-- Feedback Container -->
+    <!-- Feedback Box -->
     <div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
       <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
       <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
@@ -420,191 +430,4 @@ const rawDataset = [
     "options": ["to assist", "assisting", "assist", "assisted"],
     "correct": 0,
     "h": "Identify the agreement verb 'agreed'.",
-    "expl": "The verb 'agree' takes 'to + infinitive' when consenting to do something.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses prepositions like 'agree in' + infinitive. English strictly uses 'agree' + 'to + infinitive' ('agreed to assist').",
-    "chunk": "agree to assist",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "id": 29,
-    "q": "The young entrepreneur hopes ___ expanding her online retail business across Europe next spring.",
-    "options": ["to start", "starting", "start", "started"],
-    "correct": 0,
-    "h": "Notice the intention/expectation verb 'hopes'.",
-    "expl": "The verb 'hope' is followed by 'to + infinitive' to express future desires.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses simple infinitive after 'hope'. English requires 'hope' + 'to + infinitive' ('hopes to start').",
-    "chunk": "hope to start",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "id": 30,
-    "q": "They offer ___ specialized training programs for all newly hired corporate employees.",
-    "options": ["to provide", "providing", "provide", "provided"],
-    "correct": 0,
-    "h": "Identify the willingness verb 'offer'.",
-    "expl": "The verb 'offer' is followed by 'to + infinitive' when expressing readiness to do something.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses simple infinitive after 'offer'. English mandates 'offer' + 'to + infinitive' ('offer to provide').",
-    "chunk": "offer to provide",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "id": 31,
-    "q": "The legal department advised us not ___ the contract without thorough legal review.",
-    "options": ["to sign", "signing", "sign", "signed"],
-    "correct": 0,
-    "h": "Look at the recommendation verb 'advised' followed by an object pronoun and negative marker 'not'.",
-    "expl": "The verb structure 'advise someone (not) to do something' strictly takes 'to + infinitive'.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses simple infinitive after negative advice. English requires 'advise someone not to' + infinitive ('advised us not to sign').",
-    "chunk": "advise not to sign",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "id": 32,
-    "q": "She claims ___ discovered a revolutionary method for desalinating seawater efficiently.",
-    "options": ["to have", "having", "have", "had"],
-    "correct": 0,
-    "h": "Identify the assertion verb 'claims'.",
-    "expl": "The verb 'claim' takes 'to + infinitive' (or perfect infinitive 'to have done') when asserting a fact.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish uses the infinitive after 'claim'. English uses 'claim' + 'to + infinitive' ('claims to have').",
-    "chunk": "claim to have",
-    "category": "Verbs + Infinitive"
-  },
-  {
-    "id": 33,
-    "q": "Please remember ___ off the office lights before you leave the building tonight.",
-    "options": ["to turn", "turning", "turn", "turned"],
-    "correct": 0,
-    "h": "Is this a duty/task to perform in the future, or a memory of a past event?",
-    "expl": "'Remember + to + infinitive' means remembering to perform a duty or task. 'Remember + gerund' means recalling a past memory.",
-    "alert": "💡 L1 Contrastive Analysis: In English, 'remember to do' looks forward to a task that needs doing. 'Remember doing' looks back at a completed memory.",
-    "chunk": "remember to turn",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 34,
-    "q": "I clearly remember ___ my car keys on the kitchen table, but now they are gone.",
-    "options": ["leaving", "to leave", "leave", "left"],
-    "correct": 0,
-    "h": "Is the speaker recalling a past memory or being reminded to do a task?",
-    "expl": "'Remember + gerund (-ing)' expresses recalling a past action or memory after it happened.",
-    "alert": "💡 L1 Contrastive Analysis: Spanish speakers often try to use 'remember to leave' for past memories. English strictly uses 'remember + -ing' for past memories ('remember leaving').",
-    "chunk": "remember leaving",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 35,
-    "q": "He stopped ___ a quick phone call to his assistant before entering the conference hall.",
-    "options": ["to make", "making", "make", "made"],
-    "correct": 0,
-    "h": "Did he pause another activity in order to make a call, or did he quit making calls altogether?",
-    "expl": "'Stop + to + infinitive' means pausing one activity in order to perform another. 'Stop + gerund' means ceasing an action completely.",
-    "alert": "💡 L1 Contrastive Analysis: English 'stop to do' means pausing work in order to perform a second action. Using 'stop making' would mean he quit making phone calls entirely!",
-    "chunk": "stop to make",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 36,
-    "q": "The doctor advised him to stop ___ sugary energy drinks if he wants to improve his health.",
-    "options": ["drinking", "to drink", "drink", "drank"],
-    "correct": 0,
-    "h": "Is he quitting the habit completely, or pausing work in order to drink?",
-    "expl": "'Stop + gerund (-ing)' means quitting or terminating a habit or continuous action.",
-    "alert": "💡 L1 Contrastive Analysis: Quitting a habit equals 'stop drinking'. Saying 'stop to drink' means pausing work to take a sip!",
-    "chunk": "stop drinking",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 37,
-    "q": "We regret ___ you that your application for the senior research fellowship was unsuccessful.",
-    "options": ["to inform", "informing", "inform", "informed"],
-    "correct": 0,
-    "h": "Is this a formal announcement of bad news, or remorse over a past mistake?",
-    "expl": "'Regret + to + infinitive' (usually with inform, say, tell) is a formal expression used to deliver bad news. 'Regret + gerund' means feeling remorse for a past action.",
-    "alert": "💡 L1 Contrastive Analysis: Formal business letters use 'regret to inform'. Using 'regret informing' would mean you feel sorry you told them!",
-    "chunk": "regret to inform",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 38,
-    "q": "He deeply regrets ___ those harsh words to his colleague during yesterday's heated debate.",
-    "options": ["saying", "to say", "say", "said"],
-    "correct": 0,
-    "h": "Does he feel remorse for an action completed in the past?",
-    "expl": "'Regret + gerund (-ing)' expresses remorse or sadness about something done in the past.",
-    "alert": "💡 L1 Contrastive Analysis: Feeling remorse for past words translates to 'regret saying'.",
-    "chunk": "regret saying",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 39,
-    "q": "Don't forget ___ the oven off after you finish baking the cake.",
-    "options": ["to switch", "switching", "switch", "switched"],
-    "correct": 0,
-    "h": "Is this a reminder for a future obligation?",
-    "expl": "'Forget + to + infinitive' means failing to perform a necessary task or duty.",
-    "alert": "💡 L1 Contrastive Analysis: 'Forget to do' means forgetting an obligation. 'Forget doing' means losing the memory of a past event.",
-    "chunk": "forget to switch",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 40,
-    "q": "I will never forget ___ the famous Nobel laureate speak live in Stockholm.",
-    "options": ["hearing", "to hear", "hear", "heard"],
-    "correct": 0,
-    "h": "Is this an unforgettable memory from the past?",
-    "expl": "'Forget + gerund (-ing)' (usually in negative sentences like 'never forget') refers to an unforgettable past experience.",
-    "alert": "💡 L1 Contrastive Analysis: Recalling an unforgettable memory translates to 'never forget hearing'.",
-    "chunk": "never forget hearing",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 41,
-    "q": "If the computer freezes, try ___ the system by holding down the power button for ten seconds.",
-    "options": ["restarting", "to restart", "restart", "restarted"],
-    "correct": 0,
-    "h": "Is this testing an experimental method to solve a problem, or attempting a difficult physical task?",
-    "expl": "'Try + gerund (-ing)' means experimenting with a method to see if it solves a problem. 'Try + to + infinitive' means making an effort to achieve something difficult.",
-    "alert": "💡 L1 Contrastive Analysis: 'Try restarting' means experimenting with an option to see if it works. 'Try to restart' implies struggling against physical difficulty.",
-    "chunk": "try restarting",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 42,
-    "q": "She tried ___ the heavy wooden oak door, but it was locked firmly from the inside.",
-    "options": ["to open", "opening", "open", "opened"],
-    "correct": 0,
-    "h": "Did she exert physical effort to accomplish a difficult task?",
-    "expl": "'Try + to + infinitive' expresses making an effort to accomplish a challenging task.",
-    "alert": "💡 L1 Contrastive Analysis: Making an effort to accomplish a difficult physical task equals 'try to open'.",
-    "chunk": "try to open",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 43,
-    "q": "The project proposal needs ___ by the chief financial officer before we can proceed.",
-    "options": ["approving", "to approve", "approve", "approved"],
-    "correct": 0,
-    "h": "Does the subject ('proposal') require a passive action performed upon it?",
-    "expl": "'Need + gerund (-ing)' has a passive meaning equivalent to 'need to be done' ('needs approving' = 'needs to be approved').",
-    "alert": "💡 L1 Contrastive Analysis: 'Needs approving' is a common Cambridge structure equivalent to 'needs to be approved'.",
-    "chunk": "need approving",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 44,
-    "q": "I meant ___ you earlier today, but my meeting ran over by two hours.",
-    "options": ["to call", "calling", "call", "called"],
-    "correct": 0,
-    "h": "Did the speaker intend to make a phone call?",
-    "expl": "'Mean + to + infinitive' means to intend or plan to do something. ('Mean + gerund' means to involve or signify).",
-    "alert": "💡 L1 Contrastive Analysis: Having the intention to make a call translates to 'mean to call'.",
-    "chunk": "mean to call",
-    "category": "Meaning Change"
-  },
-  {
-    "id": 45,
-    "q": "Taking on this international promotion will mean ___ to another country.",
-    "options": ["relocating", "to relocate", "relocate", "relocated"],
-    "correct": 0,
-    "h": "Does taking the promotion involve or signify a consequence?",
-    "expl": "'Mean + gerund (-ing)' means involving or
+    "expl": "The verb 'agree' takes 'to + infinitive' when consenting to do

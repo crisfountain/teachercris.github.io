@@ -268,6 +268,12 @@
       if (enGbFemale) return enGbFemale;
       const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
       if (anyGb) return anyGb;
+      const anyFemaleEnglish = voices.find(v => {
+        const name = (v.name || '').toLowerCase();
+        const lang = (v.lang || '').toLowerCase();
+        return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+      });
+      if (anyFemaleEnglish) return anyFemaleEnglish;
       return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
     }
 
@@ -279,7 +285,7 @@
       if (!('speechSynthesis' in window)) return;
       window.speechSynthesis.cancel();
       const card = currentData[idx];
-      const sentence = card.q.replace(/___+/g, 'blank').replace(/[\(\)\/]/g, ' ');
+      const sentence = card.q.replace(/___+/g, 'blank').replace(/\([^)]+\)/g, ' ').replace(/[\/]/g, ' ');
       const utterance = new SpeechSynthesisUtterance(sentence);
       utterance.lang = 'en-GB';
       const voice = getBritishFemaleVoice();
@@ -308,7 +314,7 @@
         }        
         const card = currentData[idx];        
         document.getElementById('q').innerText = card.q;        
-        document.getElementById('a').innerText = "Accepted: " + card.a[0];        
+        document.getElementById('a').innerText = "Accepted: " + card.a.join(' / ');        
         document.getElementById('expl').innerHTML = "<span class='explanation-header'>The Logic Behind the Answer:</span>" + card.expl;        
         document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${card.tag.split('-')[1].toUpperCase()} (Click for Category ℹ️)</span>`;        
         document.getElementById('a').classList.remove('visible');        
@@ -322,7 +328,7 @@
     }    
 
     function checkAnswer() {        
-        const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
+        const u = document.getElementById('userInput'].value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
         if(!u) return;        
         const card = currentData[idx];                
         const isCorrect = card.a.some(ans => {            

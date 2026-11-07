@@ -1,121 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerunds vs Infinitives Master | Teacher Cris Essentials</title>
+<title>Gerunds vs Infinitives Master | Teacher Cris</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-  body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
-  .animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
 
 <!-- Main App Container -->
 <main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
-  <div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200">
-    
-    <!-- Unified Internal Header -->
-    <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
-      <a href="index.html" class="text-indigo-600 font-semibold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
-        ← Volver a teachercris.online
-      </a>
-      <div class="flex items-center gap-2">
-        <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
-          <i class="fas fa-volume-up"></i> <span>Listen (UK)</span>
-        </button>
-        <button id="btn-audio-toggle" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer">
-          <i class="fas fa-headphones"></i> <span id="audio-status-label">FX ON</span>
-        </button>
-        <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reiniciar">
-          <i class="fas fa-redo-alt"></i>
-        </button>
-      </div>
-    </div>
 
-    <!-- Quiz A / Quiz B Tabs -->
-    <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
-      <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer">
-        Quiz A (Tasks 1-22)
-      </button>
-      <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer">
-        Quiz B (Tasks 23-45)
-      </button>
-    </div>
+<div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 overflow-hidden" style="border-top: 8px solid #2563eb;">
 
-    <!-- Title -->
-    <div class="text-center mb-6">
-      <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
-      <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ A)</p>
-    </div>
-
-    <!-- Progress Stats -->
-    <div class="flex justify-between items-center mb-4 text-sm text-slate-500">
-      <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
-      <div class="flex items-center gap-3">
-        <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
-        <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
-      </div>
-    </div>
-
-    <!-- Progress Bar -->
-    <div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
-      <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
-    </div>
-
-    <!-- Hint Button -->
-    <div class="mb-6 text-center">
-      <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
-        PREPOSITIONS + GERUND (CLICK FOR HINT)
-      </button>
-      <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
-        <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
-      </div>
-    </div>
-
-    <!-- Question Container -->
-    <div class="mb-6 sm:mb-8">
-      <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1.5">
-      </div>
-    </div>
-
-    <!-- Options Container -->
-    <div id="opciones-contenedor" class="space-y-3 mb-6"></div>
-
-    <!-- Verify Button -->
-    <button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
-      Verify (Enter)
+<!-- Unified Internal Header -->
+<div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+ <a href="index.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
+      ← Volver a teachercris.online
+    </a>
+  <div class="flex items-center gap-2">
+    <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Escuchar en inglés británico">
+      <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
     </button>
-
-    <!-- Feedback Box -->
-    <div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
-      <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
-      <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
-      <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
-      <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
-    </div>
-
-    <!-- Navigation Footer -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
-      <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-        <i class="fas fa-chevron-left"></i> Previous
-      </button>
-      <button id="btn-pista-inferior" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-        Hint <i class="far fa-lightbulb"></i>
-      </button>
-      <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-        Show Answer <i class="fas fa-eye"></i>
-      </button>
-      <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-        Next <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-
+    <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reiniciar">
+      <i class="fas fa-redo-alt"></i>
+    </button>
   </div>
+</div>
+
+<!-- Quiz A / Quiz B Tabs -->
+<div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
+  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer">
+    Quiz A (Tasks 1-22)
+  </button>
+  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer">
+    Quiz B (Tasks 23-45)
+  </button>
+</div>
+
+<!-- Title -->
+<div class="text-center mb-6">
+  <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
+  <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ A)</p>
+</div>
+
+<!-- Progress Stats -->
+<div class="flex justify-between items-center mb-4 text-sm text-slate-500">
+  <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
+  <div class="flex items-center gap-3">
+    <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
+    <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
+  </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
+  <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
+</div>
+
+<!-- Category Pill & Hint Button -->
+<div class="mb-6 text-center">
+  <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
+    PREPOSITIONS + GERUND (CLICK FOR HINT)
+  </button>
+  <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
+    <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
+  </div>
+</div>
+
+<!-- Question Container -->
+<div class="mb-6 sm:mb-8">
+  <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1.5">
+  </div>
+</div>
+
+<!-- Options Container -->
+<div id="opciones-contenedor" class="space-y-3 mb-6"></div>
+
+<!-- Verify Button -->
+<button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
+  Verify (Enter)
+</button>
+
+<!-- Feedback Box -->
+<div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
+  <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
+  <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
+  <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
+  <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
+</div>
+
+<!-- Navigation Footer -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
+  <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    <i class="fas fa-chevron-left"></i> Previous
+  </button>
+  <button id="btn-pista-inferior" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    Hint <i class="far fa-lightbulb"></i>
+  </button>
+  <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    Show Answer <i class="fas fa-eye"></i>
+  </button>
+  <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    Next <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+
+</div>
+
 </main>
 
 <footer class="mt-auto py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-500">
@@ -131,8 +130,8 @@ const rawDataset = [
     "options": ["learning", "to learn", "learn", "learned"],
     "correct": 0,
     "h": "Identify the preposition 'in' directly preceding the blank space.",
-    "expl": "In English, all prepositions must be followed by the gerund (-ing) form when followed by a verb.",
-    "alert": "L1 Contrastive Analysis: While Spanish speakers naturally use the infinitive after prepositions, English strictly forbids the infinitive after a preposition, requiring the gerund.",
+    "expl": "<b>Preposition + Gerund:</b> The adjective phrase <i>interested in</i> contains the preposition <b>in</b>. In English, prepositions must always be followed by a gerund (<i>-ing</i> form).",
+    "alert": "💡 Key Rule: English prepositions (in, on, at, for, about, of, before, after, without) are strictly followed by a gerund (-ing), never a to-infinitive.",
     "chunk": "interested in learning",
     "category": "Prepositions + Gerund"
   },
@@ -141,8 +140,8 @@ const rawDataset = [
     "options": ["meeting", "meet", "to meet", "met"],
     "correct": 0,
     "h": "Recognize that 'to' in 'look forward to' acts as a preposition, not part of an infinitive.",
-    "expl": "In the phrasal verb 'look forward to', 'to' is a preposition. Therefore, it must be followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: Always remember that 'to' here is a preposition requiring '-ing'.",
+    "expl": "<b>Prepositional Phrasal Verb:</b> In <i>look forward to</i>, 'to' functions as a dependent preposition. Prepositions require a gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: When 'to' functions as a preposition (as in 'look forward to' or 'object to'), it must be followed by a gerund (-ing), not a base verb.",
     "chunk": "look forward to meeting",
     "category": "Prepositions + Gerund"
   },
@@ -151,8 +150,8 @@ const rawDataset = [
     "options": ["submitting", "to submit", "submit", "submitted"],
     "correct": 0,
     "h": "Notice the time preposition 'before' standing right before the action.",
-    "expl": "Time prepositions like 'before' and 'after' require a gerund (-ing) when directly introducing a verb clause.",
-    "alert": "L1 Contrastive Analysis: Prepositions like 'before' demand the gerund ('before submitting').",
+    "expl": "<b>Time Preposition + Gerund:</b> Temporal prepositions like <i>before</i> and <i>after</i> require the gerund form when introducing a verb clause directly.",
+    "alert": "💡 Key Rule: Time prepositions like 'before' and 'after' take the gerund (-ing) when directly followed by an action verb.",
     "chunk": "before submitting",
     "category": "Prepositions + Gerund"
   },
@@ -161,8 +160,8 @@ const rawDataset = [
     "options": ["arriving", "to arrive", "arrive", "arrived"],
     "correct": 0,
     "h": "Spot the dependent preposition 'for' following the verb 'apologized'.",
-    "expl": "The verb 'apologize' pairs with 'for', which strictly governs the gerund (-ing) form.",
-    "alert": "L1 Contrastive Analysis: English mandates 'apologize for' + gerund ('apologized for arriving').",
+    "expl": "<b>Verb + Preposition:</b> The verb <i>apologize</i> pairs with the preposition <b>for</b>, which governs the gerund (<i>-ing</i>) form.",
+    "alert": "💡 Key Rule: The structure 'apologize for' is a verb-preposition combination requiring the gerund (-ing).",
     "chunk": "apologize for arriving",
     "category": "Prepositions + Gerund"
   },
@@ -171,8 +170,8 @@ const rawDataset = [
     "options": ["finalizing", "to finalize", "finalize", "finalized"],
     "correct": 0,
     "h": "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
-    "expl": "The verb phrase 'succeed in' requires a gerund (-ing) to describe the accomplished action.",
-    "alert": "L1 Contrastive Analysis: English strictly pairs 'succeed in' with '-ing' ('succeeded in finalizing').",
+    "expl": "<b>Dependent Preposition:</b> The expression <i>succeed in</i> governs the gerund (<i>-ing</i>) to express the accomplished goal.",
+    "alert": "💡 Key Rule: Always pair 'succeed in' with a gerund (-ing) to describe successful achievements.",
     "chunk": "succeed in finalizing",
     "category": "Prepositions + Gerund"
   },
@@ -181,8 +180,8 @@ const rawDataset = [
     "options": ["reading", "to read", "read", "have read"],
     "correct": 0,
     "h": "Identify the preposition 'after' placed at the head of the sentence clause.",
-    "expl": "Prepositions introduced at the start of introductory time clauses take the gerund (-ing) form.",
-    "alert": "L1 Contrastive Analysis: In English, 'after' as a preposition must be followed by a gerund ('after reading').",
+    "expl": "<b>Clause-Initial Preposition:</b> The preposition <i>after</i> introducing an abbreviated temporal clause strictly takes the gerund.",
+    "alert": "💡 Key Rule: Prepositions at the start of a clause ('after', 'before', 'by') govern the gerund (-ing).",
     "chunk": "after reading",
     "category": "Prepositions + Gerund"
   },
@@ -191,8 +190,8 @@ const rawDataset = [
     "options": ["saying", "to say", "say", "said"],
     "correct": 0,
     "h": "Look for the preposition 'without' describing the condition of her departure.",
-    "expl": "The preposition 'without' must always be followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English requires 'without' + gerund ('without saying').",
+    "expl": "<b>Preposition + Gerund:</b> The preposition <i>without</i> must always be complemented by a gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: The preposition 'without' is always followed by a gerund (-ing) to express an action that did not occur.",
     "chunk": "without saying",
     "category": "Prepositions + Gerund"
   },
@@ -201,8 +200,8 @@ const rawDataset = [
     "options": ["opening", "to open", "open", "opened"],
     "correct": 0,
     "h": "Find the preposition 'about' following the verb 'talked'.",
-    "expl": "Prepositions such as 'about' always take the gerund (-ing) when followed by a verb.",
-    "alert": "L1 Contrastive Analysis: 'About' requires '-ing' ('talked about opening').",
+    "expl": "<b>Verb + Preposition:</b> <i>Talk about</i> consists of a verb and a preposition, which requires a gerund object.",
+    "alert": "💡 Key Rule: Prepositional verbs like 'talk about' require the gerund (-ing) form.",
     "chunk": "talk about opening",
     "category": "Prepositions + Gerund"
   },
@@ -211,8 +210,8 @@ const rawDataset = [
     "options": ["achieving", "to achieve", "achieve", "achieved"],
     "correct": 0,
     "h": "Identify 'for' as the preposition indicating the reason for praise.",
-    "expl": "The pattern 'praise someone for' requires the gerund (-ing) for the action being commended.",
-    "alert": "L1 Contrastive Analysis: English strictly uses 'for' + gerund ('for achieving').",
+    "expl": "<b>Prepositional Pattern:</b> The pattern <i>praise [someone] for</i> connects to a gerund (<i>-ing</i>) to state the reason for praise.",
+    "alert": "💡 Key Rule: Verbs of praise or reward followed by 'for' mandate the gerund (-ing).",
     "chunk": "praise for achieving",
     "category": "Prepositions + Gerund"
   },
@@ -221,8 +220,8 @@ const rawDataset = [
     "options": ["buying", "to buy", "buy", "bought"],
     "correct": 0,
     "h": "Notice the prepositional phrase 'instead of' at the start of the contrast clause.",
-    "expl": "'Instead of' is a compound preposition and must be followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English requires 'instead of' + gerund ('instead of buying').",
+    "expl": "<b>Compound Preposition:</b> <i>Instead of</i> is a prepositional phrase and takes a gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: Compound prepositions like 'instead of' are followed by a gerund (-ing).",
     "chunk": "instead of buying",
     "category": "Prepositions + Gerund"
   },
@@ -231,8 +230,8 @@ const rawDataset = [
     "options": ["hearing", "to hear", "hear", "heard"],
     "correct": 0,
     "h": "Spot the adjective-preposition pair 'tired of'.",
-    "expl": "The adjective structure 'tired of' takes a gerund (-ing) to express weariness with a repeated action.",
-    "alert": "L1 Contrastive Analysis: English strictly mandates 'tired of' + gerund ('tired of hearing').",
+    "expl": "<b>Adjective + Preposition:</b> The predicate adjective <i>tired of</i> requires a gerund (<i>-ing</i>) complement.",
+    "alert": "💡 Key Rule: Adjectives with dependent prepositions (like 'tired of', 'fond of', 'afraid of') strictly take the gerund (-ing).",
     "chunk": "tired of hearing",
     "category": "Prepositions + Gerund"
   },
@@ -241,8 +240,8 @@ const rawDataset = [
     "options": ["signing", "to sign", "sign", "signed"],
     "correct": 0,
     "h": "Focus on the dependent preposition 'on' following 'insists'.",
-    "expl": "The verb 'insist' pairs with the preposition 'on', which demands a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: In English, 'insist on' requires '-ing' ('insists on signing').",
+    "expl": "<b>Verb + Preposition:</b> The verb <i>insist</i> requires the dependent preposition <b>on</b>, which takes a gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: The dependent preposition 'on' after 'insist' governs the gerund (-ing).",
     "chunk": "insist on signing",
     "category": "Prepositions + Gerund"
   },
@@ -251,8 +250,8 @@ const rawDataset = [
     "options": ["opening", "to open", "open", "opened"],
     "correct": 0,
     "h": "Recall which verb form follows polite requests with 'mind'.",
-    "expl": "The verb 'mind' (in polite requests) is strictly followed by the gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English grammar strictly requires 'mind' + gerund ('mind opening').",
+    "expl": "<b>Verb + Gerund:</b> The verb <i>mind</i> in requests is strictly followed by the gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: The verb 'mind' always patterns with a gerund (-ing) when asking for or giving permission.",
     "chunk": "mind opening",
     "category": "Verbs + Gerund"
   },
@@ -261,8 +260,8 @@ const rawDataset = [
     "options": ["making", "to make", "make", "made"],
     "correct": 0,
     "h": "Identify the verb 'avoid' which governs the following verb form.",
-    "expl": "The verb 'avoid' must always be followed by a gerund (-ing), never an infinitive.",
-    "alert": "L1 Contrastive Analysis: In English, 'avoid' strictly takes the gerund ('avoid making').",
+    "expl": "<b>Verb + Gerund:</b> The verb <i>avoid</i> strictly takes a gerund (<i>-ing</i>) complement, never a to-infinitive.",
+    "alert": "💡 Key Rule: Certain verbs like 'avoid', 'enjoy', and 'finish' can only be followed by a gerund (-ing).",
     "chunk": "avoid making",
     "category": "Verbs + Gerund"
   },
@@ -271,8 +270,8 @@ const rawDataset = [
     "options": ["hiring", "to hire", "hire", "hired"],
     "correct": 0,
     "h": "Look at the verb 'suggest' directly followed by an action verb.",
-    "expl": "When 'suggest' is directly followed by a verb, it takes a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: In English, 'suggest' never takes a direct 'to + infinitive' ('suggested hiring').",
+    "expl": "<b>Verb + Gerund:</b> When <i>suggest</i> is immediately followed by a verb without a clause, it requires the gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: The verb 'suggest' takes a direct gerund (-ing); it does not take 'to + infinitive' directly.",
     "chunk": "suggest hiring",
     "category": "Verbs + Gerund"
   },
@@ -281,8 +280,8 @@ const rawDataset = [
     "options": ["downloading", "to download", "download", "downloaded"],
     "correct": 0,
     "h": "Identify the verb 'admitted' followed by an acknowledged action.",
-    "expl": "The verb 'admit' takes a gerund (-ing) when acknowledging a past action.",
-    "alert": "L1 Contrastive Analysis: English requires 'admit' + gerund ('admitted downloading').",
+    "expl": "<b>Verb + Gerund:</b> The verb <i>admit</i> takes a gerund (<i>-ing</i>) when acknowledging an action.",
+    "alert": "💡 Key Rule: Verbs of confession or admission like 'admit' and 'deny' govern the gerund (-ing).",
     "chunk": "admit downloading",
     "category": "Verbs + Gerund"
   },
@@ -291,8 +290,8 @@ const rawDataset = [
     "options": ["running", "to run", "run", "ran"],
     "correct": 0,
     "h": "Focus on the preference verb 'enjoy'.",
-    "expl": "The verb 'enjoy' is always followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English requires 'enjoy' + gerund without any preposition ('enjoy running').",
+    "expl": "<b>Verb + Gerund:</b> <i>Enjoy</i> is a core verb that strictly requires the gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: 'Enjoy' is always followed by a gerund (-ing) without prepositions.",
     "chunk": "enjoy running",
     "category": "Verbs + Gerund"
   },
@@ -301,8 +300,8 @@ const rawDataset = [
     "options": ["launching", "to launch", "launch", "launched"],
     "correct": 0,
     "h": "Identify the delay verb 'postponed'.",
-    "expl": "The verb 'postpone' (like 'put off') is strictly followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English requires 'postpone' + gerund ('postponed launching').",
+    "expl": "<b>Verb + Gerund:</b> Verbs signifying delay or deferral (<i>postpone</i>, <i>delay</i>, <i>put off</i>) govern the gerund.",
+    "alert": "💡 Key Rule: Verbs expressing delay ('postpone', 'defer') require the gerund (-ing).",
     "chunk": "postpone launching",
     "category": "Verbs + Gerund"
   },
@@ -311,8 +310,8 @@ const rawDataset = [
     "options": ["having", "to have", "have", "had"],
     "correct": 0,
     "h": "Look at the verb 'denied' governing the clause.",
-    "expl": "The verb 'deny' takes a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: In English, 'deny' takes the gerund ('denied having').",
+    "expl": "<b>Verb + Gerund:</b> The verb <i>deny</i> is followed by a gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: 'Deny' takes the gerund (-ing) to state that an action was not performed.",
     "chunk": "deny having",
     "category": "Verbs + Gerund"
   },
@@ -321,8 +320,8 @@ const rawDataset = [
     "options": ["feeling", "to feel", "feel", "felt"],
     "correct": 0,
     "h": "Spot the fixed idiomatic expression 'cannot help'.",
-    "expl": "The idiomatic expression 'cannot help' is strictly followed by a gerund (-ing).",
-    "alert": "L1 Contrastive Analysis: English uses 'cannot help' + gerund ('cannot help feeling').",
+    "expl": "<b>Idiomatic Gerund Phrase:</b> The fixed expression <i>cannot help</i> takes a gerund (<i>-ing</i>).",
+    "alert": "💡 Key Rule: The phrase 'cannot help' is an idiomatic verb pattern strictly followed by a gerund (-ing).",
     "chunk": "cannot help feeling",
     "category": "Verbs + Gerund"
   },
@@ -331,8 +330,8 @@ const rawDataset = [
     "options": ["applying", "to apply", "apply", "applied"],
     "correct": 0,
     "h": "Identify the deliberation verb 'consider'.",
-    "expl": "The verb 'consider' takes a gerund (-ing) when contemplating an action.",
-    "alert": "L1 Contrastive Analysis: English strictly mandates 'consider' + gerund ('consider applying').",
+    "expl": "<b>Verb + Gerund:</b> The verb <i>consider</i> requires a gerund (<i>-ing</i>) when contemplating an action.",
+    "alert": "💡 Key Rule: When 'consider' means thinking about doing something, it requires a gerund (-ing).",
     "chunk": "consider applying",
     "category": "Verbs + Gerund"
   },
@@ -341,8 +340,8 @@ const rawDataset = [
     "options": ["writing", "to write", "write", "wrote"],
     "correct": 0,
     "h": "Look at the completion verb 'finished'.",
-    "expl": "The verb 'finish' is followed by a gerund (-ing) to indicate the end of an activity.",
-    "alert": "L1 Contrastive Analysis: English uses 'finish' + gerund without prepositions ('finished writing').",
+    "expl": "<b>Verb + Gerund:</b> The verb <i>finish</i> is followed by a gerund (<i>-ing</i>) to indicate the completion of an activity.",
+    "alert": "💡 Key Rule: Verbs indicating completion like 'finish' take the gerund (-ing).",
     "chunk": "finish writing",
     "category": "Verbs + Gerund"
   },
@@ -351,8 +350,8 @@ const rawDataset = [
     "options": ["to accept", "accepting", "accept", "accepted"],
     "correct": 0,
     "h": "Identify the decision verb 'decided'.",
-    "expl": "The verb 'decide' is followed by 'to + infinitive' when expressing a choice to do something.",
-    "alert": "L1 Contrastive Analysis: English strictly requires the infinitive marker 'to' ('decided to accept').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>decide</i> is followed by a <b>to-infinitive</b> to express a choice or intention.",
+    "alert": "💡 Key Rule: Verbs of decision and intention ('decide', 'choose', 'plan') take 'to + infinitive'.",
     "chunk": "decide to accept",
     "category": "Verbs + Infinitive"
   },
@@ -361,8 +360,8 @@ const rawDataset = [
     "options": ["to send", "sending", "send", "sent"],
     "correct": 0,
     "h": "Spot the commitment verb 'promised'.",
-    "expl": "The verb 'promise' requires 'to + infinitive' when offering a commitment.",
-    "alert": "L1 Contrastive Analysis: English requires the marker 'to' before the verb ('promised to send').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>promise</i> requires a <b>to-infinitive</b> when making a commitment.",
+    "alert": "💡 Key Rule: Verbs of promise or agreement ('promise', 'swear', 'agree') govern 'to + infinitive'.",
     "chunk": "promise to send",
     "category": "Verbs + Infinitive"
   },
@@ -371,8 +370,8 @@ const rawDataset = [
     "options": ["to purchase", "purchasing", "purchase", "purchased"],
     "correct": 0,
     "h": "Focus on the financial verb 'afford'.",
-    "expl": "The verb 'afford' (usually with can/cannot) is strictly followed by 'to + infinitive'.",
-    "alert": "L1 Contrastive Analysis: English requires 'afford' + 'to + infinitive' ('afford to purchase').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>afford</i> (commonly with <i>can/cannot</i>) is followed by a <b>to-infinitive</b>.",
+    "alert": "💡 Key Rule: 'Can/cannot afford' is strictly followed by 'to + infinitive'.",
     "chunk": "afford to purchase",
     "category": "Verbs + Infinitive"
   },
@@ -381,8 +380,8 @@ const rawDataset = [
     "options": ["to answer", "answering", "answer", "answered"],
     "correct": 0,
     "h": "Identify the rejection verb 'refused'.",
-    "expl": "The verb 'refuse' takes 'to + infinitive' to express unwillingness to perform an action.",
-    "alert": "L1 Contrastive Analysis: English uses 'refuse' + 'to + infinitive' ('refused to answer').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>refuse</i> takes a <b>to-infinitive</b> to express unwillingness to do an action.",
+    "alert": "💡 Key Rule: 'Refuse' takes 'to + infinitive' to decline performing an action.",
     "chunk": "refuse to answer",
     "category": "Verbs + Infinitive"
   },
@@ -391,8 +390,8 @@ const rawDataset = [
     "options": ["to restore", "restoring", "restore", "restored"],
     "correct": 0,
     "h": "Look at the achievement verb 'managed'.",
-    "expl": "The verb 'manage' (meaning to succeed in doing something difficult) requires 'to + infinitive'.",
-    "alert": "L1 Contrastive Analysis: English mandates 'manage' + 'to + infinitive' ('managed to restore').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>manage</i> (meaning to succeed in a task) requires a <b>to-infinitive</b>.",
+    "alert": "💡 Key Rule: 'Manage' (meaning succeed despite difficulty) takes 'to + infinitive'.",
     "chunk": "manage to restore",
     "category": "Verbs + Infinitive"
   },
@@ -401,8 +400,8 @@ const rawDataset = [
     "options": ["to assist", "assisting", "assist", "assisted"],
     "correct": 0,
     "h": "Identify the agreement verb 'agreed'.",
-    "expl": "The verb 'agree' takes 'to + infinitive' when consenting to do something.",
-    "alert": "L1 Contrastive Analysis: English strictly uses 'agree' + 'to + infinitive' ('agreed to assist').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>agree</i> takes a <b>to-infinitive</b> when consenting to an action.",
+    "alert": "💡 Key Rule: 'Agree' is followed by 'to + infinitive' when accepting to do something.",
     "chunk": "agree to assist",
     "category": "Verbs + Infinitive"
   },
@@ -411,8 +410,8 @@ const rawDataset = [
     "options": ["to start", "starting", "start", "started"],
     "correct": 0,
     "h": "Notice the intention/expectation verb 'hopes'.",
-    "expl": "The verb 'hope' is followed by 'to + infinitive' to express future desires.",
-    "alert": "L1 Contrastive Analysis: English requires 'hope' + 'to + infinitive' ('hopes to start').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>hope</i> expresses future expectation and requires a <b>to-infinitive</b>.",
+    "alert": "💡 Key Rule: Verbs expressing future desire ('hope', 'expect', 'wish') take 'to + infinitive'.",
     "chunk": "hope to start",
     "category": "Verbs + Infinitive"
   },
@@ -421,8 +420,8 @@ const rawDataset = [
     "options": ["to provide", "providing", "provide", "provided"],
     "correct": 0,
     "h": "Identify the willingness verb 'offer'.",
-    "expl": "The verb 'offer' is followed by 'to + infinitive' when expressing readiness to do something.",
-    "alert": "L1 Contrastive Analysis: English mandates 'offer' + 'to + infinitive' ('offer to provide').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>offer</i> takes a <b>to-infinitive</b> when proposing assistance or action.",
+    "alert": "💡 Key Rule: 'Offer' is followed by 'to + infinitive' when volunteering an action.",
     "chunk": "offer to provide",
     "category": "Verbs + Infinitive"
   },
@@ -431,8 +430,8 @@ const rawDataset = [
     "options": ["to sign", "signing", "sign", "signed"],
     "correct": 0,
     "h": "Look at the recommendation verb 'advised' followed by an object pronoun and negative marker 'not'.",
-    "expl": "The verb structure 'advise someone (not) to do something' strictly takes 'to + infinitive'.",
-    "alert": "L1 Contrastive Analysis: English requires 'advise someone not to' + infinitive ('advised us not to sign').",
+    "expl": "<b>Object + Infinitive:</b> The pattern <i>advise [someone] (not) to do [something]</i> takes a <b>to-infinitive</b>.",
+    "alert": "💡 Key Rule: Verbs like 'advise', 'tell', and 'allow' take object + '(not) to + infinitive'.",
     "chunk": "advise not to sign",
     "category": "Verbs + Infinitive"
   },
@@ -441,8 +440,8 @@ const rawDataset = [
     "options": ["to have", "having", "have", "had"],
     "correct": 0,
     "h": "Identify the assertion verb 'claims'.",
-    "expl": "The verb 'claim' takes 'to + infinitive' when asserting a fact.",
-    "alert": "L1 Contrastive Analysis: English uses 'claim' + 'to + infinitive' ('claims to have').",
+    "expl": "<b>Verb + Infinitive:</b> The verb <i>claim</i> takes a <b>to-infinitive</b> when asserting a statement.",
+    "alert": "💡 Key Rule: 'Claim' is followed by 'to + infinitive' (or perfect infinitive 'to have + participle').",
     "chunk": "claim to have",
     "category": "Verbs + Infinitive"
   },
@@ -451,8 +450,8 @@ const rawDataset = [
     "options": ["to turn", "turning", "turn", "turned"],
     "correct": 0,
     "h": "Is this a duty/task to perform in the future, or a memory of a past event?",
-    "expl": "'Remember + to + infinitive' means remembering to perform a duty or task.",
-    "alert": "L1 Contrastive Analysis: In English, 'remember to do' looks forward to a task that needs doing.",
+    "expl": "<b>Meaning Change:</b> <i>Remember + to-infinitive</i> means remembering to perform an obligation or future task.",
+    "alert": "💡 Key Rule: 'Remember + to + infinitive' looks forward to a task that must be done.",
     "chunk": "remember to turn",
     "category": "Meaning Change"
   },
@@ -461,8 +460,8 @@ const rawDataset = [
     "options": ["leaving", "to leave", "leave", "left"],
     "correct": 0,
     "h": "Is the speaker recalling a past memory or being reminded to do a task?",
-    "expl": "'Remember + gerund (-ing)' expresses recalling a past action or memory after it happened.",
-    "alert": "L1 Contrastive Analysis: English strictly uses 'remember + -ing' for past memories ('remember leaving').",
+    "expl": "<b>Meaning Change:</b> <i>Remember + gerund (-ing)</i> means recalling a memory of an action completed in the past.",
+    "alert": "💡 Key Rule: 'Remember + -ing' looks back at a memory of a past event.",
     "chunk": "remember leaving",
     "category": "Meaning Change"
   },
@@ -471,8 +470,8 @@ const rawDataset = [
     "options": ["to make", "making", "make", "made"],
     "correct": 0,
     "h": "Did he pause another activity in order to make a call, or did he quit making calls altogether?",
-    "expl": "'Stop + to + infinitive' means pausing one activity in order to perform another.",
-    "alert": "L1 Contrastive Analysis: English 'stop to do' means pausing work in order to perform a second action.",
+    "expl": "<b>Meaning Change:</b> <i>Stop + to-infinitive</i> means pausing an ongoing activity in order to perform a new action.",
+    "alert": "💡 Key Rule: 'Stop to do' means interrupting what you are doing in order to do something else.",
     "chunk": "stop to make",
     "category": "Meaning Change"
   },
@@ -481,8 +480,8 @@ const rawDataset = [
     "options": ["drinking", "to drink", "drink", "drank"],
     "correct": 0,
     "h": "Is he quitting the habit completely, or pausing work in order to drink?",
-    "expl": "'Stop + gerund (-ing)' means quitting or terminating a habit.",
-    "alert": "L1 Contrastive Analysis: Quitting a habit equals 'stop drinking'.",
+    "expl": "<b>Meaning Change:</b> <i>Stop + gerund (-ing)</i> means terminating or quitting a habit or action entirely.",
+    "alert": "💡 Key Rule: 'Stop doing' means ending a habit or terminating an action.",
     "chunk": "stop drinking",
     "category": "Meaning Change"
   },
@@ -491,8 +490,8 @@ const rawDataset = [
     "options": ["to inform", "informing", "inform", "informed"],
     "correct": 0,
     "h": "Is this a formal announcement of bad news, or remorse over a past mistake?",
-    "expl": "'Regret + to + infinitive' is a formal expression used to deliver bad news.",
-    "alert": "L1 Contrastive Analysis: Formal business letters use 'regret to inform'.",
+    "expl": "<b>Meaning Change:</b> <i>Regret + to-infinitive</i> is a formal expression used to deliver bad or disappointing news.",
+    "alert": "💡 Key Rule: 'Regret to inform/say' is used in formal communication to announce bad news.",
     "chunk": "regret to inform",
     "category": "Meaning Change"
   },
@@ -501,8 +500,8 @@ const rawDataset = [
     "options": ["saying", "to say", "say", "said"],
     "correct": 0,
     "h": "Does he feel remorse for an action completed in the past?",
-    "expl": "'Regret + gerund (-ing)' expresses remorse or sadness about something done in the past.",
-    "alert": "L1 Contrastive Analysis: Feeling remorse for past words translates to 'regret saying'.",
+    "expl": "<b>Meaning Change:</b> <i>Regret + gerund (-ing)</i> means feeling remorse about an action completed in the past.",
+    "alert": "💡 Key Rule: 'Regret doing' expresses remorse about past actions or words.",
     "chunk": "regret saying",
     "category": "Meaning Change"
   },
@@ -511,8 +510,8 @@ const rawDataset = [
     "options": ["to switch", "switching", "switch", "switched"],
     "correct": 0,
     "h": "Is this a reminder for a future obligation?",
-    "expl": "'Forget + to + infinitive' means failing to perform a necessary task or duty.",
-    "alert": "L1 Contrastive Analysis: 'Forget to do' means forgetting an obligation.",
+    "expl": "<b>Meaning Change:</b> <i>Forget + to-infinitive</i> means failing to perform a necessary task or obligation.",
+    "alert": "💡 Key Rule: 'Forget to do' means failing to remember an obligation.",
     "chunk": "forget to switch",
     "category": "Meaning Change"
   },
@@ -521,8 +520,8 @@ const rawDataset = [
     "options": ["hearing", "to hear", "hear", "heard"],
     "correct": 0,
     "h": "Is this an unforgettable memory from the past?",
-    "expl": "'Forget + gerund (-ing)' refers to an unforgettable past experience.",
-    "alert": "L1 Contrastive Analysis: Recalling an unforgettable memory translates to 'never forget hearing'.",
+    "expl": "<b>Meaning Change:</b> <i>Forget + gerund (-ing)</i> (often with <i>never</i>) refers to losing the memory of a past experience.",
+    "alert": "💡 Key Rule: 'Never forget doing' refers to an unforgettable past experience.",
     "chunk": "never forget hearing",
     "category": "Meaning Change"
   },
@@ -531,8 +530,8 @@ const rawDataset = [
     "options": ["restarting", "to restart", "restart", "restarted"],
     "correct": 0,
     "h": "Is this testing an experimental method to solve a problem, or attempting a difficult physical task?",
-    "expl": "'Try + gerund (-ing)' means experimenting with a method to see if it solves a problem.",
-    "alert": "L1 Contrastive Analysis: 'Try restarting' means experimenting with an option to see if it works.",
+    "expl": "<b>Meaning Change:</b> <i>Try + gerund (-ing)</i> means testing an experimental method or solution to see if it works.",
+    "alert": "💡 Key Rule: 'Try doing' means experimenting with an option to test if it solves a problem.",
     "chunk": "try restarting",
     "category": "Meaning Change"
   },
@@ -541,8 +540,8 @@ const rawDataset = [
     "options": ["to open", "opening", "open", "opened"],
     "correct": 0,
     "h": "Did she exert physical effort to accomplish a difficult task?",
-    "expl": "'Try + to + infinitive' expresses making an effort to accomplish a challenging task.",
-    "alert": "L1 Contrastive Analysis: Making an effort to accomplish a difficult physical task equals 'try to open'.",
+    "expl": "<b>Meaning Change:</b> <i>Try + to-infinitive</i> means making an effort or attempting to accomplish a difficult task.",
+    "alert": "💡 Key Rule: 'Try to do' means attempting to perform a difficult action.",
     "chunk": "try to open",
     "category": "Meaning Change"
   },
@@ -551,8 +550,8 @@ const rawDataset = [
     "options": ["approving", "to approve", "approve", "approved"],
     "correct": 0,
     "h": "Does the subject ('proposal') require a passive action performed upon it?",
-    "expl": "'Need + gerund (-ing)' has a passive meaning equivalent to 'need to be done'.",
-    "alert": "L1 Contrastive Analysis: 'Needs approving' is a common Cambridge structure equivalent to 'needs to be approved'.",
+    "expl": "<b>Meaning Change / Passive Gerund:</b> <i>Need + gerund (-ing)</i> has a passive meaning equivalent to <i>need to be done</i>.",
+    "alert": "💡 Key Rule: 'Needs doing' is an active structure with a passive meaning (equivalent to 'needs to be approved').",
     "chunk": "need approving",
     "category": "Meaning Change"
   },
@@ -561,8 +560,8 @@ const rawDataset = [
     "options": ["to call", "calling", "call", "called"],
     "correct": 0,
     "h": "Did the speaker intend to make a phone call?",
-    "expl": "'Mean + to + infinitive' means to intend or plan to do something.",
-    "alert": "L1 Contrastive Analysis: Having the intention to make a call translates to 'mean to call'.",
+    "expl": "<b>Meaning Change:</b> <i>Mean + to-infinitive</i> means intending or planning to perform an action.",
+    "alert": "💡 Key Rule: 'Mean to do' means to intend or plan to do something.",
     "chunk": "mean to call",
     "category": "Meaning Change"
   },
@@ -571,8 +570,8 @@ const rawDataset = [
     "options": ["relocating", "to relocate", "relocate", "relocated"],
     "correct": 0,
     "h": "Does taking the promotion involve or signify a consequence?",
-    "expl": "'Mean + gerund (-ing)' means involving or signifying a logical consequence.",
-    "alert": "L1 Contrastive Analysis: When 'mean' signifies involving or entailing a consequence, English requires the gerund.",
+    "expl": "<b>Meaning Change:</b> <i>Mean + gerund (-ing)</i> means involving or resulting in a necessary consequence.",
+    "alert": "💡 Key Rule: When 'mean' signifies involving or entailing a result, it takes a gerund (-ing).",
     "chunk": "mean relocating",
     "category": "Meaning Change"
   }
@@ -599,9 +598,8 @@ const processedDataset = rawDataset.map((item, idx) => {
   return { ...item, options: newOpts, correct: targetIdx };
 });
 
-// Quiz A = 22 tasks (1-22), Quiz B = 23 tasks (23-45)
 const quizA = processedDataset.slice(0, 22);
-const quizB = processedDataset.slice(22);
+const quizB = processedDataset.slice(22, 45);
 
 let currentMode = 'A';
 let currentIndex = 0;
@@ -609,64 +607,51 @@ let score = 0;
 let streak = 0;
 let selectedOption = null;
 let isAnswerChecked = false;
-let soundEnabled = true;
 
 function getCurrentDataset() {
   return currentMode === 'A' ? quizA : quizB;
-}
-
-function playSound(type) {
-  if (!soundEnabled) return;
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const now = ctx.currentTime;
-    if (type === 'success') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(587.33, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-      gain.gain.setValueAtTime(0.18, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-    } else if (type === 'error') {
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(260, now);
-      osc.frequency.exponentialRampToValueAtTime(190, now + 0.18);
-      gain.gain.setValueAtTime(0.16, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-    } else if (type === 'click') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(400, now);
-      gain.gain.setValueAtTime(0.05, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-    }
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(now);
-    osc.stop(now + 0.3);
-  } catch(e) {}
 }
 
 let britishFemaleVoice = null;
 function findBritishFemaleVoice() {
   if (!('speechSynthesis' in window)) return null;
   const voices = window.speechSynthesis.getVoices();
-  const ukFemaleVoices = voices.filter(v => {
-    const lang = (v.lang || '').toLowerCase();
+  if (!voices || !voices.length) return null;
+  const preferredFemaleVoices = [
+    'Google UK English Female',
+    'Microsoft Libby Online (Natural) - English (United Kingdom)',
+    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
+    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
+    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
+    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
+    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+  ];
+  for (const name of preferredFemaleVoices) {
+    const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
+    if (found) return found;
+  }
+  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+  const enGbFemale = voices.find(v => {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase();
     const name = (v.name || '').toLowerCase();
-    return (lang.includes('en-gb') || lang.includes('en_gb')) && (name.includes('female') || name.includes('libby') || name.includes('hazel') || name.includes('serena') || name.includes('susan') || name.includes('kate'));
+    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
+    return isUK && !maleKeywords.some(m => name.includes(m));
   });
-  if (ukFemaleVoices.length > 0) return ukFemaleVoices[0];
-  const ukVoices = voices.filter(v => (v.lang || '').toLowerCase().includes('en-gb'));
-  if (ukVoices.length > 0) return ukVoices[0];
-  return voices.find(v => v.lang.startsWith('en')) || null;
+  if (enGbFemale) return enGbFemale;
+  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+  if (anyGb) return anyGb;
+  const anyFemaleEnglish = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+  });
+  if (anyFemaleEnglish) return anyFemaleEnglish;
+  return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
 }
 
 if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = findBritishFemaleVoice;
-  findBritishFemaleVoice();
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
 }
 
 function speakBritish(text) {
@@ -674,7 +659,8 @@ function speakBritish(text) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'en-GB';
-  utterance.rate = 0.92;
+  utterance.rate = 0.98;
+  utterance.pitch = 1.05;
   const voice = britishFemaleVoice || findBritishFemaleVoice();
   if (voice) utterance.voice = voice;
   window.speechSynthesis.speak(utterance);
@@ -683,7 +669,45 @@ function speakBritish(text) {
 function getCompletedSentence() {
   const dataset = getCurrentDataset();
   const current = dataset[currentIndex];
-  return current.q.replace('___', current.options[current.correct]);
+  return current.q.replace('___', 'blank');
+}
+
+function playSound(type) {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+
+    if (type === 'success') {
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc1.type = 'sine'; osc1.frequency.setValueAtTime(523.25, now); osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+      osc2.type = 'triangle'; osc2.frequency.setValueAtTime(659.25, now + 0.08); osc2.frequency.exponentialRampToValueAtTime(783.99, now + 0.22);
+      g.gain.setValueAtTime(0.001, now); g.gain.linearRampToValueAtTime(0.18, now + 0.05); g.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      osc1.connect(g); osc2.connect(g); g.connect(ctx.destination);
+      osc1.start(now); osc2.start(now + 0.08); osc1.stop(now + 0.35); osc2.stop(now + 0.35);
+    } else if (type === 'error') {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sine'; osc.frequency.setValueAtTime(260, now); osc.frequency.setValueAtTime(220, now + 0.12);
+      g.gain.setValueAtTime(0.001, now); g.gain.linearRampToValueAtTime(0.16, now + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(now); osc.stop(now + 0.28);
+    } else if (type === 'click') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, now);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.08);
+    }
+  } catch(e) {}
 }
 
 function switchQuizMode(mode) {
@@ -691,7 +715,6 @@ function switchQuizMode(mode) {
   currentIndex = 0;
   score = 0;
   streak = 0;
-  
   const tabA = document.getElementById('tab-quiz-a');
   const tabB = document.getElementById('tab-quiz-b');
   const sub = document.getElementById('subtitulo-quiz');
@@ -714,7 +737,6 @@ function loadChallenge() {
     showFinalSummary();
     return;
   }
-
   isAnswerChecked = false;
   selectedOption = null;
   const current = dataset[currentIndex];
@@ -722,7 +744,9 @@ function loadChallenge() {
   document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
   document.getElementById('puntuacion').innerText = `Correct: ${score}`;
   document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-  document.getElementById('barra-progreso').style.width = `${((currentIndex + 1) / dataset.length) * 100}%`;
+
+  const pct = Math.round(((currentIndex + 1) / dataset.length) * 100);
+  document.getElementById('barra-progreso').style.width = `${pct}%`;
 
   const btnCat = document.getElementById('btn-categoria');
   btnCat.innerText = (current.category || 'Standard').toUpperCase() + ' (CLICK FOR HINT)';
@@ -737,23 +761,23 @@ function loadChallenge() {
   document.getElementById('pregunta-texto').innerHTML = qHtml;
 
   const pista = document.getElementById('pista-texto');
-  pista.innerText = current.h;
+  document.getElementById('pista-contenido').innerText = current.h;
   pista.classList.add('hidden');
 
   const feedbackBox = document.getElementById('feedback-box');
   feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
+
   document.getElementById('btn-verificar').classList.remove('hidden');
 
   const container = document.getElementById('opciones-contenedor');
   container.innerHTML = '';
-
   current.options.forEach((opt, idx) => {
     const div = document.createElement('div');
     div.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer bg-white';
     div.innerHTML = `
       <div class="flex items-center justify-between w-full">
-        <span class="text-base">${opt}</span>
-        <input type="radio" name="quiz-option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
+        <span class="text-base font-semibold">${opt}</span>
+        <input type="radio" name="option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
       </div>
     `;
     div.onclick = () => {
@@ -771,7 +795,6 @@ function loadChallenge() {
 function verifyAnswer() {
   if (selectedOption === null || isAnswerChecked) return;
   isAnswerChecked = true;
-
   const dataset = getCurrentDataset();
   const current = dataset[currentIndex];
   const isCorrect = (selectedOption === current.correct);
@@ -811,13 +834,14 @@ function verifyAnswer() {
   const feedbackAlert = document.getElementById('feedback-alert');
   const feedbackChunk = document.getElementById('feedback-chunk');
 
+  feedbackBox.className = 'p-5 rounded-2xl mb-6 border transition-all duration-300';
   if (isCorrect) {
     feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
-    feedbackTitulo.innerText = '¡Correcto / Excellent!';
+    feedbackTitulo.innerText = 'Excellent!';
     feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
   } else {
     feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
-    feedbackTitulo.innerText = '¡Toma nota / Take Note!';
+    feedbackTitulo.innerText = 'Key Distinction / Take Note!';
     feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
   }
 
@@ -845,12 +869,9 @@ document.getElementById('btn-mostrar-respuesta').onclick = () => {
   if (items[current.correct]) items[current.correct].querySelector('input').checked = true;
   verifyAnswer();
 };
+
 document.getElementById('btn-restart').onclick = () => { currentIndex = 0; score = 0; streak = 0; loadChallenge(); };
 document.getElementById('btn-audio-sentence').onclick = () => { speakBritish(getCompletedSentence()); };
-document.getElementById('btn-audio-toggle').onclick = () => {
-  soundEnabled = !soundEnabled;
-  document.getElementById('audio-status-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
-};
 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
@@ -864,20 +885,21 @@ function showFinalSummary() {
   const dataset = getCurrentDataset();
   const main = document.querySelector('main');
   main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in">
+    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in overflow-hidden" style="border-top: 8px solid #2563eb;">
       <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
       <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">Has completado con éxito este bloque.</p>
+      <p class="text-slate-600 mb-6 max-w-md mx-auto">You have successfully completed this practice module.</p>
       <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
         <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
         <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span></div>
       </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Reiniciar Práctica</button>
+      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Restart Practice</button>
     </div>
   `;
 }
 
 loadChallenge();
 </script>
+
 </body>
 </html>

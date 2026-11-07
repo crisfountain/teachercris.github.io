@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Cris | Essential Present Perfect Practice</title>
+<title>Teacher Cris | Present Perfect Master</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
@@ -68,14 +68,14 @@ button:disabled { background: #cbd5e1; cursor: not-allowed; }
     <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>
   </div>
 
-  <!-- Top Bar with Return Link & Action Controls -->
+  <!-- Top Bar with Return Link & Audio Controls -->
   <div class="top-bar">
-   <a href="index-eng.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
-      ← Return to teachercris.online
+    <a href="index.html" class="back-link">
+      &larr; Back to teachercris.online
     </a>
     <div class="top-actions">
       <button id="btn-audio" class="action-btn" title="Listen in British English">
-        <i class="fas fa-volume-up"></i> <span>Listen (UK)</span>
+        <i class="fas fa-volume-up"></i> <span>Listen (UK ♀)</span>
       </button>
       <button id="btn-reset" class="action-btn" title="Reset progress">
         <i class="fas fa-redo-alt"></i>
@@ -91,7 +91,7 @@ button:disabled { background: #cbd5e1; cursor: not-allowed; }
 
   <div class="brand-header">
     Teacher Cris
-    <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Essential Present Perfect Practice (Quiz A)</span>
+    <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Present Perfect Master Practice (Quiz A)</span>
   </div>
 
   <div class="stats-row">
@@ -171,7 +171,7 @@ const quizB = [
   { q: "High-speed rail connectivity ___ regional commerce across the province since its launch in 2018.", a: ["has transformed", "has been transforming"], h: "Trace economic transformation back to the exact year of rail line inauguration.", expl: "<b>Grammar & Structure:</b> has transformed since / has been transforming since<br><br><b>Temporal Anchor & Aspect:</b> Pinpointing a specific inauguration milestone ('since its launch in 2018') requires the present perfect aspect to connect that past event to ongoing present impacts.", tag: "tag-verb" },
   { q: "The chief archivist ___ rare historical manuscripts for the national library for over a decade.", a: ["has cataloged", "has been cataloging", "has catalogued", "has been cataloguing"], h: "Quantify a specialized professional task spanning a ten-year duration.", expl: "<b>Grammar & Structure:</b> has cataloged for / has been cataloging for<br><br><b>Temporal Anchor & Aspect:</b> Specialized professional tasks carried out over a decade-long duration ('for over a decade') take the present perfect simple or continuous with <b>for</b>.", tag: "tag-verb" },
   { q: "The urban district ___ rapid gentrification since the university constructed its new campus.", a: ["has experienced", "has undergone"], h: "Link social neighborhood changes to a major construction milestone.", expl: "<b>Grammar & Structure:</b> has experienced since / has undergone since<br><br><b>Temporal Anchor & Aspect:</b> A past construction milestone ('since the university constructed...') serves as the origin point, governing the present perfect in the main clause.", tag: "tag-verb" },
-  { q: "Volunteers ___ emergency relief packages for flood victims for forty-eight continuous hours.", a: ["have prepared", "have been preparing", "have assembled", "have been assembling"], h: "Highlight exhaustive physical volunteer effort measured over a two-day timeframe.", expl: "<b>Grammar & Structure:</b> have prepared for / has been preparing for<br><br><b>Temporal Anchor & Aspect:</b> Continuous active effort measured over a defined timeframe ('forty-eight continuous hours') is expressed using the present perfect continuous with <b>for</b>.", tag: "tag-verb" },
+  { q: "Volunteers ___ emergency relief packages for flood victims for forty-eight continuous hours.", a: ["have prepared", "have been preparing", "have assembled", "have been assembling"], h: "Highlight exhaustive physical volunteer effort measured over a two-day timeframe.", expl: "<b>Grammar & Structure:</b> have prepared for / have been preparing for<br><br><b>Temporal Anchor & Aspect:</b> Continuous active effort measured over a defined timeframe ('forty-eight continuous hours') is expressed using the present perfect continuous with <b>for</b>.", tag: "tag-verb" },
   { q: "Strict data privacy standards ___ enforced across all corporate divisions since Q1.", a: ["have been"], h: "Mark the corporate compliance enforcement starting at the first quarter.", expl: "<b>Grammar & Structure:</b> have been enforced since<br><br><b>Temporal Anchor & Aspect:</b> The temporal preposition <b>since</b> introduces the starting quarter ('since Q1'), governing the present perfect passive auxiliary <i>have been</i>.", tag: "tag-verb" },
   { q: "The clinical trial participants ___ daily symptom journals for three full months.", a: ["have maintained", "have been maintaining", "have kept", "have been keeping"], h: "Measure patient record-keeping over a ninety-day clinical trial window.", expl: "<b>Grammar & Structure:</b> have maintained for / have been keeping for<br><br><b>Temporal Anchor & Aspect:</b> Recording or tracking activity measured across a three-month duration requires the present perfect simple or continuous paired with <b>for</b>.", tag: "tag-verb" },
   { q: "Interest rates in the eurozone ___ at historic lows since the central bank intervention.", a: ["have stayed", "have remained"], h: "Show financial rate stability tied to a major central bank policy event.", expl: "<b>Grammar & Structure:</b> have stayed since / have remained since<br><br><b>Temporal Anchor & Aspect:</b> Continuous state stability originating at a central bank intervention is anchored by <b>since</b>, requiring the present perfect.", tag: "tag-verb" },
@@ -189,35 +189,38 @@ let streak = 0;
 let score = 0;
 let solvedThisIdx = false;
 
-// Voice Selector for UK Female Speech Synthesis
+// Enhanced Robust Female Voice Selector (Prioritizing macOS/iOS/Windows Native Female Voices & Filtering Out Male Voices)
 function getBritishFemaleVoice() {
   if (!('speechSynthesis' in window)) return null;
   const voices = window.speechSynthesis.getVoices();
   if (!voices || !voices.length) return null;
+
   const preferredFemaleVoices = [
+    'Victoria', 'Karen', 'Moira', 'Tessa', 'Samantha', 'Zoe', 'Hazel', 'Susan',
     'Google UK English Female',
     'Microsoft Libby Online (Natural) - English (United Kingdom)',
     'Microsoft Sonia Online (Natural) - English (United Kingdom)',
-    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
-    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
-    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
-    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
-    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+    'Microsoft Zira',
+    'Serena', 'Kate', 'Stephanie', 'Fiona', 'Martha'
   ];
+
   for (const name of preferredFemaleVoices) {
     const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
     if (found) return found;
   }
-  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
-  const enGbFemale = voices.find(v => {
+
+  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark', 'fred', 'alex', 'bruce', 'tom', 'lee', 'nathan', 'edward', 'aaron', 'albert', 'alfie', 'benjamin', 'brandon', 'callum', 'charles', 'charlie', 'christian', 'connor', 'dylan', 'elliot', 'ethan', 'felix', 'finley', 'fynn', 'harrison', 'harvey', 'henry', 'isaac', 'jack', 'jacob', 'james', 'jason', 'jayden', 'leo', 'leonard', 'liam', 'logan', 'louis', 'lucas', 'luke', 'mason', 'matthew', 'max', 'michael', 'mohammed', 'muhammad', 'nicholas', 'noah', 'oscar', 'owen', 'patrick', 'peter', 'philip', 'richard', 'robert', 'samuel', 'sebastian', 'theo', 'thomas', 'toby', 'tyler', 'william', 'zachary'];
+
+  const enFemale = voices.find(v => {
     const lang = (v.lang || '').replace('_', '-').toLowerCase();
     const name = (v.name || '').toLowerCase();
-    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
-    return isUK && !maleKeywords.some(m => name.includes(m));
+    const isEnglish = lang.startsWith('en') || name.includes('english') || name.includes('united kingdom') || name.includes('british');
+    const isMale = maleKeywords.some(m => name.includes(m));
+    return isEnglish && !isMale;
   });
-  if (enGbFemale) return enGbFemale;
-  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
-  if (anyGb) return anyGb;
+
+  if (enFemale) return enFemale;
+
   return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
 }
 
@@ -228,15 +231,32 @@ if ('speechSynthesis' in window) {
 function speakCurrentSentence() {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
+  
   const card = currentData[idx];
-  const sentence = card.q.replace(/___+/g, 'blank');
+  const sentence = card.q.replace(/___+/g, 'blank').replace(/[\(\)\/]/g, ' ');
   const utterance = new SpeechSynthesisUtterance(sentence);
   utterance.lang = 'en-GB';
-  const voice = getBritishFemaleVoice();
-  if (voice) utterance.voice = voice;
   utterance.rate = 0.98;
   utterance.pitch = 1.05;
-  window.speechSynthesis.speak(utterance);
+
+  const executeSpeech = () => {
+    const voice = getBritishFemaleVoice();
+    if (voice) {
+      utterance.voice = voice;
+    }
+    window.speechSynthesis.speak(utterance);
+  };
+
+  let voices = window.speechSynthesis.getVoices();
+  if (!voices || voices.length === 0) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      executeSpeech();
+    };
+    window.speechSynthesis.getVoices();
+    setTimeout(executeSpeech, 150);
+  } else {
+    executeSpeech();
+  }
 }
 
 function openModal() {
@@ -334,7 +354,7 @@ function switchQuiz(type) {
   solvedThisIdx = false;
   document.getElementById("tabA").className = (type === 'A') ? "tab-btn active" : "tab-btn";
   document.getElementById("tabB").className = (type === 'B') ? "tab-btn active" : "tab-btn";
-  document.getElementById("subTitle").innerText = `ESSENTIAL PRESENT PERFECT PRACTICE (QUIZ ${type})`;
+  document.getElementById("subTitle").innerText = `Present Perfect Master Practice (Quiz ${type})`;
   document.getElementById('final-screen').style.display = 'none';
   update();
 }
@@ -342,9 +362,10 @@ function switchQuiz(type) {
 document.getElementById('userInput').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') checkAnswer();
 });
+
 document.getElementById('btn-audio').onclick = speakCurrentSentence;
 document.getElementById('btn-reset').onclick = () => {
-  if (confirm('Restart from Task 1 and reset score?')) {
+  if (confirm('Reset from task 1 and clear your progress?')) {
     score = 0;
     streak = 0;
     solvedThisIdx = false;

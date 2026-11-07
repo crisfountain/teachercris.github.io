@@ -3,277 +3,856 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Cris | Advanced Dependent Prepositions Practice</title>
+<title>Advanced Dependent Prepositions Master | Teacher Cris</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
-.card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #2563eb; position: relative; }
-
-/* Quiz Selector Tabs */
-.quiz-tabs { display: flex; gap: 8px; margin-bottom: 20px; background-color: #f1f5f9; padding: 6px; border-radius: 12px; }
-.tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-weight: 600; font-size: 0.9rem; color: #64748b; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
-.tab-btn.active { background-color: #ffffff; color: #2563eb; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-
-.brand-header { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; color: #2563eb; letter-spacing: -0.5px; }
-.stats-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: 600; color: #64748b; font-size: 0.9rem; }
-.question { font-size: 1.15rem; margin-bottom: 20px; min-height: 110px; display: flex; align-items: center; justify-content: center; line-height: 1.7; color: #2c3e50; text-align: left; background: #f9fbff; padding: 25px; border-radius: 12px; border: 1px solid #e1e8ed; }
-.type-tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; color: white; text-transform: uppercase; cursor: help; }
-.tag-verb { background: #2563eb; }
-.tag-adjective { background: #d97706; }
-.tag-noun { background: #7c3aed; }
-input[type="text"] { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid #ced6e0; border-radius: 10px; box-sizing: border-box; outline: none; margin-bottom: 10px; }
-#feedback { height: 30px; margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; }
-.correct { color: #27ae60; } .wrong { color: #e74c3c; }
-.ans-text, .hint-text { margin: 10px 0; font-weight: bold; color: #2f3542; display: none; padding: 15px; border-radius: 10px; text-align: left; }
-.ans-text { background: #eef2f7; border: 1px dashed #2c3e50; }
-.hint-text { background: #fffbe3; border-left: 4px solid #f1c40f; color: #7d6608; }
-.explanation-box { background: #fff9db; padding: 20px; border-radius: 10px; text-align: left; font-size: 0.95rem; margin-top: 15px; display: none; border-left: 5px solid #f1c40f; line-height: 1.6; max-height: 250px; overflow-y: auto; }
-.explanation-header { color: #946c00; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
-.controls { display: flex; gap: 10px; margin-top: 20px; }
-button { flex: 1; padding: 12px; font-size: 1rem; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; background: #2563eb; color: white; transition: background 0.2s ease; }
-button:hover { background: #1d4ed8; }
-button:disabled { background: #cbd5e1; cursor: not-allowed; }
-.check-btn { background: #27ae60; width: 100%; margin-bottom: 15px; font-size: 1.1rem; flex: none; }
-.check-btn:hover { background: #219653; }
-#ruleModal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
-.modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: left; position: relative; }
-.close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
-#final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
-.visible { display: block !important; }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
 
-<div id="ruleModal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <h3 id="modalTitle" style="margin-top:0;">Category Reference</h3>
-    <p id="modalText"></p>
+<main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
+
+<div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 overflow-hidden" style="border-top: 8px solid #2563eb;">
+
+<!-- Header Controls -->
+<div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+  <a href="index-eng.html" class="text-indigo-600 font-semibold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
+    &larr; Return to teachercris.online
+  </a>
+  <div class="flex items-center gap-2">
+    <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
+      <i class="fas fa-volume-up"></i> <span>Listen (UK ♀)</span>
+    </button>
+    <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reset">
+      <i class="fas fa-redo-alt"></i>
+    </button>
   </div>
 </div>
 
-<div class="card-container">
-  <div id="final-screen">
-    <h1 style="color: #27ae60;">Session Complete! 🎓</h1>
-    <p id="final-stats" style="font-size: 1.2rem; color: #2c3e50;"></p>
-    <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>
-  </div>
+<!-- Quiz Mode Tabs -->
+<div class="grid grid-cols-2 gap-2 mb-6 bg-slate-100 p-1.5 rounded-2xl">
+  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer bg-white text-indigo-600">
+    Quiz A (Verbs & Adjectives)
+  </button>
+  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer text-slate-600 hover:text-slate-900">
+    Quiz B (Adjectives & Nouns)
+  </button>
+</div>
 
-  <div style="text-align: left; margin-bottom: 15px;">
-    <a href="index.html" style="text-decoration: none; color: #2563eb; background: #eff6ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
-      ← Back to teachercris.online
-    </a>
-  </div>
+<!-- Title -->
+<div class="text-center mb-6">
+  <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
+  <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">Advanced Dependent Prepositions Practice (Quiz A)</p>
+</div>
 
-  <!-- Quiz Selector Tabs -->
-  <div class="quiz-tabs">
-    <button id="tabA" class="tab-btn active" onclick="switchQuiz('A')">Quiz A (Verbs & Adjectives)</button>
-    <button id="tabB" class="tab-btn" onclick="switchQuiz('B')">Quiz B (Adjectives & Nouns)</button>
+<!-- Progress Bar -->
+<div class="flex justify-between items-center mb-4 text-sm text-slate-500">
+  <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
+  <div class="flex items-center gap-3">
+    <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
+    <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
   </div>
+</div>
+<div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
+  <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
+</div>
 
-  <div class="brand-header">
-    Teacher Cris
-    <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Advanced Dependent Prepositions Practice (Quiz A)</span>
+<!-- Category Pill & Hint -->
+<div class="mb-6 text-center">
+  <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
+    VERB (CLICK FOR CATEGORY ℹ️)
+  </button>
+  <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
+    <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
   </div>
+</div>
 
-  <div class="stats-row">
-    <div id="pg">Task 1 of 22</div>
-    <div>
-      <span id="score-display" style="margin-right: 15px; color: #27ae60;">Correct: 0</span>
-      <span id="streak-count" style="color: #e67e22;">Streak: 0</span>
+<!-- Question Text -->
+<div class="mb-6 sm:mb-8">
+  <div id="pregunta-texto" class="text-base sm:text-lg font-medium text-slate-900 bg-slate-50 p-6 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center">
+  </div>
+</div>
+
+<!-- Input Box Container -->
+<div class="mb-6">
+  <input type="text" id="userInput" placeholder="Type preposition..." autocomplete="off" autocapitalize="off" spellcheck="false" class="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition text-base font-semibold text-slate-800 placeholder-slate-400 bg-white shadow-inner">
+</div>
+
+<!-- Action Button -->
+<button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
+  Verify (Enter)
+</button>
+
+<!-- Feedback Card -->
+<div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
+  <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
+  <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
+  <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
+  <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
+</div>
+
+<!-- Footer Controls -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
+  <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    <i class="fas fa-chevron-left"></i> Previous
+  </button>
+  <button id="btn-pista-inferior" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    Hint <i class="far fa-lightbulb"></i>
+  </button>
+  <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    Show Answer <i class="fas fa-eye"></i>
+  </button>
+  <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
+    Next <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+
+</div>
+</main>
+
+<!-- Category Modal -->
+<div id="modal-category" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+  <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-hidden shadow-2xl border border-slate-200 flex flex-col">
+    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-indigo-50/50">
+      <div class="flex items-center gap-2">
+        <span id="modal-aspect-badge" class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+        <span class="text-xs text-slate-500 font-semibold">Dependent Preposition Overview</span>
+      </div>
+      <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div id="modal-content" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-700"></div>
+    <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex justify-end">
+      <button id="btn-modal-return" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-xs transition cursor-pointer">
+        Got it (Return to Task)
+      </button>
     </div>
   </div>
-
-  <div id="tagDisplay" onclick="openModal()"></div>
-
-  <div class="question" id="q">Loading...</div>
-
-  <input type="text" id="userInput" placeholder="Type preposition..." autocomplete="off">
-  <div id="feedback"></div>
-
-  <button class="check-btn" onclick="checkAnswer()">Verify (Enter)</button>
-
-  <div id="hintBox" class="hint-text"></div>
-  <div id="a" class="ans-text"></div>
-  <div id="expl" class="explanation-box"></div>
-
-  <div class="controls">
-    <button id="pBtn" onclick="prev()">← Previous</button>
-    <button onclick="showHint()">Hint 💡</button>
-    <button onclick="revealAnswer()">Show Answer 👁️</button>
-    <button id="nBtn" onclick="next()">Next →</button>
-  </div>
 </div>
 
+<footer class="mt-auto py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-500">
+  <div class="max-w-4xl mx-auto px-4">
+    <p class="font-semibold text-slate-700">Teacher Cris • Advanced Dependent Prepositions Master</p>
+  </div>
+</footer>
+
 <script>
-const rules = {
-  "tag-verb": { title: "Verb + Preposition", text: "Verbs that require specific dependent prepositions to establish legal, causal, or spatial relationships.<br><br>• <i>Depend <b>on / upon</b></i> (contingency base).<br>• <i>Insist <b>on / upon</b></i> (sustained focus)." },
-  "tag-adjective": { title: "Adjective + Preposition", text: "Adjectives paired with fixed particles to define psychological states, competencies, or directional orientations.<br><br>• <i>Married <b>to</b></i> (relational bond).<br>• <i>Good <b>at</b></i> (point of competence)." },
-  "tag-noun": { title: "Noun + Preposition", text: "Nouns linked to prepositions governing institutional trust, environmental risk, or relational connection.<br><br>• <i>A threat <b>to</b></i> (target of risk).<br>• <i>Confidence <b>in</b></i> (domain of trust)." }
-};
-
-const quizA = [
-  { q: "Whether the new regional branch opens next autumn will strictly depend ___ the board's approval of the revised budget.", a: ["on", "upon"], h: "Visualizes a physical or metaphorical weight resting/leaning on a base.", expl: "<b>Prepositional Governance:</b> <i>depend on / depend upon</i><br><br><b>Lexical Logic:</b> The verb <i>depend</i> strictly governs <b>on</b> or <b>upon</b> to denote reliance or contingency, conceptualizing a condition as a supporting foundation.", tag: "tag-verb" },
-  { q: "Despite facing strong opposition from several committee members, the director insisted ___ implementing the new workplace policies immediately.", a: ["on", "upon"], h: "Projects sustained downwards pressure placed on a point of focus.", expl: "<b>Prepositional Governance:</b> <i>insist on / insist upon</i><br><br><b>Lexical Logic:</b> The verb <i>insist</i> requires the preposition <b>on</b> or <b>upon</b> when introducing a gerund or noun phrase, expressing sustained focus or firm determination.", tag: "tag-verb" },
-  { q: "The managing editor warmly congratulated the investigative journalist ___ winning the prestigious international press award.", a: ["on"], h: "Visualizes placing praise or a token directly on top of the achievement.", expl: "<b>Prepositional Governance:</b> <i>congratulate [someone] on [something]</i><br><br><b>Lexical Logic:</b> Standard English syntax couples <i>congratulate</i> with <b>on</b> to link praise directly to the specific achievement or occasion.", tag: "tag-verb" },
-  { q: "Due to unexpected severe weather conditions, event organizers had no choice but to substitute the outdoor gala ___ a smaller indoor reception.", a: ["for"], h: "Visualizes destination aimed for a target replacement.", expl: "<b>Prepositional Governance:</b> <i>substitute [new item] for [old item]</i><br><br><b>Lexical Logic:</b> When substituting, <b>for</b> marks the item being replaced. Note that <i>substitute A for B</i> means A replaces B.", tag: "tag-verb" },
-  { q: "The legal team worked through the night to prevent key evidence ___ being accidentally destroyed during the audit.", a: ["from"], h: "Builds a protective barrier to keep the action away.", expl: "<b>Prepositional Governance:</b> <i>prevent [someone/something] from [gerund]</i><br><br><b>Syntactic Pattern:</b> Verbs of prevention and restraint (e.g., <i>prevent, hinder, stop</i>) systematically require <b>from</b> followed by a gerund clause.", tag: "tag-verb" },
-  { q: "The panel of international judges consisted ___ experts drawn from five distinct scientific disciplines.", a: ["of"], h: "Visualizes intrinsic constituent parts making up a whole.", expl: "<b>Prepositional Governance:</b> <i>consist of</i><br><br><b>Lexical Logic:</b> The phrase <i>consist of</i> introduces the intrinsic component parts or members that comprise a whole. Compare with <i>consist in</i> (to reside in as a defining feature).", tag: "tag-verb" },
-  { q: "The department manager spent nearly half of the quarterly budget ___ upgrading the office's software infrastructure.", a: ["on"], h: "Views expenditure as laying out funds directly on a surface/project.", expl: "<b>Prepositional Governance:</b> <i>spend [time/money] on [something]</i><br><br><b>Lexical Logic:</b> The verb <i>spend</i> requires <b>on</b> when followed by a noun or gerund object denoting the target of expenditure.", tag: "tag-verb" },
-  { q: "After a turbulent negotiation phase, both pharmaceutical companies finally succeeded ___ reaching a mutually beneficial distribution agreement.", a: ["in"], h: "Visualizes operating or arriving in a domain of success.", expl: "<b>Prepositional Governance:</b> <i>succeed in [gerund]</i><br><br><b>Syntactic Pattern:</b> Achieving a goal is expressed by <i>succeed in</i> followed by a gerund, marking the sphere or domain of accomplishment.", tag: "tag-verb" },
-  { q: "The regulatory commission accused the pharmaceutical firm ___ deliberately manipulating trial results to accelerate approval.", a: ["of"], h: "Visualizes pulling a charge out of a person's conduct.", expl: "<b>Prepositional Governance:</b> <i>accuse [someone] of [something]</i><br><br><b>Lexical Logic:</b> Verbs of judicial allegation (e.g., <i>accuse, suspect, convict</i>) govern <b>of</b> to link the individual to the charge or offense.", tag: "tag-verb" },
-  { q: "Financial advisors strongly discourage their clients ___ making speculative investments during periods of high market volatility.", a: ["from"], h: "Visualizes steering motion away from a trajectory.", expl: "<b>Prepositional Governance:</b> <i>discourage [someone] from [gerund]</i><br><br><b>Syntactic Pattern:</b> <i>Discourage</i> takes an object + <b>from</b> + gerund to express dissuasion; it does not take a to-infinitive complement.", tag: "tag-verb" },
-  { q: "Political leaders were sternly warned not to interfere ___ the independent judicial proceedings of the international tribunal.", a: ["with", "in"], h: "Coming into friction alongside an ongoing process, disturbing its flow.", expl: "<b>Prepositional Governance:</b> <i>interfere with / interfere in</i><br><br><b>Lexical Logic:</b> <i>Interfere with</i> denotes causing obstruction or disruption to a process, while <i>interfere in</i> highlights unwarranted meddling in an affair.", tag: "tag-verb" },
-  { q: "The architecture of the newly constructed museum strikingly reminds visitors ___ the historical monuments of ancient Rome.", a: ["of"], h: "Draws a memory out of the source object.", expl: "<b>Prepositional Governance:</b> <i>remind [someone] of [something]</i><br><br><b>Lexical Logic:</b> To evoke a memory of resemblance or association, <i>remind</i> requires <b>of</b> to connect the stimulus to the recalled subject.", tag: "tag-verb" },
-  { q: "Many rural communities across the region continue to suffer ___ a severe lack of modern healthcare infrastructure.", a: ["from"], h: "Visualizes distress emanating from an external condition.", expl: "<b>Prepositional Governance:</b> <i>suffer from</i><br><br><b>Lexical Logic:</b> The verb <i>suffer</i> governs <b>from</b> when indicating the origin or cause of chronic hardship, illness, or disadvantage.", tag: "tag-verb" },
-  { q: "During the press conference, the spokesperson refused to comment ___ the ongoing police investigation.", a: ["on", "upon"], h: "Visualizes focusing remarks directly on top of a subject surface.", expl: "<b>Prepositional Governance:</b> <i>comment on / comment upon</i><br><br><b>Lexical Logic:</b> In standard English, the verb <i>comment</i> requires the preposition <b>on</b> (or <b>upon</b>) to introduce the subject matter of discourse.", tag: "tag-verb" },
-  { q: "The lead researcher spent months attempting to approve ___ the proposed ethical guidelines for human trials.", a: ["of"], h: "Extracting a favorable evaluation out of something.", expl: "<b>Prepositional Governance:</b> <i>approve of</i><br><br><b>Lexical Logic:</b> <i>Approve of</i> denotes personal endorsement or favorable opinion, whereas transitive <i>approve</i> signifies official sanction or formal authorisation.", tag: "tag-verb" },
-  { q: "After twenty years of dedicated research, the immunologist is effectively married ___ her groundbreaking work on autoimmune diseases.", a: ["to"], h: "Conceptualizes a directional connection or bond targeted to another entity.", expl: "<b>Prepositional Governance:</b> <i>married to</i><br><br><b>Lexical Logic:</b> The adjective <i>married</i> takes <b>to</b> to specify the partner, institution, or devotion bound by the relationship.", tag: "tag-adjective" },
-  { q: "She has always been exceptionally good ___ synthesizing complex statistical data into actionable business insights.", a: ["at"], h: "Pinpoints a precise target coordinate where skill is applied.", expl: "<b>Prepositional Governance:</b> <i>good at / adept at</i><br><br><b>Lexical Logic:</b> Ability adjectives (e.g., <i>good, adept, brilliant, skilled</i>) govern <b>at</b> to pinpoint the specific area of competence or skill.", tag: "tag-adjective" },
-  { q: "The corporate board remained remarkably indifferent ___ the growing public criticism regarding their environmental record.", a: ["to"], h: "Establishes an orientation aimed to an external stimulus showing zero responsiveness.", expl: "<b>Prepositional Governance:</b> <i>indifferent to</i><br><br><b>Lexical Logic:</b> The adjective <i>indifferent</i> takes <b>to</b> to designate the recipient or stimulus toward which apathy or lack of concern is directed.", tag: "tag-adjective" },
-  { q: "Unregulated industrial runoff is directly responsible ___ the catastrophic decline in local freshwater fish populations.", a: ["for"], h: "Visualizes standing in front of or answering for a consequence.", expl: "<b>Prepositional Governance:</b> <i>responsible for</i><br><br><b>Lexical Logic:</b> <i>Responsible</i> governs <b>for</b> when identifying the cause, duty, or agent accountable for an outcome.", tag: "tag-adjective" },
-  { q: "Deeply absorbed ___ his research on quantum computing, the theoretical physicist completely lost track of time.", a: ["in"], h: "Visualizes complete immersion or containment in a liquid or surrounding medium.", expl: "<b>Prepositional Governance:</b> <i>absorbed in</i><br><br><b>Lexical Logic:</b> The state of mental immersion or complete mental engagement is metaphorically framed using <b>in</b>.", tag: "tag-adjective" },
-  { q: "Senior corporate executives must be fully aware ___ the potential geopolitical risks before finalizing the multi-billion dollar merger.", a: ["of"], h: "Visualizes conscious knowledge radiating out of a reality.", expl: "<b>Prepositional Governance:</b> <i>aware of</i><br><br><b>Lexical Logic:</b> Cognition adjectives such as <i>aware</i> and <i>conscious</i> take <b>of</b> to complement the object of perception.", tag: "tag-adjective" },
-  { q: "The new AI processing unit is capable ___ executing billions of complex mathematical calculations per millisecond.", a: ["of"], h: "Measures potential capacity stemming out of an entity.", expl: "<b>Prepositional Governance:</b> <i>capable of [gerund]</i><br><br><b>Syntactic Pattern:</b> <i>Capable</i> takes <b>of</b> followed by a gerund clause to denote potential or capacity; it does not complement with a to-infinitive.", tag: "tag-adjective" }
+const datasetA = [
+  {
+    q: "Whether the new regional branch opens next autumn will strictly depend ___ the board's approval of the revised budget.",
+    answer: "on",
+    alt: ["upon"],
+    category: "VERB",
+    h: "Think of what preposition normally follows 'depend'.",
+    expl: "<b>Depend on / upon:</b> To be contingent on or determined by something.",
+    alert: "💡 Collocation: 'Depend on' or 'depend upon' are standard.",
+    chunk: "depend on the board's approval"
+  },
+  {
+    "q": "The committee's decision was predicated ___ a thorough review of the financial disclosures.",
+    "answer": "on",
+    "alt": ["upon"],
+    "category": "VERB",
+    h: "Identify the preposition required after 'predicated'.",
+    expl: "<b>Predicated on:</b> To base something on a particular set of conditions or assumptions.",
+    "alert": "💡 Collocation: 'Predicated on' is formal academic register.",
+    "chunk": "predicated on a thorough review"
+  },
+  {
+    "q": "His continuous tardiness is tantamount ___ negligence in his professional duties.",
+    "answer": "to",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Select the preposition used with 'tantamount' indicating equivalence.",
+    expl: "<b>Tantamount to:</b> Equivalent in seriousness or effect to something bad.",
+    "alert": "💡 Fixed Expression: 'Tantamount to' always takes 'to'.",
+    "chunk": "tantamount to negligence"
+  },
+  {
+    "q": "The new CEO is fully committed ___ restructuring the entire supply chain division.",
+    "answer": "to",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Remember that 'committed' takes a gerund (-ing) object after its preposition.",
+    expl: "<b>Committed to + -ing:</b> Dedicated to a cause or course of action.",
+    "alert": "💡 Grammar Rule: 'Committed to' is followed by a gerund noun phrase.",
+    "chunk": "committed to restructuring"
+  },
+  {
+    "q": "The startup was fraught ___ risks during its initial developmental phase.",
+    "answer": "with",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "What preposition pairs with 'fraught' to mean filled with danger or problems?",
+    expl: "<b>Fraught with:</b> Filled with or destined to result in (undesirable things like danger or peril).",
+    "alert": "💡 Fixed Pair: 'Fraught with danger/difficulties'.",
+    "chunk": "fraught with risks"
+  },
+  {
+    "q": "The diplomat was adept ___ navigating complex international negotiations.",
+    "answer": "at",
+    "alt": ["in"],
+    "category": "ADJECTIVE",
+    h: "Select the preposition used with 'adept' denoting high skill.",
+    expl: "<b>Adept at / in:</b> Very skilled or proficient at doing something.",
+    "alert": "💡 Adjective Pattern: 'Adept at + -ing'.",
+    "chunk": "adept at navigating"
+  },
+  {
+    "q": "The board remains averse ___ taking unnecessary financial gambles.",
+    "answer": "to",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Choose the preposition pairing with 'averse' meaning opposed to.",
+    expl: "<b>Averse to:</b> Having a strong dislike of or opposition to something.",
+    "alert": "💡 Adjective Pattern: 'Averse to + gerund'.",
+    "chunk": "averse to taking"
+  },
+  {
+    "q": "The incumbent administration is prone ___ making hasty legislative decisions.",
+    "answer": "to",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "What preposition follows 'prone' to denote likelihood?",
+    expl: "<b>Prone to:</b> Likely or liable to suffer from or do something undesirable.",
+    "alert": "💡 Adjective Pattern: 'Prone to errors / prone to acting'.",
+    "chunk": "prone to making"
+  },
+  {
+    "q": "The scientist was engrossed ___ analyzing the complex genomic data.",
+    "answer": "in",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "What preposition pairs with 'engrossed' meaning absorbed in attention?",
+    expl: "<b>Engrossed in:</b> Having all one's attention or interest absorbed by someone or something.",
+    "alert": "💡 Adjective Pattern: 'Engrossed in research/study'.",
+    "chunk": "engrossed in analyzing"
+  },
+  {
+    "q": "The auditor pointed ___ several critical discrepancies in the quarterly ledger.",
+    "answer": "out",
+    "alt": [],
+    "category": "VERB",
+    h: "Phrasal verb meaning to draw attention to specific facts.",
+    expl: "<b>Point out:</b> To direct someone's attention toward something important.",
+    "alert": "💡 Phrasal Verb: 'Point out discrepancies'.",
+    "chunk": "pointed out several discrepancies"
+  },
+  {
+    "q": "The region is notorious ___ its unpredictable weather patterns during autumn.",
+    "answer": "for",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Choose the preposition following 'notorious' for bad traits.",
+    expl: "<b>Notorious for:</b> Famous or well known, typically for some bad quality or deed.",
+    "alert": "💡 Adjective Pattern: 'Notorious for + noun/-ing'.",
+    "chunk": "notorious for its unpredictable"
+  },
+  {
+    "q": "The new policy resulted ___ a significant decrease in administrative overhead.",
+    "answer": "in",
+    "alt": [],
+    "category": "VERB",
+    h: "Distinguish cause ('result from') from effect ('result in').",
+    expl: "<b>Result in:</b> To cause a specific outcome or consequence.",
+    "alert": "💡 Verb Distinction: 'Result in' introduces the consequence; 'result from' introduces the cause.",
+    "chunk": "resulted in a significant"
+  },
+  {
+    "q": "His resignation stemmed directly ___ irreconcilable differences with the board.",
+    "answer": "from",
+    "alt": [],
+    "category": "VERB",
+    h: "Select the preposition denoting origin or source.",
+    expl: "<b>Stem from:</b> To originate in or be caused by something.",
+    "alert": "💡 Collocation: Problems or events 'stem from' a source.",
+    "chunk": "stemmed directly from"
+  },
+  {
+    "q": "The architecture of the building is reminiscent ___ 19th-century neoclassical design.",
+    "answer": "of",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "What preposition follows 'reminiscent' meaning evoking memories?",
+    expl: "<b>Reminiscent of:</b> Tending to remind one of something.",
+    "alert": "💡 Adjective Pattern: 'Reminiscent of + noun'.",
+    "chunk": "reminiscent of 19th-century"
+  },
+  {
+    "q": "The committee is endowed ___ the authority to investigate corporate fraud.",
+    "answer": "with",
+    "alt": [],
+    "category": "VERB",
+    h: "What preposition pairs with 'endowed' meaning naturally provided with?",
+    expl: "<b>Endowed with:</b> Provided or equipped with a quality, asset, or power.",
+    "alert": "💡 Passive Collocation: 'Endowed with rights/authority'.",
+    "chunk": "endowed with the authority"
+  },
+  {
+    "q": "She was acutely conscious ___ the intense scrutiny surrounding her promotion.",
+    "answer": "of",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Select the adjective preposition denoting awareness.",
+    expl: "<b>Conscious of:</b> Aware of and responding to one's surroundings or specific facts.",
+    "alert": "💡 Adjective Pattern: 'Conscious of + noun/-ing'.",
+    "chunk": "conscious of the intense"
+  },
+  {
+    "q": "The research team collaborated closely ___ leading academic institutions worldwide.",
+    "answer": "with",
+    "alt": [],
+    "category": "VERB",
+    h: "What preposition denotes working jointly with someone?",
+    expl: "<b>Collaborate with:</b> To work jointly on an activity or project with another person or group.",
+    "alert": "💡 Verb Pattern: 'Collaborate with colleagues/institutions'.",
+    "chunk": "collaborated closely with leading"
+  },
+  {
+    "q": "The defense asserted that the prosecution's claims were devoid ___ factual backing.",
+    "answer": "of",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "What preposition pairs with 'devoid' meaning completely lacking?",
+    expl: "<b>Devoid of:</b> Entirely lacking or free from something.",
+    "alert": "💡 Adjective Pattern: 'Devoid of merit/evidence'.",
+    "chunk": "devoid of factual backing"
+  },
+  {
+    "q": "She was subjected ___ rigorous vetting before joining the intelligence agency.",
+    "answer": "to",
+    "alt": [],
+    "category": "VERB",
+    h: "What preposition follows 'subjected' in passive voice?",
+    expl: "<b>Subjected to:</b> Caused or forced to undergo a particular experience or treatment.",
+    "alert": "💡 Passive Collocation: 'Subjected to tests/vetting'.",
+    "chunk": "subjected to rigorous vetting"
+  },
+  {
+    "q": "The success of the venture was contingent ___ securing long-term supply contracts.",
+    "answer": "on",
+    "alt": ["upon"],
+    "category": "ADJECTIVE",
+    h: "Identify the preposition meaning dependent upon.",
+    expl: "<b>Contingent on / upon:</b> Depending on certain conditions or circumstances to occur.",
+    "alert": "💡 Adjective Pattern: 'Contingent on conditions'.",
+    "chunk": "contingent on securing"
+  },
+  {
+    "q": "The board insisted ___ conducting an independent forensic audit.",
+    "answer": "on",
+    "alt": ["upon"],
+    "category": "VERB",
+    h: "What preposition follows 'insist' when demanding an action?",
+    expl: "<b>Insist on + gerund:</b> To demand something forcefully, refusing to accept an alternative.",
+    "alert": "💡 Verb Pattern: 'Insist on doing something'.",
+    "chunk": "insisted on conducting"
+  },
+  {
+    "q": "The diplomat proved instrumental ___ brokering the historic ceasefire agreement.",
+    "answer": "in",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Select the adjective preposition denoting crucial involvement.",
+    expl: "<b>Instrumental in:</b> Serving as an important agent or cause in achieving something.",
+    "alert": "💡 Adjective Pattern: 'Instrumental in + -ing'.",
+    "chunk": "instrumental in brokering"
+  }
 ];
 
-const quizB = [
-  { q: "Environmental analysts were sharply critical ___ the government's decision to subsidize fossil fuel extraction.", a: ["of"], h: "Directs evaluation or judgment coming out of an observer onto a subject.", expl: "<b>Prepositional Governance:</b> <i>critical of</i><br><br><b>Lexical Logic:</b> Evaluative adjectives expressing disapproval (e.g., <i>critical, mistrustful, suspicious</i>) regularly govern <b>of</b>.", tag: "tag-adjective" },
-  { q: "The selection tribunal found that the interviewing panel had been unfairly prejudiced ___ candidates from non-traditional backgrounds.", a: ["against"], h: "Projects a hostile force or barrier leaning directly against a target.", expl: "<b>Prepositional Governance:</b> <i>prejudiced against</i><br><br><b>Lexical Logic:</b> Adjectives denoting bias or opposition take <b>against</b> (e.g., <i>prejudiced against, biased against</i>) to mark the target of hostility.", tag: "tag-adjective" },
-  { q: "Modern optical sensors are extraordinarily sensitive ___ minor variations in ambient environmental light.", a: ["to"], h: "Projects receptivity pointing to an incoming stimulus or signal.", expl: "<b>Prepositional Governance:</b> <i>sensitive to</i><br><br><b>Lexical Logic:</b> <i>Sensitive</i> requires <b>to</b> to indicate responsiveness or susceptibility to external stimuli or environmental changes.", tag: "tag-adjective" },
-  { q: "Although he was deeply disappointed ___ the election results, the candidate delivered a gracious concession speech.", a: ["with", "at", "by"], h: "Visualizes being accompanied or impacted by an unsatisfactory outcome.", expl: "<b>Prepositional Governance:</b> <i>disappointed with / at / by</i><br><br><b>Lexical Logic:</b> Emotional reaction adjectives accept <b>with</b> (for objects/results), <b>at</b>, or <b>by</b> (for events/causes) to connect feeling with source.", tag: "tag-adjective" },
-  { q: "Young entrepreneurs are often obsessed ___ finding scalable business models before establishing steady revenue.", a: ["with"], h: "Visualizes a mental fixation that lingers constantly alongside a person.", expl: "<b>Prepositional Governance:</b> <i>obsessed with</i><br><br><b>Lexical Logic:</b> The adjective <i>obsessed</i> governs <b>with</b> to mark the idea, entity, or goal occupying mental focus.", tag: "tag-adjective" },
-  { q: "The candidate's extensive international experience makes her uniquely suited ___ the diplomatic post in Geneva.", a: ["to", "for"], h: "Visualizes a tailored fit pointing directional alignment to a position.", expl: "<b>Prepositional Governance:</b> <i>suited to / suited for</i><br><br><b>Lexical Logic:</b> <i>Suited</i> couples with <b>to</b> (matching quality) or <b>for</b> (purpose/role) to express appropriateness or alignment.", tag: "tag-adjective" },
-  { q: "After working twelve-hour shifts for six consecutive weeks, the medical staff became thoroughly tired ___ administrative delays.", a: ["of"], h: "Visualizes physical or mental exhaustion stemming out of a repetitive situation.", expl: "<b>Prepositional Governance:</b> <i>tired of</i><br><br><b>Lexical Logic:</b> Idiomatic expressions of impatience or exhaustion (e.g., <i>tired of, sick of</i>) require <b>of</b> before the source of annoyance.", tag: "tag-adjective" },
-  { q: "The lead developer was extremely proud ___ the team's ability to deploy the software patch without any server downtime.", a: ["of"], h: "Visualizes pride radiating out of an achievement or person.", expl: "<b>Prepositional Governance:</b> <i>proud of</i><br><br><b>Lexical Logic:</b> The adjective <i>proud</i> takes <b>of</b> to specify the achievement, quality, or person that is the source of pride.", tag: "tag-adjective" },
-  { q: "Rising ocean temperatures pose an immediate and severe threat ___ coastal marine ecosystems worldwide.", a: ["to"], h: "Visualizes a directed vector or arrow pointing to a target that receives impact.", expl: "<b>Prepositional Governance:</b> <i>a threat to</i><br><br><b>Lexical Logic:</b> Nouns indicating risk or hazard (e.g., <i>threat, danger, risk</i>) govern <b>to</b> to designate the vulnerable entity.", tag: "tag-noun" },
-  { q: "Financial institutions operating within the European Union must strictly maintain compliance ___ updated anti-money laundering regulations.", a: ["with"], h: "Visualizes moving or acting alongside in harmony/company with a set of rules.", expl: "<b>Prepositional Governance:</b> <i>compliance with</i><br><br><b>Lexical Logic:</b> Abstract nouns derived from verbs of adherence (<i>comply → compliance</i>) require <b>with</b> to specify the rules or standards.", tag: "tag-noun" },
-  { q: "Throughout the prolonged crisis, the chief negotiator demonstrated an extraordinary capacity ___ maintaining calm under extreme pressure.", a: ["for"], h: "Visualizes an internal space or volume built for carrying out a purpose.", expl: "<b>Prepositional Governance:</b> <i>capacity for [noun/gerund]</i><br><br><b>Lexical Logic:</b> The noun <i>capacity</i> takes <b>for</b> when referring to potential for an activity or skill (e.g., <i>capacity for hard work</i>).", tag: "tag-noun" },
-  { q: "Public confidence ___ the domestic banking system plummeted following the unexpected collapse of two major lenders.", a: ["in"], h: "Visualizes trust anchored deep inside an institution or person.", expl: "<b>Prepositional Governance:</b> <i>confidence in</i><br><br><b>Lexical Logic:</b> Nouns denoting trust and psychological reliance (e.g., <i>confidence, faith, belief</i>) govern <b>in</b>.", tag: "tag-noun" },
-  { q: "The minister faced widespread criticism ___ his handling of the emergency evacuation during the recent flash floods.", a: ["of"], h: "Links the critique as belonging to or originating out of the target's actions.", expl: "<b>Prepositional Governance:</b> <i>criticism of</i><br><br><b>Lexical Logic:</b> The noun <i>criticism</i> governs <b>of</b> when identifying the subject, behavior, or policy undergoing evaluation.", tag: "tag-noun" },
-  { q: "The university has earned an enviable international reputation ___ academic excellence in biotechnology research.", a: ["for"], h: "Visualizes standing or renown awarded for a specific trait or achievement.", expl: "<b>Prepositional Governance:</b> <i>reputation for</i><br><br><b>Lexical Logic:</b> The noun <i>reputation</i> takes <b>for</b> to specify the distinguishing quality or achievement for which someone is known.", tag: "tag-noun" },
-  { q: "Rebuilding consumer trust ___ autonomous vehicle technology will require years of verified safety data.", a: ["in"], h: "Visualizes placing faith securely inside a system or person.", expl: "<b>Prepositional Governance:</b> <i>trust in</i><br><br><b>Lexical Logic:</b> The noun <i>trust</i> governs <b>in</b> to indicate the object or system in which confidence is placed.", tag: "tag-noun" },
-  { q: "The keynote speaker paid close attention ___ the audience's non-verbal reactions throughout her lecture.", a: ["to"], h: "Visualizes directing cognitive focus pointing to a target.", expl: "<b>Prepositional Governance:</b> <i>attention to</i><br><br><b>Lexical Logic:</b> Collocations with <i>attention</i> (e.g., <i>pay attention, turn attention</i>) require <b>to</b> to mark the focus of awareness.", tag: "tag-noun" },
-  { q: "Despite the lack of empirical evidence, the community held an unwavering belief ___ the traditional healing methods.", a: ["in"], h: "Visualizes conviction residing deep inside a core principle or entity.", expl: "<b>Prepositional Governance:</b> <i>belief in</i><br><br><b>Lexical Logic:</b> The noun <i>belief</i> takes <b>in</b> to state conviction regarding the existence, truth, or efficacy of a concept.", tag: "tag-noun" },
-  { q: "The team encountered immense difficulty ___ obtaining the necessary permits from the local municipal council.", a: ["in", "with"], h: "Visualizes experiencing friction inside an ongoing process or task.", expl: "<b>Prepositional Governance:</b> <i>difficulty in / difficulty with</i><br><br><b>Lexical Logic:</b> <i>Difficulty</i> takes <b>in</b> followed by a gerund (an area of struggle) or <b>with</b> followed by a noun phrase.", tag: "tag-noun" },
-  { q: "The committee held a lengthy discussion ___ the economic implications of the proposed tariff increases.", a: ["about", "on"], h: "Visualizes surrounding or encompassing a topic from all sides.", expl: "<b>Prepositional Governance:</b> <i>discussion about / discussion on</i><br><br><b>Lexical Logic:</b> Nouns of deliberation (e.g., <i>discussion, debate</i>) take <b>about</b> or <b>on</b> to designate the subject matter.", tag: "tag-noun" },
-  { q: "Having previous experience ___ managing cross-functional remote teams is an essential prerequisite for this position.", a: ["in", "of"], h: "Visualizes possessing practical wisdom acquired inside a domain or field.", expl: "<b>Prepositional Governance:</b> <i>experience in / experience of</i><br><br><b>Lexical Logic:</b> The noun <i>experience</i> governs <b>in</b> (field/activity) or <b>of</b> (specific event/phenomenon) to denote practical involvement.", tag: "tag-noun" },
-  { q: "The white paper provides valuable information ___ the latest regulatory changes affecting renewable energy projects.", a: ["on", "about"], h: "Visualizes data or knowledge resting directly on top of a subject area.", expl: "<b>Prepositional Governance:</b> <i>information on / information about</i><br><br><b>Lexical Logic:</b> <i>Information</i> connects to its subject via <b>on</b> (formal/detailed topic) or <b>about</b> (general topic).", tag: "tag-noun" },
-  { q: "Engineers are currently working to solve the systemic problem ___ recurring voltage fluctuations in the power grid.", a: ["of", "with"], h: "Links the defect as belonging directly to the system.", expl: "<b>Prepositional Governance:</b> <i>problem of / problem with</i><br><br><b>Lexical Logic:</b> The noun <i>problem</i> links via <b>of</b> (defining the specific nature of the issue) or <b>with</b> (identifying the faulty entity).", tag: "tag-noun" },
-  { q: "There is an urgent need for more research into the relationship ___ environmental stress and cognitive performance.", a: ["between"], h: "Visualizes a conceptual bridge spanning the space between two distinct entities.", expl: "<b>Prepositional Governance:</b> <i>relationship between</i><br><br><b>Lexical Logic:</b> <i>Relationship</i> requires <b>between</b> when connecting two distinct variables or entities.", tag: "tag-noun" }
+const datasetB = [
+  {
+    "q": "She proved remarkably resilient ___ adversity throughout her corporate career.",
+    "answer": "to",
+    "alt": ["against"],
+    "category": "ADJECTIVE",
+    h: "What adjective-preposition pair describes enduring hardships?",
+    expl: "<b>Resilient to:</b> Able to withstand or recover quickly from difficult conditions.",
+    "alert": "💡 Adjective Pattern: 'Resilient to shocks, stress, or adversity'.",
+    "chunk": "resilient to adversity"
+  },
+  {
+    "q": "Investors expressed deep skepticism ___ the viability of the proposed merger.",
+    "answer": "about",
+    "alt": ["regarding", "of"],
+    "category": "NOUN",
+    h: "Identify the preposition following nouns denoting doubt or disbelief like 'skepticism'.",
+    expl: "<b>Skepticism about / regarding:</b> A questioning attitude towards integrity or success.",
+    "alert": "💡 Noun Pattern: Skepticism takes 'about', 'of', or 'regarding'.",
+    "chunk": "skepticism about the viability"
+  },
+  {
+    "q": "The report provides compelling testimony ___ the efficacy of the new vaccine.",
+    "answer": "to",
+    "alt": ["of"],
+    "category": "NOUN",
+    h: "What preposition follows 'testimony' when proving a fact?",
+    expl: "<b>Testimony to:</b> Evidence or proof of something.",
+    "alert": "💡 Noun Collocation: 'Testimony to' serves as proof.",
+    "chunk": "testimony to the efficacy"
+  },
+  {
+    "q": "Her immaculate presentation was a credit ___ her dedication and hard work.",
+    "answer": "to",
+    "alt": [],
+    "category": "IDIOM",
+    h: "Complete the idiom: 'a credit ___ someone'.",
+    "expl": "<b>A credit to:</b> Someone or something that brings honor or praise to an entity.",
+    "alert": "💡 Idiomatic Collocation: 'A credit to your hard work'.",
+    "chunk": "a credit to her dedication"
+  },
+  {
+    "q": "There is an urgent need ___ greater transparency in corporate governance.",
+    "answer": "for",
+    "alt": [],
+    "category": "NOUN",
+    h: "Select the noun preposition denoting necessity.",
+    expl: "<b>Need for:</b> Requirements or necessity regarding a resource or condition.",
+    "alert": "💡 Noun Pattern: 'Need for + noun'.",
+    "chunk": "need for greater transparency"
+  },
+  {
+    "q": "She harbored deep resentment ___ her supervisor for the unfair performance review.",
+    "answer": "towards",
+    "alt": ["against"],
+    "category": "NOUN",
+    h: "Identify the preposition following 'resentment' directed at a person.",
+    expl: "<b>Resentment towards / against:</b> Bitter indignation at having been treated unfairly.",
+    "alert": "💡 Noun Pattern: Resentment takes 'towards' or 'against'.",
+    "chunk": "resentment towards her supervisor"
+  },
+  {
+    "q": "The government imposed severe restrictions ___ foreign currency exchange.",
+    "answer": "on",
+    "alt": ["upon"],
+    "category": "NOUN",
+    h: "What preposition pairs with nouns like 'restrictions' or 'limitations'?",
+    expl: "<b>Restrictions on:</b> Official rules limiting or controlling actions or commodities.",
+    "alert": "💡 Noun Collocation: 'Restrictions on trade/currency'.",
+    "chunk": "restrictions on foreign currency"
+  },
+  {
+    "q": "The CEO resigned ___ the wake of the devastating financial scandal.",
+    "answer": "in",
+    "alt": [],
+    "category": "IDIOM",
+    h: "Complete the prepositional idiom meaning following an event.",
+    expl: "<b>In the wake of:</b> Coming after or following an event, usually a significant or disruptive one.",
+    "alert": "💡 Fixed Idiom: 'In the wake of the scandal'.",
+    "chunk": "in the wake of"
+  },
+  {
+    "q": "The negotiators reached an impasse ___ the issue of intellectual property rights.",
+    "answer": "over",
+    "alt": ["on", "regarding"],
+    "category": "NOUN",
+    h: "Choose the preposition denoting the subject of a disagreement.",
+    expl: "<b>Impasse over:</b> A situation where no progress is possible regarding a specific topic.",
+    "alert": "💡 Noun Pattern: Impasse 'over' or 'regarding'.",
+    "chunk": "impasse over the issue"
+  },
+  {
+    "q": "His unorthodox management style sparked widespread controversy ___ the workforce.",
+    "answer": "among",
+    "alt": ["amongst", "within"],
+    "category": "PREPOSITION",
+    h: "Choose the preposition for distribution across a group of three or more.",
+    expl: "<b>Among:</b> Occurring in or shared by a larger group or collective body.",
+    "alert": "💡 Preposition Rule: Use 'between' for two entities, 'among' for three or more.",
+    "chunk": "controversy among the workforce"
+  },
+  {
+    "q": "The government faced fierce opposition ___ its proposed tax reform measures.",
+    "answer": "to",
+    "alt": ["against"],
+    "category": "NOUN",
+    h: "Select the noun preposition denoting resistance or hostility.",
+    expl: "<b>Opposition to:</b> Resistance or dissent expressed against a policy or plan.",
+    "alert": "💡 Noun Pattern: 'Opposition to reform'.",
+    "chunk": "opposition to its proposed"
+  },
+  {
+    "q": "There is growing anxiety ___ the rapid escalation of living expenses.",
+    "answer": "over",
+    "alt": ["about"],
+    "category": "NOUN",
+    h: "Choose the noun preposition expressing worry concerning an issue.",
+    expl: "<b>Anxiety over / about:</b> A feeling of worry, nervousness, or unease regarding an event.",
+    "alert": "💡 Noun Pattern: Anxiety takes 'over' or 'about'.",
+    "chunk": "anxiety over the rapid"
+  },
+  {
+    "q": "The artist drew inspiration ___ her childhood experiences in rural Andalusia.",
+    "answer": "from",
+    "alt": [],
+    "category": "VERB",
+    h: "What preposition pairs with 'draw inspiration' indicating the source?",
+    expl: "<b>Draw inspiration from:</b> To take creative ideas or motivation originating from a source.",
+    "alert": "💡 Collocation: 'Draw inspiration from nature/memory'.",
+    "chunk": "draw inspiration from her"
+  },
+  {
+    "q": "The company takes immense pride ___ its record of environmental sustainability.",
+    "answer": "in",
+    "alt": [],
+    "category": "IDIOM",
+    h: "Select the preposition used in the idiom 'take pride ___'.",
+    "expl": "<b>Take pride in:</b> To feel a deep sense of satisfaction in one's achievements or qualities.",
+    "alert": "💡 Fixed Idiom: 'Take pride in your work'.",
+    "chunk": "takes immense pride in"
+  },
+  {
+    "q": "His promotion was testament ___ his unwavering dedication to the firm.",
+    "answer": "to",
+    "alt": [],
+    "category": "NOUN",
+    h: "Complete the collocation meaning serves as proof.",
+    "expl": "<b>Testament to:</b> Something that serves as a clear sign or proof of something.",
+    "alert": "💡 Collocation: 'A testament to success'.",
+    "chunk": "testament to his unwavering"
+  },
+  {
+    "q": "She harbored a deep-seated aversion ___ public speaking throughout her youth.",
+    "answer": "to",
+    "alt": [],
+    "category": "NOUN",
+    h: "Recall the preposition required after the noun 'aversion'.",
+    expl: "<b>Aversion to:</b> A strong dislike or disinclination towards something.",
+    "alert": "💡 Noun Pattern: Aversion takes 'to'.",
+    "chunk": "aversion to public speaking"
+  },
+  {
+    "q": "The negotiator managed to bridge the gap ___ the two opposing factions.",
+    "answer": "between",
+    "alt": [],
+    "category": "PREPOSITION",
+    h: "What preposition denotes separation or connection across two distinct parties?",
+    expl: "<b>Between:</b> Used when connecting or separating two distinct items or parties.",
+    "alert": "💡 Rule: Use 'between' strictly for two parties; 'among' for more than two.",
+    "chunk": "gap between the two"
+  },
+  {
+    "q": "The new regulations are subversive ___ traditional corporate governance models.",
+    "answer": "to",
+    "alt": ["of"],
+    "category": "ADJECTIVE",
+    h: "What preposition follows 'subversive' meaning destructive to established systems?",
+    expl: "<b>Subversive of / to:</b> Seeking or intended to subvert an established system or institution.",
+    "alert": "💡 Formal Register: 'Subversive of order/morals'.",
+    "chunk": "subversive of traditional"
+  },
+  {
+    "q": "The politician's remarks were interpreted as detrimental ___ the peace process.",
+    "answer": "to",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "Select the adjective preposition meaning harmful or damaging.",
+    expl: "<b>Detrimental to:</b> Tending to cause harm, injury, or negative impact.",
+    "alert": "💡 Adjective Pattern: 'Detrimental to health/progress'.",
+    "chunk": "detrimental to the peace"
+  },
+  {
+    "q": "Her exceptional leadership was pivotal ___ steering the company through bankruptcy.",
+    "answer": "in",
+    "alt": [],
+    "category": "ADJECTIVE",
+    h: "What preposition pairs with 'pivotal' indicating central importance in an action?",
+    expl: "<b>Pivotal in:</b> Of crucial importance in relation to the development or success of something.",
+    "alert": "💡 Adjective Pattern: 'Pivotal in + -ing'.",
+    "chunk": "pivotal in steering"
+  },
+  {
+    "q": "The defendant was found culpable ___ gross negligence and breach of contract.",
+    "answer": "of",
+    "alt": ["for"],
+    "category": "ADJECTIVE",
+    h: "Choose the legal adjective preposition denoting blameworthiness.",
+    expl: "<b>Culpable of:</b> Deserving blame; responsible for a fault or wrong.",
+    "alert": "💡 Legal Register: 'Culpable of an offense/negligence'.",
+    "chunk": "culpable of gross negligence"
+  },
+  {
+    "q": "The policy change is bound to elicit a sharp backlash ___ consumers.",
+    "answer": "from",
+    "alt": ["by"],
+    "category": "NOUN",
+    h: "What preposition indicates the source of a reaction like backlash?",
+    expl: "<b>Backlash from:</b> A strong negative reaction by a large group, typically from consumers or voters.",
+    "alert": "💡 Noun Collocation: 'Backlash from the public/consumers'.",
+    "chunk": "backlash from consumers"
+  }
 ];
 
-let currentQuizType = 'A';
-let currentData = quizA;
-let idx = 0;
-let streak = 0;
+let currentMode = 'A';
+let currentDataset = datasetA;
+let currentIndex = 0;
 let score = 0;
-let solvedThisIdx = false;
+let streak = 0;
+let isAnswerChecked = false;
+let soundEnabled = true;
 
-function openModal() {
-  const tag = currentData[idx].tag;
-  document.getElementById('modalTitle').innerText = rules[tag].title;
-  document.getElementById('modalText').innerHTML = rules[tag].text;
-  document.getElementById('ruleModal').style.display = 'flex';
+// Sound FX Synthesizer
+let audioCtx = null;
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const now = audioCtx.currentTime;
+    if (type === 'success') {
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc1.type = 'sine'; osc1.frequency.setValueAtTime(523.25, now); osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+      osc2.type = 'triangle'; osc2.frequency.setValueAtTime(659.25, now + 0.08); osc2.frequency.exponentialRampToValueAtTime(783.99, now + 0.22);
+      gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.18, now + 0.05); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      osc1.connect(gain); osc2.connect(gain); gain.connect(audioCtx.destination);
+      osc1.start(now); osc2.start(now + 0.08); osc1.stop(now + 0.35); osc2.stop(now + 0.35);
+    } else if (type === 'error') {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.setValueAtTime(260, now); osc.frequency.setValueAtTime(220, now + 0.12);
+      gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.16, now + 0.03); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.28);
+    }
+  } catch(e) {}
 }
 
-function closeModal() {
-  document.getElementById('ruleModal').style.display = 'none';
-}
-
-function update() {
-  if (idx >= currentData.length) {
-    document.getElementById('final-screen').style.display = 'flex';
-    document.getElementById('final-stats').innerText = `Tasks completed: ${score}/${currentData.length} | Streak: ${streak}`;
-    return;
+// Proven British Female Voice Selector
+function getBritishFemaleVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || !voices.length) return null;
+  const preferredFemaleVoices = [
+    'Google UK English Female',
+    'Microsoft Libby Online (Natural) - English (United Kingdom)',
+    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
+    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
+    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
+    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
+    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+  ];
+  for (const name of preferredFemaleVoices) {
+    const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
+    if (found) return found;
   }
-  const card = currentData[idx];
-  document.getElementById('q').innerText = card.q;
-  document.getElementById('a').innerText = "Accepted: " + card.a.join(' / ');
-  document.getElementById('expl').innerHTML = "<span class='explanation-header'>Prepositional Governance & Usage:</span>" + card.expl;
-  let tagName = card.tag.split('-')[1].toUpperCase();
-  document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${tagName} (Click for Category ℹ️)</span>`;
-  document.getElementById('a').classList.remove('visible');
-  document.getElementById('expl').classList.remove('visible');
-  document.getElementById('hintBox').classList.remove('visible');
-  document.getElementById('feedback').innerText = '';
-  document.getElementById('userInput').value = '';
-  document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;
-  solvedThisIdx = false;
-  document.getElementById('pBtn').disabled = idx === 0;
-}
-
-function checkAnswer() {
-  const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();
-  if(!u) return;
-  const card = currentData[idx];
-  const isCorrect = card.a.some(ans => {
-    const normalizedAns = ans.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();
-    return u === normalizedAns;
+  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+  const enGbFemale = voices.find(v => {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase();
+    const name = (v.name || '').toLowerCase();
+    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
+    return isUK && !maleKeywords.some(m => name.includes(m));
   });
+  if (enGbFemale) return enGbFemale;
+  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+  if (anyGb) return anyGb;
+  const anyFemaleEnglish = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+  });
+  if (anyFemaleEnglish) return anyFemaleEnglish;
+  return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
+}
 
-  if (isCorrect) {
-    document.getElementById('feedback').innerText = "CORRECT! ✨";
-    document.getElementById('feedback').className = 'correct';
-    document.getElementById('a').classList.add('visible');
-    document.getElementById('expl').classList.add('visible');
-    if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }
-  } else {
-    document.getElementById('feedback').innerText = "TRY AGAIN ❌";
-    document.getElementById('feedback').className = 'wrong';
-    streak = 0;
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+}
+
+function speakCurrentSentence() {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const current = currentDataset[currentIndex];
+  const sentence = current.q.replace('___', 'blank');
+  const utterance = new SpeechSynthesisUtterance(sentence);
+  utterance.lang = 'en-GB';
+  const voice = getBritishFemaleVoice();
+  if (voice) {
+    utterance.voice = voice;
   }
-  document.getElementById('streak-count').innerText = `Streak: ${streak}`;
-  document.getElementById('score-display').innerText = `Correct: ${score}`;
+  utterance.rate = 0.98;
+  utterance.pitch = 1.05;
+  window.speechSynthesis.speak(utterance);
 }
 
-function showHint() {
-  document.getElementById('hintBox').innerText = "💡 " + currentData[idx].h;
-  document.getElementById('hintBox').classList.add('visible');
-}
-
-function revealAnswer() {
-  document.getElementById('a').classList.add('visible');
-  document.getElementById('expl').classList.add('visible');
-  streak = 0;
-  document.getElementById('streak-count').innerText = `Streak: 0`;
-}
-
-function next() {
-  if (idx < currentData.length - 1) {
-    idx++;
-    update();
-  } else {
-    idx++;
-    update();
-  }
-}
-
-function prev() {
-  if (idx > 0) {
-    idx--;
-    update();
-  }
-}
-
-function switchQuiz(type) {
-  currentQuizType = type;
-  currentData = (type === 'A') ? quizA : quizB;
-  idx = 0;
+function switchQuizMode(mode) {
+  currentMode = mode;
+  currentDataset = (mode === 'A') ? datasetA : datasetB;
+  currentIndex = 0;
   score = 0;
   streak = 0;
-  solvedThisIdx = false;
-  document.getElementById("tabA").className = (type === 'A') ? "tab-btn active" : "tab-btn";
-  document.getElementById("tabB").className = (type === 'B') ? "tab-btn active" : "tab-btn";
-  document.getElementById("subTitle").innerText = `Advanced Dependent Prepositions Practice (Quiz ${type})`;
-  document.getElementById('final-screen').style.display = 'none';
-  update();
+
+  const btnA = document.getElementById('tab-quiz-a');
+  const btnB = document.getElementById('tab-quiz-b');
+  const sub = document.getElementById('subtitulo-quiz');
+
+  if (mode === 'A') {
+    btnA.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer bg-white text-indigo-600";
+    btnB.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer text-slate-600 hover:text-slate-900";
+    sub.innerText = "Advanced Dependent Prepositions Practice (Quiz A)";
+  } else {
+    btnB.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer bg-white text-indigo-600";
+    btnA.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer text-slate-600 hover:text-slate-900";
+    sub.innerText = "Advanced Dependent Prepositions Practice (Quiz B)";
+  }
+  loadChallenge();
 }
 
-document.getElementById('userInput').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') checkAnswer();
+function loadChallenge() {
+  if (currentIndex >= currentDataset.length) {
+    showFinalSummary();
+    return;
+  }
+  isAnswerChecked = false;
+  const current = currentDataset[currentIndex];
+
+  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${currentDataset.length}`;
+  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
+  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+
+  const pct = Math.round(((currentIndex + 1) / currentDataset.length) * 100);
+  document.getElementById('barra-progreso').style.width = `${pct}%`;
+
+  document.getElementById('btn-categoria').innerText = `${current.category} (CLICK FOR CATEGORY ℹ️)`;
+
+  const parts = current.q.split('___');
+  document.getElementById('pregunta-texto').innerHTML = `<span>${parts[0]}</span><span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span><span>${parts[1]}</span>`;
+
+  document.getElementById('pista-contenido').innerText = current.h;
+  document.getElementById('pista-texto').classList.add('hidden');
+
+  const inputEl = document.getElementById('userInput');
+  inputEl.value = '';
+  inputEl.disabled = false;
+  inputEl.className = "w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition text-base font-semibold text-slate-800 placeholder-slate-400 bg-white shadow-inner";
+  inputEl.focus();
+
+  const feedbackBox = document.getElementById('feedback-box');
+  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
+  document.getElementById('btn-verificar').classList.remove('hidden');
+}
+
+function verifyAnswer() {
+  if (isAnswerChecked) return;
+  const inputEl = document.getElementById('userInput');
+  const userVal = inputEl.value.trim().toLowerCase();
+  if (!userVal) return;
+
+  isAnswerChecked = true;
+  const current = currentDataset[currentIndex];
+  const allAnswers = [current.answer.toLowerCase(), ...(current.alt || []).map(a => a.toLowerCase())];
+  const isCorrect = allAnswers.includes(userVal);
+
+  if (isCorrect) {
+    score++;
+    streak++;
+    playSound('success');
+  } else {
+    streak = 0;
+    playSound('error');
+  }
+
+  const slot = document.getElementById('blank-slot');
+  if (slot) {
+    slot.innerText = current.answer;
+    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200 align-middle';
+  }
+
+  inputEl.disabled = true;
+  if (isCorrect) {
+    inputEl.className = "w-full px-5 py-4 rounded-2xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition text-base shadow-inner";
+  } else {
+    inputEl.className = "w-full px-5 py-4 rounded-2xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition text-base shadow-inner";
+  }
+
+  const feedbackBox = document.getElementById('feedback-box');
+  feedbackBox.className = 'p-5 rounded-2xl mb-6 border transition-all duration-300 ' + (isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200');
+  
+  document.getElementById('feedback-titulo').innerText = isCorrect ? 'Excellent!' : 'Key Distinction / Take Note!';
+  document.getElementById('feedback-titulo').className = 'font-bold text-lg mb-2 ' + (isCorrect ? 'text-emerald-800' : 'text-rose-800');
+  document.getElementById('feedback-explicacion').innerHTML = current.expl;
+  document.getElementById('feedback-alert').innerText = current.alert;
+  document.getElementById('feedback-chunk').innerText = `Chunk: ${current.chunk}`;
+
+  feedbackBox.classList.remove('hidden');
+  document.getElementById('btn-verificar').classList.add('hidden');
+  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
+  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+}
+
+document.getElementById('btn-verificar').onclick = verifyAnswer;
+document.getElementById('btn-siguiente').onclick = () => { currentIndex++; loadChallenge(); };
+document.getElementById('btn-anterior').onclick = () => { if (currentIndex > 0) { currentIndex--; loadChallenge(); } };
+document.getElementById('btn-pista-inferior').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
+document.getElementById('btn-mostrar-respuesta').onclick = () => {
+  if (isAnswerChecked) return;
+  const current = currentDataset[currentIndex];
+  document.getElementById('userInput').value = current.answer;
+  verifyAnswer();
+};
+
+document.getElementById('btn-restart').onclick = () => { currentIndex = 0; score = 0; streak = 0; loadChallenge(); };
+document.getElementById('btn-audio-sentence').onclick = speakCurrentSentence;
+
+document.getElementById('userInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (!isAnswerChecked) verifyAnswer();
+    else { currentIndex++; loadChallenge(); }
+  }
 });
 
-update();
+// Category Modal handlers
+const modal = document.getElementById('modal-category');
+document.getElementById('btn-categoria').onclick = () => {
+  const current = currentDataset[currentIndex];
+  const aspect = current.category || 'PREPOSITION';
+  document.getElementById('modal-aspect-badge').innerText = aspect;
+  const content = document.getElementById('modal-content');
+  
+  content.innerHTML = `
+    <div>
+      <h3 class="font-bold text-slate-900 text-base mb-1">Advanced Dependent Prepositions (${aspect})</h3>
+      <p class="text-xs text-slate-600 leading-relaxed">Mastering fixed collocations where specific verbs, adjectives, and nouns require exact prepositions to sound natural and proficient at C1/C2 level.</p>
+    </div>
+    <div class="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-100 space-y-2 text-xs">
+      <p class="font-bold text-indigo-950 uppercase tracking-wider text-[11px]">Key Study Strategy:</p>
+      <p class="text-slate-700">• Learn words in complete <strong>chunks</strong> (e.g. <em>predicated on</em>, <em>averse to</em>, <em>devoid of</em>).</p>
+      <p class="text-slate-700">• Pay attention to prepositions following adjectives expressing attitude or state.</p>
+    </div>
+  `;
+  modal.classList.remove('hidden');
+};
+
+document.getElementById('btn-close-modal').onclick = () => modal.classList.add('hidden');
+document.getElementById('btn-modal-return').onclick = () => modal.classList.add('hidden');
+modal.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
+
+function showFinalSummary() {
+  const main = document.querySelector('main');
+  main.innerHTML = `
+    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in overflow-hidden" style="border-top: 8px solid #2563eb;">
+      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
+      <p class="text-slate-600 mb-6 max-w-md mx-auto">You have successfully completed this practice module.</p>
+      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
+        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${currentDataset.length}</span></div>
+      </div>
+      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Restart Practice</button>
+    </div>
+  `;
+}
+
+loadChallenge();
 </script>
 
 </body>

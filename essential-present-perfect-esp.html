@@ -189,11 +189,12 @@
     let score = 0; 
     let solvedThisIdx = false;    
 
-    // Voice Selector for UK Female Speech Synthesis
+    // Voice Selector for UK Female Speech Synthesis (Strictly British Female)
     function getBritishFemaleVoice() {
       if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices();
       if (!voices || !voices.length) return null;
+      
       const preferredFemaleVoices = [
         'Google UK English Female',
         'Microsoft Libby Online (Natural) - English (United Kingdom)',
@@ -204,11 +205,14 @@
         'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
         'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
       ];
+      
       for (const name of preferredFemaleVoices) {
         const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
         if (found) return found;
       }
+
       const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+      
       const enGbFemale = voices.find(v => {
         const lang = (v.lang || '').replace('_', '-').toLowerCase();
         const name = (v.name || '').toLowerCase();
@@ -216,8 +220,10 @@
         return isUK && !maleKeywords.some(m => name.includes(m));
       });
       if (enGbFemale) return enGbFemale;
+
       const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
       if (anyGb) return anyGb;
+
       return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
     }
 
@@ -229,7 +235,12 @@
       if (!('speechSynthesis' in window)) return;
       window.speechSynthesis.cancel();
       const card = currentData[idx];
-      const sentence = card.q.replace(/___+/g, 'blank').replace(/[\(\)\/]/g, ' ');
+      // Clean up parentheses, slashes, and underscores so it reads naturally without saying "blank"
+      const sentence = card.q
+        .replace(/___+/g, '')
+        .replace(/\(([^)]+)\)/g, (match, p1) => p1.replace(/\//g, 'or'))
+        .replace(/[\/]/g, ' ');
+        
       const utterance = new SpeechSynthesisUtterance(sentence);
       utterance.lang = 'en-GB';
       const voice = getBritishFemaleVoice();
@@ -275,7 +286,7 @@
     }    
 
     function checkAnswer() {        
-        const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
+        const u = document.getElementById('userInput'].value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();        
         if(!u) return;        
         const card = currentData[idx];                
         const isCorrect = card.a.some(ans => {            

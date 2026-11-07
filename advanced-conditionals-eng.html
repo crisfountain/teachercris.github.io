@@ -43,10 +43,15 @@ button:hover { background: #4338ca; }
 </div>
 
 <div class="card-container">
-  <div style="text-align: left; margin-bottom: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
     <a href="index.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
       ← Return to teachercris.online
     </a>
+    <div style="display: flex; gap: 8px;">
+      <button id="btn-audio-sentence" onclick="speakCurrentSentence()" style="padding: 6px 12px; font-size: 0.8rem; background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer;" title="Listen in British English">
+        🔊 Listen (UK ♀)
+      </button>
+    </div>
   </div>
 
   <div id="final-screen">
@@ -149,6 +154,65 @@ let streak = 0;
 let score = 0;
 let solvedThisIdx = false;
 
+// Proven British Female Voice Selector
+function getBritishFemaleVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || !voices.length) return null;
+  const preferredFemaleVoices = [
+    'Google UK English Female',
+    'Microsoft Libby Online (Natural) - English (United Kingdom)',
+    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
+    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
+    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
+    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
+    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+  ];
+  for (const name of preferredFemaleVoices) {
+    const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
+    if (found) return found;
+  }
+  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+  const enGbFemale = voices.find(v => {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase();
+    const name = (v.name || '').toLowerCase();
+    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
+    return isUK && !maleKeywords.some(m => name.includes(m));
+  });
+  if (enGbFemale) return enGbFemale;
+  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+  if (anyGb) return anyGb;
+  const anyFemaleEnglish = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+  });
+  if (anyFemaleEnglish) return anyFemaleEnglish;
+  return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+}
+
+function speakCurrentSentence() {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const card = cards[idx];
+  // Replace brackets or parenthetical prompts/blanks with "blank" so it does not spoil the answer
+  const sentence = card.q.replace(/\([^)]+\)/g, 'blank');
+  const utterance = new SpeechSynthesisUtterance(sentence);
+  utterance.lang = 'en-GB';
+  const voice = getBritishFemaleVoice();
+  if (voice) {
+    utterance.voice = voice;
+  }
+  utterance.rate = 0.98;
+  utterance.pitch = 1.05;
+  window.speechSynthesis.speak(utterance);
+}
+
 function openModal() {
   const tag = cards[idx].tag;
   document.getElementById('modalTitle').innerText = rules[tag].title;
@@ -169,7 +233,6 @@ function update() {
 
   const card = cards[idx];
   document.getElementById('q').innerText = card.q;
-  // FIXED: Join array elements cleanly instead of showing only card.a[0]
   document.getElementById('a').innerText = "Accepted: " + card.a.join(' / ');
   document.getElementById('hintBox').innerText = "";
   document.getElementById('hintBox').classList.remove('visible');
@@ -190,7 +253,6 @@ function update() {
 }
 
 function checkAnswer() {
-  // FIXED: Corrected regex from \\s+ to \s+ for proper whitespace normalization
   const u = document.getElementById('userInput').value.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();
   if(!u) return;
 

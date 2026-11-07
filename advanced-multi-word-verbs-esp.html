@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Cris | Advanced Multi-Word Verbs Practice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
         .card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #4f46e5; position: relative; }
         
+        /* Top Header Bar */
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .back-link { text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; }
+        .back-link:hover { background: #e0e7ff; }
+        .top-actions { display: flex; align-items: center; gap: 8px; }
+        .action-btn { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 0.75rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; white-space: nowrap; }
+        .action-btn:hover { background: #e2e8f0; }
+
         /* Quiz Selector Tabs */
         .quiz-tabs { display: flex; gap: 8px; margin-bottom: 20px; background-color: #f1f5f9; padding: 6px; border-radius: 12px; }
         .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-weight: 600; font-size: 0.9rem; color: #64748b; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
@@ -65,11 +74,19 @@
         <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>    
     </div>    
 
-    <!-- Botón de Retorno Estilizado -->
-    <div style="text-align: left; margin-bottom: 15px;">
-        <a href="index.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
-            ← Volver a teachercris.online
+    <!-- Top Bar with Return Link & Audio Controls -->
+    <div class="top-bar">
+        <a href="index.html" class="back-link">
+            &larr; Volver a teachercris.online
         </a>
+        <div class="top-actions">
+            <button id="btn-audio" class="action-btn" title="Escuchar en inglés británico">
+                <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
+            </button>
+            <button id="btn-reset" class="action-btn" title="Reiniciar progreso">
+                <i class="fas fa-redo-alt"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Quiz Selector Tabs -->
@@ -138,7 +155,7 @@
         { q: "Unforeseen administrative expenses can slowly ___ and exceed the approved quarterly budget.", a: ["creep up"], h: "To increase gradually without being noticed.", expl: "<strong>The Logic Behind the Answer:</strong> 'Creep up' describes costs or numbers rising gradually and insidiously.<br><br><strong>Spanish Tip:</strong> Translates to <i>ir aumentando gradualmente</i> or <i>subir sigilosamente</i>. 'Creep' evokes the image of stealthy movement.", tag: "tag-nuance" },
         { q: "Environmental degradation is an urgent global issue that ___ socioeconomic and political boundaries.", a: ["cuts across", "cut across"], h: "To affect or transcend different groups.", expl: "<strong>The Logic Behind the Answer:</strong> 'Cut across' means to affect or be relevant to diverse groups, social classes, or domains.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>trascender</i> or <i>afectar a todos los sectores</i>. Don't confuse with taking a shortcut across a field.", tag: "tag-nuance" },
         { q: "Elderly citizens often ___ social security payments and community support to maintain their quality of life.", a: ["depend on", "depend upon"], h: "To rely on someone or something.", expl: "<strong>The Logic Behind the Answer:</strong> 'Depend on' means to rely upon for support or sustenance.<br><br><strong>Spanish Tip:</strong> CRITICAL SPANISH ERROR! Spanish uses <i>depender DE</i>, leading students to say 'depend OF'. In English, it is ALWAYS <b>depend ON</b> or <b>upon</b>.", tag: "tag-preposition" },
-        { q: "Many scientific terms in modern medicine are directly ___ Ancient Greek and Latin roots.", a: ["derived from", "derive from"], h: "To originate or stem from a source.", expl: "<strong>The Logic Behind the Answer:</strong> 'Derive from' indicates the historical or logical source from which something originates.<br><br><strong>Spanish Tip:</strong> Translates to <i>derivar de</i> or <i>provenir de</i>.", tag: "tag-preposition" },
+        { q: "Many scientific terms in modern medicine are directly ___ Ancient Greek and Latin roots.", a: ["derived from", "derive from"], h: "To originate or stem from a source.", expl: "<strong>The Logic Behind the Answer:</strong> 'Derive from' indicates the historical or logical source from which something originates.<br><br><b>Spanish Tip:</b> Translates to <i>derivar de</i> or <i>provenir de</i>.", tag: "tag-preposition" },
         { q: "Chemical plants must strictly follow international protocols when they ___ toxic chemical waste.", a: ["dispose of"], h: "To discard or get rid of.", expl: "<strong>The Logic Behind the Answer:</strong> 'Dispose of' means to eliminate, discard, or destroy unwanted waste or property.<br><br><strong>Spanish Tip:</strong> Spanish speakers often think of <i>disponer de</i> (to have at one's disposal). However, English 'dispose OF' means <i>deshacerse de</i> or <i>eliminar</i>.", tag: "tag-preposition" },
         { q: "To resolve the crisis, the negotiator had to ___ her extensive past experience in international diplomacy.", a: ["draw on", "draw upon"], h: "To use available skills, knowledge, or resources.", expl: "<strong>The Logic Behind the Answer:</strong> 'Draw on' means to utilize existing knowledge, expertise, or reserves to accomplish a task.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>recurrir a</i> or <i>hacer uso de</i>.", tag: "tag-phrasal" },
         { q: "Constant self-doubt and unaddressed guilt can slowly ___ a professional's self-esteem.", a: ["eat away at"], h: "To erode or destroy gradually.", expl: "<strong>The Logic Behind the Answer:</strong> 'Eat away at' means to erode, consume, or destroy something progressively.<br><br><strong>Spanish Tip:</strong> Translates as <i>carcomer</i> or <i>consumir poco a poco</i>.", tag: "tag-preposition" },
@@ -146,7 +163,7 @@
         { q: "Moving to a foreign country as a teenager can be daunting if you struggle to ___ with local peers.", a: ["fit in"], h: "To feel accepted by a group.", expl: "<strong>The Logic Behind the Answer:</strong> 'Fit in' means to feel comfortable and accepted within a social group or environment.<br><br><strong>Spanish Tip:</strong> Equivalent to <i>encajar</i> or <i>integrarse</i>.", tag: "tag-nuance" },
         { q: "Emergency responders worked for hours to ___ the trapped passengers ___ of the wrecked vehicle.", a: ["get...out", "get out"], h: "To extract, rescue, or escape.", expl: "<strong>The Logic Behind the Answer:</strong> 'Get (someone/something) out' means to rescue or remove from a confined space or difficult situation.", tag: "tag-phrasal" },
         { q: "Recently, my brother has ___ amateur astronomy, spending every clear night studying the stars.", a: ["gotten into", "got into"], h: "To become interested or involved in a hobby.", expl: "<b>The Logic Behind the Answer:</b> 'Gotten into' (US) or 'got into' (UK) is required after the auxiliary verb 'has' to form the present perfect ('has gotten/got into').<br><br><b>Spanish Tip:</b> Translates to <i>aficionarse a</i> or <i>engancharse a</i>. Never use the base form 'get' after 'has'.", tag: "tag-phrasal" },
-        { q: "No matter how clearly I presented the evidence, I couldn't ___ to the stubborn board members.", a: ["get through"], h: "To succeed in making someone understand.", expl: "<b>The Logic Behind the Answer:</b> 'Get through' means to make someone comprehend or accept a point despite resistance.<br><br><b>Spanish Tip:</b> Translates to <i>hacer entender a</i>. Notice that the preposition 'to' is already written in the prompt ('to the stubborn board members'), so enter only 'get through'.", tag: "tag-preposition" },
+        { q: "No matter how clearly I presented the evidence, I couldn't ___ to the stubborn board members.", a: ["get through"], h: "To succeed in making someone understand.", expl: "<b>The Logic Behind the Answer:</b> 'Get through' means to make someone comprehend or accept a point despite resistance.<br><br><b>Spanish Tip:</b> Translates to <i>hacer entender a</i>. Notice that the preposition 'to' is already provided in the prompt ('to the stubborn board members'), so enter only the phrasal verb 'get through'.", tag: "tag-preposition" },
         { q: "Residents panicked when they heard an unannounced firework ___ in the central plaza late at night.", a: ["go off"], h: "To explode, detonate, or ring suddenly.", expl: "<strong>The Logic Behind the Answer:</strong> 'Go off' means to detonate (bombs, fireworks) or sound loudly (alarms, clocks).", tag: "tag-nuance" },
         { q: "Policy experts from around the globe met in Geneva to ___ the ethics of artificial intelligence.", a: ["grapple with"], h: "To struggle to solve or understand a complex problem.", expl: "<strong>The Logic Behind the Answer:</strong> 'Grapple with' means to confront and work hard to resolve a complex, tough challenge.", tag: "tag-nuance" },
         { q: "Cybersecurity firms were alarmed when sophisticated attackers managed to ___ the financial institution's main server.", a: ["hack into"], h: "To gain unauthorized digital access.", expl: "<strong>The Logic Behind the Answer:</strong> 'Hack into' means to break into a computer system or network without authorization.", tag: "tag-preposition" },
@@ -221,6 +238,56 @@
     let streak = 0; 
     let score = 0; 
     let solvedThisIdx = false;    
+
+    // Voice Selector for UK Female Speech Synthesis
+    function getBritishFemaleVoice() {
+      if (!('speechSynthesis' in window)) return null;
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || !voices.length) return null;
+      const preferredFemaleVoices = [
+        'Google UK English Female',
+        'Microsoft Libby Online (Natural) - English (United Kingdom)',
+        'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+        'Microsoft Maisie Online (Natural) - English (United Kingdom)',
+        'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
+        'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
+        'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
+        'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+      ];
+      for (const name of preferredFemaleVoices) {
+        const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
+        if (found) return found;
+      }
+      const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+      const enGbFemale = voices.find(v => {
+        const lang = (v.lang || '').replace('_', '-').toLowerCase();
+        const name = (v.name || '').toLowerCase();
+        const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
+        return isUK && !maleKeywords.some(m => name.includes(m));
+      });
+      if (enGbFemale) return enGbFemale;
+      const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+      if (anyGb) return anyGb;
+      return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+    }
+
+    function speakCurrentSentence() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const card = currentData[idx];
+      const sentence = card.q.replace(/___+/g, 'blank').replace(/[\(\)\/]/g, ' ');
+      const utterance = new SpeechSynthesisUtterance(sentence);
+      utterance.lang = 'en-GB';
+      const voice = getBritishFemaleVoice();
+      if (voice) utterance.voice = voice;
+      utterance.rate = 0.98;
+      utterance.pitch = 1.05;
+      window.speechSynthesis.speak(utterance);
+    }
 
     function openModal() {        
         const tag = currentData[idx].tag;        
@@ -324,6 +391,17 @@
     document.getElementById('userInput').addEventListener('keypress', (e) => { 
         if (e.key === 'Enter') checkAnswer(); 
     });    
+
+    document.getElementById('btn-audio').onclick = speakCurrentSentence;
+    document.getElementById('btn-reset').onclick = () => {
+      if (confirm('¿Reiniciar desde la tarea 1 y poner el contador a cero?')) {
+        score = 0;
+        streak = 0;
+        solvedThisIdx = false;
+        idx = 0;
+        update();
+      }
+    };
 
     update();
 </script>

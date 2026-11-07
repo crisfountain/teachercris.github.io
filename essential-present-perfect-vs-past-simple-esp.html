@@ -27,13 +27,10 @@
     </a>
 
     <div class="flex items-center gap-2">
-      <button id="btn-audio" class="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Escuchar en inglés británico">
-        <i class="fas fa-volume-up"></i>
+      <button id="btn-audio" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition" title="Escuchar en inglés británico">
+        <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
       </button>
-      <button id="btn-sound" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition" title="Toggle sound effects">
-        <span id="sound-label" class="text-xs font-bold text-emerald-600">FX ON</span>
-      </button>
-      <button id="btn-reset" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Reset progress">
+      <button id="btn-reset" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition" title="Reiniciar progreso">
         <i class="fas fa-redo-alt"></i>
       </button>
     </div>
@@ -70,7 +67,7 @@
 
   <!-- Centered Aspect Pill Button -->
   <div class="flex justify-center mb-6">
-    <button id="btn-category" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5">
+    <button id="btn-category" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5 cursor-pointer">
       <span id="category-pill-text">PRESENT PERFECT</span> (CLICK FOR CATEGORY <i class="fas fa-info-circle"></i>)
     </button>
   </div>
@@ -664,35 +661,6 @@ let isAnswerVerified = false;
 let score = 0;
 let streak = 0;
 let solvedTasks = {};
-let soundEnabled = true;
-
-// Audio Synth
-let audioCtx = null;
-function playSound(type) {
-  if (!soundEnabled) return;
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const now = audioCtx.currentTime;
-    if (type === 'correct') {
-      const osc1 = audioCtx.createOscillator();
-      const osc2 = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc1.type = 'sine'; osc1.frequency.setValueAtTime(523.25, now); osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
-      osc2.type = 'triangle'; osc2.frequency.setValueAtTime(659.25, now + 0.08); osc2.frequency.exponentialRampToValueAtTime(783.99, now + 0.22);
-      gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.18, now + 0.05); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
-      osc1.connect(gain); osc2.connect(gain); gain.connect(audioCtx.destination);
-      osc1.start(now); osc2.start(now + 0.08); osc1.stop(now + 0.35); osc2.stop(now + 0.35);
-    } else if (type === 'incorrect') {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine'; osc.frequency.setValueAtTime(260, now); osc.frequency.setValueAtTime(220, now + 0.12);
-      gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.16, now + 0.03); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-      osc.connect(gain); gain.connect(audioCtx.destination);
-      osc.start(now); osc.stop(now + 0.28);
-    }
-  } catch(e) {}
-}
 
 function getBritishFemaleVoice() {
   if (!('speechSynthesis' in window)) return null;
@@ -856,7 +824,6 @@ function verifyAnswer() {
   });
 
   if (isCorrect) {
-    playSound('correct');
     if (!solvedTasks[current.id]) {
       score++;
       solvedTasks[current.id] = true;
@@ -865,7 +832,6 @@ function verifyAnswer() {
     streak++;
     document.getElementById('streak-display').innerText = streak;
   } else {
-    playSound('incorrect');
     streak = 0;
     document.getElementById('streak-display').innerText = streak;
   }
@@ -958,13 +924,8 @@ document.getElementById('btn-show-answer').onclick = showAnswer;
 document.getElementById('tab-quiz-a').onclick = () => switchQuiz('A');
 document.getElementById('tab-quiz-b').onclick = () => switchQuiz('B');
 document.getElementById('btn-audio').onclick = speakCurrentSentence;
-document.getElementById('btn-sound').onclick = () => {
-  soundEnabled = !soundEnabled;
-  document.getElementById('sound-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
-  document.getElementById('sound-label').className = soundEnabled ? 'text-xs font-bold text-emerald-600' : 'text-xs font-bold text-slate-400';
-};
 document.getElementById('btn-reset').onclick = () => {
-  if (confirm('Restart from Task 1 and reset score?')) {
+  if (confirm('¿Reiniciar desde la tarea 1 y poner el contador a cero?')) {
     score = 0;
     streak = 0;
     solvedTasks = {};

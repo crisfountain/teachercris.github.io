@@ -3,601 +3,670 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Dependent Prepositions Master | Teacher Cris</title>
+<title>Present Perfect vs Past Simple Master | Teacher Cris</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
-.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
 </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
+<body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-blue-100">
 
-<main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
+<!-- Main Card Container with Prominent Blue Accent Bar -->
+<div class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all overflow-hidden" style="border-top: 8px solid #2563eb;">
 
-<div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 overflow-hidden" style="border-top: 8px solid #2563eb;">
+  <!-- Top Bar -->
+  <div class="flex justify-between items-center mb-6">
+    <a href="https://teachercris.online" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50/90 hover:bg-blue-100 border border-blue-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs">
+      &larr; Back to teachercris.online
+    </a>
 
-<!-- Header Controls -->
-<div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
-  <a href="index-eng.html" class="text-indigo-600 font-semibold flex items-center gap-2 hover:text-indigo-700 transition text-sm">
-    &larr; Return to teachercris.online
-  </a>
-  <div class="flex items-center gap-2">
-    <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
-      <i class="fas fa-volume-up"></i> <span>Listen (UK ♀)</span>
+    <div class="flex items-center gap-2">
+      <button id="btn-audio" class="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Listen to English pronunciation">
+        <i class="fas fa-volume-up"></i>
+      </button>
+      <button id="btn-sound" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition" title="Toggle sound effects">
+        <span id="sound-label" class="text-xs font-bold text-emerald-600">FX ON</span>
+      </button>
+      <button id="btn-reset" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Reset progress">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz Switcher Tabs -->
+  <div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
+    <button id="tab-quiz-a" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition">
+      Quiz A (Tasks 1-22)
     </button>
-    <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reset">
-      <i class="fas fa-redo-alt"></i>
+    <button id="tab-quiz-b" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition">
+      Quiz B (Tasks 23-45)
     </button>
   </div>
-</div>
 
-<!-- Quiz Mode Tabs -->
-<div class="grid grid-cols-2 gap-2 mb-6 bg-slate-100 p-1.5 rounded-2xl">
-  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer bg-white text-indigo-600">
-    Quiz A (Verbs & Adjectives)
-  </button>
-  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer text-slate-600 hover:text-slate-900">
-    Quiz B (Adjectives & Nouns)
-  </button>
-</div>
-
-<!-- Title -->
-<div class="text-center mb-6">
-  <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
-  <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">Advanced Dependent Prepositions Practice (Quiz A)</p>
-</div>
-
-<!-- Progress Bar -->
-<div class="flex justify-between items-center mb-4 text-sm text-slate-500">
-  <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
-  <div class="flex items-center gap-3">
-    <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
-    <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
+  <!-- Center Brand Title -->
+  <div class="text-center mb-6">
+    <h1 class="text-blue-600 font-extrabold text-3xl sm:text-4xl tracking-tight">
+      Teacher Cris
+    </h1>
+    <p id="quiz-subtitle" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+      Present Perfect Master Practice (Quiz A)
+    </p>
   </div>
-</div>
-<div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
-  <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
-</div>
 
-<!-- Category Pill & Hint -->
-<div class="mb-6 text-center">
-  <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
-    VERB (CLICK FOR CATEGORY ℹ️)
-  </button>
-  <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
-    <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
+  <!-- Task progress & Score row -->
+  <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
+    <span id="task-counter" class="text-slate-500">Task 1 of 22</span>
+    <div class="flex items-center gap-4">
+      <span class="text-slate-700">Correct: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Streak: <strong id="streak-display" class="text-amber-600 font-bold">0</strong></span>
+    </div>
   </div>
-</div>
 
-<!-- Question Text -->
-<div class="mb-6 sm:mb-8">
-  <div id="pregunta-texto" class="text-base sm:text-lg font-medium text-slate-900 bg-slate-50 p-6 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center">
+  <!-- Centered Aspect Pill Button -->
+  <div class="flex justify-center mb-6">
+    <button id="btn-category" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5">
+      <span id="category-pill-text">PRESENT PERFECT</span> (CLICK FOR CATEGORY <i class="fas fa-info-circle"></i>)
+    </button>
   </div>
-</div>
 
-<!-- Input Box Container -->
-<div class="mb-6">
-  <input type="text" id="userInput" placeholder="Type preposition..." autocomplete="off" autocapitalize="off" spellcheck="false" class="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition text-base font-semibold text-slate-800 placeholder-slate-400 bg-white shadow-inner">
-</div>
+  <!-- Question Box -->
+  <div class="border border-slate-200 rounded-2xl p-6 sm:p-9 bg-white min-h-[140px] flex items-center justify-center text-center mb-5 shadow-2xs">
+    <p id="pregunta-texto" class="text-base sm:text-lg text-slate-800 leading-relaxed font-normal text-left sm:text-center select-text">
+      <!-- Injected by JS -->
+    </p>
+  </div>
 
-<!-- Action Button -->
-<button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
-  Verify (Enter)
-</button>
+  <!-- Tactical Hint Box -->
+  <div id="pista-box" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700">
+    <div class="flex items-center gap-2 font-bold text-amber-900 mb-1">
+      <span>💡 Tactical Hint:</span>
+    </div>
+    <p id="pista-texto" class="italic text-slate-700"></p>
+  </div>
 
-<!-- Feedback Card -->
-<div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
-  <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
-  <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
-  <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
-  <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
-</div>
+  <!-- Multiple Choice Options Container -->
+  <div id="opciones-contenedor" class="space-y-3 mb-5">
+    <!-- Injected by JS -->
+  </div>
 
-<!-- Footer Controls -->
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
-  <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    <i class="fas fa-chevron-left"></i> Previous
+  <!-- Big Green Verify Button -->
+  <button id="btn-verify" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+    Verify (Enter)
   </button>
-  <button id="btn-pista-inferior" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Hint <i class="far fa-lightbulb"></i>
-  </button>
-  <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Show Answer <i class="fas fa-eye"></i>
-  </button>
-  <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Next <i class="fas fa-chevron-right"></i>
-  </button>
-</div>
+
+  <!-- Feedback Box -->
+  <div id="feedback-box" class="hidden p-5 rounded-2xl mb-5 border transition-all duration-300">
+    <div class="flex justify-between items-start mb-2">
+      <p id="feedback-titulo" class="font-bold text-base sm:text-lg"></p>
+      <span id="feedback-target-badge" class="hidden text-xs bg-rose-200 text-rose-900 px-2.5 py-1 rounded-md font-semibold"></span>
+    </div>
+    <p id="feedback-explicacion" class="text-xs sm:text-sm leading-relaxed mb-3 text-slate-700"></p>
+    <p id="feedback-alert" class="text-xs sm:text-sm font-medium border-t pt-2.5 border-slate-200/80 text-slate-800"></p>
+    <p id="feedback-chunk" class="text-xs font-bold text-blue-600 uppercase tracking-wider mt-2.5"></p>
+  </div>
+
+  <!-- Bottom Buttons Row -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <button id="btn-prev" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      &larr; Previous
+    </button>
+    <button id="btn-hint" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      Hint 💡
+    </button>
+    <button id="btn-show-answer" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      Show Answer 👁
+    </button>
+    <button id="btn-next" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+      Next &rarr;
+    </button>
+  </div>
 
 </div>
-</main>
+
+<!-- Footer -->
+<div class="mt-6 text-center text-xs text-slate-400">
+  Teacher Cris · Present Perfect & Past Simple Master Practice
+</div>
 
 <!-- Category Modal -->
 <div id="modal-category" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
   <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-hidden shadow-2xl border border-slate-200 flex flex-col">
-    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-indigo-50/50">
+    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-blue-50/50">
       <div class="flex items-center gap-2">
-        <span id="modal-aspect-badge" class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-        <span class="text-xs text-slate-500 font-semibold">Dependent Preposition Overview</span>
+        <span id="modal-aspect-badge" class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+        <span class="text-xs text-slate-500 font-semibold">Aspect Overview</span>
       </div>
-      <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition cursor-pointer">
+      <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div id="modal-content" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-700"></div>
     <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex justify-end">
-      <button id="btn-modal-return" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-xs transition cursor-pointer">
+      <button id="btn-modal-return" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">
         Got it (Return to Task)
       </button>
     </div>
   </div>
 </div>
 
-<footer class="mt-auto py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-500">
-  <div class="max-w-4xl mx-auto px-4">
-    <p class="font-semibold text-slate-700">Teacher Cris • Advanced Dependent Prepositions Master</p>
-  </div>
-</footer>
-
 <script>
-const datasetA = [
+const dataset = [
   {
-    q: "Whether the new regional branch opens next autumn will strictly depend ___ the board's approval of the revised budget.",
-    answer: "on",
-    alt: ["upon"],
-    category: "VERB",
-    h: "Think of what preposition normally follows 'depend'.",
-    expl: "<b>Depend on / upon:</b> To be contingent on or determined by something.",
-    alert: "💡 Collocation: 'Depend on' or 'depend upon' are standard.",
-    chunk: "depend on the board's approval"
+    "id": 1,
+    "q": "The archaeological team ___ a remarkably preserved Roman villa near Seville last month.",
+    "options": ["discovered", "has discovered", "have discovered", "discovers"],
+    "correct": 0,
+    "h": "Look closely at the explicit time marker 'last month' at the very end.",
+    "expl": "The time frame is completely closed and finished ('last month'), which strictly mandates the use of the Past Simple.",
+    "alert": "💡 Key Grammar Rule: In English, whenever a closed past time marker (such as 'last month', 'yesterday', or 'ago') is present, the Present Perfect is forbidden and the Past Simple must be used.",
+    "chunk": "discovered [...] last month",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The committee's decision was predicated ___ a thorough review of the financial disclosures.",
-    "answer": "on",
-    "alt": ["upon"],
-    "category": "VERB",
-    h: "Identify the preposition required after 'predicated'.",
-    expl: "<b>Predicated on:</b> To base something on a particular set of conditions or assumptions.",
-    "alert": "💡 Collocation: 'Predicated on' is formal academic register.",
-    "chunk": "predicated on a thorough review"
+    "id": 2,
+    "q": "Dr. Ramirez ___ three groundbreaking research papers on renewable energy so far this year.",
+    "options": ["published", "has published", "is publishing", "publishes"],
+    "correct": 1,
+    "h": "The phrase 'so far this year' indicates the time period is still open and ongoing.",
+    "expl": "Because the current year is not finished, we use the Present Perfect to indicate an accumulated experience up to now.",
+    "alert": "💡 Key Grammar Rule: When a time frame remains open and unfinished ('so far this year'), use the Present Perfect to connect accumulated actions or achievements to the present moment.",
+    "chunk": "has published [...] so far this year",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "His continuous tardiness is tantamount ___ negligence in his professional duties.",
-    "answer": "to",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Select the preposition used with 'tantamount' indicating equivalence.",
-    expl: "<b>Tantamount to:</b> Equivalent in seriousness or effect to something bad.",
-    "alert": "💡 Fixed Expression: 'Tantamount to' always takes 'to'.",
-    "chunk": "tantamount to negligence"
+    "id": 3,
+    "q": "I ___ my passport! I've searched everywhere, but I still can't find it anywhere in the house.",
+    "options": ["lost", "have lost", "am losing", "had lost"],
+    "correct": 1,
+    "h": "Focus on the present result: the passport is missing right now at this exact moment.",
+    "expl": "The Present Perfect is required here because a past action has an immediate, critical consequence in the present reality.",
+    "alert": "💡 Key Grammar Rule: When a past action has an active, visible result or consequence in the present (the passport is missing right now), use the Present Perfect regardless of when the action happened.",
+    "chunk": "have lost my passport",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The new CEO is fully committed ___ restructuring the entire supply chain division.",
-    "answer": "to",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Remember that 'committed' takes a gerund (-ing) object after its preposition.",
-    expl: "<b>Committed to + -ing:</b> Dedicated to a cause or course of action.",
-    "alert": "💡 Grammar Rule: 'Committed to' is followed by a gerund noun phrase.",
-    "chunk": "committed to restructuring"
+    "id": 4,
+    "q": "My grandfather ___ in a traditional fishing village for forty years before moving to the city in 2005.",
+    "options": ["lived", "has lived", "is living", "lives"],
+    "correct": 0,
+    "h": "Did the living period end when he moved away in 2005?",
+    "expl": "The state is fully completed and belongs entirely to the past, so 'for forty years' requires the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Although 'for' often indicates duration, if that duration took place entirely within a closed past period that has ended, use the Past Simple instead of the Present Perfect.",
+    "chunk": "lived [...] for forty years before",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The startup was fraught ___ risks during its initial developmental phase.",
-    "answer": "with",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "What preposition pairs with 'fraught' to mean filled with danger or problems?",
-    expl: "<b>Fraught with:</b> Filled with or destined to result in (undesirable things like danger or peril).",
-    "alert": "💡 Fixed Pair: 'Fraught with danger/difficulties'.",
-    "chunk": "fraught with risks"
+    "id": 5,
+    "q": "A: Have you ever visited the Prado Museum? B: Yes, I ___ there two years ago during a summer trip.",
+    "options": ["have gone", "went", "have been going", "go"],
+    "correct": 1,
+    "h": "Notice the shift from general experience in the question to a specific details marker ('two years ago').",
+    "expl": "Once a specific time details marker is introduced in the conversation, you must immediately shift to the Past Simple.",
+    "alert": "💡 Key Grammar Rule: General life experiences are introduced with the Present Perfect ('Have you ever visited?'), but when specific past details or time markers ('two years ago') are mentioned, shift to the Past Simple.",
+    "chunk": "went there two years ago",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The diplomat was adept ___ navigating complex international negotiations.",
-    "answer": "at",
-    "alt": ["in"],
-    "category": "ADJECTIVE",
-    h: "Select the preposition used with 'adept' denoting high skill.",
-    expl: "<b>Adept at / in:</b> Very skilled or proficient at doing something.",
-    "alert": "💡 Adjective Pattern: 'Adept at + -ing'.",
-    "chunk": "adept at navigating"
+    "id": 6,
+    "q": "The corporate legal department ___ the revised compliance guidelines yesterday afternoon.",
+    "options": ["has distributed", "distributed", "distributes", "have distributed"],
+    "correct": 1,
+    "h": "Check the exact hour or day marker at the end of the clause.",
+    "expl": "'Yesterday afternoon' is a finished time frame, which strictly locks the sentence into the Past Simple structure.",
+    "alert": "💡 Key Grammar Rule: Specific past time expressions ('yesterday afternoon') specify a completed time period, requiring the Past Simple.",
+    "chunk": "distributed [...] yesterday",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The board remains averse ___ taking unnecessary financial gambles.",
-    "answer": "to",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Choose the preposition pairing with 'averse' meaning opposed to.",
-    expl: "<b>Averse to:</b> Having a strong dislike of or opposition to something.",
-    "alert": "💡 Adjective Pattern: 'Averse to + gerund'.",
-    "chunk": "averse to taking"
+    "id": 7,
+    "q": "The IT network infrastructure ___ stable since the major server upgrade last weekend.",
+    "options": ["remained", "is remaining", "has remained", "remains"],
+    "correct": 2,
+    "h": "The word 'since' marks the precise starting point of an ongoing state connected to the present.",
+    "expl": "An action that started at a point in the past and continues to be true right now requires the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: English requires the Present Perfect whenever 'since' anchors an ongoing state or action that originated in the past and continues up to the present.",
+    "chunk": "has remained stable since",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The incumbent administration is prone ___ making hasty legislative decisions.",
-    "answer": "to",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "What preposition follows 'prone' to denote likelihood?",
-    expl: "<b>Prone to:</b> Likely or liable to suffer from or do something undesirable.",
-    "alert": "💡 Adjective Pattern: 'Prone to errors / prone to acting'.",
-    "chunk": "prone to making"
+    "id": 8,
+    "q": "Oh look! The construction workers ___ paving the new bicycle lane down the main avenue.",
+    "options": ["just finished", "have just finished", "finish recently", "had just finished"],
+    "correct": 1,
+    "h": "The words 'Oh look!' draw attention to an action completed a very short moment ago with visible evidence.",
+    "expl": "Actions that have just occurred and have immediate visual relevance in the present require 'have/has just + participle'.",
+    "alert": "💡 Key Grammar Rule: Actions completed a very short moment ago with immediate present relevance use 'have/has just + past participle'.",
+    "chunk": "have just finished",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The scientist was engrossed ___ analyzing the complex genomic data.",
-    "answer": "in",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "What preposition pairs with 'engrossed' meaning absorbed in attention?",
-    expl: "<b>Engrossed in:</b> Having all one's attention or interest absorbed by someone or something.",
-    "alert": "💡 Adjective Pattern: 'Engrossed in research/study'.",
-    "chunk": "engrossed in analyzing"
+    "id": 9,
+    "q": "Our current logistics manager ___ for three different global transport companies in her entire career.",
+    "options": ["worked", "works", "has worked", "was working"],
+    "correct": 2,
+    "h": "Is her career over, or is it an ongoing experience up to the present day?",
+    "expl": "Her career is an open, unfinished time frame, making the accumulated experience a perfect fit for the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: As long as a career or life timeframe remains open and ongoing, express accumulated professional experience up to the present using the Present Perfect.",
+    "chunk": "has worked [...] in her entire career",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The auditor pointed ___ several critical discrepancies in the quarterly ledger.",
-    "answer": "out",
-    "alt": [],
-    "category": "VERB",
-    h: "Phrasal verb meaning to draw attention to specific facts.",
-    expl: "<b>Point out:</b> To direct someone's attention toward something important.",
-    "alert": "💡 Phrasal Verb: 'Point out discrepancies'.",
-    "chunk": "pointed out several discrepancies"
+    "id": 10,
+    "q": "When I was a university student in Barcelona, I ___ in a small shared apartment near the campus.",
+    "options": ["lived", "have lived", "am living", "was lived"],
+    "correct": 0,
+    "h": "Identify the completed past time frame introduced by 'When I was a university student'.",
+    "expl": "The period of being a student is completely finished, so the Past Simple ('lived') is required.",
+    "alert": "💡 Key Grammar Rule: A completed life stage ('When I was a university student') defines a closed past period, requiring the Past Simple rather than the Present Perfect.",
+    "chunk": "lived [...] when I was a student",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The region is notorious ___ its unpredictable weather patterns during autumn.",
-    "answer": "for",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Choose the preposition following 'notorious' for bad traits.",
-    expl: "<b>Notorious for:</b> Famous or well known, typically for some bad quality or deed.",
-    "alert": "💡 Adjective Pattern: 'Notorious for + noun/-ing'.",
-    "chunk": "notorious for its unpredictable"
+    "id": 11,
+    "q": "The lead developer ___ the new software update two days ago, but some users are still reporting minor bugs.",
+    "options": ["has released", "released", "releases", "was releasing"],
+    "correct": 1,
+    "h": "Identify the time marker 'two days ago', which points to a completed moment in the past.",
+    "expl": "Time expressions with 'ago' always refer to a completed past moment and strictly require the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Time expressions ending with 'ago' ('two days ago') specify a closed point in past time, making the Past Simple mandatory.",
+    "chunk": "released [...] two days ago",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The new policy resulted ___ a significant decrease in administrative overhead.",
-    "answer": "in",
-    "alt": [],
-    "category": "VERB",
-    h: "Distinguish cause ('result from') from effect ('result in').",
-    expl: "<b>Result in:</b> To cause a specific outcome or consequence.",
-    "alert": "💡 Verb Distinction: 'Result in' introduces the consequence; 'result from' introduces the cause.",
-    "chunk": "resulted in a significant"
+    "id": 12,
+    "q": "Our research team ___ over five hundred patient samples in total this month.",
+    "options": ["analyzed", "has analyzed", "analyzes", "was analyzing"],
+    "correct": 1,
+    "h": "The month is still ongoing, representing an unfinished time frame.",
+    "expl": "'This month' is an open time period that includes the present moment, requiring the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: As long as the current time period ('this month') remains open and unfinished, actions completed within it take the Present Perfect.",
+    "chunk": "has analyzed [...] this month",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "His resignation stemmed directly ___ irreconcilable differences with the board.",
-    "answer": "from",
-    "alt": [],
-    "category": "VERB",
-    h: "Select the preposition denoting origin or source.",
-    expl: "<b>Stem from:</b> To originate in or be caused by something.",
-    "alert": "💡 Collocation: Problems or events 'stem from' a source.",
-    "chunk": "stemmed directly from"
+    "id": 13,
+    "q": "In 2019, the national government ___ new tax incentives to support clean energy startups.",
+    "options": ["has introduced", "introduced", "introduces", "was introducing"],
+    "correct": 1,
+    "h": "Notice the specific calendar year 'In 2019'.",
+    "expl": "A specific past calendar year represents a closed historical period, mandating the Past Simple.",
+    "alert": "💡 Key Grammar Rule: A specific past calendar year ('In 2019') represents a finished time period, requiring the Past Simple.",
+    "chunk": "introduced in 2019",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The architecture of the building is reminiscent ___ 19th-century neoclassical design.",
-    "answer": "of",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "What preposition follows 'reminiscent' meaning evoking memories?",
-    expl: "<b>Reminiscent of:</b> Tending to remind one of something.",
-    "alert": "💡 Adjective Pattern: 'Reminiscent of + noun'.",
-    "chunk": "reminiscent of 19th-century"
+    "id": 14,
+    "q": "Look at the kitchen! Maria ___ a delicious chocolate cake for tonight's dinner party.",
+    "options": ["baked", "has baked", "bakes", "was baking"],
+    "correct": 1,
+    "h": "The result (the cake) is visible and fresh right now in the kitchen.",
+    "expl": "The Present Perfect is used when a recently completed action has direct visual impact on the present.",
+    "alert": "💡 Key Grammar Rule: When a past action produces a clear, visible result in the present (the cake is in the kitchen right now), use the Present Perfect.",
+    "chunk": "has baked a cake",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The committee is endowed ___ the authority to investigate corporate fraud.",
-    "answer": "with",
-    "alt": [],
-    "category": "VERB",
-    h: "What preposition pairs with 'endowed' meaning naturally provided with?",
-    expl: "<b>Endowed with:</b> Provided or equipped with a quality, asset, or power.",
-    "alert": "💡 Passive Collocation: 'Endowed with rights/authority'.",
-    "chunk": "endowed with the authority"
+    "id": 15,
+    "q": "The company directors ___ an emergency board meeting last night to address the crisis.",
+    "options": ["have held", "held", "hold", "were holding"],
+    "correct": 1,
+    "h": "Identify the closed past time expression 'last night'.",
+    "expl": "'Last night' is a completed time frame that locks the verb into the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Time expressions designating finished past periods ('last night') strictly require the Past Simple.",
+    "chunk": "held [...] last night",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "She was acutely conscious ___ the intense scrutiny surrounding her promotion.",
-    "answer": "of",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Select the adjective preposition denoting awareness.",
-    expl: "<b>Conscious of:</b> Aware of and responding to one's surroundings or specific facts.",
-    "alert": "💡 Adjective Pattern: 'Conscious of + noun/-ing'.",
-    "chunk": "conscious of the intense"
+    "id": 16,
+    "q": "I ___ to the financial director twice today, but she hasn't made a final decision yet.",
+    "options": ["spoke", "have spoken", "speak", "was speaking"],
+    "correct": 1,
+    "h": "'Today' is an unfinished time period that continues right now.",
+    "expl": "Repeated actions within an unfinished time frame ('today') require the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: Because 'today' is an unfinished time period that includes the present moment, actions taking place within it use the Present Perfect.",
+    "chunk": "have spoken [...] twice today",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The research team collaborated closely ___ leading academic institutions worldwide.",
-    "answer": "with",
-    "alt": [],
-    "category": "VERB",
-    h: "What preposition denotes working jointly with someone?",
-    expl: "<b>Collaborate with:</b> To work jointly on an activity or project with another person or group.",
-    "alert": "💡 Verb Pattern: 'Collaborate with colleagues/institutions'.",
-    "chunk": "collaborated closely with leading"
+    "id": 17,
+    "q": "The historic cathedral in the city center ___ completely in a fire in 1845.",
+    "options": ["was destroyed", "has been destroyed", "is destroyed", "destroyed"],
+    "correct": 0,
+    "h": "Look at the specific past historical date 'in 1845'.",
+    "expl": "Historical facts associated with specific dates require the Past Simple in the passive voice.",
+    "alert": "💡 Key Grammar Rule: Historical events associated with specific past dates ('in 1845') represent completed past events, requiring the Past Simple.",
+    "chunk": "was destroyed [...] in 1845",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The defense asserted that the prosecution's claims were devoid ___ factual backing.",
-    "answer": "of",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "What preposition pairs with 'devoid' meaning completely lacking?",
-    expl: "<b>Devoid of:</b> Entirely lacking or free from something.",
-    "alert": "💡 Adjective Pattern: 'Devoid of merit/evidence'.",
-    "chunk": "devoid of factual backing"
+    "id": 18,
+    "q": "So far, our customer support department ___ more than two hundred inquiries today.",
+    "options": ["received", "has received", "receives", "is receiving"],
+    "correct": 1,
+    "h": "The phrase 'so far' measures accumulated progress up to the present moment.",
+    "expl": "'So far' signals an ongoing timeframe leading up to now, requiring the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: The phrase 'so far' measures an accumulating total within an unfinished time period leading up to the present, requiring the Present Perfect.",
+    "chunk": "has received [...] so far",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "She was subjected ___ rigorous vetting before joining the intelligence agency.",
-    "answer": "to",
-    "alt": [],
-    "category": "VERB",
-    h: "What preposition follows 'subjected' in passive voice?",
-    expl: "<b>Subjected to:</b> Caused or forced to undergo a particular experience or treatment.",
-    "alert": "💡 Passive Collocation: 'Subjected to tests/vetting'.",
-    "chunk": "subjected to rigorous vetting"
+    "id": 19,
+    "q": "The famous novelist ___ five international bestseller awards during his lifetime before passing away in 2010.",
+    "options": ["won", "has won", "wins", "had been winning"],
+    "correct": 0,
+    "h": "The author passed away in 2010, so his life is a completed past timeframe.",
+    "expl": "Because the person's life has ended, all lifetime achievements are expressed in the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Achievements of a deceased person belong to a closed past lifetime and must be expressed in the Past Simple.",
+    "chunk": "won [...] during his lifetime",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The success of the venture was contingent ___ securing long-term supply contracts.",
-    "answer": "on",
-    "alt": ["upon"],
-    "category": "ADJECTIVE",
-    h: "Identify the preposition meaning dependent upon.",
-    expl: "<b>Contingent on / upon:</b> Depending on certain conditions or circumstances to occur.",
-    "alert": "💡 Adjective Pattern: 'Contingent on conditions'.",
-    "chunk": "contingent on securing"
+    "id": 20,
+    "q": "We ___ a reservation at the restaurant for 8:00 PM tonight, so we don't need to queue.",
+    "options": ["made", "have made", "make", "were making"],
+    "correct": 1,
+    "h": "The reservation is active and valid right now in the present.",
+    "expl": "The Present Perfect expresses a past action that creates a valid present situation.",
+    "alert": "💡 Key Grammar Rule: When a past action creates an active, valid state or arrangement in the present, use the Present Perfect.",
+    "chunk": "have made a reservation",
+    "targetAspect": "PRESENT PERFECT"
   },
   {
-    "q": "The board insisted ___ conducting an independent forensic audit.",
-    "answer": "on",
-    "alt": ["upon"],
-    "category": "VERB",
-    h: "What preposition follows 'insist' when demanding an action?",
-    expl: "<b>Insist on + gerund:</b> To demand something forcefully, refusing to accept an alternative.",
-    "alert": "💡 Verb Pattern: 'Insist on doing something'.",
-    "chunk": "insisted on conducting"
+    "id": 21,
+    "q": "When did you ___ your new smartphone?",
+    "options": ["buy", "bought", "have bought", "buying"],
+    "correct": 0,
+    "h": "Questions starting with 'When' ask about a specific point in past time.",
+    "expl": "Questions with 'When did you...' explicitly seek a past timestamp and require the base verb after 'did'.",
+    "alert": "💡 Key Grammar Rule: Questions starting with 'When' ask for a specific past time or event, taking 'did' + base verb in the Past Simple.",
+    "chunk": "When did you buy",
+    "targetAspect": "PAST SIMPLE"
   },
   {
-    "q": "The diplomat proved instrumental ___ brokering the historic ceasefire agreement.",
-    "answer": "in",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Select the adjective preposition denoting crucial involvement.",
-    expl: "<b>Instrumental in:</b> Serving as an important agent or cause in achieving something.",
-    "alert": "💡 Adjective Pattern: 'Instrumental in + -ing'.",
-    "chunk": "instrumental in brokering"
+    "id": 22,
+    "q": "The financial markets ___ significantly since the central bank announced the interest rate drop.",
+    "options": ["recovered", "have recovered", "recover", "are recovering"],
+    "correct": 1,
+    "h": "'Since' introduces the starting event of a trend that continues up to now.",
+    "expl": "An action or trend that originated at a past moment and continues until now takes the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: When 'since' introduces a starting point for a trend or action that continues to the present, use the Present Perfect in the main clause.",
+    "chunk": "have recovered [...] since",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 23,
+    "q": "She ___ her first marathon in under four hours last autumn.",
+    "options": ["has completed", "completed", "completes", "was completing"],
+    "correct": 1,
+    "h": "'Last autumn' is a closed past season.",
+    "expl": "'Last autumn' is a finished time period, requiring the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Closed past seasons or time expressions ('last autumn') specify a finished time frame, requiring the Past Simple.",
+    "chunk": "completed [...] last autumn",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 24,
+    "q": "I'm afraid Mr. Henderson isn't here; he ___ out to meet a client.",
+    "options": ["went", "has gone", "has been", "goes"],
+    "correct": 1,
+    "h": "He has gone and is still away right now at this moment.",
+    "expl": "'Has gone' indicates that someone has left and has not yet returned to the current location.",
+    "alert": "💡 Key Grammar Rule: 'Has gone' signifies that someone departed and is still absent or at the destination right now.",
+    "chunk": "has gone out",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 25,
+    "q": "A: How many times have you been to Paris? B: I ___ there three times in my life.",
+    "options": ["went", "have been", "was", "have gone"],
+    "correct": 1,
+    "h": "The answer refers to lifetime experience up to the present moment.",
+    "expl": "Lifetime experiences without specific dates require 'have been'.",
+    "alert": "💡 Key Grammar Rule: Expressing accumulated lifetime experiences ('in my life') up to the present moment requires the Present Perfect.",
+    "chunk": "have been there three times",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 26,
+    "q": "The storm yesterday evening ___ power outages across the northern coastal towns.",
+    "options": ["has caused", "caused", "causes", "was caused"],
+    "correct": 1,
+    "h": "'Yesterday evening' is a finished past time marker.",
+    "expl": "'Yesterday evening' refers to a closed past timeframe, mandating the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Specific past time expressions like 'yesterday evening' define a closed past time period, requiring the Past Simple.",
+    "chunk": "caused [...] yesterday evening",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 27,
+    "q": "I ___ never eaten traditional Japanese sushi before, but I really enjoyed it tonight!",
+    "options": ["did", "have", "was", "had"],
+    "correct": 1,
+    "h": "'Never' combines with the Present Perfect to express lifetime experience.",
+    "expl": "'Have never eaten' expresses a lack of experience up to the present or recent event.",
+    "alert": "💡 Key Grammar Rule: Using 'never' to express a lack of experience up to the present moment requires the Present Perfect.",
+    "chunk": "have never eaten",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 28,
+    "q": "The train to London ___ from platform 4 five minutes ago.",
+    "options": ["has departed", "departed", "departs", "was departing"],
+    "correct": 1,
+    "h": "'Five minutes ago' is a specific past time marker with 'ago'.",
+    "expl": "Time expressions with 'ago' strictly require the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Expressions with 'ago' ('five minutes ago') specify a closed point in past time, requiring the Past Simple.",
+    "chunk": "departed [...] ago",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 29,
+    "q": "Great news! Our team ___ the contract for the international construction project!",
+    "options": ["won", "has won", "wins", "was winning"],
+    "correct": 1,
+    "h": "'Great news!' introduces a fresh, recent event with present news value.",
+    "expl": "Announcing fresh news of present interest takes the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: Announcing recent achievements or breaking news without a specific past date requires the Present Perfect.",
+    "chunk": "has won the contract",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 30,
+    "q": "The ancient Romans ___ extensive road networks across Europe two thousand years ago.",
+    "options": ["have built", "built", "build", "were building"],
+    "correct": 1,
+    "h": "The ancient Romans represent a closed historical civilization.",
+    "expl": "Historical actions performed by past civilizations require the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Actions completed by historical civilizations in the past belong to closed history, requiring the Past Simple.",
+    "chunk": "built [...] two thousand years ago",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 31,
+    "q": "I ___ my keys on the kitchen counter this morning, but now they are gone.",
+    "options": ["left", "have left", "leave", "was leaving"],
+    "correct": 0,
+    "h": "'This morning' here refers to a completed past moment earlier today.",
+    "expl": "When 'this morning' refers to a finished time period earlier in the day, the Past Simple is used.",
+    "alert": "💡 Key Grammar Rule: When referring to a specific completed action during a time period earlier today that has now passed, use the Past Simple.",
+    "chunk": "left [...] this morning",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 32,
+    "q": "The international diplomatic summit ___ remarkable progress over the past forty-eight hours.",
+    "options": ["achieved", "has achieved", "achieves", "was achieving"],
+    "correct": 1,
+    "h": "'Over the past forty-eight hours' connects the recent timeframe to the present.",
+    "expl": "Timeframes extending up to the present ('over the past 48 hours') take the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: Time periods stretching continuously up to the present moment ('over the past 48 hours') require the Present Perfect.",
+    "chunk": "has achieved [...] over the past",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 33,
+    "q": "When I was young, my family ___ to the seaside every summer holiday.",
+    "options": ["has gone", "went", "goes", "have been going"],
+    "correct": 1,
+    "h": "'When I was young' defines a finished past period of childhood habits.",
+    "expl": "Past habits tied to a completed stage of life require the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Past routines and habits tied to a finished period of life ('When I was young') take the Past Simple.",
+    "chunk": "went [...] when I was young",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 34,
+    "q": "The medical researchers ___ a novel compound that inhibits bacterial growth.",
+    "options": ["discovered", "have discovered", "discover", "were discovering"],
+    "correct": 1,
+    "h": "The discovery is a recent scientific breakthrough with present importance.",
+    "expl": "Presenting recent scientific discoveries without a specific past date uses the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: Announcing recent scientific discoveries without a specific calendar date uses the Present Perfect to emphasize present significance.",
+    "chunk": "have discovered a novel compound",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 35,
+    "q": "The firm ___ fifty new staff members during the expansion phase in 2021.",
+    "options": ["has hired", "hired", "hires", "was hiring"],
+    "correct": 1,
+    "h": "'In 2021' specifies a closed calendar year in the past.",
+    "expl": "Specific past calendar years mandate the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Events linked to a specific finished calendar year ('in 2021') require the Past Simple.",
+    "chunk": "hired [...] in 2021",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 36,
+    "q": "I ___ three emails to the support team so far, but nobody has replied yet.",
+    "options": ["sent", "have sent", "send", "was sending"],
+    "correct": 1,
+    "h": "'So far' tracks cumulative actions up to the present moment.",
+    "expl": "Cumulative actions measured 'so far' require the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: The time marker 'so far' indicates an open, accumulating count up to the present moment, requiring the Present Perfect.",
+    "chunk": "have sent [...] so far",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 37,
+    "q": "The famous painter ___ his final masterpiece shortly before his death in 1890.",
+    "options": ["completed", "has completed", "completes", "was completed"],
+    "correct": 0,
+    "h": "The painter's life ended in 1890.",
+    "expl": "Actions completed during the lifetime of someone who has passed away require the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Actions completed by historical figures during their lifetime belong to a finished past era, requiring the Past Simple.",
+    "chunk": "completed [...] shortly before his death",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 38,
+    "q": "Our company ___ its official annual sustainability report this afternoon.",
+    "options": ["published", "has published", "publishes", "was publishing"],
+    "correct": 1,
+    "h": "'This afternoon' is the current ongoing period.",
+    "expl": "Actions completed within an ongoing current time frame ('this afternoon') take the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: Actions completed within an ongoing, current time frame ('this afternoon') take the Present Perfect.",
+    "chunk": "has published [...] this afternoon",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 39,
+    "q": "The severe earthquake ___ the coastal region at 5:00 AM yesterday.",
+    "options": ["has struck", "struck", "strikes", "was striking"],
+    "correct": 1,
+    "h": "'At 5:00 AM yesterday' provides an exact past timestamp.",
+    "expl": "Exact past timestamps ('at 5:00 AM yesterday') strictly mandate the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Events with an exact past timestamp ('at 5:00 AM yesterday') specify a completed point in time, requiring the Past Simple.",
+    "chunk": "struck at 5:00 AM yesterday",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 40,
+    "q": "Scientists ___ significant evidence of subsurface liquid water on Mars recently.",
+    "options": ["found", "have found", "find", "were finding"],
+    "correct": 1,
+    "h": "'Recently' connects recent findings to current scientific understanding.",
+    "expl": "'Recently' pairs naturally with the Present Perfect to highlight current relevance.",
+    "alert": "💡 Key Grammar Rule: The adverb 'recently' connects fresh discoveries directly to present knowledge, favoring the Present Perfect.",
+    "chunk": "have found [...] recently",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 41,
+    "q": "The factory ___ manufacturing operations last month after thirty years of production.",
+    "options": ["has ceased", "ceased", "ceases", "was ceasing"],
+    "correct": 1,
+    "h": "'Last month' marks a closed past month.",
+    "expl": "'Last month' is a finished time frame requiring the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Events completed in a finished past period ('last month') represent closed past facts, requiring the Past Simple.",
+    "chunk": "ceased [...] last month",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 42,
+    "q": "I ___ to six different European countries in my life.",
+    "options": ["traveled", "have traveled", "travel", "was traveling"],
+    "correct": 1,
+    "h": "The sentence describes lifetime travel experience.",
+    "expl": "Expressing lifetime travel experience up to now requires the Present Perfect.",
+    "alert": "💡 Key Grammar Rule: Quantifying travel experience accumulated across an ongoing lifetime requires the Present Perfect.",
+    "chunk": "have traveled [...] in my life",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 43,
+    "q": "The police ___ two suspects in connection with the bank robbery last night.",
+    "options": ["have arrested", "arrested", "arrest", "were arresting"],
+    "correct": 1,
+    "h": "'Last night' is a closed past timeframe.",
+    "expl": "'Last night' strictly requires the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Actions conducted during a specific finished time period ('last night') require the Past Simple.",
+    "chunk": "arrested [...] last night",
+    "targetAspect": "PAST SIMPLE"
+  },
+  {
+    "id": 44,
+    "q": "Look! Someone ___ an umbrella under the table in the coffee shop.",
+    "options": ["left", "has left", "leaves", "was leaving"],
+    "correct": 1,
+    "h": "The umbrella is physically present right now under the table.",
+    "expl": "The Present Perfect is used because the left item is right there in front of us now.",
+    "alert": "💡 Key Grammar Rule: Observing an item or situation right now with present evidence/relevance requires the Present Perfect.",
+    "chunk": "has left an umbrella",
+    "targetAspect": "PRESENT PERFECT"
+  },
+  {
+    "id": 45,
+    "q": "The team ___ the final project report ten minutes ago.",
+    "options": ["has submitted", "submitted", "submits", "was submitting"],
+    "correct": 1,
+    "h": "'Ten minutes ago' has the closed time marker 'ago'.",
+    "expl": "Time expressions with 'ago' always take the Past Simple.",
+    "alert": "💡 Key Grammar Rule: Submitting work or completing an action at a specific past interval ('ten minutes ago') specifies a closed past moment, requiring the Past Simple.",
+    "chunk": "submitted [...] minutes ago",
+    "targetAspect": "PAST SIMPLE"
   }
 ];
 
-const datasetB = [
-  {
-    "q": "She proved remarkably resilient ___ adversity throughout her corporate career.",
-    "answer": "to",
-    "alt": ["against"],
-    "category": "ADJECTIVE",
-    h: "What adjective-preposition pair describes enduring hardships?",
-    expl: "<b>Resilient to:</b> Able to withstand or recover quickly from difficult conditions.",
-    "alert": "💡 Adjective Pattern: 'Resilient to shocks, stress, or adversity'.",
-    "chunk": "resilient to adversity"
-  },
-  {
-    "q": "Investors expressed deep skepticism ___ the viability of the proposed merger.",
-    "answer": "about",
-    "alt": ["regarding", "of"],
-    "category": "NOUN",
-    h: "Identify the preposition following nouns denoting doubt or disbelief like 'skepticism'.",
-    expl: "<b>Skepticism about / regarding:</b> A questioning attitude towards integrity or success.",
-    "alert": "💡 Noun Pattern: Skepticism takes 'about', 'of', or 'regarding'.",
-    "chunk": "skepticism about the viability"
-  },
-  {
-    "q": "The report provides compelling testimony ___ the efficacy of the new vaccine.",
-    "answer": "to",
-    "alt": ["of"],
-    "category": "NOUN",
-    h: "What preposition follows 'testimony' when proving a fact?",
-    expl: "<b>Testimony to:</b> Evidence or proof of something.",
-    "alert": "💡 Noun Collocation: 'Testimony to' serves as proof.",
-    "chunk": "testimony to the efficacy"
-  },
-  {
-    "q": "Her immaculate presentation was a credit ___ her dedication and hard work.",
-    "answer": "to",
-    "alt": [],
-    "category": "IDIOM",
-    h: "Complete the idiom: 'a credit ___ someone'.",
-    "expl": "<b>A credit to:</b> Someone or something that brings honor or praise to an entity.",
-    "alert": "💡 Idiomatic Collocation: 'A credit to your hard work'.",
-    "chunk": "a credit to her dedication"
-  },
-  {
-    "q": "There is an urgent need ___ greater transparency in corporate governance.",
-    "answer": "for",
-    "alt": [],
-    "category": "NOUN",
-    h: "Select the noun preposition denoting necessity.",
-    expl: "<b>Need for:</b> Requirements or necessity regarding a resource or condition.",
-    "alert": "💡 Noun Pattern: 'Need for + noun'.",
-    "chunk": "need for greater transparency"
-  },
-  {
-    "q": "She harbored deep resentment ___ her supervisor for the unfair performance review.",
-    "answer": "towards",
-    "alt": ["against"],
-    "category": "NOUN",
-    h: "Identify the preposition following 'resentment' directed at a person.",
-    expl: "<b>Resentment towards / against:</b> Bitter indignation at having been treated unfairly.",
-    "alert": "💡 Noun Pattern: Resentment takes 'towards' or 'against'.",
-    "chunk": "resentment towards her supervisor"
-  },
-  {
-    "q": "The government imposed severe restrictions ___ foreign currency exchange.",
-    "answer": "on",
-    "alt": ["upon"],
-    "category": "NOUN",
-    h: "What preposition pairs with nouns like 'restrictions' or 'limitations'?",
-    expl: "<b>Restrictions on:</b> Official rules limiting or controlling actions or commodities.",
-    "alert": "💡 Noun Collocation: 'Restrictions on trade/currency'.",
-    "chunk": "restrictions on foreign currency"
-  },
-  {
-    "q": "The CEO resigned ___ the wake of the devastating financial scandal.",
-    "answer": "in",
-    "alt": [],
-    "category": "IDIOM",
-    h: "Complete the prepositional idiom meaning following an event.",
-    expl: "<b>In the wake of:</b> Coming after or following an event, usually a significant or disruptive one.",
-    "alert": "💡 Fixed Idiom: 'In the wake of the scandal'.",
-    "chunk": "in the wake of"
-  },
-  {
-    "q": "The negotiators reached an impasse ___ the issue of intellectual property rights.",
-    "answer": "over",
-    "alt": ["on", "regarding"],
-    "category": "NOUN",
-    h: "Choose the preposition denoting the subject of a disagreement.",
-    expl: "<b>Impasse over:</b> A situation where no progress is possible regarding a specific topic.",
-    "alert": "💡 Noun Pattern: Impasse 'over' or 'regarding'.",
-    "chunk": "impasse over the issue"
-  },
-  {
-    "q": "His unorthodox management style sparked widespread controversy ___ the workforce.",
-    "answer": "among",
-    "alt": ["amongst", "within"],
-    "category": "PREPOSITION",
-    h: "Choose the preposition for distribution across a group of three or more.",
-    expl: "<b>Among:</b> Occurring in or shared by a larger group or collective body.",
-    "alert": "💡 Preposition Rule: Use 'between' for two entities, 'among' for three or more.",
-    "chunk": "controversy among the workforce"
-  },
-  {
-    "q": "The government faced fierce opposition ___ its proposed tax reform measures.",
-    "answer": "to",
-    "alt": ["against"],
-    "category": "NOUN",
-    h: "Select the noun preposition denoting resistance or hostility.",
-    expl: "<b>Opposition to:</b> Resistance or dissent expressed against a policy or plan.",
-    "alert": "💡 Noun Pattern: 'Opposition to reform'.",
-    "chunk": "opposition to its proposed"
-  },
-  {
-    "q": "There is growing anxiety ___ the rapid escalation of living expenses.",
-    "answer": "over",
-    "alt": ["about"],
-    "category": "NOUN",
-    h: "Choose the noun preposition expressing worry concerning an issue.",
-    expl: "<b>Anxiety over / about:</b> A feeling of worry, nervousness, or unease regarding an event.",
-    "alert": "💡 Noun Pattern: Anxiety takes 'over' or 'about'.",
-    "chunk": "anxiety over the rapid"
-  },
-  {
-    "q": "The artist drew inspiration ___ her childhood experiences in rural Andalusia.",
-    "answer": "from",
-    "alt": [],
-    "category": "VERB",
-    h: "What preposition pairs with 'draw inspiration' indicating the source?",
-    expl: "<b>Draw inspiration from:</b> To take creative ideas or motivation originating from a source.",
-    "alert": "💡 Collocation: 'Draw inspiration from nature/memory'.",
-    "chunk": "draw inspiration from her"
-  },
-  {
-    "q": "The company takes immense pride ___ its record of environmental sustainability.",
-    "answer": "in",
-    "alt": [],
-    "category": "IDIOM",
-    h: "Select the preposition used in the idiom 'take pride ___'.",
-    "expl": "<b>Take pride in:</b> To feel a deep sense of satisfaction in one's achievements or qualities.",
-    "alert": "💡 Fixed Idiom: 'Take pride in your work'.",
-    "chunk": "takes immense pride in"
-  },
-  {
-    "q": "His promotion was testament ___ his unwavering dedication to the firm.",
-    "answer": "to",
-    "alt": [],
-    "category": "NOUN",
-    h: "Complete the collocation meaning serves as proof.",
-    "expl": "<b>Testament to:</b> Something that serves as a clear sign or proof of something.",
-    "alert": "💡 Collocation: 'A testament to success'.",
-    "chunk": "testament to his unwavering"
-  },
-  {
-    "q": "She harbored a deep-seated aversion ___ public speaking throughout her youth.",
-    "answer": "to",
-    "alt": [],
-    "category": "NOUN",
-    h: "Recall the preposition required after the noun 'aversion'.",
-    expl: "<b>Aversion to:</b> A strong dislike or disinclination towards something.",
-    "alert": "💡 Noun Pattern: Aversion takes 'to'.",
-    "chunk": "aversion to public speaking"
-  },
-  {
-    "q": "The negotiator managed to bridge the gap ___ the two opposing factions.",
-    "answer": "between",
-    "alt": [],
-    "category": "PREPOSITION",
-    h: "What preposition denotes separation or connection across two distinct parties?",
-    expl: "<b>Between:</b> Used when connecting or separating two distinct items or parties.",
-    "alert": "💡 Rule: Use 'between' strictly for two parties; 'among' for more than two.",
-    "chunk": "gap between the two"
-  },
-  {
-    "q": "The new regulations are subversive ___ traditional corporate governance models.",
-    "answer": "to",
-    "alt": ["of"],
-    "category": "ADJECTIVE",
-    h: "What preposition follows 'subversive' meaning destructive to established systems?",
-    expl: "<b>Subversive of / to:</b> Seeking or intended to subvert an established system or institution.",
-    "alert": "💡 Formal Register: 'Subversive of order/morals'.",
-    "chunk": "subversive of traditional"
-  },
-  {
-    "q": "The politician's remarks were interpreted as detrimental ___ the peace process.",
-    "answer": "to",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "Select the adjective preposition meaning harmful or damaging.",
-    expl: "<b>Detrimental to:</b> Tending to cause harm, injury, or negative impact.",
-    "alert": "💡 Adjective Pattern: 'Detrimental to health/progress'.",
-    "chunk": "detrimental to the peace"
-  },
-  {
-    "q": "Her exceptional leadership was pivotal ___ steering the company through bankruptcy.",
-    "answer": "in",
-    "alt": [],
-    "category": "ADJECTIVE",
-    h: "What preposition pairs with 'pivotal' indicating central importance in an action?",
-    expl: "<b>Pivotal in:</b> Of crucial importance in relation to the development or success of something.",
-    "alert": "💡 Adjective Pattern: 'Pivotal in + -ing'.",
-    "chunk": "pivotal in steering"
-  },
-  {
-    "q": "The defendant was found culpable ___ gross negligence and breach of contract.",
-    "answer": "of",
-    "alt": ["for"],
-    "category": "ADJECTIVE",
-    h: "Choose the legal adjective preposition denoting blameworthiness.",
-    expl: "<b>Culpable of:</b> Deserving blame; responsible for a fault or wrong.",
-    "alert": "💡 Legal Register: 'Culpable of an offense/negligence'.",
-    "chunk": "culpable of gross negligence"
-  },
-  {
-    "q": "The policy change is bound to elicit a sharp backlash ___ consumers.",
-    "answer": "from",
-    "alt": ["by"],
-    "category": "NOUN",
-    h: "What preposition indicates the source of a reaction like backlash?",
-    expl: "<b>Backlash from:</b> A strong negative reaction by a large group, typically from consumers or voters.",
-    "alert": "💡 Noun Collocation: 'Backlash from the public/consumers'.",
-    "chunk": "backlash from consumers"
-  }
-];
+const QUIZ_A = dataset.slice(0, 22);
+const QUIZ_B = dataset.slice(22, 45);
 
-let currentMode = 'A';
-let currentDataset = datasetA;
-let currentIndex = 0;
+let currentQuizMode = 'A';
+let localIndex = 0;
+let selectedOption = null;
+let isAnswerVerified = false;
 let score = 0;
 let streak = 0;
-let isAnswerChecked = false;
+let solvedTasks = {};
 let soundEnabled = true;
 
-// Sound FX Synthesizer
+// Audio Synth
 let audioCtx = null;
 function playSound(type) {
   if (!soundEnabled) return;
@@ -605,7 +674,7 @@ function playSound(type) {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (audioCtx.state === 'suspended') audioCtx.resume();
     const now = audioCtx.currentTime;
-    if (type === 'success') {
+    if (type === 'correct') {
       const osc1 = audioCtx.createOscillator();
       const osc2 = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
@@ -614,7 +683,7 @@ function playSound(type) {
       gain.gain.setValueAtTime(0.001, now); gain.gain.linearRampToValueAtTime(0.18, now + 0.05); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
       osc1.connect(gain); osc2.connect(gain); gain.connect(audioCtx.destination);
       osc1.start(now); osc2.start(now + 0.08); osc1.stop(now + 0.35); osc2.stop(now + 0.35);
-    } else if (type === 'error') {
+    } else if (type === 'incorrect') {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.type = 'sine'; osc.frequency.setValueAtTime(260, now); osc.frequency.setValueAtTime(220, now + 0.12);
@@ -625,7 +694,6 @@ function playSound(type) {
   } catch(e) {}
 }
 
-// Proven British Female Voice Selector
 function getBritishFemaleVoice() {
   if (!('speechSynthesis' in window)) return null;
   const voices = window.speechSynthesis.getVoices();
@@ -670,8 +738,8 @@ if ('speechSynthesis' in window) {
 function speakCurrentSentence() {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
-  const current = currentDataset[currentIndex];
-  const sentence = current.q.replace('___', 'blank');
+  const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  const sentence = currentList[localIndex].q.replace(/___+/g, ', ');
   const utterance = new SpeechSynthesisUtterance(sentence);
   utterance.lang = 'en-GB';
   const voice = getBritishFemaleVoice();
@@ -683,152 +751,270 @@ function speakCurrentSentence() {
   window.speechSynthesis.speak(utterance);
 }
 
-function switchQuizMode(mode) {
-  currentMode = mode;
-  currentDataset = (mode === 'A') ? datasetA : datasetB;
-  currentIndex = 0;
-  score = 0;
-  streak = 0;
-
-  const btnA = document.getElementById('tab-quiz-a');
-  const btnB = document.getElementById('tab-quiz-b');
-  const sub = document.getElementById('subtitulo-quiz');
-
-  if (mode === 'A') {
-    btnA.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer bg-white text-indigo-600";
-    btnB.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer text-slate-600 hover:text-slate-900";
-    sub.innerText = "Advanced Dependent Prepositions Practice (Quiz A)";
-  } else {
-    btnB.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer bg-white text-indigo-600";
-    btnA.className = "py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-xs cursor-pointer text-slate-600 hover:text-slate-900";
-    sub.innerText = "Advanced Dependent Prepositions Practice (Quiz B)";
-  }
-  loadChallenge();
+function getCurrentChallenge() {
+  const list = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  return list[localIndex];
 }
 
-function loadChallenge() {
-  if (currentIndex >= currentDataset.length) {
-    showFinalSummary();
-    return;
-  }
-  isAnswerChecked = false;
-  const current = currentDataset[currentIndex];
+function renderTask() {
+  const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  const current = currentList[localIndex];
+  selectedOption = null;
+  isAnswerVerified = false;
 
-  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${currentDataset.length}`;
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+  // Header & Counts
+  document.getElementById('task-counter').innerText = `Task ${localIndex + 1} of ${currentList.length}`;
+  document.getElementById('score-display').innerText = score;
+  document.getElementById('streak-display').innerText = streak;
+  document.getElementById('quiz-subtitle').innerText = `Present Perfect Master Practice (${currentQuizMode === 'A' ? 'Quiz A' : 'Quiz B'})`;
 
-  const pct = Math.round(((currentIndex + 1) / currentDataset.length) * 100);
-  document.getElementById('barra-progreso').style.width = `${pct}%`;
+  // Aspect Category Pill
+  const aspect = current.targetAspect || 'PRESENT PERFECT';
+  document.getElementById('category-pill-text').innerText = aspect;
 
-  document.getElementById('btn-categoria').innerText = `${current.category} (CLICK FOR CATEGORY ℹ️)`;
+  // Question & Hint
+  document.getElementById('pregunta-texto').innerText = current.q;
+  document.getElementById('pista-texto').innerText = current.h;
+  document.getElementById('pista-box').classList.add('hidden');
 
-  const parts = current.q.split('___');
-  document.getElementById('pregunta-texto').innerHTML = `<span>${parts[0]}</span><span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span><span>${parts[1]}</span>`;
+  // Feedback Box & Verify Button
+  document.getElementById('feedback-box').classList.add('hidden');
+  const btnVerify = document.getElementById('btn-verify');
+  btnVerify.innerText = 'Verify (Enter)';
+  btnVerify.disabled = true;
 
-  document.getElementById('pista-contenido').innerText = current.h;
-  document.getElementById('pista-texto').classList.add('hidden');
+  // Render Options
+  const container = document.getElementById('opciones-contenedor');
+  container.innerHTML = '';
+  current.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-semibold text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition flex justify-between items-center shadow-xs cursor-pointer';
+    btn.innerHTML = `<span class="text-sm sm:text-base">${opt}</span><i class="far fa-circle text-slate-300"></i>`;
+    btn.onclick = () => selectOption(idx);
+    container.appendChild(btn);
+  });
 
-  const inputEl = document.getElementById('userInput');
-  inputEl.value = '';
-  inputEl.disabled = false;
-  inputEl.className = "w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 outline-none transition text-base font-semibold text-slate-800 placeholder-slate-400 bg-white shadow-inner";
-  inputEl.focus();
+  // Prev / Next button state
+  document.getElementById('btn-prev').disabled = (localIndex === 0);
+  document.getElementById('btn-prev').classList.toggle('opacity-50', localIndex === 0);
+}
 
-  const feedbackBox = document.getElementById('feedback-box');
-  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
-  document.getElementById('btn-verificar').classList.remove('hidden');
+function selectOption(idx) {
+  if (isAnswerVerified) return;
+  selectedOption = idx;
+  const container = document.getElementById('opciones-contenedor');
+  const buttons = container.children;
+  Array.from(buttons).forEach((btn, i) => {
+    if (i === idx) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-blue-600 font-bold text-blue-900 bg-blue-50/80 transition flex justify-between items-center shadow-xs cursor-pointer';
+      btn.querySelector('i').className = 'fas fa-check-circle text-blue-600';
+    } else {
+      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-semibold text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition flex justify-between items-center shadow-xs cursor-pointer';
+      btn.querySelector('i').className = 'far fa-circle text-slate-300';
+    }
+  });
+  document.getElementById('btn-verify').disabled = false;
 }
 
 function verifyAnswer() {
-  if (isAnswerChecked) return;
-  const inputEl = document.getElementById('userInput');
-  const userVal = inputEl.value.trim().toLowerCase();
-  if (!userVal) return;
+  if (selectedOption === null) return;
+  if (isAnswerVerified) {
+    nextTask();
+    return;
+  }
+  isAnswerVerified = true;
+  const current = getCurrentChallenge();
+  const isCorrect = (selectedOption === current.correct);
+  const container = document.getElementById('opciones-contenedor');
+  const buttons = container.children;
 
-  isAnswerChecked = true;
-  const current = currentDataset[currentIndex];
-  const allAnswers = [current.answer.toLowerCase(), ...(current.alt || []).map(a => a.toLowerCase())];
-  const isCorrect = allAnswers.includes(userVal);
+  Array.from(buttons).forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === current.correct) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.querySelector('i').className = 'fas fa-check-circle text-emerald-600';
+    } else if (i === selectedOption && !isCorrect) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.querySelector('i').className = 'fas fa-times-circle text-rose-500';
+    } else {
+      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-default';
+      btn.querySelector('i').className = 'far fa-circle text-slate-200';
+    }
+  });
 
   if (isCorrect) {
-    score++;
+    playSound('correct');
+    if (!solvedTasks[current.id]) {
+      score++;
+      solvedTasks[current.id] = true;
+      document.getElementById('score-display').innerText = score;
+    }
     streak++;
-    playSound('success');
+    document.getElementById('streak-display').innerText = streak;
   } else {
+    playSound('incorrect');
     streak = 0;
-    playSound('error');
+    document.getElementById('streak-display').innerText = streak;
   }
 
-  const slot = document.getElementById('blank-slot');
-  if (slot) {
-    slot.innerText = current.answer;
-    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200 align-middle';
-  }
-
-  inputEl.disabled = true;
-  if (isCorrect) {
-    inputEl.className = "w-full px-5 py-4 rounded-2xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition text-base shadow-inner";
-  } else {
-    inputEl.className = "w-full px-5 py-4 rounded-2xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition text-base shadow-inner";
-  }
-
+  // Feedback Box
   const feedbackBox = document.getElementById('feedback-box');
-  feedbackBox.className = 'p-5 rounded-2xl mb-6 border transition-all duration-300 ' + (isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200');
-  
-  document.getElementById('feedback-titulo').innerText = isCorrect ? 'Excellent!' : 'Key Distinction / Take Note!';
-  document.getElementById('feedback-titulo').className = 'font-bold text-lg mb-2 ' + (isCorrect ? 'text-emerald-800' : 'text-rose-800');
-  document.getElementById('feedback-explicacion').innerHTML = current.expl;
-  document.getElementById('feedback-alert').innerText = current.alert;
-  document.getElementById('feedback-chunk').innerText = `Chunk: ${current.chunk}`;
+  const feedbackTitulo = document.getElementById('feedback-titulo');
+  const feedbackTarget = document.getElementById('feedback-target-badge');
+  const feedbackExplicacion = document.getElementById('feedback-explicacion');
+  const feedbackAlert = document.getElementById('feedback-alert');
+  const feedbackChunk = document.getElementById('feedback-chunk');
 
-  feedbackBox.classList.remove('hidden');
-  document.getElementById('btn-verificar').classList.add('hidden');
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+  if (isCorrect) {
+    feedbackBox.className = 'p-5 rounded-2xl mb-5 border bg-emerald-50/90 border-emerald-200 block transition-all';
+    feedbackTitulo.innerText = 'Excellent!';
+    feedbackTitulo.className = 'font-bold text-base sm:text-lg text-emerald-800';
+    feedbackTarget.classList.add('hidden');
+  } else {
+    feedbackBox.className = 'p-5 rounded-2xl mb-5 border bg-rose-50/90 border-rose-200 block transition-all';
+    feedbackTitulo.innerText = 'Key Distinction / Take Note!';
+    feedbackTitulo.className = 'font-bold text-base sm:text-lg text-rose-800';
+    feedbackTarget.innerText = `Target: ${current.options[current.correct]}`;
+    feedbackTarget.classList.remove('hidden');
+  }
+
+  feedbackExplicacion.innerText = current.expl;
+  feedbackAlert.innerText = current.alert;
+  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
+
+  // Update button to Next
+  const btnVerify = document.getElementById('btn-verify');
+  btnVerify.innerText = 'Next Challenge → (Enter)';
+  btnVerify.disabled = false;
 }
 
-document.getElementById('btn-verificar').onclick = verifyAnswer;
-document.getElementById('btn-siguiente').onclick = () => { currentIndex++; loadChallenge(); };
-document.getElementById('btn-anterior').onclick = () => { if (currentIndex > 0) { currentIndex--; loadChallenge(); } };
-document.getElementById('btn-pista-inferior').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
-document.getElementById('btn-mostrar-respuesta').onclick = () => {
-  if (isAnswerChecked) return;
-  const current = currentDataset[currentIndex];
-  document.getElementById('userInput').value = current.answer;
+function nextTask() {
+  const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
+  if (localIndex < currentList.length - 1) {
+    localIndex++;
+    renderTask();
+  } else {
+    if (currentQuizMode === 'A') {
+      if (confirm('Quiz A completed! Ready to move to Quiz B (Tasks 23-45)?')) {
+        switchQuiz('B');
+      }
+    } else {
+      alert(`Congratulations! You completed all 45 tasks! Final Score: ${score} / 45.`);
+    }
+  }
+}
+
+function prevTask() {
+  if (localIndex > 0) {
+    localIndex--;
+    renderTask();
+  }
+}
+
+function switchQuiz(mode) {
+  currentQuizMode = mode;
+  localIndex = 0;
+  if (mode === 'A') {
+    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition';
+    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition';
+  } else {
+    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition';
+    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition';
+  }
+  renderTask();
+}
+
+function showAnswer() {
+  const current = getCurrentChallenge();
+  selectOption(current.correct);
   verifyAnswer();
+  streak = 0;
+  document.getElementById('streak-display').innerText = streak;
+}
+
+// Event Listeners
+document.getElementById('btn-verify').onclick = verifyAnswer;
+document.getElementById('btn-next').onclick = nextTask;
+document.getElementById('btn-prev').onclick = prevTask;
+document.getElementById('btn-hint').onclick = () => {
+  document.getElementById('pista-box').classList.toggle('hidden');
+};
+document.getElementById('btn-show-answer').onclick = showAnswer;
+document.getElementById('tab-quiz-a').onclick = () => switchQuiz('A');
+document.getElementById('tab-quiz-b').onclick = () => switchQuiz('B');
+document.getElementById('btn-audio').onclick = speakCurrentSentence;
+document.getElementById('btn-sound').onclick = () => {
+  soundEnabled = !soundEnabled;
+  document.getElementById('sound-label').innerText = soundEnabled ? 'FX ON' : 'FX OFF';
+  document.getElementById('sound-label').className = soundEnabled ? 'text-xs font-bold text-emerald-600' : 'text-xs font-bold text-slate-400';
+};
+document.getElementById('btn-reset').onclick = () => {
+  if (confirm('Restart from Task 1 and reset score?')) {
+    score = 0;
+    streak = 0;
+    solvedTasks = {};
+    localIndex = 0;
+    renderTask();
+  }
 };
 
-document.getElementById('btn-restart').onclick = () => { currentIndex = 0; score = 0; streak = 0; loadChallenge(); };
-document.getElementById('btn-audio-sentence').onclick = speakCurrentSentence;
-
-document.getElementById('userInput').addEventListener('keydown', (e) => {
+// Keyboard listener
+window.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    e.preventDefault();
-    if (!isAnswerChecked) verifyAnswer();
-    else { currentIndex++; loadChallenge(); }
+    if (isAnswerVerified) {
+      nextTask();
+    } else if (selectedOption !== null) {
+      verifyAnswer();
+    }
   }
 });
 
 // Category Modal handlers
 const modal = document.getElementById('modal-category');
-document.getElementById('btn-categoria').onclick = () => {
-  const current = currentDataset[currentIndex];
-  const aspect = current.category || 'PREPOSITION';
+document.getElementById('btn-category').onclick = () => {
+  const current = getCurrentChallenge();
+  const aspect = current.targetAspect || 'PRESENT PERFECT';
   document.getElementById('modal-aspect-badge').innerText = aspect;
   const content = document.getElementById('modal-content');
-  
-  content.innerHTML = `
-    <div>
-      <h3 class="font-bold text-slate-900 text-base mb-1">Advanced Dependent Prepositions (${aspect})</h3>
-      <p class="text-xs text-slate-600 leading-relaxed">Mastering fixed collocations where specific verbs, adjectives, and nouns require exact prepositions to sound natural and proficient at C1/C2 level.</p>
-    </div>
-    <div class="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-100 space-y-2 text-xs">
-      <p class="font-bold text-indigo-950 uppercase tracking-wider text-[11px]">Key Study Strategy:</p>
-      <p class="text-slate-700">• Learn words in complete <strong>chunks</strong> (e.g. <em>predicated on</em>, <em>averse to</em>, <em>devoid of</em>).</p>
-      <p class="text-slate-700">• Pay attention to prepositions following adjectives expressing attitude or state.</p>
-    </div>
-  `;
+
+  if (aspect === 'PRESENT PERFECT') {
+    content.innerHTML = `
+      <div>
+        <h3 class="font-bold text-slate-900 text-base mb-1">Present Perfect (have / has + past participle)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">Used when an action occurred in the past but has a <strong>direct connection to the present moment</strong>, accumulated life experience, or an unfinished timeframe.</p>
+      </div>
+      <div class="bg-blue-50/60 p-4 rounded-2xl border border-blue-100 space-y-2 text-xs">
+        <p class="font-bold text-blue-950 uppercase tracking-wider text-[11px]">Key Grammar Triggers:</p>
+        <p class="text-slate-700">• <strong>Unfinished Time:</strong> <em>this week, this year, so far today</em></p>
+        <p class="text-slate-700">• <strong>Life Experience:</strong> <em>ever, never, in my life, three times</em></p>
+        <p class="text-slate-700">• <strong>Present Result:</strong> <em>"I have lost my passport!" (it is missing right now)</em></p>
+        <p class="text-slate-700">• <strong>Immediate Past:</strong> <em>have just finished, recently</em></p>
+        <p class="text-slate-700">• <strong>Starting Point / Duration:</strong> <em>since Monday, for ten years (ongoing)</em></p>
+      </div>
+      <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200 text-xs text-amber-950">
+        <p class="font-bold mb-1">💡 Key Rule:</p>
+        <p class="leading-relaxed">Never use the Present Perfect with finished past time markers like <em>yesterday</em>, <em>last week</em>, or <em>ago</em>!</p>
+      </div>
+    `;
+  } else {
+    content.innerHTML = `
+      <div>
+        <h3 class="font-bold text-slate-900 text-base mb-1">Past Simple (V2 / did + base form)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">Used for actions completed in a <strong>closed, finished time period</strong>. The connection to the present is completely severed.</p>
+      </div>
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+        <p class="font-bold text-slate-900 uppercase tracking-wider text-[11px]">Strict Past Simple Markers:</p>
+        <p class="text-slate-700">• <strong>Explicit Past Markers:</strong> <em>yesterday, last month, last autumn</em></p>
+        <p class="text-slate-700">• <strong>The "-ago" Rule:</strong> <em>two days ago, ten minutes ago</em></p>
+        <p class="text-slate-700">• <strong>Specific Dates/Years:</strong> <em>in 2019, in 1845, at 5:00 AM yesterday</em></p>
+        <p class="text-slate-700">• <strong>Completed Life Stage:</strong> <em>when I was a student, during his lifetime</em></p>
+      </div>
+      <div class="bg-blue-50/60 p-3.5 rounded-2xl border border-blue-100 text-xs text-blue-900">
+        <p class="font-bold mb-1">Structure Formula:</p>
+        <p class="font-mono text-slate-700">Subject + Verb-ed / Irregular 2nd form (e.g. discovered, went, held, struck)</p>
+      </div>
+    `;
+  }
   modal.classList.remove('hidden');
 };
 
@@ -836,23 +1022,8 @@ document.getElementById('btn-close-modal').onclick = () => modal.classList.add('
 document.getElementById('btn-modal-return').onclick = () => modal.classList.add('hidden');
 modal.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
 
-function showFinalSummary() {
-  const main = document.querySelector('main');
-  main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in overflow-hidden" style="border-top: 8px solid #2563eb;">
-      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">You have successfully completed this practice module.</p>
-      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
-        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${currentDataset.length}</span></div>
-      </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Restart Practice</button>
-    </div>
-  `;
-}
-
-loadChallenge();
+// Initial Load
+renderTask();
 </script>
 
 </body>

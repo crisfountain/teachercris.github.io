@@ -1,905 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Present Perfect vs Past Simple Master | Teacher Cris</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
-.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Cris | Clases Particulares de Inglés Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-<!-- Main App Container -->
-<main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
+ <!-- Header / Navegación -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-indigo-600 tracking-tight">Teacher Cris</span>
+            <div class="flex items-center gap-4">
+                <!-- Larger Language Switcher -->
+                <a href="index-eng.html" class="flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-indigo-600 bg-slate-100 hover:bg-indigo-50 px-4 py-2 rounded-full transition border border-slate-200 shadow-xs" title="Switch to English">
+                    <span class="text-base">🇬🇧</span> <span>EN</span>
+                </a>
+                <a href="#contacto" class="bg-indigo-600 text-white px-5 py-2.5 rounded-full font-medium hover:bg-indigo-700 transition text-sm">Reserva tu Clase</a>
+            </div>
+        </div>
+    </header>
 
-<div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 overflow-hidden" style="border-top: 8px solid #2563eb;">
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="text-indigo-600 font-semibold tracking-wide uppercase text-sm">Clases de Inglés Online</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2 mb-6 leading-tight">
+                Habla inglés con confianza y a tu propio ritmo
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                Clases particulares y personalizadas para adultos y profesionales. Profesor titulado con certificación <strong>CELTA (Cambridge)</strong> y nivel <strong>C2 Proficient</strong>.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#contacto" class="text-center bg-indigo-600 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-indigo-700 transition">
+                    Empezar Ahora
+                </a>
+                <a href="https://wa.me/34621390976?text=Hola%20Cris,%20he%20visto%20tu%20web%20y%20me%20gustaría%20recibir%20más%20información%20sobre%20tus%20clases%20de%20inglés." target="_blank" class="text-center bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-emerald-600 transition flex items-center justify-center gap-2">
+                    <i class="fab font-bold fa-whatsapp text-xl"></i> Hablar por WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                <img src="images/profile.png" alt="Teacher Cris" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
 
-<!-- Unified Internal Header -->
-<div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
- <a href="index.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
-      ← Volver a teachercris.online
-    </a>
-  <div class="flex items-center gap-2">
-    <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Escuchar en inglés británico">
-      <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
-    </button>
-    <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reiniciar">
-      <i class="fas fa-redo-alt"></i>
-    </button>
-  </div>
-</div>
+    <!-- Ventajas / Especialidades -->
+    <section class="bg-white py-16 border-y border-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">¿En qué te puedo ayudar?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inglés de Conversación</h3>
+                    <p class="text-slate-600">Gana fluidez, mejora tu pronunciación y pierde la vergüenza de hablar en situaciones reales con un método práctico.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Business English</h3>
+                    <p class="text-slate-600">Prepara entrevistas de trabajo, presentaciones y reuniones de negocios con un enfoque profesional y directo.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Exámenes Oficiales</h3>
+                    <p class="text-slate-600">Preparación experta para Cambridge (First, Advanced), IELTS, TOEFL y TOEIC con alta tasa de aprobados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Quiz A / Quiz B Tabs -->
-<div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
-  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer">
-    Quiz A (Tasks 1-22)
-  </button>
-  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer">
-    Quiz B (Tasks 23-45)
-  </button>
-</div>
+    <!-- Sobre Mí y Credenciales -->
+    <section class="max-w-5xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-6 text-center">Sobre Mí y Experiencia</h2>
+        <p class="text-lg text-slate-600 leading-relaxed text-center max-w-3xl mx-auto mb-12">
+            ¡Hola! Soy Cris. Cuento con una sólida trayectoria internacional que incluye 11 años de docencia en Tailandia y 2 años en España, ayudando a estudiantes y profesionales a alcanzar sus metas con total seguridad.
+        </p>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-certificate"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">CELTA</h4>
+                <p class="text-sm text-slate-500">University of Cambridge</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-award"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">C2 Proficient</h4>
+                <p class="text-sm text-slate-500">Certificación EF SET</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-globe-asia"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">13 Años de Experiencia</h4>
+                <p class="text-sm text-slate-500">11 Tailandia + 2 España</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-star"></i></div>
+                <h4 class="font-bold text-slate-900 mb-1">TOEIC 990</h4>
+                <p class="text-sm text-slate-500">Maximum Score (Perfecto)</p>
+            </div>
+        </div>
+    </section>
 
-<!-- Title -->
-<div class="text-center mb-6">
-  <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
-  <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">PRESENT PERFECT VS PAST SIMPLE MASTER PRACTICE (QUIZ A)</p>
-</div>
+    <!-- Sección de Recursos e Herramientas Interactivas -->
+    <section id="recursos" class="bg-slate-100 py-16 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-indigo-600 font-semibold tracking-wide uppercase text-sm">Aprende y Practica</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Recursos Interactivos Gratis</h2>
+                <p class="text-slate-600 mt-2 max-w-2xl mx-auto">Pon a prueba tu nivel de inglés con herramientas prácticas diseñadas para pulir tu gramática y vocabulario.</p>
+            </div>
 
-<!-- Progress Stats -->
-<div class="flex justify-between items-center mb-4 text-sm text-slate-500">
-  <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
-  <div class="flex items-center gap-3">
-    <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
-    <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
-  </div>
-</div>
+            <!-- BLOQUE ADVANCED TIER (C1 / C2) -->
+            <div class="grid md:grid-cols-3 gap-8">
+               <!-- Tarjeta: Quiz de Condicionales C1/C2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Gramática C1 / C2</span>
+                            <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Retos</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Advanced Conditionals </h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            Domina condicionales mixtos, inversiones formales (<em>Had I known, Were we to...</em>) y matices de cortesía con feedback instantáneo y explicaciones gramaticales.
+                        </p>
+                    </div>
+                    <a href="conditionals.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
+                        <i class="fas fa-gamepad"></i> Practicar Ahora
+                    </a>
+                </div>
 
-<!-- Progress Bar -->
-<div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
-  <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
-</div>
+                <!-- Tarjeta: Quiz de Multi-Word Verbs C1/C2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Vocabulario C1 / C2</span>
+                            <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 90 Retos</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Advanced Multi-Word Verbs</h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            Domina phrasal verbs complejos, preposiciones dependientes y matices semánticos avanzados con dos listas de práctica exhaustivas y explicaciones detalladas.
+                        </p>
+                    </div>
+                    <a href="Multi-Word-Verbs.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
+                        <i class="fas fa-gamepad"></i> Practicar Ahora
+                    </a>
+                </div>
 
-<!-- Category Pill & Hint Button -->
-<div class="mb-6 text-center">
-  <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
-    PAST SIMPLE (CLICK FOR HINT)
-  </button>
-  <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
-    <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
-  </div>
-</div>
+                <!-- Tarjeta: Quiz de Dependent Prepositions C1/C2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Preposiciones C1 / C2</span>
+                            <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Retos</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Advanced Dependent Prepositions</h3>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            Domina combinaciones fijas de verbos, adjetivos y sustantivos con preposiciones, corrigiendo los errores típicos que cometemos al traducir desde el español.
+                        </p>
+                    </div>
+                    <a href="Dependent_Prepositions.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
+                        <i class="fas fa-gamepad"></i> Practicar Ahora
+                    </a>
+                </div>
+            </div>
 
-<!-- Question Container -->
-<div class="mb-6 sm:mb-8">
-  <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1.5">
-  </div>
-</div>
+            <!-- BLOQUE INTERMEDIO (B1 / B2) -->
+            <div class="mt-12 pt-10 border-t border-slate-200/60">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Tarjeta: Essential Present Perfect (Nivel B con fondo sutilmente distinto) -->
+                    <div class="bg-emerald-50/40 rounded-2xl p-6 shadow-sm border border-emerald-100/80 flex flex-col justify-between hover:shadow-md transition duration-300">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Gramática B1 / B2</span>
+                                <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Retos</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Essential Present Perfect</h3>
+                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                                Domina el uso de for y since en contextos reales. Corrige los errores típicos de traducción directa desde el español con feedback instantáneo y consejos prácticos.
+                            </p>
+                        </div>
+                        <a href="Present-Perfect.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
+                            <i class="fas fa-gamepad"></i> Practicar Ahora
+                        </a>
+                    </div>
 
-<!-- Options Container -->
-<div id="opciones-contenedor" class="space-y-3 mb-6"></div>
+                    <!-- Tarjeta: Present Perfect vs Past Simple (Nivel B con fondo sutilmente distinto) -->
+                    <div class="bg-emerald-50/40 rounded-2xl p-6 shadow-sm border border-emerald-100/80 flex flex-col justify-between hover:shadow-md transition duration-300">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Gramática B1 / B2</span>
+                                <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Retos</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Present Perfect vs Past Simple</h3>
+                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                                Domina cuándo usar el pasado reciente y el pasado cerrado sin caer en los típicos errores al traducir del español, con explicaciones claras y prácticas.
+                            </p>
+                        </div>
+                        <a href="present-perfect-vs-past-simple.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
+                            <i class="fas fa-gamepad"></i> Practicar Ahora
+                        </a>
+                    </div>
 
-<!-- Verify Button -->
-<button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
-  Verify (Enter)
-</button>
+                    <!-- Tarjeta: Gerunds vs Infinitives (Nivel B con fondo sutilmente distinto) -->
+                    <div class="bg-emerald-50/40 rounded-2xl p-6 shadow-sm border border-emerald-100/80 flex flex-col justify-between hover:shadow-md transition duration-300">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Gramática B1 / B2</span>
+                                <span class="text-amber-500 text-sm font-semibold"><i class="fas fa-star"></i> 45 Retos</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Gerunds vs Infinitives</h3>
+                            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                                Domina cuándo usar gerundio o infinitivo tras verbos y preposiciones sin caer en los típicos errores al traducir del español, con explicaciones claras y prácticas.
+                            </p>
+                        </div>
+                        <a href="gerunds-vs-infinitives.html" class="inline-flex items-center justify-center gap-2 w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition">
+                            <i class="fas fa-gamepad"></i> Practicar Ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-<!-- Feedback Box -->
-<div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
-  <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
-  <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
-  <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
-  <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
-</div>
+        </div>
+    </section>
 
-<!-- Navigation Footer -->
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
-  <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    <i class="fas fa-chevron-left"></i> Previous
-  </button>
-  <button id="btn-pista-inferior" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Hint <i class="far fa-lightbulb"></i>
-  </button>
-  <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Show Answer <i class="fas fa-eye"></i>
-  </button>
-  <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Next <i class="fas fa-chevron-right"></i>
-  </button>
-</div>
+    <!-- Contacto / Formulario -->
+    <section id="contacto" class="bg-indigo-900 text-white py-16">
+        <div class="max-w-xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Reserva tu clase o pide información</h2>
+            <p class="text-indigo-200 text-center mb-8">Escríbeme un mensaje directo y me pondré en contacto contigo en menos de 24 horas.</p>
+            
+            <form action="https://formspree.io/f/mdeazwne" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nombre completo</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Correo electrónico</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">¿Qué te gustaría mejorar?</label>
+                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Cuéntame un poco sobre tu nivel actual y tus objetivos..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-white text-indigo-900 font-bold py-3.5 rounded-lg hover:bg-indigo-50 transition">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
 
-</div>
-
-</main>
-
-<footer class="mt-auto py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-500">
-  <div class="max-w-4xl mx-auto px-4">
-    <p class="font-semibold text-slate-700">Teacher Cris • Present Perfect & Past Simple Master Practice</p>
-  </div>
-</footer>
-
-<script>
-const rawDataset = [
-  {
-    "q": "The archaeological team ___ a remarkably preserved Roman villa near Seville last month.",
-    "options": ["discovered", "has discovered", "have discovered", "discovers"],
-    "correct": 0,
-    "h": "Look at the specific past time marker 'last month'.",
-    "expl": "<b>Past Simple for Finished Time:</b> When a sentence specifies a completed time in the past (like <i>last month</i>, <i>yesterday</i>, <i>in 2010</i>), we must use the Past Simple, never the Present Perfect.",
-    "alert": "💡 Key Rule: Specific finished time expressions ('yesterday', 'last year', 'in 1995') require the Past Simple.",
-    "chunk": "discovered ... last month",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ three major software updates to our corporate server system this week.",
-    "options": ["have installed", "installed", "install", "was installing"],
-    "correct": 0,
-    "h": "Notice the unfinished time phrase 'this week'.",
-    "expl": "<b>Present Perfect for Unfinished Time:</b> <i>This week</i> is a time period that has not finished yet. We use the Present Perfect for actions repeated or completed within an ongoing time frame.",
-    "alert": "💡 Key Rule: Unfinished time markers ('this week', 'today', 'this month') frequently trigger the Present Perfect.",
-    "chunk": "have installed ... this week",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "She ___ as lead financial analyst at the Madrid branch for five years before transferring to Barcelona.",
-    "options": ["worked", "has worked", "has been working", "works"],
-    "correct": 0,
-    "h": "Look at the time clause 'before transferring to Barcelona', indicating a completed past period.",
-    "expl": "<b>Past Simple for Completed Past States:</b> Even though 'for five years' is used, the period is entirely in the past and separated from the present by a subsequent event (transferring).",
-    "alert": "💡 Key Rule: If a duration or past state is completely finished and disconnected from the present, use Past Simple.",
-    "chunk": "worked ... for five years",
-    "category": "Past Simple"
-  },
-  {
-    "q": "We ___ several contracts with international suppliers since we expanded our operations overseas.",
-    "options": ["have signed", "signed", "sign", "had signed"],
-    "correct": 0,
-    "h": "Spot the conjunction 'since' introducing a starting point in the past.",
-    "expl": "<b>Present Perfect with 'Since':</b> The word <i>since</i> connects a past starting point to the present moment, requiring the Present Perfect in the main clause.",
-    "alert": "💡 Key Rule: The preposition/conjunction 'since' paired with a past event requires the Present Perfect.",
-    "chunk": "have signed ... since",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Dr. Aris ___ numerous research papers on sustainable architecture throughout his career.",
-    "options": ["has published", "published", "publish", "was publishing"],
-    "correct": 0,
-    "h": "Consider whether his career is an ongoing lifetime experience or a closed past event.",
-    "expl": "<b>Present Perfect for Life Experience:</b> Actions spanning an open lifetime period (<i>throughout his career</i>, <i>in her life</i>) take the Present Perfect.",
-    "alert": "💡 Key Rule: Lifetime experiences and ongoing careers up to the present take the Present Perfect.",
-    "chunk": "has published ... career",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "When ___ you ___ the official notification regarding the tax audit?",
-    "options": ["did / receive", "have / received", "do / receive", "were / receiving"],
-    "correct": 0,
-    "h": "Questions starting with 'When' ask about the exact moment of a past event.",
-    "expl": "<b>Past Simple in 'When' Questions:</b> 'When' specifically inquires about a point in past time, which is incompatible with the Present Perfect.",
-    "alert": "💡 Key Rule: Never use 'When' with the Present Perfect; 'When' always triggers the Past Simple.",
-    "chunk": "When did you receive",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ my passport yesterday evening, so I cannot board the international flight tomorrow.",
-    "options": ["lost", "have lost", "had lost", "lose"],
-    "correct": 0,
-    "h": "Check the exact past time anchor 'yesterday evening'.",
-    "expl": "<b>Past Simple for Specific Past Moments:</b> The presence of <i>yesterday evening</i> anchors the event to a specific finished time, demanding Past Simple.",
-    "alert": "💡 Key Rule: Specific time anchors ('yesterday', 'at 3 PM') overrule current results and require Past Simple.",
-    "chunk": "lost ... yesterday evening",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Our export department ___ a remarkable 20% growth in quarterly revenue.",
-    "options": ["has achieved", "achieved", "achieve", "was achieving"],
-    "correct": 0,
-    "h": "This announces a recent achievement with direct relevance to the present business standing.",
-    "expl": "<b>Present Perfect for Recent News:</b> Recent accomplishments or news announcements without a stated past time use the Present Perfect.",
-    "alert": "💡 Key Rule: Present results and recent business updates use the Present Perfect when no time is stated.",
-    "chunk": "has achieved growth",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Shakespeare ___ many renowned plays during the Elizabethan era.",
-    "options": ["wrote", "has written", "had written", "is writing"],
-    "correct": 0,
-    "h": "Consider the historical timeframe of Shakespeare's life.",
-    "expl": "<b>Past Simple for Historical Figures:</b> Actions performed by people who are no longer alive, set in a past era, require the Past Simple.",
-    "alert": "💡 Key Rule: Actions of deceased historical figures are always in the Past Simple.",
-    "chunk": "wrote ... Elizabethan era",
-    "category": "Past Simple"
-  },
-  {
-    "q": "So far this quarter, our team ___ all key performance targets ahead of schedule.",
-    "options": ["has met", "met", "meet", "meeting"],
-    "correct": 0,
-    "h": "Look at the phrase 'So far this quarter'.",
-    "expl": "<b>Present Perfect with 'So Far':</b> Expressions like <i>so far</i>, <i>up to now</i>, and <i>yet</i> evaluate accumulation leading up to the present.",
-    "alert": "💡 Key Rule: 'So far', 'up to now', and 'yet' signal the use of the Present Perfect.",
-    "chunk": "has met ... so far",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The board of directors ___ the merger agreement late on Friday afternoon.",
-    "options": ["approved", "have approved", "has approved", "approve"],
-    "correct": 0,
-    "h": "Notice the precise time marker 'late on Friday afternoon'.",
-    "expl": "<b>Past Simple with Precise Time:</b> Specific time details lock the action into the Past Simple.",
-    "alert": "💡 Key Rule: Precise time stamps ('late on Friday', 'at noon') demand the Past Simple.",
-    "chunk": "approved ... Friday afternoon",
-    "category": "Past Simple"
-  },
-  {
-    "q": "You look exceptionally familiar. ___ we ___ somewhere in London before?",
-    "options": ["Have / met", "Did / meet", "Do / meet", "Had / met"],
-    "correct": 0,
-    "h": "This asks about an unspecified experience anytime in your life up to now.",
-    "expl": "<b>Present Perfect for Life Experience:</b> Inquiring about general life experiences up to the present requires the Present Perfect.",
-    "alert": "💡 Key Rule: Asking about lifetime experiences ('Have you ever... ?') uses the Present Perfect.",
-    "chunk": "Have we met before",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The historic cathedral ___ by a massive earthquake in 1755.",
-    "options": ["was destroyed", "has been destroyed", "destroyed", "is destroyed"],
-    "correct": 0,
-    "h": "Identify the exact historical year 'in 1755'.",
-    "expl": "<b>Past Simple Passive:</b> Finished historical events with a specific date use the Past Simple Passive.",
-    "alert": "💡 Key Rule: Specific past dates require Past Simple, even in passive voice.",
-    "chunk": "was destroyed in 1755",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ my quarterly tax report yet, so I must stay up late tonight.",
-    "options": ["haven't finished", "didn't finish", "won't finish", "wasn't finishing"],
-    "correct": 0,
-    "h": "Spot the negative marker 'yet' at the end of the clause.",
-    "expl": "<b>Present Perfect with 'Yet':</b> The adverb <i>yet</i> is used in negative sentences and questions with the Present Perfect.",
-    "alert": "💡 Key Rule: 'Yet' in negative sentences requires the Present Perfect.",
-    "chunk": "haven't finished yet",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Einstein ___ the theory of relativity during his time working at the patent office.",
-    "options": ["developed", "has developed", "was developing", "develops"],
-    "correct": 0,
-    "h": "Consider Albert Einstein as a historical figure in the past.",
-    "expl": "<b>Past Simple for Historical Breakthroughs:</b> Discoveries by historical figures are reported in the Past Simple.",
-    "alert": "💡 Key Rule: Historical achievements of past figures take the Past Simple.",
-    "chunk": "developed the theory",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Our company ___ business in Asian markets for over twenty years, and we plan to expand further.",
-    "options": ["has done", "did", "does", "had done"],
-    "correct": 0,
-    "h": "Notice 'for over twenty years' connecting a past duration directly to the present.",
-    "expl": "<b>Present Perfect for Continuous Duration:</b> Duration continuing from the past into the present uses the Present Perfect.",
-    "alert": "💡 Key Rule: Actions starting in the past and continuing now ('for / since') take the Present Perfect.",
-    "chunk": "has done business for",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Where ___ you ___ your professional certification in digital marketing?",
-    "options": ["did / obtain", "have / obtained", "do / obtain", "were / obtaining"],
-    "correct": 0,
-    "h": "An inquiry starting with 'Where' about an accomplished training event in the past.",
-    "expl": "<b>Past Simple in 'Where' Inquiries:</b> Asking about the location or fact of a completed past accomplishment uses Past Simple.",
-    "alert": "💡 Key Rule: 'Where' questions about completed accomplishments take Past Simple.",
-    "chunk": "Where did you obtain",
-    "category": "Past Simple"
-  },
-  {
-    "q": "She ___ the prestigious Hemingway Award twice during her prolific literary career.",
-    "options": ["has won", "won", "wins", "had won"],
-    "correct": 0,
-    "h": "Her career is ongoing, creating an open timeframe for achievements.",
-    "expl": "<b>Present Perfect for Repeated Actions in Open Time:</b> Achievements across an unfinished life period use the Present Perfect.",
-    "alert": "💡 Key Rule: Accomplishments within an ongoing lifetime or career take the Present Perfect.",
-    "chunk": "has won twice",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The Roman Empire ___ vast territories across Europe, North Africa, and the Middle East.",
-    "options": ["ruled", "has ruled", "was ruling", "rules"],
-    "correct": 0,
-    "h": "Reference to an extinct historical empire.",
-    "expl": "<b>Past Simple for Extinct Entities:</b> States and empires that no longer exist are described using the Past Simple.",
-    "alert": "💡 Key Rule: Extinct civilizations and historical entities take the Past Simple.",
-    "chunk": "ruled vast territories",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ the revised budget proposal to the executive board just five minutes ago.",
-    "options": ["sent", "have sent", "send", "was sending"],
-    "correct": 0,
-    "h": "Look at the specific recent past marker 'just five minutes ago'.",
-    "expl": "<b>Past Simple with 'Ago':</b> The word <i>ago</i> counts backward from the present to a specific moment, requiring Past Simple.",
-    "alert": "💡 Key Rule: Time expressions ending in 'ago' require the Past Simple.",
-    "chunk": "sent ... five minutes ago",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Our team ___ amazing progress on the new user interface redesign this week.",
-    "options": ["has made", "made", "make", "is making"],
-    "correct": 0,
-    "h": "Focus on the ongoing time phrase 'this week'.",
-    "expl": "<b>Present Perfect for Unfinished Periods:</b> Activities within current time blocks (<i>this week</i>) require the Present Perfect.",
-    "alert": "💡 Key Rule: Actions during current time frames ('this week', 'today') take the Present Perfect.",
-    "chunk": "has made progress",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Leonardo da Vinci ___ the Mona Lisa in the early 16th century.",
-    "options": ["painted", "has painted", "was painting", "paints"],
-    "correct": 0,
-    "h": "Specific historical epoch 'in the early 16th century'.",
-    "expl": "<b>Past Simple for Historical Art:</b> Artistic creations tied to past eras use the Past Simple.",
-    "alert": "💡 Key Rule: Historical works of art created in past centuries take the Past Simple.",
-    "chunk": "painted the Mona Lisa",
-    "category": "Past Simple"
-  },
-  {
-    "q": "The CEO ___ a press statement confirming the international expansion strategy.",
-    "options": ["has issued", "issued", "issue", "issuing"],
-    "correct": 0,
-    "h": "Announcing a fresh piece of corporate news without a time marker.",
-    "expl": "<b>Present Perfect for Recent News:</b> Stating recent developments or announcements takes the Present Perfect.",
-    "alert": "💡 Key Rule: Fresh news announcements without a time specifier use the Present Perfect.",
-    "chunk": "has issued a statement",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "My colleagues ___ to Berlin last weekend to attend the fintech convention.",
-    "options": ["traveled", "have traveled", "had traveled", "travel"],
-    "correct": 0,
-    "h": "Look at the finished weekend indicator 'last weekend'.",
-    "expl": "<b>Past Simple for Past Weekends:</b> Completed weekend trips use the Past Simple.",
-    "alert": "💡 Key Rule: Finished past weekends ('last weekend') require the Past Simple.",
-    "chunk": "traveled to Berlin",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ never ___ such intricate negotiation tactics in my entire professional career.",
-    "options": ["have / encountered", "did / encounter", "had / encountered", "encountered"],
-    "correct": 0,
-    "h": "Combination of 'never' and lifetime professional experience.",
-    "expl": "<b>Present Perfect with 'Never':</b> 'Never' statements describing lifetime experiences take the Present Perfect.",
-    "alert": "💡 Key Rule: 'Never' in experiences up to now takes the Present Perfect.",
-    "chunk": "have never encountered",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The Wright brothers ___ the first successful motor-operated airplane in 1903.",
-    "options": ["invented", "have invented", "had invented", "invent"],
-    "correct": 0,
-    "h": "Exact milestone year 'in 1903'.",
-    "expl": "<b>Past Simple for Past Milestones:</b> Specific dates in history require the Past Simple.",
-    "alert": "💡 Key Rule: Historical milestones with exact years take the Past Simple.",
-    "chunk": "invented in 1903",
-    "category": "Past Simple"
-  },
-  {
-    "q": "We ___ our primary office headquarters to the new technology park last month.",
-    "options": ["relocated", "have relocated", "had relocated", "relocate"],
-    "correct": 0,
-    "h": "Specific past time expression 'last month'.",
-    "expl": "<b>Past Simple for Completed Relocations:</b> Relocations tied to past months use the Past Simple.",
-    "alert": "💡 Key Rule: Events tied to finished months take the Past Simple.",
-    "chunk": "relocated ... last month",
-    "category": "Past Simple"
-  },
-  {
-    "q": "___ you ever ___ a major keynote presentation in front of thousands of attendees?",
-    "options": ["Have / delivered", "Did / deliver", "Do / deliver", "Had / delivered"],
-    "correct": 0,
-    "h": "Inquiry about lifetime experience using 'ever'.",
-    "expl": "<b>Present Perfect for Life Experience ('Ever'):</b> Questions with 'ever' addressing lifetime achievements take the Present Perfect.",
-    "alert": "💡 Key Rule: 'Have you ever...?' structures require the Present Perfect.",
-    "chunk": "Have you ever delivered",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The temperature ___ drastically during the violent thunderstorm yesterday evening.",
-    "options": ["dropped", "has dropped", "had dropped", "drops"],
-    "correct": 0,
-    "h": "Exact weather event marker 'yesterday evening'.",
-    "expl": "<b>Past Simple for Finished Weather Events:</b> Weather occurrences anchored to yesterday use the Past Simple.",
-    "alert": "💡 Key Rule: Past weather events with finished time markers take the Past Simple.",
-    "chunk": "dropped yesterday evening",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Our R&D team ___ a breakthrough patent for renewable energy storage this morning.",
-    "options": ["secured", "has secured", "secure", "was securing"],
-    "correct": 0,
-    "h": "Notice 'this morning'. Note: If 'this morning' is spoken during the afternoon/evening, Past Simple is standard for a finished part of today.",
-    "expl": "<b>Past Simple for Finished Parts of Today:</b> When a part of today (like <i>this morning</i>) is over and done with, native speakers usually prefer Past Simple.",
-    "alert": "💡 Key Rule: Finished parts of today ('this morning' when it's afternoon) take the Past Simple.",
-    "chunk": "secured ... this morning",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ all the required compliance documents before the strict deadline expired.",
-    "options": ["submitted", "have submitted", "had submitted", "submit"],
-    "correct": 0,
-    "h": "Completed action governed by a past deadline clause.",
-    "expl": "<b>Past Simple for Past Conditionals/Clauses:</b> Actions completed within a fully past context use the Past Simple.",
-    "alert": "💡 Key Rule: Actions completed inside past timeframe clauses take the Past Simple.",
-    "chunk": "submitted before deadline",
-    "category": "Past Simple"
-  },
-  {
-    "q": "She ___ three different foreign languages fluently since she lived in Brussels.",
-    "options": ["has spoken", "spoke", "speaks", "had spoken"],
-    "correct": 0,
-    "h": "Ongoing skill enhanced since a past starting period.",
-    "expl": "<b>Present Perfect from a Past Point:</b> Skills cultivated continuously from a past milestone up to now use the Present Perfect.",
-    "alert": "💡 Key Rule: Ongoing competence since a past period takes the Present Perfect.",
-    "chunk": "has spoken since",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The local municipality ___ a new cycling lane network across the city centre.",
-    "options": ["has built", "built", "build", "is building"],
-    "correct": 0,
-    "h": "Presently completed urban development news.",
-    "expl": "<b>Present Perfect for Recent Completion:</b> Newly finished infrastructural projects reported as current news use the Present Perfect.",
-    "alert": "💡 Key Rule: Newly completed projects reported as current news take the Present Perfect.",
-    "chunk": "has built a network",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Who ___ the foundational architecture for our enterprise database system?",
-    "options": ["designed", "has designed", "did design", "designs"],
-    "correct": 0,
-    "h": "Subject question ('Who') asking about a past creation.",
-    "expl": "<b>Past Simple in 'Who' Subject Questions:</b> Asking 'Who' did something in the past uses the Past Simple without auxiliary 'did'.",
-    "alert": "💡 Key Rule: 'Who' questions about past creators take the Past Simple.",
-    "chunk": "Who designed",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ breakfast yet, so I am quite hungry right now.",
-    "options": ["haven't eaten", "didn't eat", "haven't ate", "don't eat"],
-    "correct": 0,
-    "h": "Present state caused by an unfulfilled action up to now ('yet').",
-    "expl": "<b>Present Perfect with 'Yet' affecting Present State:</b> Uncompleted actions up to the present moment use the Present Perfect.",
-    "alert": "💡 Key Rule: Unfinished actions up to now with 'yet' take the Present Perfect.",
-    "chunk": "haven't eaten yet",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "Ancient Greek philosophers ___ foundational theories of ethics and governance.",
-    "options": ["formulated", "have formulated", "formulate", "are formulating"],
-    "correct": 0,
-    "h": "Actions of ancient historical thinkers.",
-    "expl": "<b>Past Simple for Ancient History:</b> Philosophers and figures of antiquity take the Past Simple.",
-    "alert": "💡 Key Rule: Intellectual work of ancient philosophers takes the Past Simple.",
-    "chunk": "formulated theories",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Our customer service desk ___ over five hundred inquiries already today.",
-    "options": ["has handled", "handled", "handle", "was handling"],
-    "correct": 0,
-    "h": "Accumulation during an ongoing day with 'already today'.",
-    "expl": "<b>Present Perfect for Accumulation Today:</b> Quantifying items completed during an ongoing day takes the Present Perfect.",
-    "alert": "💡 Key Rule: Completed tallies during an ongoing day take the Present Perfect.",
-    "chunk": "has handled ... today",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The financial markets ___ sharply when the unexpected regulatory news broke.",
-    "options": ["reacted", "have reacted", "had reacted", "react"],
-    "correct": 0,
-    "h": "Reaction triggered by a specific past event clause ('when the news broke').",
-    "expl": "<b>Past Simple in Reaction Clauses:</b> Instantaneous reactions to specific past occurrences use the Past Simple.",
-    "alert": "💡 Key Rule: Reactions to specific past occurrences take the Past Simple.",
-    "chunk": "reacted when news broke",
-    "category": "Past Simple"
-  },
-  {
-    "q": "She ___ abroad three times for international conferences over the past twelve months.",
-    "options": ["has traveled", "traveled", "travels", "had traveled"],
-    "correct": 0,
-    "h": "Time frame 'over the past twelve months' showing accumulation up to now.",
-    "expl": "<b>Present Perfect for Rolling Time Frames:</b> Durations like <i>over the past year</i> span backward from now, requiring the Present Perfect.",
-    "alert": "💡 Key Rule: Rolling time frames leading to the present ('over the past months') take the Present Perfect.",
-    "chunk": "has traveled ... past months",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The ancient Egyptians ___ monumental pyramids as tombs for their pharaohs.",
-    "options": ["constructed", "have constructed", "construct", "were constructing"],
-    "correct": 0,
-    "h": "Ancient civilization historical fact.",
-    "expl": "<b>Past Simple for Ancient Civilizations:</b> Long-passed civilizations and their constructions use the Past Simple.",
-    "alert": "💡 Key Rule: Constructions of ancient civilizations take the Past Simple.",
-    "chunk": "constructed pyramids",
-    "category": "Past Simple"
-  },
-  {
-    "q": "I ___ my primary mentor at the global conference last Thursday.",
-    "options": ["met", "have met", "meet", "had met"],
-    "correct": 0,
-    "h": "Specific past time marker 'last Thursday'.",
-    "expl": "<b>Past Simple for Specific Days:</b> Days of the week in the past ('last Thursday') require the Past Simple.",
-    "alert": "💡 Key Rule: Specific finished weekdays take the Past Simple.",
-    "chunk": "met ... last Thursday",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Our engineering division ___ an innovative automated testing protocol recently.",
-    "options": ["has implemented", "implemented", "implement", "was implementing"],
-    "correct": 0,
-    "h": "Adverb 'recently' indicating a fresh corporate milestone.",
-    "expl": "<b>Present Perfect with 'Recently':</b> Fresh developments described with <i>recently</i> or <i>lately</i> take the Present Perfect.",
-    "alert": "💡 Key Rule: 'Recently' and 'lately' introducing new developments take the Present Perfect.",
-    "chunk": "has implemented recently",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "The committee ___ an unanimous decision after hours of tense deliberation.",
-    "options": ["reached", "has reached", "reach", "had reached"],
-    "correct": 0,
-    "h": "Completed event tied to a finished meeting context.",
-    "expl": "<b>Past Simple for Completed Meetings:</b> Outcomes of finished meetings use the Past Simple.",
-    "alert": "💡 Key Rule: Outcomes of finished deliberations take the Past Simple.",
-    "chunk": "reached a decision",
-    "category": "Past Simple"
-  },
-  {
-    "q": "Science ___ tremendous strides in artificial intelligence over recent years.",
-    "options": ["has made", "made", "make", "is making"],
-    "correct": 0,
-    "h": "Time phrase 'over recent years' tracking progress up to the present.",
-    "expl": "<b>Present Perfect for General Trends Up to Now:</b> Progress over rolling recent years takes the Present Perfect.",
-    "alert": "💡 Key Rule: Scientific progress over recent years takes the Present Perfect.",
-    "chunk": "has made strides",
-    "category": "Present Perfect"
-  },
-  {
-    "q": "He ___ his professional career as a junior clerk back in 1988.",
-    "options": ["began", "has begun", "had begun", "begins"],
-    "correct": 0,
-    "h": "Exact past starting year marker 'back in 1988'.",
-    "expl": "<b>Past Simple with Specific Past Years:</b> Starting points tied to specific historical years use the Past Simple.",
-    "alert": "💡 Key Rule: Starting points with exact past years take the Past Simple.",
-    "chunk": "began in 1988",
-    "category": "Past Simple"
-  }
-];
-
-// Deterministic option shuffling
-const SHUFFLE_OFFSETS = [
-  1, 2, 0, 3, 2, 1, 3, 0, 2, 1, 0, 3,
-  2, 0, 1, 3, 1, 2, 0, 3, 2, 0, 1, 3,
-  0, 2, 1, 3, 2, 0, 1, 3, 1, 2, 0, 3,
-  2, 0, 1, 3, 2, 1, 0, 3, 1
-];
-
-const processedDataset = rawDataset.map((item, idx) => {
-  const correctVal = item.options[0];
-  const others = item.options.slice(1);
-  const targetIdx = SHUFFLE_OFFSETS[idx % SHUFFLE_OFFSETS.length] % 4;
-  const newOpts = [];
-  let ptr = 0;
-  for (let i = 0; i < 4; i++) {
-    if (i === targetIdx) newOpts.push(correctVal);
-    else newOpts.push(others[ptr++]);
-  }
-  return { ...item, options: newOpts, correct: targetIdx };
-});
-
-const quizA = processedDataset.slice(0, 22);
-const quizB = processedDataset.slice(22, 45);
-
-let currentMode = 'A';
-let currentIndex = 0;
-let score = 0;
-let streak = 0;
-let selectedOption = null;
-let isAnswerChecked = false;
-
-function getCurrentDataset() {
-  return currentMode === 'A' ? quizA : quizB;
-}
-
-let britishFemaleVoice = null;
-function findBritishFemaleVoice() {
-  if (!('speechSynthesis' in window)) return null;
-  const voices = window.speechSynthesis.getVoices();
-  if (!voices || !voices.length) return null;
-  const preferredFemaleVoices = [
-    'Google UK English Female',
-    'Microsoft Libby Online (Natural) - English (United Kingdom)',
-    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
-    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
-    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
-    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
-    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
-    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
-  ];
-  for (const name of preferredFemaleVoices) {
-    const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
-    if (found) return found;
-  }
-  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
-  const enGbFemale = voices.find(v => {
-    const lang = (v.lang || '').replace('_', '-').toLowerCase();
-    const name = (v.name || '').toLowerCase();
-    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
-    return isUK && !maleKeywords.some(m => name.includes(m));
-  });
-  if (enGbFemale) return enGbFemale;
-  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
-  if (anyGb) return anyGb;
-  const anyFemaleEnglish = voices.find(v => {
-    const name = (v.name || '').toLowerCase();
-    const lang = (v.lang || '').toLowerCase();
-    return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
-  });
-  if (anyFemaleEnglish) return anyFemaleEnglish;
-  return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
-}
-
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
-}
-
-function speakBritish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-GB';
-  utterance.rate = 0.98;
-  utterance.pitch = 1.05;
-  const voice = britishFemaleVoice || findBritishFemaleVoice();
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.speak(utterance);
-}
-
-function getCompletedSentence() {
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  return current.q.replace('___', 'blank');
-}
-
-function playSound(type) {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const now = ctx.currentTime;
-
-    if (type === 'success') {
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc1.type = 'sine'; osc1.frequency.setValueAtTime(523.25, now); osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
-      osc2.type = 'triangle'; osc2.frequency.setValueAtTime(659.25, now + 0.08); osc2.frequency.exponentialRampToValueAtTime(783.99, now + 0.22);
-      g.gain.setValueAtTime(0.001, now); g.gain.linearRampToValueAtTime(0.18, now + 0.05); g.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
-      osc1.connect(g); osc2.connect(g); g.connect(ctx.destination);
-      osc1.start(now); osc2.start(now + 0.08); osc1.stop(now + 0.35); osc2.stop(now + 0.35);
-    } else if (type === 'error') {
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc.type = 'sine'; osc.frequency.setValueAtTime(260, now); osc.frequency.setValueAtTime(220, now + 0.12);
-      g.gain.setValueAtTime(0.001, now); g.gain.linearRampToValueAtTime(0.16, now + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-      osc.connect(g); g.connect(ctx.destination);
-      osc.start(now); osc.stop(now + 0.28);
-    } else if (type === 'click') {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(400, now);
-      gain.gain.setValueAtTime(0.05, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.08);
-    }
-  } catch(e) {}
-}
-
-function switchQuizMode(mode) {
-  currentMode = mode;
-  currentIndex = 0;
-  score = 0;
-  streak = 0;
-  const tabA = document.getElementById('tab-quiz-a');
-  const tabB = document.getElementById('tab-quiz-b');
-  const sub = document.getElementById('subtitulo-quiz');
-
-  if (mode === 'A') {
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
-    sub.innerText = 'PRESENT PERFECT VS PAST SIMPLE MASTER PRACTICE (QUIZ A)';
-  } else {
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
-    sub.innerText = 'PRESENT PERFECT VS PAST SIMPLE MASTER PRACTICE (QUIZ B)';
-  }
-  loadChallenge();
-}
-
-function loadChallenge() {
-  const dataset = getCurrentDataset();
-  if (currentIndex >= dataset.length) {
-    showFinalSummary();
-    return;
-  }
-  isAnswerChecked = false;
-  selectedOption = null;
-  const current = dataset[currentIndex];
-
-  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-
-  const pct = Math.round(((currentIndex + 1) / dataset.length) * 100);
-  document.getElementById('barra-progreso').style.width = `${pct}%`;
-
-  const btnCat = document.getElementById('btn-categoria');
-  btnCat.innerText = (current.category || 'Standard').toUpperCase() + ' (CLICK FOR HINT)';
-
-  const parts = current.q.split('___');
-  let qHtml = '';
-  if (parts.length === 2) {
-    qHtml = `<span>${parts[0]}</span><span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span><span>${parts[1]}</span>`;
-  } else {
-    qHtml = current.q.replace('___', '<span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span>');
-  }
-  document.getElementById('pregunta-texto').innerHTML = qHtml;
-
-  const pista = document.getElementById('pista-texto');
-  document.getElementById('pista-contenido').innerText = current.h;
-  pista.classList.add('hidden');
-
-  const feedbackBox = document.getElementById('feedback-box');
-  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
-
-  document.getElementById('btn-verificar').classList.remove('hidden');
-
-  const container = document.getElementById('opciones-contenedor');
-  container.innerHTML = '';
-  current.options.forEach((opt, idx) => {
-    const div = document.createElement('div');
-    div.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer bg-white';
-    div.innerHTML = `
-      <div class="flex items-center justify-between w-full">
-        <span class="text-base font-semibold">${opt}</span>
-        <input type="radio" name="option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
-      </div>
-    `;
-    div.onclick = () => {
-      if (isAnswerChecked) return;
-      selectedOption = idx;
-      playSound('click');
-      div.querySelector('input').checked = true;
-      Array.from(container.children).forEach(el => el.classList.remove('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500'));
-      div.classList.add('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500');
-    };
-    container.appendChild(div);
-  });
-}
-
-function verifyAnswer() {
-  if (selectedOption === null || isAnswerChecked) return;
-  isAnswerChecked = true;
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  const isCorrect = (selectedOption === current.correct);
-
-  if (isCorrect) {
-    score++;
-    streak++;
-    playSound('success');
-  } else {
-    streak = 0;
-    playSound('error');
-  }
-
-  const slot = document.getElementById('blank-slot');
-  if (slot) {
-    slot.innerText = current.options[current.correct];
-    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200 align-middle';
-  }
-
-  const items = document.getElementById('opciones-contenedor').children;
-  Array.from(items).forEach((div, idx) => {
-    div.onclick = null;
-    const input = div.querySelector('input');
-    input.disabled = true;
-    if (idx === current.correct) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs';
-    } else if (idx === selectedOption && !isCorrect) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs';
-    } else {
-      div.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-not-allowed';
-    }
-  });
-
-  const feedbackBox = document.getElementById('feedback-box');
-  const feedbackTitulo = document.getElementById('feedback-titulo');
-  const feedbackExplicacion = document.getElementById('feedback-explicacion');
-  const feedbackAlert = document.getElementById('feedback-alert');
-  const feedbackChunk = document.getElementById('feedback-chunk');
-
-  feedbackBox.className = 'p-5 rounded-2xl mb-6 border transition-all duration-300';
-  if (isCorrect) {
-    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
-    feedbackTitulo.innerText = 'Excellent!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
-  } else {
-    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
-    feedbackTitulo.innerText = 'Key Distinction / Take Note!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
-  }
-
-  feedbackExplicacion.innerHTML = current.expl;
-  feedbackAlert.innerText = current.alert;
-  feedbackChunk.innerText = `Chunk: ${current.chunk}`;
-
-  feedbackBox.classList.remove('hidden');
-  document.getElementById('btn-verificar').classList.add('hidden');
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
-}
-
-document.getElementById('btn-verificar').onclick = verifyAnswer;
-document.getElementById('btn-siguiente').onclick = () => { currentIndex++; loadChallenge(); };
-document.getElementById('btn-anterior').onclick = () => { if (currentIndex > 0) { currentIndex--; loadChallenge(); } };
-document.getElementById('btn-categoria').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
-document.getElementById('btn-pista-inferior').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
-document.getElementById('btn-mostrar-respuesta').onclick = () => {
-  if (isAnswerChecked) return;
-  const dataset = getCurrentDataset();
-  const current = dataset[currentIndex];
-  selectedOption = current.correct;
-  const items = document.getElementById('opciones-contenedor').children;
-  if (items[current.correct]) items[current.correct].querySelector('input').checked = true;
-  verifyAnswer();
-};
-
-document.getElementById('btn-restart').onclick = () => { currentIndex = 0; score = 0; streak = 0; loadChallenge(); };
-document.getElementById('btn-audio-sentence').onclick = () => { speakBritish(getCompletedSentence()); };
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    if (!isAnswerChecked) verifyAnswer();
-    else { currentIndex++; loadChallenge(); }
-  }
-});
-
-function showFinalSummary() {
-  const dataset = getCurrentDataset();
-  const main = document.querySelector('main');
-  main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in overflow-hidden" style="border-top: 8px solid #2563eb;">
-      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">You have successfully completed this practice module.</p>
-      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
-        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span></div>
-      </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Restart Practice</button>
-    </div>
-  `;
-}
-
-loadChallenge();
-</script>
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <p>&copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online</p>
+    </footer>
 
 </body>
 </html>

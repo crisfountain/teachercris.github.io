@@ -175,7 +175,7 @@
         { q: "Public confidence ___ the domestic banking system plummeted following the unexpected collapse of two major lenders.", a: ["in"], h: "Visualizes trust anchored deep inside an institution or person.", expl: "<b>Indivisible Chunk:</b> confidence in<br><br><b>Meaning & Contrast:</b> English visualizes trust anchored deep inside an institution. Spanish uses 'confianza en'; avoid 'confidence on'.", tag: "tag-noun" },
         { q: "The minister faced widespread criticism ___ his handling of the emergency evacuation during the recent flash floods.", a: ["of"], h: "Links the critique as belonging to or originating out of the target's actions.", expl: "<b>Indivisible Chunk:</b> criticism of<br><br><b>Meaning & Contrast:</b> English links critique as originating out of the target's actions. Spanish uses 'críticas a/hacia'.", tag: "tag-noun" },
         { q: "The university has earned an enviable international reputation ___ academic excellence in biotechnology research.", a: ["for"], h: "Visualizes standing or renown awarded for a specific trait or achievement.", expl: "<b>Indivisible Chunk:</b> reputation for<br><br><b>Meaning & Contrast:</b> English visualizes renown awarded for a specific trait. Spanish uses 'reputación por'.", tag: "tag-noun" },
-        { q: "Rebuilding consumer trust ___ autonomous vehicle technology will require years of verified safety data.", a: ["in"], h: "Visualizes placing faith securely inside a system or person.", expl: "<b>Indivisible Chunk:</b> trust in<br><br><b>Meaning & Contrast:</b> English visualizes placing faith securely inside a system. Spanish uses 'fe en'.", tag: "tag-noun" },
+        { q: "Rebuilding consumer trust ___ autonomous vehicle technology will require years of verified safety data.", a: ["in"], h: "Visualizes placing faith securely inside a system or person.", expl: "<b>Indivisible Chunk:</b> trust in<br><br><b>Meaning & Contrast:</b> English places faith securely inside a system. Spanish uses 'fe en'.", tag: "tag-noun" },
         { q: "The keynote speaker paid close attention ___ the audience's non-verbal reactions throughout her lecture.", a: ["to"], h: "Visualizes directing cognitive focus pointing to a target.", expl: "<b>Indivisible Chunk:</b> attention to<br><br><b>Meaning & Contrast:</b> English visualizes directing cognitive focus pointing to a target. Spanish uses 'atención a'.", tag: "tag-noun" },
         { q: "Despite the lack of empirical evidence, the community held an unwavering belief ___ the traditional healing methods.", a: ["in"], h: "Visualizes conviction residing deep inside a core principle or entity.", expl: "<b>Indivisible Chunk:</b> belief in<br><br><b>Meaning & Contrast:</b> English visualizes conviction residing deep inside a core principle. Spanish uses 'creencia en'.", tag: "tag-noun" },
         { q: "The team encountered immense difficulty ___ obtaining the necessary permits from the local municipal council.", a: ["in", "with"], h: "Visualizes experiencing friction inside an ongoing process or task.", expl: "<b>Indivisible Chunk:</b> difficulty in / difficulty with<br><br><b>Meaning & Contrast:</b> English visualizes friction inside an ongoing task. Spanish uses 'dificultad para'.", tag: "tag-noun" },
@@ -193,7 +193,7 @@
     let score = 0; 
     let solvedThisIdx = false;    
 
-    // Voice Selector for UK Female Speech Synthesis
+    // Robust British Female Voice Selector with Async Handling
     function getBritishFemaleVoice() {
       if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices();
@@ -222,6 +222,12 @@
       if (enGbFemale) return enGbFemale;
       const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
       if (anyGb) return anyGb;
+      const anyFemaleEnglish = voices.find(v => {
+        const name = (v.name || '').toLowerCase();
+        const lang = (v.lang || '').toLowerCase();
+        return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+      });
+      if (anyFemaleEnglish) return anyFemaleEnglish;
       return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
     }
 
@@ -232,15 +238,33 @@
     function speakCurrentSentence() {
       if (!('speechSynthesis' in window)) return;
       window.speechSynthesis.cancel();
+      
       const card = currentData[idx];
       const sentence = card.q.replace(/___+/g, 'blank').replace(/[\(\)\/]/g, ' ');
       const utterance = new SpeechSynthesisUtterance(sentence);
       utterance.lang = 'en-GB';
-      const voice = getBritishFemaleVoice();
-      if (voice) utterance.voice = voice;
       utterance.rate = 0.98;
       utterance.pitch = 1.05;
-      window.speechSynthesis.speak(utterance);
+
+      const executeSpeech = () => {
+        const voice = getBritishFemaleVoice();
+        if (voice) {
+          utterance.voice = voice;
+        }
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Ensure voices are loaded asynchronously if empty on first click
+      let voices = window.speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          executeSpeech();
+        };
+        window.speechSynthesis.getVoices(); // Trigger load
+        setTimeout(executeSpeech, 150); // Fallback execution
+      } else {
+        executeSpeech();
+      }
     }
 
     function openModal() {        

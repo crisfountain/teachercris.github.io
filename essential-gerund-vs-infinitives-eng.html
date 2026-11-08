@@ -6,122 +6,124 @@
 <title>Essential Gerunds vs Infinitives | Teacher Cris</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
-.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+  .animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
+<body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-blue-100">
 
 <!-- Main App Container -->
-<main class="flex-grow max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col justify-center">
-
-<div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 overflow-hidden" style="border-top: 8px solid #2563eb;">
+<main class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all" style="border-top: 8px solid #2563eb !important;">
 
 <!-- Unified Internal Header -->
-<div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
- <a href="index-eng.html" style="text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">
-      ← Return to teachercris.online
-    </a>
+<div class="flex justify-between items-center mb-6">
+  <a href="index-eng.html" class="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50/90 hover:bg-blue-100 border border-blue-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs" style="text-decoration: none;">
+    &larr; Return to teachercris.online
+  </a>
   <div class="flex items-center gap-2">
-    <button id="btn-audio-sentence" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
+    <button id="btn-audio-sentence" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
       <i class="fas fa-volume-up"></i> <span>Listen (UK ♀)</span>
     </button>
-    <button id="btn-restart" class="text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 px-3 py-1.5 rounded-full border border-slate-200 flex items-center gap-1.5 transition cursor-pointer" title="Reset">
+    <button id="btn-restart" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition cursor-pointer" title="Reset">
       <i class="fas fa-redo-alt"></i>
     </button>
   </div>
 </div>
 
 <!-- Quiz A / Quiz B Tabs -->
-<div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-8">
-  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer">
+<div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
+  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer">
     Quiz A (Tasks 1-22)
   </button>
-  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer">
+  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
     Quiz B (Tasks 23-45)
   </button>
 </div>
 
 <!-- Title -->
 <div class="text-center mb-6">
-  <h1 class="text-3xl font-extrabold text-indigo-600 tracking-tight">Teacher Cris</h1>
-  <p id="subtitulo-quiz" class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ A)</p>
+  <h1 class="text-blue-600 font-extrabold text-3xl sm:text-4xl tracking-tight">Teacher Cris</h1>
+  <p id="subtitulo-quiz" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ A)</p>
 </div>
 
 <!-- Progress Stats -->
-<div class="flex justify-between items-center mb-4 text-sm text-slate-500">
-  <span id="progreso-texto" class="font-semibold text-slate-600">Task 1 of 22</span>
-  <div class="flex items-center gap-3">
-    <span id="puntuacion" class="font-bold text-emerald-600">Correct: 0</span>
-    <span id="streak-badge" class="font-bold text-amber-600">Streak: 0</span>
+<div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
+  <span id="progreso-texto" class="text-slate-500">Task 1 of 22</span>
+  <div class="flex items-center gap-4">
+    <span class="text-slate-700">Correct: <strong id="puntuacion" class="text-emerald-600 font-bold">0</strong></span>
+    <span class="text-slate-700">Streak: <strong id="streak-badge" class="text-amber-600 font-bold">0</strong></span>
   </div>
 </div>
 
 <!-- Progress Bar -->
 <div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
-  <div id="barra-progreso" class="bg-indigo-600 h-2.5 w-0 transition-all duration-300"></div>
+  <div id="barra-progreso" class="bg-blue-600 h-2.5 w-0 transition-all duration-300"></div>
 </div>
 
-<!-- Category Pill & Hint Button -->
-<div class="mb-6 text-center">
-  <button id="btn-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-full shadow-xs transition cursor-pointer">
-    PREPOSITIONS + GERUND (CLICK FOR HINT)
+<!-- Category Pill Button -->
+<div class="flex justify-center mb-6">
+  <button id="btn-categoria" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+    <span id="category-pill-text">PREPOSITIONS + GERUND</span> (CLICK FOR HINT <i class="fas fa-info-circle"></i>)
   </button>
-  <div id="pista-texto" class="hidden text-xs text-slate-600 italic mt-2.5 bg-amber-50 border border-amber-200 p-3 rounded-xl animate-fade-in max-w-md mx-auto">
-    <span class="text-amber-700 font-bold not-italic">Hint: </span><span id="pista-contenido"></span>
+</div>
+
+<!-- Hint Box -->
+<div id="pista-texto" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 animate-fade-in">
+  <div class="flex items-center gap-2 font-bold text-amber-900 mb-1">
+    <span>💡 Tactical Hint:</span>
   </div>
+  <p id="pista-contenido" class="italic text-slate-700"></p>
 </div>
 
 <!-- Question Container -->
-<div class="mb-6 sm:mb-8">
-  <div id="pregunta-texto" class="text-base sm:text-lg font-bold text-slate-900 bg-slate-50 p-5 rounded-2xl border border-slate-100 leading-relaxed shadow-xs text-center flex flex-wrap items-center justify-center gap-1.5">
-  </div>
+<div class="border border-slate-200 rounded-2xl p-6 sm:p-9 bg-white min-h-[140px] flex items-center justify-center text-center mb-5 shadow-2xs">
+  <p id="pregunta-texto" class="text-base sm:text-lg text-slate-800 leading-relaxed font-normal text-left sm:text-center select-text">
+  </p>
 </div>
 
 <!-- Options Container -->
-<div id="opciones-contenedor" class="space-y-3 mb-6"></div>
+<div id="opciones-contenedor" class="space-y-3 mb-5"></div>
 
 <!-- Verify Button -->
-<button id="btn-verificar" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md cursor-pointer mb-6">
+<button id="btn-verificar" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
   Verify (Enter)
 </button>
 
 <!-- Feedback Box -->
-<div id="feedback-box" class="hidden p-5 rounded-2xl mb-6 border transition-all duration-300">
-  <p id="feedback-titulo" class="font-bold text-lg mb-2"></p>
-  <p id="feedback-explicacion" class="text-sm leading-relaxed mb-3 text-slate-700"></p>
-  <p id="feedback-alert" class="text-sm font-medium border-t pt-2.5 border-slate-200 text-slate-800"></p>
-  <p id="feedback-chunk" class="text-xs font-bold text-indigo-600 uppercase tracking-wider mt-2"></p>
+<div id="feedback-box" class="hidden p-5 rounded-2xl mb-5 border transition-all duration-300">
+  <p id="feedback-titulo" class="font-bold text-base sm:text-lg mb-2"></p>
+  <p id="feedback-explicacion" class="text-xs sm:text-sm leading-relaxed mb-3 text-slate-700"></p>
+  <p id="feedback-alert" class="text-xs sm:text-sm font-medium border-t pt-2.5 border-slate-200/80 text-slate-800"></p>
+  <p id="feedback-chunk" class="text-xs font-bold text-blue-600 uppercase tracking-wider mt-2.5"></p>
 </div>
 
-<!-- Navigation Footer -->
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-100">
-  <button id="btn-anterior" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    <i class="fas fa-chevron-left"></i> Previous
+<!-- Unified All-Blue Navigation Buttons Row -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+  <button id="btn-anterior" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+    &larr; Previous
   </button>
-  <button id="btn-pista-inferior" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Hint <i class="far fa-lightbulb"></i>
+  <button id="btn-pista-inferior" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+    Hint 💡
   </button>
-  <button id="btn-mostrar-respuesta" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Show Answer <i class="fas fa-eye"></i>
+  <button id="btn-mostrar-respuesta" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+    Show Answer 👁
   </button>
-  <button id="btn-siguiente" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 text-xs cursor-pointer">
-    Next <i class="fas fa-chevron-right"></i>
+  <button id="btn-siguiente" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
+    Next &rarr;
   </button>
-</div>
-
 </div>
 
 </main>
 
-<footer class="mt-auto py-6 border-t border-slate-200 bg-white text-center text-xs text-slate-500">
-  <div class="max-w-4xl mx-auto px-4">
-    <p class="font-semibold text-slate-700">Teacher Cris • Gerunds vs Infinitives Master Practice</p>
-  </div>
-</footer>
+<!-- Footer -->
+<div class="mt-6 text-center text-xs text-slate-400">
+  Teacher Cris · Gerunds vs Infinitives Master Practice
+</div>
 
 <script>
 const rawDataset = [
@@ -612,7 +614,6 @@ function getCurrentDataset() {
   return currentMode === 'A' ? quizA : quizB;
 }
 
-// Proven British Female Voice Selector & Synthesizer
 let britishFemaleVoice = null;
 function findBritishFemaleVoice() {
   if (!('speechSynthesis' in window)) return null;
@@ -670,8 +671,7 @@ function speakBritish(text) {
 function getCompletedSentence() {
   const dataset = getCurrentDataset();
   const current = dataset[currentIndex];
-  // Replace blanks with "blank" so it does not spoil the answer
-  return current.q.replace('___', 'blank');
+  return current.q.replace(/___+/g, 'blank');
 }
 
 function playSound(type) {
@@ -679,8 +679,6 @@ function playSound(type) {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (!AudioCtx) return;
     const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
     const now = ctx.currentTime;
 
     if (type === 'success') {
@@ -700,6 +698,8 @@ function playSound(type) {
       osc.connect(g); g.connect(ctx.destination);
       osc.start(now); osc.stop(now + 0.28);
     } else if (type === 'click') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(400, now);
       gain.gain.setValueAtTime(0.05, now);
@@ -722,12 +722,12 @@ function switchQuizMode(mode) {
   const sub = document.getElementById('subtitulo-quiz');
 
   if (mode === 'A') {
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
+    tabA.className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer';
+    tabB.className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer';
     sub.innerText = 'GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ A)';
   } else {
-    tabB.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm bg-white text-indigo-600 cursor-pointer';
-    tabA.className = 'py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:text-indigo-600 cursor-pointer';
+    tabB.className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer';
+    tabA.className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer';
     sub.innerText = 'GERUNDS VS INFINITIVES MASTER PRACTICE (QUIZ B)';
   }
   loadChallenge();
@@ -744,54 +744,60 @@ function loadChallenge() {
   const current = dataset[currentIndex];
 
   document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+  document.getElementById('puntuacion').innerText = score;
+  document.getElementById('streak-badge').innerText = streak;
 
   const pct = Math.round(((currentIndex + 1) / dataset.length) * 100);
   document.getElementById('barra-progreso').style.width = `${pct}%`;
 
-  const btnCat = document.getElementById('btn-categoria');
-  btnCat.innerText = (current.category || 'Standard').toUpperCase() + ' (CLICK FOR HINT)';
+  document.getElementById('category-pill-text').innerText = (current.category || 'Standard').toUpperCase();
 
-  const parts = current.q.split('___');
-  let qHtml = '';
-  if (parts.length === 2) {
-    qHtml = `<span>${parts[0]}</span><span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span><span>${parts[1]}</span>`;
-  } else {
-    qHtml = current.q.replace('___', '<span id="blank-slot" class="inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-white text-indigo-600 border-indigo-200/80 shadow-xs align-middle">___</span>');
-  }
-  document.getElementById('pregunta-texto').innerHTML = qHtml;
+  document.getElementById('pregunta-texto').innerText = current.q;
 
   const pista = document.getElementById('pista-texto');
   document.getElementById('pista-contenido').innerText = current.h;
   pista.classList.add('hidden');
 
   const feedbackBox = document.getElementById('feedback-box');
-  feedbackBox.className = 'hidden p-5 rounded-2xl mb-6 border transition-all duration-300';
+  feedbackBox.className = 'hidden p-5 rounded-2xl mb-5 border transition-all duration-300';
 
-  document.getElementById('btn-verificar').classList.remove('hidden');
+  const btnVerificar = document.getElementById('btn-verificar');
+  btnVerificar.innerText = 'Verify (Enter)';
+  btnVerificar.disabled = true;
 
   const container = document.getElementById('opciones-contenedor');
   container.innerHTML = '';
   current.options.forEach((opt, idx) => {
-    const div = document.createElement('div');
-    div.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-medium text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 transition flex justify-between items-center shadow-xs cursor-pointer bg-white';
-    div.innerHTML = `
-      <div class="flex items-center justify-between w-full">
-        <span class="text-base font-semibold">${opt}</span>
-        <input type="radio" name="option" value="${idx}" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 pointer-events-none">
-      </div>
-    `;
-    div.onclick = () => {
-      if (isAnswerChecked) return;
-      selectedOption = idx;
-      playSound('click');
-      div.querySelector('input').checked = true;
-      Array.from(container.children).forEach(el => el.classList.remove('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500'));
-      div.classList.add('border-indigo-500', 'bg-indigo-50/50', 'ring-1', 'ring-indigo-500');
-    };
-    container.appendChild(div);
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-semibold text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition flex justify-between items-center shadow-xs cursor-pointer';
+    btn.innerHTML = `<span class="text-sm sm:text-base">${opt}</span><i class="far fa-circle text-slate-300"></i>`;
+    btn.onclick = () => selectOption(idx);
+    container.appendChild(btn);
   });
+
+  document.getElementById('btn-anterior').disabled = (currentIndex === 0);
+  document.getElementById('btn-anterior').classList.toggle('opacity-50', currentIndex === 0);
+}
+
+function selectOption(idx) {
+  if (isAnswerChecked) return;
+  selectedOption = idx;
+  playSound('click');
+
+  const container = document.getElementById('opciones-contenedor');
+  const buttons = container.children;
+
+  Array.from(buttons).forEach((btn, i) => {
+    if (i === idx) {
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-blue-600 font-bold text-blue-900 bg-blue-50/80 transition flex justify-between items-center shadow-xs cursor-pointer';
+      btn.querySelector('i').className = 'fas fa-check-circle text-blue-600';
+    } else {
+      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 font-semibold text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition flex justify-between items-center shadow-xs cursor-pointer';
+      btn.querySelector('i').className = 'far fa-circle text-slate-300';
+    }
+  });
+
+  document.getElementById('btn-verificar').disabled = false;
 }
 
 function verifyAnswer() {
@@ -810,23 +816,20 @@ function verifyAnswer() {
     playSound('error');
   }
 
-  const slot = document.getElementById('blank-slot');
-  if (slot) {
-    slot.innerText = current.options[current.correct];
-    slot.className = 'inline-block mx-1.5 px-3 py-0.5 rounded-lg border font-extrabold bg-indigo-100 text-indigo-800 border-indigo-200 align-middle';
-  }
+  const container = document.getElementById('opciones-contenedor');
+  const buttons = container.children;
 
-  const items = document.getElementById('opciones-contenedor').children;
-  Array.from(items).forEach((div, idx) => {
-    div.onclick = null;
-    const input = div.querySelector('input');
-    input.disabled = true;
+  Array.from(buttons).forEach((btn, idx) => {
+    btn.disabled = true;
     if (idx === current.correct) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs';
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.querySelector('i').className = 'fas fa-check-circle text-emerald-600';
     } else if (idx === selectedOption && !isCorrect) {
-      div.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs';
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.querySelector('i').className = 'fas fa-times-circle text-rose-500';
     } else {
-      div.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-not-allowed';
+      btn.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-default';
+      btn.querySelector('i').className = 'far fa-circle text-slate-200';
     }
   });
 
@@ -836,15 +839,15 @@ function verifyAnswer() {
   const feedbackAlert = document.getElementById('feedback-alert');
   const feedbackChunk = document.getElementById('feedback-chunk');
 
-  feedbackBox.className = 'p-5 rounded-2xl mb-6 border transition-all duration-300';
+  feedbackBox.className = 'p-5 rounded-2xl mb-5 border transition-all duration-300';
   if (isCorrect) {
-    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
+    feedbackBox.classList.add('bg-emerald-50/90', 'border-emerald-200');
     feedbackTitulo.innerText = 'Excellent!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-emerald-800';
+    feedbackTitulo.className = 'font-bold text-base sm:text-lg text-emerald-800 mb-2';
   } else {
-    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
+    feedbackBox.classList.add('bg-rose-50/90', 'border-rose-200');
     feedbackTitulo.innerText = 'Key Distinction / Take Note!';
-    feedbackTitulo.className = 'font-bold text-lg mb-2 text-rose-800';
+    feedbackTitulo.className = 'font-bold text-base sm:text-lg text-rose-800 mb-2';
   }
 
   feedbackExplicacion.innerHTML = current.expl;
@@ -852,12 +855,23 @@ function verifyAnswer() {
   feedbackChunk.innerText = `Chunk: ${current.chunk}`;
 
   feedbackBox.classList.remove('hidden');
-  document.getElementById('btn-verificar').classList.add('hidden');
-  document.getElementById('puntuacion').innerText = `Correct: ${score}`;
-  document.getElementById('streak-badge').innerText = `Streak: ${streak}`;
+
+  const btnVerificar = document.getElementById('btn-verificar');
+  btnVerificar.innerText = 'Next Challenge → (Enter)';
+  btnVerificar.disabled = false;
+
+  document.getElementById('puntuacion').innerText = score;
+  document.getElementById('streak-badge').innerText = streak;
 }
 
-document.getElementById('btn-verificar').onclick = verifyAnswer;
+document.getElementById('btn-verificar').onclick = () => {
+  if (isAnswerChecked) {
+    currentIndex++;
+    loadChallenge();
+  } else {
+    verifyAnswer();
+  }
+};
 document.getElementById('btn-siguiente').onclick = () => { currentIndex++; loadChallenge(); };
 document.getElementById('btn-anterior').onclick = () => { if (currentIndex > 0) { currentIndex--; loadChallenge(); } };
 document.getElementById('btn-categoria').onclick = () => { document.getElementById('pista-texto').classList.toggle('hidden'); };
@@ -866,36 +880,38 @@ document.getElementById('btn-mostrar-respuesta').onclick = () => {
   if (isAnswerChecked) return;
   const dataset = getCurrentDataset();
   const current = dataset[currentIndex];
-  selectedOption = current.correct;
-  const items = document.getElementById('opciones-contenedor').children;
-  if (items[current.correct]) items[current.correct].querySelector('input').checked = true;
+  selectOption(current.correct);
   verifyAnswer();
 };
 
-document.getElementById('btn-restart').onclick = () => { currentIndex = 0; score = 0; streak = 0; loadChallenge(); };
+document.getElementById('btn-restart').onclick = () => {
+  if (confirm('Reset progress to task 1?')) {
+    currentIndex = 0; score = 0; streak = 0; loadChallenge();
+  }
+};
 document.getElementById('btn-audio-sentence').onclick = () => { speakBritish(getCompletedSentence()); };
 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    if (!isAnswerChecked) verifyAnswer();
-    else { currentIndex++; loadChallenge(); }
+    if (!isAnswerChecked && selectedOption !== null) verifyAnswer();
+    else if (isAnswerChecked) { currentIndex++; loadChallenge(); }
   }
 });
 
 function showFinalSummary() {
   const dataset = getCurrentDataset();
-  const main = document.querySelector('main');
-  main.innerHTML = `
-    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 text-center animate-fade-in overflow-hidden" style="border-top: 8px solid #2563eb;">
-      <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
+  const card = document.querySelector('main');
+  card.innerHTML = `
+    <div class="text-center py-8">
+      <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
       <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
       <p class="text-slate-600 mb-6 max-w-md mx-auto">You have successfully completed this practice module.</p>
       <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
         <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
-        <div class="text-5xl font-black text-indigo-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span></div>
+        <div class="text-5xl font-black text-blue-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span></div>
       </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Restart Practice</button>
+      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg cursor-pointer">Restart Practice</button>
     </div>
   `;
 }

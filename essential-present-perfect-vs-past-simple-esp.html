@@ -17,8 +17,8 @@
 </head>
 <body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-blue-100">
 
-<!-- Main Card -->
-<div class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-t-[5px] border-blue-600 border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all">
+<!-- Main Card con estilo en línea para forzar el borde superior azul -->
+<div class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all" style="border-top: 8px solid #2563eb !important;">
 
   <!-- Top Bar -->
   <div class="flex justify-between items-center mb-6">
@@ -619,7 +619,7 @@ const dataset = [
   {
     "id": 43,
     "q": "The police ___ two suspects in connection with the bank robbery last night.",
-    "options": ["have arrested", "arrested", "arrest", "were arresting"],
+    "options": ["have arrested", "arrested", "arrest", "was arresting"],
     "correct": 1,
     "h": "'Last night' is a closed past timeframe.",
     "expl": "'Last night' strictly requires the Past Simple.",
@@ -713,7 +713,7 @@ function speakCurrentSentence() {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const currentList = currentQuizMode === 'A' ? QUIZ_A : QUIZ_B;
-  const sentence = currentList[localIndex].q.replace(/___+/g, ', ');
+  const sentence = currentList[localIndex].q.replace(/___+/g, 'blank');
   const utterance = new SpeechSynthesisUtterance(sentence);
   utterance.lang = 'en-GB';
 

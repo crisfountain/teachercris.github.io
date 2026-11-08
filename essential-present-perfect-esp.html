@@ -193,7 +193,12 @@
     function getBritishFemaleVoice() {
       if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices();
-      if (!voices || !voices.length) return null;
+      
+      // Si la lista está vacía (común en la carga inicial), forzamos una recarga si es posible
+      if (!voices || !voices.length) {
+        return null; 
+      }
+
       const preferredFemaleVoices = [
         'Google UK English Female',
         'Microsoft Libby Online (Natural) - English (United Kingdom)',
@@ -204,11 +209,15 @@
         'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
         'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
       ];
+
       for (const name of preferredFemaleVoices) {
         const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
         if (found) return found;
       }
+
       const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+      
+      // Buscar cualquier voz en inglés británico que NO sea masculina
       const enGbFemale = voices.find(v => {
         const lang = (v.lang || '').replace('_', '-').toLowerCase();
         const name = (v.name || '').toLowerCase();
@@ -216,9 +225,18 @@
         return isUK && !maleKeywords.some(m => name.includes(m));
       });
       if (enGbFemale) return enGbFemale;
-      const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
-      if (anyGb) return anyGb;
-      return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
+
+      // Si no encuentra una específica de UK limpia, busca cualquier voz en inglés que no sea masculina
+      const anyFemaleEnglish = voices.find(v => {
+        const name = (v.name || '').toLowerCase();
+        const lang = (v.lang || '').toLowerCase();
+        return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+      });
+      if (anyFemaleEnglish) return anyFemaleEnglish;
+
+      // ÚLTIMO RECURSO: Evitar rotundamente la primera voz genérica si es masculina, 
+      // buscando cualquier otra que contenga "female" o devolviendo la primera que no sea marcadamente de hombre.
+      return voices.find(v => v.name.toLowerCase().includes('female')) || voices[0];
     }
 
     if ('speechSynthesis' in window) {

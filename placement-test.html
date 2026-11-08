@@ -1,206 +1,139 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cambridge English Placement Test | teachercris.online</title>
+    <title>Cambridge English Online Placement Test | Teacher Cris</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            900: '#14532d',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-brand-600 text-white p-2 rounded-xl font-bold text-xl tracking-tight">TC</div>
-                <div>
-                    <span class="font-bold text-lg text-slate-900 tracking-tight">teachercris.online</span>
-                    <span class="block text-xs text-brand-600 font-medium">Official Cambridge Level Assessment</span>
-                </div>
-            </div>
-            <div id="nav-status" class="hidden sm:block text-xs font-semibold px-3 py-1 bg-slate-100 text-slate-600 rounded-full">
-                Placement Test v2.5
+    <!-- Header / Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-indigo-600 tracking-tight">Teacher Cris</a>
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-2 text-xs md:text-sm font-semibold text-slate-700 hover:text-indigo-600 bg-slate-100 hover:bg-indigo-50 px-3.5 py-2 rounded-full transition border border-slate-200">
+                    <i class="fas fa-arrow-left"></i> <span>Back to Site / Volver</span>
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow flex flex-col justify-center">
-
-        <!-- VIEW 1: Landing / Welcome Screen -->
-        <div id="view-welcome" class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 sm:p-12 text-center transition-all duration-300">
-            <div class="inline-block p-3 bg-brand-50 text-brand-600 rounded-2xl mb-6">
-                <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
-                Discover Your True English Level
-            </h1>
-            <p class="text-slate-600 max-w-2xl mx-auto text-base sm:text-lg mb-8 leading-relaxed">
-                Take our professional 25-question diagnostic test calibrated strictly to official Cambridge English standards (<span class="font-semibold text-slate-700">B1 Preliminary, B2 First, and C1/C2 Advanced</span>). Get instant scoring, detailed feedback, and your recommended CEFR band.
+    <!-- Hero Banner -->
+    <section class="bg-indigo-900 text-white py-10 px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-indigo-800 text-indigo-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Official Level Assessment</span>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3">Cambridge English Online Placement Test</h1>
+            <p class="text-indigo-200 text-sm md:text-base">
+                25 calibrated questions ranging from B1 (Preliminary) to C1/C2 (Advanced/Proficiency) built to official Cambridge standards.
             </p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-left max-w-2xl mx-auto">
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="block text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">Duration</span>
-                    <span class="font-semibold text-slate-800">5 – 7 Minutes</span>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="block text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">Format</span>
-                    <span class="font-semibold text-slate-800">25 Multiple Choice</span>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="block text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">Standard</span>
-                    <span class="font-semibold text-slate-800">CEFR B1 to C2</span>
-                </div>
-            </div>
-
-            <button onclick="startTest()" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all transform active:scale-95">
-                Start Placement Test →
-            </button>
         </div>
+    </section>
 
-        <!-- VIEW 2: Quiz Assessment Screen -->
-        <div id="view-quiz" class="hidden bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-10 transition-all duration-300">
-            <!-- Progress Bar & Tier Header -->
-            <div class="mb-6 pb-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <span id="tier-badge" class="inline-block px-3 py-1 bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider rounded-full mb-1">Tier 1: Intermediate (B1)</span>
-                    <div class="text-sm font-semibold text-slate-500">Question <span id="current-q-num">1</span> of 25</div>
-                </div>
-                <div class="w-full sm:w-48 bg-slate-100 h-3 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-brand-500 h-full transition-all duration-300" style="width: 4%"></div>
-                </div>
-            </div>
-
-            <!-- Question Box -->
+    <!-- Main Quiz Container -->
+    <main class="max-w-4xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="quiz-container" class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:p-10">
+            
+            <!-- Progress Bar -->
             <div class="mb-8">
-                <h2 id="question-title" class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Grammar: Present Perfect Simple vs. Past Simple</h2>
-                <p id="question-text" class="text-lg sm:text-xl font-semibold text-slate-900 mb-6 leading-snug">
-                    I ___ to Italy three times, but my last trip there ___ two years ago.
-                </p>
-
-                <!-- Options List -->
-                <div id="options-container" class="space-y-3">
-                    <!-- Dynamic option buttons injected via JS -->
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 text-sm font-semibold text-slate-600 mb-2">
+                    <span id="progress-text">Question 1 of 25</span>
+                    <span id="tier-badge" class="bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-xs uppercase font-bold w-max">Tier 1: Intermediate (B1)</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-indigo-600 h-2.5 transition-all duration-300" style="width: 4%"></div>
                 </div>
             </div>
 
-            <!-- Quiz Navigation Footer -->
-            <div class="flex items-center justify-between pt-6 border-t border-slate-100">
-                <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition">
-                    ← Previous
-                </button>
-                <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md transition disabled:opacity-40 disabled:cursor-not-allowed">
-                    Next Question →
-                </button>
-            </div>
-        </div>
+            <!-- Question Card -->
+            <div id="question-card">
+                <h2 id="question-title" class="text-lg md:text-xl font-bold text-slate-900 mb-6 leading-snug">
+                    <!-- Injected dynamically -->
+                </h2>
 
-        <!-- VIEW 3: Results & Diagnostic Screen -->
-        <div id="view-results" class="hidden bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-10 transition-all duration-300">
-            <div class="text-center max-w-xl mx-auto mb-8">
-                <div class="inline-block p-3 bg-brand-50 text-brand-600 rounded-full mb-3">
-                    <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <div id="options-container" class="space-y-3 mb-8">
+                    <!-- Injected dynamically -->
+                </div>
+
+                <!-- Next Button -->
+                <div class="flex justify-end">
+                    <button id="next-btn" onclick="handleNext()" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" disabled>
+                        <span>Next Question</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Screen (Hidden by default) -->
+            <div id="result-screen" class="hidden text-center py-6">
+                <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                    <i class="fas fa-award"></i>
                 </div>
                 <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Assessment Complete!</h2>
-                <p class="text-slate-600 text-sm">Here is your official performance evaluation based on Cambridge standards.</p>
-
-                <!-- Score Card -->
-                <div class="my-6 p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                    <div class="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Your Final Score</div>
-                    <div class="text-5xl font-black text-brand-600 mb-2"><span id="score-display">0</span><span class="text-2xl text-slate-400 font-normal"> / 25</span></div>
-                    <div id="cefr-badge" class="inline-block px-4 py-1.5 bg-brand-600 text-white font-bold text-sm rounded-full shadow-sm mb-3">B2 Upper-Intermediate</div>
-                    <p id="level-desc-summary" class="text-slate-700 text-sm leading-relaxed">
-                        Strong command of core and advanced grammar. Errors occur mainly in high-level inversion and mixed conditionals.
-                    </p>
+                <p class="text-slate-600 mb-6">Here is your estimated level based on official Cambridge English criteria.</p>
+                
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 max-w-lg mx-auto mb-8 text-left shadow-xs">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                        <span class="text-slate-600 font-medium">Total Score:</span>
+                        <span id="final-score" class="text-2xl font-bold text-indigo-600">0 / 25</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                        <span class="text-slate-600 font-medium">Estimated CEFR Level:</span>
+                        <span id="final-cefr" class="text-sm md:text-base font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">-</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-600 font-medium block mb-1">Diagnosis & Next Steps:</span>
+                        <p id="final-description" class="text-sm text-slate-700 leading-relaxed">-</p>
+                    </div>
                 </div>
 
-                <!-- Course Recommendation -->
-                <div class="bg-brand-50 border border-brand-100 p-5 rounded-xl text-left mb-8">
-                    <span class="block text-xs font-bold text-brand-700 uppercase tracking-wider mb-1">Recommended Cambridge Course</span>
-                    <h4 id="recommended-course" class="font-bold text-brand-900 text-base mb-1">Complete Advanced (C1)</h4>
-                    <p id="recommended-focus" class="text-xs text-brand-800 leading-relaxed">Focus on formal stylistic nuances, inversions, and advanced idioms to prepare for full C1/C2 mastery.</p>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <button onclick="toggleReviewMode()" class="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm rounded-xl shadow transition">
-                        Review Answers & Explanations 📋
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="restartQuiz()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fas fa-redo"></i> Retake Test
                     </button>
-                    <button onclick="restartTest()" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-xl transition">
-                        Retake Test 🔄
-                    </button>
-                    <button onclick="downloadHTMLCode()" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow transition">
-                        Download Code for GitHub 💻
-                    </button>
+                    <a href="index.html#contacto" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                        <i class="fas fa-envelope"></i> Contact Teacher Cris
+                    </a>
                 </div>
             </div>
 
-            <!-- Detailed Answer Review Section (Hidden by default) -->
-            <div id="review-section" class="hidden mt-10 pt-8 border-t border-slate-200">
-                <h3 class="text-xl font-bold text-slate-900 mb-6">Detailed Answer Key & Explanations</h3>
-                <div id="review-questions-list" class="space-y-6">
-                    <!-- Injected via JS -->
-                </div>
-            </div>
         </div>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
-        <div class="max-w-5xl mx-auto px-4">
-            <p>© 2026 teachercris.online — Advanced English & Cambridge Exam Preparation Platform.</p>
-        </div>
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
+        <p>&copy; 2026 Teacher Cris. All rights reserved. | teachercris.online</p>
     </footer>
 
-    <!-- JavaScript Data and Logic -->
+    <!-- Quiz JavaScript Engine -->
     <script>
-        const questions = [
+        const quizData = [
             // Tier 1: Intermediate (B1) — Questions 1 to 7
             {
-                id: 1,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Grammar: Present Perfect Simple vs. Past Simple",
-                text: "I ___ to Italy three times, but my last trip there ___ two years ago.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 1 (Grammar: Present Perfect Simple vs. Past Simple)<br><span class='text-base font-normal text-slate-600'>I ___ to Italy three times, but my last trip there ___ two years ago.</span>",
                 options: [
                     "A) went / has been",
                     "B) have been / was",
                     "C) have gone / was",
                     "D) was / had been"
                 ],
-                correct: 1, // Index of B
-                explanation: "Present perfect simple (have been) is used to describe life experiences at an unspecified past time, whereas the past simple (was) must be used when a specific finished time expression ('two years ago') is mentioned."
+                correct: 1,
+                explanation: "Present perfect simple (have been) is used to describe life experiences at an unspecified past time, whereas past simple (was) must be used when a specific finished time expression ('two years ago') is mentioned."
             },
             {
-                id: 2,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Grammar: Past Simple vs. Past Continuous",
-                text: "While I ___ down the street, I suddenly ___ an old school friend.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 2 (Grammar: Past Simple vs. Past Continuous)<br><span class='text-base font-normal text-slate-600'>While I ___ down the street, I suddenly ___ an old school friend.</span>",
                 options: [
                     "A) walked / was meeting",
                     "B) was walking / met",
@@ -211,10 +144,9 @@
                 explanation: "The past continuous (was walking) describes a background action in progress in the past, while the past simple (met) denotes a shorter event that interrupted it."
             },
             {
-                id: 3,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Grammar: Present Perfect Simple vs. Continuous",
-                text: "Sarah looks exhausted because she ___ the living room all morning, though she ___ only two walls so far.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 3 (Grammar: Present Perfect Simple vs. Continuous)<br><span class='text-base font-normal text-slate-600'>Sarah looks exhausted because she ___ the living room all morning, though she ___ only two walls so far.</span>",
                 options: [
                     "A) painted / has been painting",
                     "B) has been painting / has painted",
@@ -222,13 +154,12 @@
                     "D) was painting / painted"
                 ],
                 correct: 1,
-                explanation: "The present perfect continuous (has been painting) focuses on duration and effort, whereas the present perfect simple (has painted) emphasizes the completed quantity."
+                explanation: "The present perfect continuous (has been painting) focuses on duration and effort, whereas the present perfect simple (has painted) emphasizes the completed quantity ('only two walls')."
             },
             {
-                id: 4,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Vocabulary: Basic Phrasal Verbs",
-                text: "Before we move into the new flat, we need to ___ it ___ with a fresh coat of paint.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 4 (Vocabulary: Basic Phrasal Verbs)<br><span class='text-base font-normal text-slate-600'>Before we move into the new flat, we need to ___ it ___ with a fresh coat of paint.</span>",
                 options: [
                     "A) wear / out",
                     "B) do / up",
@@ -236,13 +167,12 @@
                     "D) get / on"
                 ],
                 correct: 1,
-                explanation: "'Do up' is a standard phrasal verb meaning to repair, redecorate, or improve a building or room."
+                explanation: "In Cambridge English, 'do up' is a standard phrasal verb meaning to repair, redecorate, or improve a building or room."
             },
             {
-                id: 5,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Grammar: Conditionals & Connectors — unless vs. if",
-                text: "You shouldn't take the motorway during peak hours ___ you are willing to get stuck in heavy traffic.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 5 (Grammar: Conditionals & Connectors — unless vs. if)<br><span class='text-base font-normal text-slate-600'>You shouldn't take the motorway during peak hours ___ you are willing to get stuck in heavy traffic.</span>",
                 options: [
                     "A) in case",
                     "B) if",
@@ -250,13 +180,12 @@
                     "D) although"
                 ],
                 correct: 2,
-                explanation: "'Unless' means 'except if' or 'if not'. The sentence means 'don't take the motorway except if you are willing...'"
+                explanation: "'Unless' means 'except if' or 'if not'. The sentence means 'don't take the motorway except if you are willing...'."
             },
             {
-                id: 6,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Grammar: Past Ability — could vs. was able to",
-                text: "Although the storm was severe, the rescue team ___ reach the stranded hikers before nightfall.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 6 (Grammar: Past Ability — could vs. was able to)<br><span class='text-base font-normal text-slate-600'>Although the storm was severe, the rescue team ___ reach the stranded hikers before nightfall.</span>",
                 options: [
                     "A) could",
                     "B) was able to",
@@ -264,13 +193,12 @@
                     "D) might"
                 ],
                 correct: 1,
-                explanation: "Cambridge grammar rules state that succeeding in a specific, difficult past occasion requires 'was/were able to' or 'managed to'."
+                explanation: "While 'could' expresses general past ability, Cambridge grammar rules state that succeeding in a specific, difficult past occasion requires 'was/were able to' or 'managed to'."
             },
             {
-                id: 7,
                 tier: "Tier 1: Intermediate (B1)",
-                title: "Grammar: Connectors of Precaution — in case",
-                text: "Please take a waterproof jacket with you ___ it starts raining while you are on the mountain trail.",
+                badgeClass: "bg-sky-100 text-sky-700",
+                question: "Question 7 (Grammar: Connectors of Precaution — in case)<br><span class='text-base font-normal text-slate-600'>Please take a waterproof jacket with you ___ it starts raining while you are on the mountain trail.</span>",
                 options: [
                     "A) if",
                     "B) in case",
@@ -283,10 +211,9 @@
 
             // Tier 2: Upper-Intermediate (B2) — Questions 8 to 16
             {
-                id: 8,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Grammar: Passive Voice with Reporting Verbs",
-                text: "The new eco-friendly policy is thought ___ by the board members during yesterday's meeting.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 8 (Grammar: Passive Voice with Reporting Verbs)<br><span class='text-base font-normal text-slate-600'>The new eco-friendly policy is thought ___ by the board members during yesterday's meeting.</span>",
                 options: [
                     "A) to approve",
                     "B) to be approving",
@@ -297,10 +224,9 @@
                 explanation: "When reporting past events using passive structures, a past action requires the perfect passive infinitive (to have been + past participle)."
             },
             {
-                id: 9,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Grammar: Causative Have and Get",
-                text: "Instead of repairing the damaged roof himself, Mr. Davis decided to ___ by a professional contractor.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 9 (Grammar: Causative Have and Get)<br><span class='text-base font-normal text-slate-600'>Instead of repairing the damaged roof himself, Mr. Davis decided to ___ by a professional contractor.</span>",
                 options: [
                     "A) have it fixed",
                     "B) fix it",
@@ -311,10 +237,9 @@
                 explanation: "The causative structure (have/get + object + past participle) is used when arranging for a professional to perform a task."
             },
             {
-                id: 10,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Grammar: Relative Clauses — Possession",
-                text: "Dr. Aris, ___ research on marine biology has won international awards, will deliver the keynote address.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 10 (Grammar: Relative Clauses — Possession)<br><span class='text-base font-normal text-slate-600'>Dr. Aris, ___ research on marine biology has won international awards, will deliver the keynote address.</span>",
                 options: [
                     "A) who",
                     "B) whom",
@@ -322,13 +247,12 @@
                     "D) which"
                 ],
                 correct: 2,
-                explanation: "'Whose' is the relative pronoun used to indicate possession for people or things in relative clauses ('his research -> whose research')."
+                explanation: "'Whose' is the relative pronoun used to indicate possession for people or things in relative clauses."
             },
             {
-                id: 11,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Grammar: Reporting Verbs & Verb Patterns",
-                text: "The project manager strongly suggested ___ a short break before finalizing the quarterly report.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 11 (Grammar: Reporting Verbs & Verb Patterns)<br><span class='text-base font-normal text-slate-600'>The project manager strongly suggested ___ a short break before finalizing the quarterly report.</span>",
                 options: [
                     "A) us to take",
                     "B) taking",
@@ -336,13 +260,12 @@
                     "D) that we to take"
                 ],
                 correct: 1,
-                explanation: "Cambridge exam traps frequently test 'suggest', which must be followed by verb + -ing, a noun phrase, or that + clause (never object + to-infinitive)."
+                explanation: "Cambridge English exam traps frequently test 'suggest', which must be followed by verb + -ing, a noun phrase, or that + clause (never object + to-infinitive)."
             },
             {
-                id: 12,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Grammar & Prepositions: Verb + Preposition Structures",
-                text: "The security officer accused the stranger ___ trying to enter the restricted research facility without clearance.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 12 (Grammar & Prepositions: Verb + Preposition Structures)<br><span class='text-base font-normal text-slate-600'>The security officer accused the stranger ___ trying to enter the restricted research facility without clearance.</span>",
                 options: [
                     "A) for",
                     "B) to",
@@ -353,10 +276,9 @@
                 explanation: "'Accuse' strictly collocates with the preposition 'of' + verb -ing (accuse somebody of doing something)."
             },
             {
-                id: 13,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Vocabulary: Upper-Intermediate Phrasal Verbs",
-                text: "After reviewing several design proposals, the creative team managed to ___ an innovative marketing concept.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 13 (Vocabulary: Upper-Intermediate Phrasal Verbs)<br><span class='text-base font-normal text-slate-600'>After reviewing several design proposals, the creative team managed to ___ an innovative marketing concept.</span>",
                 options: [
                     "A) come up with",
                     "B) live up to",
@@ -367,10 +289,9 @@
                 explanation: "'Come up with' means to think of, produce, or suggest an idea or plan."
             },
             {
-                id: 14,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Word Formation: Negative Prefixes",
-                text: "Leaving confidential documents unattended on your desk is highly ___ and breaches office security protocols.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 14 (Word Formation: Negative Prefixes)<br><span class='text-base font-normal text-slate-600'>Leaving confidential documents unattended on your desk is highly ___ and breaches office security protocols.</span>",
                 options: [
                     "A) unresponsible",
                     "B) disresponsible",
@@ -381,10 +302,9 @@
                 explanation: "In Cambridge Word Formation, adjectives starting with r- form their negative opposite using the prefix ir- (responsible -> irresponsible)."
             },
             {
-                id: 15,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Word Formation: Suffix Traps & Noun Derivation",
-                text: "The sudden ___ of the new flight route caused considerable inconvenience to hundreds of travellers.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 15 (Word Formation: Suffix Traps & Noun Derivation)<br><span class='text-base font-normal text-slate-600'>The sudden ___ of the new flight route caused considerable inconvenience to hundreds of travellers.</span>",
                 options: [
                     "A) cancelation",
                     "B) cancelling",
@@ -395,10 +315,9 @@
                 explanation: "Forming nominalised nouns from verbs ending in -l in British English requires doubling the consonant and adding -ation (cancel -> cancellation)."
             },
             {
-                id: 16,
                 tier: "Tier 2: Upper-Intermediate (B2)",
-                title: "Vocabulary Traps: Countable vs. Uncountable Nouns",
-                text: "She was offered a temporary ___ at the publisher's head office, which will give her valuable professional experience.",
+                badgeClass: "bg-indigo-100 text-indigo-700",
+                question: "Question 16 (Vocabulary Traps: Countable vs. Uncountable Nouns)<br><span class='text-base font-normal text-slate-600'>She was offered a temporary ___ at the publisher's head office, which will give her valuable professional experience.</span>",
                 options: [
                     "A) work",
                     "B) job",
@@ -406,15 +325,14 @@
                     "D) employment"
                 ],
                 correct: 1,
-                explanation: "'Job' is a countable noun taking the indefinite article 'a'. 'Work' and 'employment' are uncountable and cannot follow 'a'."
+                explanation: "'Job' is a countable noun that takes the indefinite article 'a'. 'Work' and 'employment' are uncountable."
             },
 
             // Tier 3: Advanced / Proficient (C1–C2) — Questions 17 to 25
             {
-                id: 17,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Advanced Grammar: Inversion with Negative Adverbials",
-                text: "Little ___ that the complex financial agreement was about to be cancelled by the board.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 17 (Advanced Grammar: Inversion with Negative Adverbials)<br><span class='text-base font-normal text-slate-600'>Little ___ that the complex financial agreement was about to be cancelled by the board.</span>",
                 options: [
                     "A) did the director suspect",
                     "B) the director suspected",
@@ -422,13 +340,12 @@
                     "D) was the director suspecting"
                 ],
                 correct: 0,
-                explanation: "When negative or limiting adverbials ('Little', 'Seldom') are placed at the beginning of a clause, subject-auxiliary inversion is required (Little + did + subject + verb)."
+                explanation: "When negative or limiting adverbials ('Little', 'Seldom') are placed at the beginning of a clause, subject-auxiliary inversion is required (Little + did + subject + base verb)."
             },
             {
-                id: 18,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Advanced Grammar: Mixed Conditionals",
-                text: "If the lead engineer ___ the structural calculations last month, the bridge ___ open to traffic today.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 18 (Advanced Grammar: Mixed Conditionals)<br><span class='text-base font-normal text-slate-600'>If the lead engineer ___ the structural calculations last month, the bridge ___ open to traffic today.</span>",
                 options: [
                     "A) didn't complete / wouldn't be",
                     "B) hadn't completed / wouldn't be",
@@ -436,13 +353,12 @@
                     "D) wouldn't complete / isn't"
                 ],
                 correct: 1,
-                explanation: "This is a mixed conditional combining a past unreal condition (if + past perfect) with a present result (would + base infinitive indicated by 'today')."
+                explanation: "This is a mixed conditional combining a past unreal condition (if + past perfect) with a present result (would + base infinitive)."
             },
             {
-                id: 19,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Advanced Structures: Cleft Sentences for Emphasis",
-                text: "It was not until the comprehensive audit was completed ___ the accounting department discovered the missing funds.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 19 (Advanced Structures: Cleft Sentences for Emphasis)<br><span class='text-base font-normal text-slate-600'>It was not until the comprehensive audit was completed ___ the accounting department discovered the missing funds.</span>",
                 options: [
                     "A) when",
                     "B) that",
@@ -453,10 +369,9 @@
                 explanation: "In formal English, It-cleft sentences designed to emphasize a time clause follow the structure: 'It was not until [clause] THAT [main clause]'."
             },
             {
-                id: 20,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Advanced Grammar: Participle Clauses",
-                text: "___ the historical evidence thoroughly, the research committee published a groundbreaking report.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 20 (Advanced Grammar: Participle Clauses)<br><span class='text-base font-normal text-slate-600'>___ the historical evidence thoroughly, the research committee published a groundbreaking report.</span>",
                 options: [
                     "A) Having examined",
                     "B) Examined",
@@ -464,13 +379,12 @@
                     "D) To examine"
                 ],
                 correct: 0,
-                explanation: "A perfect participle clause (Having + past participle) is required to emphasize that the action of examining was completed before publication."
+                explanation: "A perfect participle clause (Having + past participle) is required to emphasize that the action of examining was completed before the main clause action took place."
             },
             {
-                id: 21,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Vocabulary: Advanced Collocations",
-                text: "With only a few minutes remaining before the deadline, there is a very ___ chance that the proposal will be accepted.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 21 (Vocabulary: Advanced Collocations)<br><span class='text-base font-normal text-slate-600'>With only a few minutes remaining before the deadline, there is a very ___ chance that the proposal will be accepted.</span>",
                 options: [
                     "A) narrow",
                     "B) slim",
@@ -481,10 +395,9 @@
                 explanation: "In C1/C2 Cambridge English, 'slim chance' (or slight possibility) is a fixed adjective-noun collocation."
             },
             {
-                id: 22,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Advanced Idiomatic Expressions",
-                text: "When the unexpected news of the corporate merger was announced, the entire department was completely ___.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 22 (Advanced Idiomatic Expressions)<br><span class='text-base font-normal text-slate-600'>When the unexpected news of the corporate merger was announced, the entire department was completely ___.</span>",
                 options: [
                     "A) taken aback",
                     "B) brought down",
@@ -492,13 +405,12 @@
                     "D) turned over"
                 ],
                 correct: 0,
-                explanation: "The advanced idiom 'taken aback' means to be deeply surprised, shocked, or disarranged by unexpected news."
+                explanation: "The advanced idiom 'taken aback' means to be deeply surprised or shocked by unexpected news."
             },
             {
-                id: 23,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Formal Style: Subjunctive Structures",
-                text: "The chairperson insisted that every member of the committee ___ present at the emergency briefing.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 23 (Formal Style: Subjunctive Structures)<br><span class='text-base font-normal text-slate-600'>The chairperson insisted that every member of the committee ___ present at the emergency briefing.</span>",
                 options: [
                     "A) is",
                     "B) be",
@@ -506,13 +418,12 @@
                     "D) would be"
                 ],
                 correct: 1,
-                explanation: "Formal English mandates the present subjunctive (bare infinitive: be) after verbs of demand or insistence (insist, demand, recommend + that + subject + bare verb)."
+                explanation: "Formal English mandates the present subjunctive (bare infinitive: be) after verbs of demand or insistence."
             },
             {
-                id: 24,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Grammar: Verb + Infinitive vs. -ing with Meaning Shift",
-                text: "I deeply regret ___ you that your application for the senior research fellowship has been unsuccessful.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 24 (Grammar: Verb + Infinitive vs. -ing with Meaning Shift)<br><span class='text-base font-normal text-slate-600'>I deeply regret ___ you that your application for the senior research fellowship has been unsuccessful.</span>",
                 options: [
                     "A) informing",
                     "B) to inform",
@@ -523,10 +434,9 @@
                 explanation: "'Regret + to inform / tell / say' is a formal structure used to announce bad news in the present moment."
             },
             {
-                id: 25,
                 tier: "Tier 3: Advanced / Proficient (C1–C2)",
-                title: "Advanced Inversion & Time Connectors",
-                text: "Hardly ___ the presentation begun ___ the projector broke down unexpectedly.",
+                badgeClass: "bg-amber-100 text-amber-800",
+                question: "Question 25 (Advanced Inversion & Time Connectors)<br><span class='text-base font-normal text-slate-600'>Hardly ___ the presentation begun ___ the projector broke down unexpectedly.</span>",
                 options: [
                     "A) was / than",
                     "B) had / when",
@@ -538,197 +448,132 @@
             }
         ];
 
-        let currentIndex = 0;
-        let userAnswers = new Array(questions.length).fill(null);
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let answered = false;
 
-        function startTest() {
-            document.getElementById('view-welcome').classList.add('hidden');
-            document.getElementById('view-quiz').classList.remove('hidden');
-            loadQuestion();
-        }
+        const progressText = document.getElementById("progress-text");
+        const progressBar = document.getElementById("progress-bar");
+        const tierBadge = document.getElementById("tier-badge");
+        const questionTitle = document.getElementById("question-title");
+        const optionsContainer = document.getElementById("options-container");
+        const nextBtn = document.getElementById("next-btn");
+        const questionCard = document.getElementById("question-card");
+        const resultScreen = document.getElementById("result-screen");
 
         function loadQuestion() {
-            const q = questions[currentIndex];
-            document.getElementById('current-q-num').innerText = currentIndex + 1;
-            document.getElementById('tier-badge').innerText = q.tier;
-            document.getElementById('question-title').innerText = q.title;
-            document.getElementById('question-text').innerText = q.text;
+            const q = quizData[currentQuestion];
+            progressText.innerText = `Question ${currentQuestion + 1} of ${quizData.length}`;
+            progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+            tierBadge.innerText = q.tier;
+            tierBadge.className = `px-3 py-1 rounded-full text-xs uppercase font-bold w-max ${q.badgeClass}`;
+            questionTitle.innerHTML = q.question;
 
-            // Update Progress bar
-            const progressPercent = ((currentIndex + 1) / questions.length) * 100;
-            document.getElementById('progress-bar').style.width = progressPercent + '%';
-
-            // Render options
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-
-            q.options.forEach((opt, idx) => {
-                const isSelected = userAnswers[currentIndex] === idx;
-                const btn = document.createElement('button');
-                btn.className = `w-full text-left p-4 rounded-xl border transition-all font-medium text-sm sm:text-base flex items-center justify-between ${
-                    isSelected 
-                        ? 'border-brand-500 bg-brand-50 text-brand-900 shadow-sm' 
-                        : 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700'
-                }`;
-                
-                btn.innerHTML = `
-                    <span>${opt}</span>
-                    <span class="w-5 h-5 rounded-full border flex items-center justify-center text-xs ${isSelected ? 'border-brand-600 bg-brand-600 text-white' : 'border-slate-300'}">
-                        ${isSelected ? '✓' : ''}
-                    </span>
-                `;
-                btn.onclick = () => selectOption(idx);
-                container.appendChild(btn);
+            optionsContainer.innerHTML = "";
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement("button");
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 font-medium transition flex items-center justify-between";
+                btn.innerHTML = `<span>${opt}</span><i class="far fa-circle text-slate-400"></i>`;
+                btn.onclick = () => selectAnswer(index, btn);
+                optionsContainer.appendChild(btn);
             });
 
-            // Update Nav Buttons
-            document.getElementById('prev-btn').disabled = currentIndex === 0;
-            const nextBtn = document.getElementById('next-btn');
-            if (currentIndex === questions.length - 1) {
-                nextBtn.innerText = "Finish & View Score →";
-            } else {
-                nextBtn.innerText = "Next Question →";
+            nextBtn.disabled = true;
+            selectedOption = null;
+            answered = false;
+        }
+
+        function selectAnswer(index, btnElement) {
+            if (answered) return;
+            selectedOption = index;
+
+            const buttons = optionsContainer.getElementsByTagName("button");
+            for (let b of buttons) {
+                b.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-slate-50 font-medium transition flex items-center justify-between opacity-70";
             }
-            nextBtn.disabled = userAnswers[currentIndex] === null;
+            btnElement.className = "w-full text-left p-4 rounded-xl border-2 border-indigo-600 bg-indigo-50/50 font-semibold transition flex items-center justify-between shadow-xs";
+            
+            nextBtn.disabled = false;
         }
 
-        function selectOption(idx) {
-            userAnswers[currentIndex] = idx;
-            loadQuestion();
-            document.getElementById('next-btn').disabled = false;
-        }
+        function handleNext() {
+            if (selectedOption === null) return;
 
-        function prevQuestion() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                loadQuestion();
+            if (!answered) {
+                answered = true;
+                const q = quizData[currentQuestion];
+                const buttons = optionsContainer.getElementsByTagName("button");
+
+                if (selectedOption === q.correct) {
+                    score++;
+                    buttons[selectedOption].className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 font-semibold transition flex items-center justify-between text-emerald-900";
+                    buttons[selectedOption].innerHTML += `<i class="fas fa-check-circle text-emerald-600 ml-2"></i>`;
+                } else {
+                    buttons[selectedOption].className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-50 font-semibold transition flex items-center justify-between text-rose-900";
+                    buttons[selectedOption].innerHTML += `<i class="fas fa-times-circle text-rose-600 ml-2"></i>`;
+                    buttons[q.correct].className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 font-semibold transition flex items-center justify-between text-emerald-900";
+                    buttons[q.correct].innerHTML += `<i class="fas fa-check-circle text-emerald-600 ml-2"></i>`;
+                }
+
+                const explanationDiv = document.createElement("div");
+                explanationDiv.className = "mt-6 p-4 bg-slate-100 rounded-xl border border-slate-200 text-sm text-slate-700 leading-relaxed";
+                explanationDiv.innerHTML = `<strong>Explanation:</strong> ${q.explanation}`;
+                optionsContainer.appendChild(explanationDiv);
+
+                if (currentQuestion === quizData.length - 1) {
+                    nextBtn.innerHTML = `<span>View Final Results</span> <i class="fas fa-award"></i>`;
+                } else {
+                    nextBtn.innerHTML = `<span>Next Question</span> <i class="fas fa-arrow-right"></i>`;
+                }
+                return;
             }
-        }
 
-        function nextQuestion() {
-            if (currentIndex < questions.length - 1) {
-                currentIndex++;
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
                 loadQuestion();
+                nextBtn.innerHTML = `<span>Next Question</span> <i class="fas fa-arrow-right"></i>`;
             } else {
                 showResults();
             }
         }
 
         function showResults() {
-            document.getElementById('view-quiz').classList.add('hidden');
-            document.getElementById('view-results').classList.remove('hidden');
+            questionCard.classList.add("hidden");
+            resultScreen.classList.remove("hidden");
+            
+            document.getElementById("final-score").innerText = `${score} / 25`;
 
-            let score = 0;
-            userAnswers.forEach((ans, idx) => {
-                if (ans === questions[idx].correct) score++;
-            });
-
-            document.getElementById('score-display').innerText = score;
-
-            // CEFR Mapping
             let cefr = "";
-            let badgeClass = "";
             let desc = "";
-            let course = "";
-            let focus = "";
 
             if (score <= 6) {
-                cefr = "A2 / Below B1 (Elementary)";
-                badgeClass = "bg-amber-600 text-white";
-                desc = "The learner struggles with core tense contrasts, basic phrasal verbs, and simple connectors.";
-                course = "Complete Preliminary (B1)";
-                focus = "Focus on fundamental tenses and essential vocabulary build-up.";
+                cefr = "A2 / Below B1";
+                desc = "Elementary / Pre-Intermediate: You are building your foundation. Recommended course: Complete Preliminary (B1) — Focus on core tenses and essential vocabulary.";
             } else if (score <= 13) {
-                cefr = "B1 (Intermediate)";
-                badgeClass = "bg-blue-600 text-white";
-                desc = "Demonstrates control over basic grammar and tenses, but struggles with passive structures, complex verb patterns, and prepositions.";
-                course = "Complete First (B2)";
-                focus = "Focus on upper-intermediate grammar, relative clauses, and word formation.";
+                cefr = "B1 Intermediate";
+                desc = "Intermediate: Good control over everyday tenses, but needs refinement in passive voice, relative clauses, and verb patterns. Recommended: Complete First (B2).";
             } else if (score <= 19) {
-                cefr = "B2 (Upper-Intermediate)";
-                badgeClass = "bg-brand-600 text-white";
-                desc = "Strong command of core and advanced grammar. Errors occur mainly in high-level inversion, mixed conditionals, and subtle collocations.";
-                course = "Complete Advanced (C1)";
-                focus = "Focus on formal stylistic nuances, inversions, and advanced idioms.";
+                cefr = "B2 Upper-Intermediate";
+                desc = "Upper-Intermediate (Cambridge First standard): Strong command of core grammar. Main areas for growth are inversion, mixed conditionals, and collocations. Recommended: Complete Advanced (C1).";
             } else {
-                cefr = "C1 – C2 (Advanced / Proficient)";
-                badgeClass = "bg-purple-700 text-white";
-                desc = "Exceptional mastery of complex grammatical structures, inversion, subjunctive forms, subtle collocations, and idiomatic expressions.";
-                course = "C1 Advanced / C2 Proficiency Exam Preparation";
-                focus = "Polish writing style, academic register, and absolute linguistic precision.";
+                cefr = "C1 – C2 Advanced / Proficient";
+                desc = "Advanced / Proficient (Cambridge Advanced / Proficiency standard): Excellent mastery of complex grammatical structures, inversion, subjunctive forms, and subtle idioms. Recommended: C1/C2 Exam Preparation & Professional Fluency.";
             }
 
-            const badgeEl = document.getElementById('cefr-badge');
-            badgeEl.innerText = cefr;
-            badgeEl.className = `inline-block px-4 py-1.5 font-bold text-sm rounded-full shadow-sm mb-3 ${badgeClass}`;
-
-            document.getElementById('level-desc-summary').innerText = desc;
-            document.getElementById('recommended-course').innerText = course;
-            document.getElementById('recommended-focus').innerText = focus;
-
-            buildReviewList();
+            document.getElementById("final-cefr").innerText = cefr;
+            document.getElementById("final-description").innerText = desc;
         }
 
-        function buildReviewList() {
-            const listContainer = document.getElementById('review-questions-list');
-            listContainer.innerHTML = '';
-
-            questions.forEach((q, idx) => {
-                const userAns = userAnswers[idx];
-                const isCorrect = userAns === q.correct;
-                const userChoiceText = userAns !== null ? q.options[userAns] : "Not answered";
-                const correctChoiceText = q.options[q.correct];
-
-                const item = document.createElement('div');
-                item.className = `p-5 rounded-xl border ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-rose-50/50 border-rose-200'}`;
-                
-                item.innerHTML = `
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Question ${idx + 1} • ${q.tier}</span>
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                            ${isCorrect ? 'Correct ✓' : 'Incorrect ✗'}
-                        </span>
-                    </div>
-                    <p class="font-semibold text-slate-900 mb-3">${q.text}</p>
-                    <div class="text-xs space-y-1 mb-3">
-                        <div class="text-slate-600"><span class="font-semibold">Your Answer:</span> <span class="${isCorrect ? 'text-emerald-700 font-bold' : 'text-rose-700 font-bold'}">${userChoiceText}</span></div>
-                        ${!isCorrect ? `<div class="text-slate-600"><span class="font-semibold">Correct Answer:</span> <span class="text-emerald-700 font-bold">${correctChoiceText}</span></div>` : ''}
-                    </div>
-                    <div class="bg-white/80 p-3 rounded-lg border border-slate-200 text-xs text-slate-700 leading-relaxed">
-                        <span class="font-bold text-slate-900">Explanation:</span> ${q.explanation}
-                    </div>
-                `;
-                listContainer.appendChild(item);
-            });
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            resultScreen.classList.add("hidden");
+            questionCard.classList.remove("hidden");
+            loadQuestion();
         }
 
-        function toggleReviewMode() {
-            const reviewSec = document.getElementById('review-section');
-            reviewSec.classList.toggle('hidden');
-            reviewSec.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function restartTest() {
-            currentIndex = 0;
-            userAnswers = new Array(questions.length).fill(null);
-            document.getElementById('view-results').classList.add('hidden');
-            document.getElementById('review-section').classList.add('hidden');
-            document.getElementById('view-welcome').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function downloadHTMLCode() {
-            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'placement-test.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
+        window.onload = loadQuestion;
     </script>
 </body>
 </html>

@@ -52,7 +52,7 @@
       Teacher Cris
     </h1>
     <p id="quiz-subtitle" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">
-      Present Perfect Master Practice (Quiz A)
+      Essential Present Perfect vs Past Simple Practice (Quiz A)
     </p>
   </div>
 
@@ -743,7 +743,7 @@ function renderTask() {
   document.getElementById('task-counter').innerText = `Task ${localIndex + 1} of ${currentList.length}`;
   document.getElementById('score-display').innerText = score;
   document.getElementById('streak-display').innerText = streak;
-  document.getElementById('quiz-subtitle').innerText = `Present Perfect Master Practice (${currentQuizMode === 'A' ? 'Quiz A' : 'Quiz B'})`;
+  document.getElementById('quiz-subtitle').innerText = `Essential Present Perfect vs Past Simple Practice (${currentQuizMode === 'A' ? 'Quiz A' : 'Quiz B'})`;
 
   // Aspect Category Pill
   const aspect = current.targetAspect || 'PRESENT PERFECT';

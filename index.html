@@ -232,29 +232,73 @@
         </div>
     </section>
 
-    <!-- Contacto / Formulario -->
-    <section id="contacto" class="bg-indigo-900 text-white py-16">
-        <div class="max-w-xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4">Reserva tu clase o pide información</h2>
-            <p class="text-indigo-200 text-center mb-8">Escríbeme un mensaje directo y me pondré en contacto contigo en menos de 24 horas.</p>
+    <!-- Contacto / Formulario Ampliado -->
+<section id="contacto" class="bg-indigo-900 text-white py-16">
+    <div class="max-w-xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">Reserva tu clase o pide información</h2>
+        <p class="text-indigo-200 text-center mb-8">Escríbeme un mensaje directo y me pondré en contacto contigo en menos de 24 horas.</p>
+        
+        <form action="https://formspree.io/f/mdeazwne" method="POST" class="space-y-6">
             
-            <form action="https://formspree.io/f/mdeazwne" method="POST" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Nombre completo</label>
-                    <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <!-- Nombre -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Nombre completo</label>
+                <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Tu nombre">
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Correo electrónico</label>
+                <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="tu.correo@example.com">
+            </div>
+
+            <!-- Nivel aproximado -->
+            <div>
+                <label class="block text-sm font-medium mb-2">Nivel aproximado</label>
+                <div class="space-y-2 bg-indigo-800/50 p-4 rounded-lg border border-indigo-700">
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="level" value="Beginner (A1-A2)" required class="accent-indigo-400 w-4 h-4"> Beginner (A1-A2)</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="level" value="Intermediate (B1)" class="accent-indigo-400 w-4 h-4"> Intermediate (B1)</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="level" value="Upper-Intermediate (B2)" class="accent-indigo-400 w-4 h-4"> Upper-Intermediate (B2)</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="level" value="Advanced (C1)" class="accent-indigo-400 w-4 h-4"> Advanced (C1)</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="level" value="Proficient (C2)" class="accent-indigo-400 w-4 h-4"> Proficient (C2)</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="level" value="Not sure" class="accent-indigo-400 w-4 h-4"> No estoy seguro/a</label>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Correo electrónico</label>
-                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            </div>
+
+            <!-- Objetivo principal -->
+            <div>
+                <label class="block text-sm font-medium mb-2">Objetivo principal</label>
+                <div class="space-y-2 bg-indigo-800/50 p-4 rounded-lg border border-indigo-700">
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="goal" value="Conversation" required class="accent-indigo-400 w-4 h-4"> Conversation</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="goal" value="Cambridge Exam" class="accent-indigo-400 w-4 h-4"> Cambridge Exam (IELTS / First / Advanced / Proficiency)</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="goal" value="Work / Business English" class="accent-indigo-400 w-4 h-4"> Work / Business English</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="goal" value="Travel" class="accent-indigo-400 w-4 h-4"> Travel</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="goal" value="Grammar Improvement" class="accent-indigo-400 w-4 h-4"> Improve my grammar</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="goal" value="General English" class="accent-indigo-400 w-4 h-4"> General English</label>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">¿Qué te gustaría mejorar?</label>
-                    <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Cuéntame un poco sobre tu nivel actual y tus objetivos..."></textarea>
+            </div>
+
+            <!-- Disponibilidad -->
+            <div>
+                <label class="block text-sm font-medium mb-2">Disponibilidad</label>
+                <div class="space-y-2 bg-indigo-800/50 p-4 rounded-lg border border-indigo-700">
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="availability" value="Mornings" required class="accent-indigo-400 w-4 h-4"> Mañanas</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="availability" value="Afternoons" class="accent-indigo-400 w-4 h-4"> Tardes</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="availability" value="Evenings" class="accent-indigo-400 w-4 h-4"> Noches</label>
+                    <label class="flex items-center gap-3 text-sm cursor-pointer"><input type="radio" name="availability" value="Flexible" class="accent-indigo-400 w-4 h-4"> Flexible</label>
                 </div>
-                <button type="submit" class="w-full bg-white text-indigo-900 font-bold py-3.5 rounded-lg hover:bg-indigo-50 transition">Enviar Mensaje</button>
-            </form>
-        </div>
-    </section>
+            </div>
+
+            <!-- Mensaje libre -->
+            <div>
+                <label class="block text-sm font-medium mb-1">Mensaje libre</label>
+                <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-indigo-800 text-white placeholder-indigo-300 border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Tell me a little about your goals and current level..."></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-white text-indigo-900 font-bold py-3.5 rounded-lg hover:bg-indigo-50 transition">Enviar Mensaje</button>
+        </form>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambridge Writing Coach | Teacher Cris</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Navigation Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-indigo-600 font-bold flex items-center gap-2 hover:text-indigo-700 transition">
+        <i class="fas fa-arrow-left"></i> Return to teachercris.online
+      </a>
+      <span class="text-xs font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full uppercase tracking-wider">
+        Cambridge Writing Hub
+      </span>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="bg-indigo-900 text-white py-10 px-4 text-center">
+    <div class="max-w-3xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Cambridge Writing Coach</h1>
+      <p class="text-indigo-200 text-base sm:text-lg max-w-2xl mx-auto">
+        Select your exam level, draft your response under timed conditions, and submit your writing directly to Teacher Cris for detailed feedback.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Workspace Container -->
+  <main class="flex-grow max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- STEP 1: EMAIL SIGN-UP GATE -->
+    <div id="step-gate" class="bg-white rounded-2xl p-6 sm:p-10 shadow-xl border border-slate-200 max-w-xl mx-auto">
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+          <i class="fas fa-user-edit"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-slate-900">Start Your Practice</h2>
+        <p class="text-slate-500 text-sm mt-1">Enter your details so Teacher Cris can send your evaluation report.</p>
+      </div>
+
+      <form id="gate-form" onsubmit="unlockCoach(event)" class="space-y-5">
+        <div>
+          <label for="student-name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Full Name</label>
+          <input type="text" id="student-name" required placeholder="e.g. Maria Silva"
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+        </div>
+
+        <div>
+          <label for="student-email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email Address</label>
+          <input type="email" id="student-email" required placeholder="e.g. maria@example.com"
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+        </div>
+
+        <div>
+          <label for="student-level" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Target Exam Level</label>
+          <select id="student-level" required
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm bg-white">
+            <option value="B1 Preliminary">B1 Preliminary (PET) — Task 1 Email (~100 words)</option>
+            <option value="B2 First">B2 First (FCE) — Task 1 Essay (140-190 words)</option>
+            <option value="C1 / C2 Advanced">C1 Advanced / C2 Proficiency — Task 1 Essay (220-280 words)</option>
+          </select>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-indigo-600 text-white font-bold py-3.5 rounded-xl hover:bg-indigo-700 transition shadow-lg flex items-center justify-center gap-2">
+          Unlock Writing Workspace <i class="fas fa-arrow-right"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- STEP 2: WRITING WORKSPACE (Hidden until gated) -->
+    <div id="step-workspace" class="hidden space-y-8">
+      
+      <!-- Top Control Bar: Level & Timer -->
+      <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Active Candidate:</span>
+          <h3 id="display-user-info" class="text-base font-bold text-slate-900"></h3>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Timer Controls -->
+          <div class="bg-slate-100 px-4 py-2 rounded-xl flex items-center gap-3">
+            <i class="far fa-clock text-indigo-600 font-bold"></i>
+            <span id="timer-display" class="font-mono font-bold text-slate-800 text-lg">45:00</span>
+          </div>
+          <button id="btn-timer" onclick="toggleTimer()"
+            class="bg-indigo-600 text-white px-3.5 py-2 rounded-xl font-semibold text-xs hover:bg-indigo-700 transition">
+            Start Timer
+          </button>
+        </div>
+      </div>
+
+      <!-- Prompt Selector & Display Area -->
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-slate-200 space-y-6">
+        
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 border-b border-slate-100 pb-4">
+          <label for="prompt-select" class="text-xs font-bold text-slate-700 uppercase tracking-wider">Select Practice Prompt:</label>
+          <select id="prompt-select" onchange="loadSelectedPrompt()"
+            class="px-4 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-medium bg-slate-50">
+            <!-- Options dynamically populated by JS based on user level -->
+          </select>
+        </div>
+
+        <!-- Rendered Prompt Container -->
+        <div id="prompt-container"></div>
+      </div>
+
+      <!-- Main Submission Form (Formspree Integrated) -->
+      <!-- REPLACE YOUR_FORMSPREE_ENDPOINT BELOW WITH YOUR ACTUAL FORMSPREE URL -->
+      <form id="writing-submission-form" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST" class="space-y-6">
+        
+        <!-- Hidden Inputs Passed to Formspree -->
+        <input type="hidden" name="Candidate Name" id="form-candidate-name">
+        <input type="hidden" name="Candidate Email" id="form-candidate-email">
+        <input type="hidden" name="Exam Level" id="form-exam-level">
+        <input type="hidden" name="Selected Prompt Title" id="form-prompt-title">
+        <input type="hidden" name="Time Spent" id="form-time-spent">
+
+        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-slate-200 space-y-4">
+          
+          <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Draft Your Response Below</span>
+            
+            <!-- Live Word Counter Badge -->
+            <div id="word-count-badge" class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-semibold text-xs">
+              Words: <span id="word-count">0</span> / <span id="target-count">100</span>
+            </div>
+          </div>
+
+          <textarea name="Student Submission" id="student-text" required rows="12" oninput="updateWordCount()"
+            placeholder="Type your response here..."
+            class="w-full p-4 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none font-sans text-slate-800 leading-relaxed text-sm sm:text-base"></textarea>
+
+          <!-- Pre-submission Student Checklist -->
+          <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100 text-xs text-indigo-900 space-y-2">
+            <p class="font-bold uppercase tracking-wider text-indigo-800"><i class="fas fa-tasks mr-1"></i> Pre-Submission Checklist:</p>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 font-medium">
+              <li><i class="far fa-check-square text-indigo-600 mr-1"></i> Addressed all prompt notes/points</li>
+              <li><i class="far fa-check-square text-indigo-600 mr-1"></i> Organized into clear paragraphs</li>
+              <li><i class="far fa-check-square text-indigo-600 mr-1"></i> Checked target word count limit</li>
+              <li><i class="far fa-check-square text-indigo-600 mr-1"></i> Proofread for spelling & punctuation</li>
+            </ul>
+          </div>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-emerald-600 text-white font-bold py-4 rounded-xl hover:bg-emerald-700 transition shadow-lg flex items-center justify-center gap-2 text-base">
+          <i class="fas fa-paper-plane"></i> Submit Task for Evaluation
+        </button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    <p>&copy; Teacher Cris — Online Cambridge & IELTS Exam Preparation.</p>
+  </footer>
+
+  <!-- App Script -->
+  <script>
+    // Prompt Data Store
+    const prompts = {
+      "B1 Preliminary": [
+        {
+          id: "b1-p1",
+          title: "Prompt 1: Summer Holiday Visit (Alex)",
+          targetWords: "100",
+          renderHtml: `
+            <div class="border border-slate-300 rounded-xl overflow-hidden font-sans">
+              <div class="bg-slate-100 p-4 border-b border-slate-200 text-sm">
+                <p class="text-slate-600"><strong>From:</strong> Alex Chen &lt;alexc@email.com&gt;</p>
+                <p class="text-slate-900 font-medium"><strong>Subject:</strong> Summer holiday plans</p>
+              </div>
+              <div class="p-5 text-slate-800 text-sm leading-relaxed space-y-3">
+                <p class="font-semibold">Hi!</p>
+                <p>I'm planning to visit your country this summer for two weeks<sup class="text-red-600 font-bold text-xs ml-0.5">1</sup>. I'd like to try some local food while I'm there<sup class="text-red-600 font-bold text-xs ml-0.5">2</sup>. What dishes should I definitely try?</p>
+                <p>Also, what's the weather like in summer? Should I bring warm clothes or just light ones<sup class="text-red-600 font-bold text-xs ml-0.5">3</sup>?</p>
+                <p>And one more thing - could you recommend a good area to stay in<sup class="text-red-600 font-bold text-xs ml-0.5">4</sup>?</p>
+                <p>Thanks!<br><strong>Alex</strong></p>
+              </div>
+              <div class="bg-blue-50/80 p-5 border-t border-blue-200 text-sm">
+                <h4 class="font-bold text-blue-900 mb-3 text-xs uppercase tracking-wider">Notes (Include all 4 points in your reply):</h4>
+                <ol class="space-y-2 text-slate-800">
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">1</span>
+                    <span><strong>Say you're pleased</strong> (Express excitement about the visit)</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">2</span>
+                    <span><strong>Suggest two traditional dishes</strong></span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">3</span>
+                    <span><strong>Explain about summer clothes</strong></span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">4</span>
+                    <span><strong>Recommend area and give reason</strong></span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3 text-right italic">Write your email to Alex in about 100 words, using all the notes.</p>
+          `
+        },
+        {
+          id: "b1-p2",
+          title: "Prompt 2: Weekend Music Festival (Thomas)",
+          targetWords: "100",
+          renderHtml: `
+            <div class="border border-slate-300 rounded-xl overflow-hidden font-sans">
+              <div class="bg-slate-100 p-4 border-b border-slate-200 text-sm">
+                <p class="text-slate-600"><strong>From:</strong> Thomas &lt;thomas@email.com&gt;</p>
+                <p class="text-slate-900 font-medium"><strong>Subject:</strong> Weekend Plans</p>
+              </div>
+              <div class="p-5 text-slate-800 text-sm leading-relaxed space-y-3">
+                <p class="font-semibold">Hi!</p>
+                <p>Sorry I've taken so long to write back but I've been very busy with work<sup class="text-red-600 font-bold text-xs ml-0.5">1</sup>.</p>
+                <p>I'm going to an international music festival on Saturday. Would you like to go with us<sup class="text-red-600 font-bold text-xs ml-0.5">2</sup>? There will be bands from all over the world.</p>
+                <p>We'll be there all day so we'll need to eat. Do you want to take food or buy something there<sup class="text-red-600 font-bold text-xs ml-0.5">3</sup>?</p>
+                <p>By the way, where will you meet us on Saturday<sup class="text-red-600 font-bold text-xs ml-0.5">4</sup>?</p>
+                <p>All the best,<br><strong>Thomas</strong></p>
+              </div>
+              <div class="bg-blue-50/80 p-5 border-t border-blue-200 text-sm">
+                <h4 class="font-bold text-blue-900 mb-3 text-xs uppercase tracking-wider">Notes (Include all 4 points in your reply):</h4>
+                <ol class="space-y-2 text-slate-800">
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">1</span>
+                    <span><strong>No problem!</strong> (Acknowledge delay politely)</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">2</span>
+                    <span><strong>Yes, say why</strong></span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">3</span>
+                    <span><strong>Tell Thomas</strong> (State your food choice)</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="font-bold text-red-600 bg-red-100 px-1.5 py-0.5 rounded text-xs">4</span>
+                    <span><strong>Suggest meeting place</strong></span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3 text-right italic">Write your email to Thomas in about 100 words, using all the notes.</p>
+          `
+        }
+      ],
+      "B2 First": [
+        {
+          id: "b2-p1",
+          title: "Prompt 1: Technology in Education Essay",
+          targetWords: "140-190",
+          renderHtml: `
+            <div class="bg-amber-50/60 border border-amber-200 p-6 rounded-xl space-y-4 text-sm text-slate-800">
+              <h4 class="font-bold text-slate-900 text-base">In your English class, you have been talking about technology in education.</h4>
+              <p>Write an essay using all the notes and giving reasons for your point of view.</p>
+              <div class="bg-white p-5 rounded-lg border border-slate-200 space-y-3">
+                <p class="font-bold text-indigo-900">Essay Question:</p>
+                <p class="italic text-base">"Modern classrooms should replace printed textbooks entirely with digital tablet devices. Do you agree?"</p>
+                <div class="pt-2">
+                  <p class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">Notes to write about:</p>
+                  <ol class="list-decimal list-inside space-y-1 font-medium text-slate-700">
+                    <li>Cost and practicality</li>
+                    <li>Student health and screen time</li>
+                    <li><strong>(Your own idea)</strong></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3 text-right italic">Write your essay in 140–190 words in an appropriate style.</p>
+          `
+        }
+      ],
+      "C1 / C2 Advanced": [
+        {
+          id: "c1-p1",
+          title: "Prompt 1: Remote Work & Society Essay",
+          targetWords: "220-280",
+          renderHtml: `
+            <div class="bg-amber-50/60 border border-amber-200 p-6 rounded-xl space-y-4 text-sm text-slate-800">
+              <h4 class="font-bold text-slate-900 text-base">Your tutor has asked you to write an essay evaluating two key aspects of modern work flexibility.</h4>
+              <p>Write an essay discussing two of the points in your notes. You should <strong>explain which factor is more significant</strong>, giving reasons in support of your answer.</p>
+              <div class="bg-white p-5 rounded-lg border border-slate-200 space-y-3">
+                <p class="font-bold text-indigo-900">Essay Topic:</p>
+                <p class="italic text-base">"Remote working has fundamentally transformed modern society. Which area has experienced the most profound long-term impact?"</p>
+                <div class="pt-2">
+                  <p class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">Points to consider:</p>
+                  <ul class="list-disc list-inside space-y-1 font-medium text-slate-700">
+                    <li>Urban economic shifts and office vacancies</li>
+                    <li>Employee mental well-being and work-life boundaries</li>
+                    <li>Global recruitment access and workforce mobility</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3 text-right italic">Write your essay in 220–280 words in an appropriate academic style.</p>
+          `
+        }
+      ]
+    };
+
+    // State Variables
+    let currentLevel = "B1 Preliminary";
+    let timerInterval = null;
+    let timerSeconds = 45 * 60;
+    let isTimerRunning = false;
+
+    // Unlock Workspace on Form Submit
+    function unlockCoach(e) {
+      e.preventDefault();
+      const name = document.getElementById('student-name').value.trim();
+      const email = document.getElementById('student-email').value.trim();
+      currentLevel = document.getElementById('student-level').value;
+
+      // Populate Display & Hidden Form Fields
+      document.getElementById('display-user-info').innerText = `${name} (${currentLevel})`;
+      document.getElementById('form-candidate-name').value = name;
+      document.getElementById('form-candidate-email').value = email;
+      document.getElementById('form-exam-level').value = currentLevel;
+
+      // Populate Prompt Dropdown
+      const selectEl = document.getElementById('prompt-select');
+      selectEl.innerHTML = '';
+      prompts[currentLevel].forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.innerText = p.title;
+        selectEl.appendChild(opt);
+      });
+
+      // Switch View
+      document.getElementById('step-gate').classList.add('hidden');
+      document.getElementById('step-workspace').classList.remove('hidden');
+
+      loadSelectedPrompt();
+    }
+
+    // Load Selected Prompt
+    function loadSelectedPrompt() {
+      const selectedId = document.getElementById('prompt-select').value;
+      const promptObj = prompts[currentLevel].find(p => p.id === selectedId);
+
+      if (promptObj) {
+        document.getElementById('prompt-container').innerHTML = promptObj.renderHtml;
+        document.getElementById('target-count').innerText = promptObj.targetWords;
+        document.getElementById('form-prompt-title').value = promptObj.title;
+      }
+      updateWordCount();
+    }
+
+    // Live Word Counter
+    function updateWordCount() {
+      const text = document.getElementById('student-text').value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      document.getElementById('word-count').innerText = words;
+    }
+
+    // Timer Controls
+    function toggleTimer() {
+      const btn = document.getElementById('btn-timer');
+      if (isTimerRunning) {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        btn.innerText = "Resume Timer";
+        btn.className = "bg-indigo-600 text-white px-3.5 py-2 rounded-xl font-semibold text-xs hover:bg-indigo-700 transition";
+      } else {
+        isTimerRunning = true;
+        btn.innerText = "Pause Timer";
+        btn.className = "bg-amber-600 text-white px-3.5 py-2 rounded-xl font-semibold text-xs hover:bg-amber-700 transition";
+        
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timer-display').innerText = 
+              `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            
+            // Format elapsed time string for form submission
+            const elapsedMins = Math.floor((45 * 60 - timerSeconds) / 60);
+            document.getElementById('form-time-spent').value = `${elapsedMins} mins`;
+          } else {
+            clearInterval(timerInterval);
+            alert("Time is up! Review your response and submit.");
+          }
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>

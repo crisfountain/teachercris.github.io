@@ -1,130 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Cris | Advanced Multi-Word Verbs Practice</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f4f8; padding: 20px; }
-        .card-container { background: white; padding: 35px; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); width: 100%; max-width: 780px; text-align: center; border-top: 8px solid #4f46e5; position: relative; }
-        
-        /* Top Header Bar */
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .back-link { text-decoration: none; color: #4f46e5; background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; }
-        .back-link:hover { background: #e0e7ff; }
-        .top-actions { display: flex; align-items: center; gap: 8px; }
-        .action-btn { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 0.75rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; white-space: nowrap; }
-        .action-btn:hover { background: #e2e8f0; }
-
-        /* Quiz Selector Tabs */
-        .quiz-tabs { display: flex; gap: 8px; margin-bottom: 20px; background-color: #f1f5f9; padding: 6px; border-radius: 12px; }
-        .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-weight: 600; font-size: 0.9rem; color: #64748b; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
-        .tab-btn.active { background-color: #ffffff; color: #4f46e5; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-
-        .brand-header { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; color: #4f46e5; letter-spacing: -0.5px; }
-        .question { font-size: 1.15rem; margin-bottom: 20px; min-height: 110px; display: flex; align-items: center; justify-content: center; line-height: 1.7; color: #2c3e50; text-align: left; background: #f9fbff; padding: 25px; border-radius: 12px; border: 1px solid #e1e8ed; }
-        
-        .type-tag { display: inline-block; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; color: white; text-transform: uppercase; cursor: help; }
-        .tag-phrasal { background: #0284c7; } 
-        .tag-nuance { background: #d97706; } 
-        .tag-preposition { background: #7c3aed; } 
-        .tag-idiom { background: #16a34a; }
-
-        input[type="text"] { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid #ced6e0; border-radius: 10px; box-sizing: border-box; outline: none; margin-bottom: 10px; }
-        #feedback { height: 30px; margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; }
-        .correct { color: #27ae60; } .wrong { color: #e74c3c; }
-        
-        .ans-text, .hint-text { margin: 10px 0; font-weight: bold; color: #2f3542; display: none; padding: 15px; border-radius: 10px; text-align: left; }
-        .ans-text { background: #eef2f7; border: 1px dashed #2c3e50; }
-        .hint-text { background: #fffbe3; border-left: 4px solid #f1c40f; color: #7d6608; }
-
-        .explanation-box { background: #fff9db; padding: 20px; border-radius: 10px; text-align: left; font-size: 0.95rem; margin-top: 15px; display: none; border-left: 5px solid #f1c40f; line-height: 1.6; max-height: 250px; overflow-y: auto; }
-        .explanation-header { color: #946c00; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
-        .visible { display: block !important; }
-        
-        .stats-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px; font-weight: 600; }
-        .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; gap: 8px; }
-        
-        button { padding: 12px 15px; cursor: pointer; border: none; border-radius: 8px; background: #4f46e5; color: white; font-weight: 600; flex: 1; transition: 0.2s; }
-        button:hover { background: #4338ca; }
-        .check-btn { background: #27ae60; width: 100%; margin-bottom: 15px; font-size: 1.1rem; flex: none; }
-        .check-btn:hover { background: #219653; }
-
-        #ruleModal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 500px; text-align: left; position: relative; }
-        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
-        
-        #final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Cris | Advanced Multi-Word Verbs Practice</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+</style>
 </head>
-<body>
+<body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-indigo-100">
 
-<div id="ruleModal">    
-    <div class="modal-content">        
-        <span class="close-modal" onclick="closeModal()">&times;</span>        
-        <h3 id="modalTitle" style="margin-top:0;">Category Reference</h3>        
-        <p id="modalText"></p>    </div>
+<!-- Main Card con borde superior en índigo corporativo para avanzado -->
+<div class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all" style="border-top: 8px solid #4f46e5 !important;">
+
+  <!-- Top Bar -->
+  <div class="flex justify-between items-center mb-6">
+    <a href="index.html" class="text-xs sm:text-sm font-semibold text-indigo-600 bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs">
+      &larr; Volver a teachercris.online
+    </a>
+
+    <div class="flex items-center gap-2">
+      <button id="btn-audio" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Escuchar en inglés británico">
+        <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
+      </button>
+      <button id="btn-reset" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition cursor-pointer" title="Reiniciar progreso">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz Selector Tabs -->
+  <div class="flex gap-2 mb-6 bg-slate-100 p-1.5 rounded-xl">
+    <button id="tabA" class="flex-1 py-2.5 px-3 border-none bg-white font-semibold text-xs sm:text-sm text-indigo-600 rounded-lg cursor-pointer transition shadow-xs" onclick="switchQuiz('A')">Quiz A (List A - 45 Verbs)</button>
+    <button id="tabB" class="flex-1 py-2.5 px-3 border-none bg-transparent font-semibold text-xs sm:text-sm text-slate-600 rounded-lg cursor-pointer transition" onclick="switchQuiz('B')">Quiz B (List B - 45 Verbs)</button>
+  </div>
+
+  <!-- Center Brand Title -->
+  <div class="text-center mb-6">
+    <h1 class="text-indigo-600 font-extrabold text-3xl sm:text-4xl tracking-tight">
+      Teacher Cris
+    </h1>
+    <p id="subTitle" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+      Advanced Multi-Word Verbs Practice (Quiz A)
+    </p>
+  </div>
+
+  <!-- Task progress & Score row -->
+  <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
+    <span id="pg" class="text-slate-500">Task 1 of 45</span>
+    <div class="flex items-center gap-4">
+      <span class="text-slate-700">Correct: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Streak: <strong id="streak-count" class="text-amber-600 font-bold">0</strong></span>
+    </div>
+  </div>
+
+  <!-- Tag Display -->
+  <div class="flex justify-center mb-6" id="tagDisplayContainer">
+    <div id="tagDisplay" onclick="openModal()" class="cursor-pointer inline-block"></div>
+  </div>
+
+  <!-- Question Box -->
+  <div class="border border-slate-200 rounded-2xl p-6 sm:p-9 bg-white min-h-[140px] flex items-center justify-center text-center mb-5 shadow-2xs">
+    <p id="q" class="text-base sm:text-lg text-slate-800 leading-relaxed font-normal text-left sm:text-center select-text">
+      Loading...
+    </p>
+  </div>
+
+  <!-- Text Input -->
+  <input type="text" id="userInput" placeholder="Type answer(s)..." autocomplete="off" class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-200 rounded-xl focus:border-indigo-600 focus:outline-none mb-3 bg-slate-50 transition">
+
+  <!-- Feedback Box -->
+  <div id="feedback" class="h-8 mb-3 font-bold text-sm sm:text-base text-center"></div>
+
+  <!-- Verify Button -->
+  <button class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center cursor-pointer" onclick="checkAnswer()">
+    Verify (Enter)
+  </button>
+
+  <!-- Hint Box -->
+  <div id="hintBox" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 text-left"></div>
+
+  <!-- Accepted Answer Box -->
+  <div id="a" class="hidden mb-5 bg-slate-100 border border-dashed border-slate-300 rounded-2xl p-4 text-xs sm:text-sm font-bold text-slate-700 text-left"></div>
+
+  <!-- Explanation Box -->
+  <div id="expl" class="hidden mb-5 bg-amber-50/70 border-l-4 border-amber-400 p-5 rounded-r-2xl text-xs sm:text-sm text-slate-700 text-left leading-relaxed"></div>
+
+  <!-- Bottom Buttons Row -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <button id="pBtn" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="prev()">
+      &larr; Previous
+    </button>
+    <button class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="showHint()">
+      Hint 💡
+    </button>
+    <button class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="revealAnswer()">
+      Show Answer 👁️
+    </button>
+    <button id="nBtn" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="next()">
+      Next &rarr;
+    </button>
+  </div>
+
+  <!-- Footer integrado dentro de la tarjeta (al pie de la app) -->
+  <div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
+    &copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
+  </div>
+
 </div>
 
-<div class="card-container">    
-    <div id="final-screen">        
-        <h1 style="color: #27ae60;">Session Complete! 🎓</h1>        
-        <p id="final-stats" style="font-size: 1.2rem; color: #2c3e50;"></p>        
-        <button onclick="location.reload()" style="max-width: 250px;">Restart Practice</button>    
-    </div>    
-
-    <!-- Top Bar with Return Link & Audio Controls -->
-    <div class="top-bar">
-        <a href="index.html" class="back-link">
-            &larr; Volver a teachercris.online
-        </a>
-        <div class="top-actions">
-            <button id="btn-audio" class="action-btn" title="Escuchar en inglés británico">
-                <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
-            </button>
-            <button id="btn-reset" class="action-btn" title="Reiniciar progreso">
-                <i class="fas fa-redo-alt"></i>
-            </button>
-        </div>
+<!-- Final Screen Modal / Overlay -->
+<div id="final-screen" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-slate-200">
+        <h1 class="text-2xl font-extrabold text-emerald-600 mb-2">Session Complete! 🎓</h1>
+        <p id="final-stats" class="text-base text-slate-700 mb-6 font-semibold"></p>
+        <button onclick="location.reload()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Restart Practice</button>
     </div>
+</div>
 
-    <!-- Quiz Selector Tabs -->
-    <div class="quiz-tabs">
-        <button id="tabA" class="tab-btn active" onclick="switchQuiz('A')">Quiz A (List A - 45 Verbs)</button>
-        <button id="tabB" class="tab-btn" onclick="switchQuiz('B')">Quiz B (List B - 45 Verbs)</button>
-    </div>
-
-    <div class="brand-header">
-        Teacher Cris 
-        <span id="subTitle" style="font-size: 0.8rem; font-weight: 500; color: #64748b; display: block; margin-top: 4px;">Advanced Multi-Word Verbs Practice (Quiz A)</span>
-    </div>
-
-    <div class="stats-row">        
-        <div id="pg">Task 1 of 45</div>        
-        <div>            
-            <span id="score-display" style="margin-right: 15px; color: #27ae60;">Correct: 0</span>            
-            <span id="streak-count" style="color: #e67e22;">Streak: 0</span>        
-        </div>    
-    </div>        
-
-    <div id="tagDisplay" onclick="openModal()"></div>    
-    <div class="question" id="q">Loading...</div>        
-    
-    <input type="text" id="userInput" placeholder="Type answer(s)..." autocomplete="off">    
-    <div id="feedback"></div>        
-    
-    <button class="check-btn" onclick="checkAnswer()">Verify (Enter)</button>        
-    
-    <div id="hintBox" class="hint-text"></div>    
-    <div id="a" class="ans-text"></div>    
-    <div id="expl" class="explanation-box"></div>    
-    
-    <div class="controls">        
-        <button id="pBtn" onclick="prev()">← Previous</button>        
-        <button onclick="showHint()">Hint 💡</button>        
-        <button onclick="revealAnswer()">Show Answer 👁️</button>        
-        <button id="nBtn" onclick="next()">Next →</button>    
+<!-- Rule Reference Modal -->
+<div id="ruleModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full text-left relative shadow-2xl border border-slate-200">
+        <span class="absolute top-4 right-5 text-slate-400 hover:text-slate-700 text-2xl font-bold cursor-pointer" onclick="closeModal()">&times;</span>        
+        <h3 id="modalTitle" class="text-lg font-bold text-slate-900 mb-3">Category Reference</h3>        
+        <p id="modalText" class="text-sm text-slate-700 leading-relaxed"></p>    
     </div>
 </div>
 
@@ -239,7 +245,6 @@
     let score = 0; 
     let solvedThisIdx = false;    
 
-    // Robust British Female Voice Selector with Async Handling
     function getBritishFemaleVoice() {
       if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices();
@@ -332,11 +337,19 @@
         const card = currentData[idx];        
         document.getElementById('q').innerText = card.q;        
         document.getElementById('a').innerText = "Accepted: " + card.a.join(' / ');        
-        document.getElementById('expl').innerHTML = "<span class='explanation-header'>The Logic Behind the Answer:</span>" + card.expl;        
-        document.getElementById('tagDisplay').innerHTML = `<span class="type-tag ${card.tag}">${card.tag.split('-')[1].toUpperCase()} (Click for Category ℹ️)</span>`;        
-        document.getElementById('a').classList.remove('visible');        
-        document.getElementById('expl').classList.remove('visible');        
-        document.getElementById('hintBox').classList.remove('visible');        
+        document.getElementById('expl').innerHTML = "<strong>The Logic Behind the Answer:</strong><br>" + card.expl;        
+        
+        let tagName = card.tag.split('-')[1].toUpperCase();
+        let tagBgColor = card.tag === 'tag-phrasal' ? 'bg-sky-600' : (card.tag === 'tag-nuance' ? 'bg-amber-600' : (card.tag === 'tag-preposition' ? 'bg-purple-600' : 'bg-emerald-600'));
+        document.getElementById('tagDisplay').innerHTML = `<span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider ${tagBgColor} cursor-pointer shadow-xs">${tagName} (Click for Category ℹ️)</span>`;        
+        
+        document.getElementById('a').classList.remove('visible', 'block');
+        document.getElementById('a').classList.add('hidden');
+        document.getElementById('expl').classList.remove('visible', 'block');
+        document.getElementById('expl').classList.add('hidden');
+        document.getElementById('hintBox').classList.remove('visible', 'block');
+        document.getElementById('hintBox').classList.add('hidden');
+        
         document.getElementById('feedback').innerText = '';        
         document.getElementById('userInput').value = '';        
         document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;        
@@ -353,29 +366,34 @@
             return u === normalizedAns;        });        
         if (isCorrect) {            
             document.getElementById('feedback').innerText = "CORRECT! ✨";            
-            document.getElementById('feedback').className = 'correct';            
-            document.getElementById('a').classList.add('visible');            
-            document.getElementById('expl').classList.add('visible');            
+            document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center correct';            
+            document.getElementById('a').classList.remove('hidden');
+            document.getElementById('a').classList.add('block');            
+            document.getElementById('expl').classList.remove('hidden');
+            document.getElementById('expl').classList.add('block');            
             if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }        
         } else {            
             document.getElementById('feedback').innerText = "TRY AGAIN ❌";            
-            document.getElementById('feedback').className = 'wrong';            
+            document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center wrong';            
             streak = 0;        
         }        
-        document.getElementById('streak-count').innerText = `Streak: ${streak}`;        
-        document.getElementById('score-display').innerText = `Correct: ${score}`;    
+        document.getElementById('streak-count').innerText = streak;        
+        document.getElementById('score-display').innerText = score;    
     }    
 
     function showHint() {
         document.getElementById('hintBox').innerText = "💡 " + currentData[idx].h;        
-        document.getElementById('hintBox').classList.add('visible');     
+        document.getElementById('hintBox').classList.remove('hidden');
+        document.getElementById('hintBox').classList.add('block');     
     }        
 
     function revealAnswer() {         
-        document.getElementById('a').classList.add('visible');         
-        document.getElementById('expl').classList.add('visible');        
+        document.getElementById('a').classList.remove('hidden');
+        document.getElementById('a').classList.add('block');         
+        document.getElementById('expl').classList.remove('hidden');
+        document.getElementById('expl').classList.add('block');        
         streak = 0; 
-        document.getElementById('streak-count').innerText = `Streak: 0`;    
+        document.getElementById('streak-count').innerText = streak;    
     }    
 
     function next() {         
@@ -403,8 +421,8 @@
         streak = 0;
         solvedThisIdx = false;
 
-        document.getElementById("tabA").className = (type === 'A') ? "tab-btn active" : "tab-btn";
-        document.getElementById("tabB").className = (type === 'B') ? "tab-btn active" : "tab-btn";
+        document.getElementById("tabA").className = (type === 'A') ? "flex-1 py-2.5 px-3 border-none bg-white font-semibold text-xs sm:text-sm text-indigo-600 rounded-lg cursor-pointer transition shadow-xs" : "flex-1 py-2.5 px-3 border-none bg-transparent font-semibold text-xs sm:text-sm text-slate-600 rounded-lg cursor-pointer transition";
+        document.getElementById("tabB").className = (type === 'B') ? "flex-1 py-2.5 px-3 border-none bg-white font-semibold text-xs sm:text-sm text-indigo-600 rounded-lg cursor-pointer transition shadow-xs" : "flex-1 py-2.5 px-3 border-none bg-transparent font-semibold text-xs sm:text-sm text-slate-600 rounded-lg cursor-pointer transition";
         document.getElementById("subTitle").innerText = `Advanced Multi-Word Verbs Practice (Quiz ${type})`;
         
         document.getElementById('final-screen').style.display = 'none';
@@ -428,6 +446,5 @@
 
     update();
 </script>
-
 </body>
 </html>

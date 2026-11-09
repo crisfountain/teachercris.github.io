@@ -37,11 +37,17 @@
     <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg cursor-pointer">Restart Practice</button>    
   </div>
 
-  <!-- Top Bar -->
+  <!-- Top Bar with Return link & Audio button -->
   <div class="flex justify-between items-center mb-6">
     <a href="index-eng.html" class="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50/90 hover:bg-blue-100 border border-blue-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs">
       &larr; Back to teachercris.online
     </a>
+
+    <div class="flex items-center gap-2">
+      <button id="btn-audio-sentence" onclick="speakCurrentSentence()" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
+        <i class="fas fa-volume-up"></i> <span>Listen (UK ♀)</span>
+      </button>
+    </div>
   </div>
 
   <!-- Quiz Selector Tabs -->
@@ -117,7 +123,7 @@
     </button>
   </div>
 
-  <!-- Footer integrado dentro de la tarjeta -->
+  <!-- Footer -->
   <div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
     &copy; 2026 Teacher Cris. All rights reserved. | teachercris.online
   </div>
@@ -234,6 +240,64 @@ let idx = 0;
 let streak = 0;
 let score = 0;
 let solvedThisIdx = false;
+
+// Proven British Female Voice Selector Engine
+function getBritishFemaleVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || !voices.length) return null;
+  const preferredFemaleVoices = [
+    'Google UK English Female',
+    'Microsoft Libby Online (Natural) - English (United Kingdom)',
+    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+    'Microsoft Maisie Online (Natural) - English (United Kingdom)',
+    'Serena (Premium)', 'Serena (Enhanced)', 'Serena',
+    'Kate (Premium)', 'Kate (Enhanced)', 'Kate',
+    'Stephanie (Premium)', 'Stephanie (Enhanced)', 'Stephanie',
+    'Fiona', 'Martha', 'Microsoft Susan', 'Microsoft Hazel'
+  ];
+  for (const name of preferredFemaleVoices) {
+    const found = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()));
+    if (found) return found;
+  }
+  const maleKeywords = ['male', 'george', 'daniel', 'ryan', 'arthur', 'oliver', 'david', 'mark'];
+  const enGbFemale = voices.find(v => {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase();
+    const name = (v.name || '').toLowerCase();
+    const isUK = lang === 'en-gb' || name.includes('united kingdom') || name.includes('uk english') || name.includes('british');
+    return isUK && !maleKeywords.some(m => name.includes(m));
+  });
+  if (enGbFemale) return enGbFemale;
+  const anyGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+  if (anyGb) return anyGb;
+  const anyFemaleEnglish = voices.find(v => {
+    const name = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    return lang.startsWith('en') && !maleKeywords.some(m => name.includes(m));
+  });
+  if (anyFemaleEnglish) return anyFemaleEnglish;
+  return voices.find(v => (v.lang || '').toLowerCase().startsWith('en')) || null;
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+}
+
+function speakCurrentSentence() {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const card = currentData[idx];
+  const sentence = card.q.replace(/___/g, 'blank');
+  const utterance = new SpeechSynthesisUtterance(sentence);
+  utterance.lang = 'en-GB';
+  const voice = getBritishFemaleVoice();
+  if (voice) {
+    utterance.voice = voice;
+  }
+  utterance.rate = 0.98;
+  utterance.pitch = 1.05;
+  window.speechSynthesis.speak(utterance);
+}
 
 function openModal() {
   const tag = currentData[idx].tag;

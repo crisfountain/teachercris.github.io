@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerunds vs Infinitives Master | Teacher Cris</title>
+<title>Teacher Cris | Gerunds vs Infinitives Master</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,10 +26,10 @@
       &larr; Volver a teachercris.online
     </a>
     <div class="flex items-center gap-2">
-      <button id="btn-audio-sentence" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition" title="Escuchar en inglés británico">
+      <button id="btn-audio-sentence" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Escuchar en inglés británico">
         <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
       </button>
-      <button id="btn-restart" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition" title="Reiniciar">
+      <button id="btn-restart" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition cursor-pointer" title="Reiniciar">
         <i class="fas fa-redo-alt"></i>
       </button>
     </div>
@@ -118,11 +118,11 @@
     </button>
   </div>
 
-</div>
+  <!-- Footer integrado dentro de la tarjeta (al pie de la app) -->
+  <div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
+    &copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
+  </div>
 
-<!-- Footer -->
-<div class="mt-6 text-center text-xs text-slate-400">
-  Teacher Cris · Gerunds vs Infinitives Master Practice
 </div>
 
 <script>
@@ -829,7 +829,7 @@ function verifyAnswer() {
       btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 font-bold text-emerald-800 bg-emerald-50 transition flex justify-between items-center shadow-xs cursor-default';
       btn.querySelector('i').className = 'fas fa-check-circle text-emerald-600';
     } else if (idx === selectedOption && !isCorrect) {
-      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-xs cursor-default';
+      btn.className = 'w-full text-left p-4 rounded-xl border-2 border-rose-400 font-bold text-rose-800 bg-rose-50 transition flex justify-between items-center shadow-default';
       btn.querySelector('i').className = 'fas fa-times-circle text-rose-500';
     } else {
       btn.className = 'w-full text-left p-4 rounded-xl border border-slate-100 font-normal text-slate-400 bg-slate-50 opacity-60 flex justify-between items-center cursor-default';

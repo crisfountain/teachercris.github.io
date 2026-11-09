@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Present Essential Perfect vs Past Simple | Teacher Cris</title>
+<title>Teacher Cris | Essential Present Perfect vs Past Simple</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,10 +27,10 @@
     </a>
 
     <div class="flex items-center gap-2">
-      <button id="btn-audio" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition" title="Escuchar en inglés británico">
+      <button id="btn-audio" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Escuchar en inglés británico">
         <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
       </button>
-      <button id="btn-reset" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition" title="Reiniciar progreso">
+      <button id="btn-reset" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition cursor-pointer" title="Reiniciar progreso">
         <i class="fas fa-redo-alt"></i>
       </button>
     </div>
@@ -38,10 +38,10 @@
 
   <!-- Quiz Switcher Tabs -->
   <div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
-    <button id="tab-quiz-a" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition">
+    <button id="tab-quiz-a" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer">
       Quiz A (Tasks 1-22)
     </button>
-    <button id="tab-quiz-b" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition">
+    <button id="tab-quiz-b" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
       Quiz B (Tasks 23-45)
     </button>
   </div>
@@ -93,7 +93,7 @@
   </div>
 
   <!-- Big Green Verify Button -->
-  <button id="btn-verify" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+  <button id="btn-verify" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
     Verify (Enter)
   </button>
 
@@ -110,25 +110,25 @@
 
   <!-- Bottom Buttons Row -->
   <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-    <button id="btn-prev" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+    <button id="btn-prev" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
       &larr; Previous
     </button>
-    <button id="btn-hint" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+    <button id="btn-hint" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
       Hint 💡
     </button>
-    <button id="btn-show-answer" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+    <button id="btn-show-answer" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
       Show Answer 👁
     </button>
-    <button id="btn-next" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs">
+    <button id="btn-next" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
       Next &rarr;
     </button>
   </div>
 
-</div>
+  <!-- Footer integrado dentro de la tarjeta -->
+  <div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
+    &copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
+  </div>
 
-<!-- Footer -->
-<div class="mt-6 text-center text-xs text-slate-400">
- © 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
 </div>
 
 <!-- Category Modal -->
@@ -139,13 +139,13 @@
         <span id="modal-aspect-badge" class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
         <span class="text-xs text-slate-500 font-semibold">Aspect Overview</span>
       </div>
-      <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition">
+      <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition cursor-pointer">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div id="modal-content" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-700"></div>
     <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex justify-end">
-      <button id="btn-modal-return" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">
+      <button id="btn-modal-return" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition cursor-pointer">
         Got it (Return to Task)
       </button>
     </div>
@@ -895,11 +895,11 @@ function switchQuiz(mode) {
   localIndex = 0;
   
   if (mode === 'A') {
-    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition';
-    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition';
+    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer';
+    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer';
   } else {
-    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition';
-    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition';
+    document.getElementById('tab-quiz-b').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer';
+    document.getElementById('tab-quiz-a').className = 'py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer';
   }
 
   renderTask();
@@ -1001,6 +1001,5 @@ modal.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); 
 // Initial Load
 renderTask();
 </script>
- 
 </body>
 </html>

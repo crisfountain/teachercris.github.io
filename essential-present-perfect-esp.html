@@ -79,15 +79,6 @@
         .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
         
         #final-screen { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 18px; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 20px; box-sizing: border-box; }
-        
-        /* Estilo profesional del footer integrado */
-        .site-footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #94a3b8;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
@@ -159,14 +150,13 @@
         <button onclick="revealAnswer()">Show Answer 👁️</button>        
         <button id="nBtn" onclick="next()">Next →</button>    
     </div>
-</div>
 
-<!-- Footer integrado DENTRO de la app / tarjeta blanca -->
+    <!-- Footer integrado DENTRO de la tarjeta blanca (al pie de la app) -->
     <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #f1f5f9; text-align: center; font-size: 0.75rem; color: #94a3b8;">
       &copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
     </div>
 
-</div> <!-- Cierre de .card-container -->
+</div> <!-- Cierre correcto de .card-container -->
 
 <script>    
     const rules = {        

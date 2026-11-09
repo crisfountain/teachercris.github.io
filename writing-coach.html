@@ -58,6 +58,12 @@
         </div>
 
         <div>
+          <label for="student-l1" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Native Language (L1)</label>
+          <input type="text" id="student-l1" required placeholder="e.g. Spanish, French, German, Japanese..."
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+        </div>
+
+        <div>
           <label for="student-level" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Target Exam Level</label>
           <select id="student-level" required
             class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm bg-white">
@@ -119,6 +125,7 @@
         <input type="hidden" name="Form Source" value="Writing Coach (English Version)">
         <input type="hidden" name="Candidate Name" id="form-candidate-name">
         <input type="hidden" name="Candidate Email" id="form-candidate-email">
+        <input type="hidden" name="Native Language" id="form-candidate-l1">
         <input type="hidden" name="Exam Level" id="form-exam-level">
         <input type="hidden" name="Selected Prompt Title" id="form-prompt-title">
         <input type="hidden" name="Time Spent" id="form-time-spent">
@@ -321,12 +328,14 @@
       e.preventDefault();
       const name = document.getElementById('student-name').value.trim();
       const email = document.getElementById('student-email').value.trim();
+      const l1 = document.getElementById('student-l1').value.trim();
       currentLevel = document.getElementById('student-level').value;
 
       // Populate Display & Hidden Form Fields
-      document.getElementById('display-user-info').innerText = `${name} (${currentLevel})`;
+      document.getElementById('display-user-info').innerText = `${name} — ${l1} (${currentLevel})`;
       document.getElementById('form-candidate-name').value = name;
       document.getElementById('form-candidate-email').value = email;
+      document.getElementById('form-candidate-l1').value = l1;
       document.getElementById('form-exam-level').value = currentLevel;
 
       // Populate Prompt Dropdown

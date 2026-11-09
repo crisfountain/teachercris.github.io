@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Cris | Present Perfect Master</title>
+<title>Teacher Cris | Essential Present Perfect Practice</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +62,7 @@
       Teacher Cris
     </h1>
     <p id="subTitle" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">
-      Present Perfect Master Practice (Quiz A)
+      Essential Present Perfect Practice (Quiz A)
     </p>
   </div>
 
@@ -350,7 +350,7 @@ function switchQuiz(type) {
   solvedThisIdx = false;
   document.getElementById("tabA").className = (type === 'A') ? "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer" : "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer";
   document.getElementById("tabB").className = (type === 'B') ? "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer" : "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer";
-  document.getElementById("subTitle").innerText = `Present Perfect Master Practice (Quiz ${type})`;
+  document.getElementById("subTitle").innerText = `Essential Present Perfect Practice (Quiz ${type})`;
   document.getElementById('final-screen').classList.remove('flex');
   document.getElementById('final-screen').classList.add('hidden');
   update();

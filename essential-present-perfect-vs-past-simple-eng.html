@@ -13,6 +13,8 @@
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
+  .animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-blue-100">
@@ -79,7 +81,7 @@
   </div>
 
   <!-- Tactical Hint Box -->
-  <div id="pista-box" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700">
+  <div id="pista-box" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 animate-fade-in">
     <div class="flex items-center gap-2 font-bold text-amber-900 mb-1">
       <span>💡 Tactical Hint:</span>
     </div>
@@ -933,7 +935,7 @@ document.getElementById('btn-verify').onclick = verifyAnswer;
 document.getElementById('btn-next').onclick = nextTask;
 document.getElementById('btn-prev').onclick = prevTask;
 document.getElementById('btn-hint').onclick = () => {
-  document.getElementById('pisi-box').classList.toggle('hidden');
+  document.getElementById('pista-box').classList.toggle('hidden');
 };
 document.getElementById('btn-show-answer').onclick = showAnswer;
 document.getElementById('tab-quiz-a').onclick = () => switchQuiz('A');

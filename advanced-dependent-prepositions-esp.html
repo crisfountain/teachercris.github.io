@@ -71,7 +71,7 @@
 
   <!-- Task progress & Score row -->
   <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
-    <span id="pg" class="text-slate-500">Task 1 of 22</span>
+    <span id="pg" class="text-slate-500">Tarea 1 de 22</span>
     <div class="flex items-center gap-4">
       <span class="text-slate-700">Correctas: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
       <span class="text-slate-700">Racha: <strong id="streak-count" class="text-amber-600 font-bold">0</strong></span>
@@ -291,7 +291,7 @@
         
         document.getElementById('feedback').innerText = '';        
         document.getElementById('userInput').value = '';        
-        document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;        
+        document.getElementById('pg').innerText = `Tarea ${idx + 1} de ${currentData.length}`;        
         solvedThisIdx = false;        
         document.getElementById('pBtn').disabled = idx === 0;    
     }    

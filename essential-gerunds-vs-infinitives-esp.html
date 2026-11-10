@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Essential Gerunds vs Infinitives | Teacher Cris</title>
+<title>Teacher Cris | Essential Gerunds vs Infinitives Master</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,522 +17,517 @@
 </head>
 <body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-blue-100">
 
-<!-- Main App Container -->
-<main id="quiz-card" class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all" style="border-top: 8px solid #2563eb !important;">
+<!-- Main Card con borde superior azul corporativo -->
+<div id="quiz-card" class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all" style="border-top: 8px solid #2563eb !important;">
 
-<!-- Final Screen Overlay -->
-<div id="final-screen" style="display: none;" class="absolute inset-0 bg-white rounded-3xl flex-col justify-center items-center z-10 p-6 box-border text-center">        
-  <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
-  <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-  <p id="final-stats" class="text-slate-600 mb-6 max-w-md mx-auto font-semibold text-base sm:text-lg"></p>        
-  <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg cursor-pointer">Restart Practice</button>    
-</div>
+  <!-- Final Screen Overlay -->
+  <div id="final-screen" style="display: none;" class="absolute inset-0 bg-white rounded-3xl flex-col justify-center items-center z-10 p-6 box-border text-center">        
+    <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
+    <h2 class="text-3xl font-extrabold text-slate-900 mb-2">¡Sesión Completada!</h2>
+    <p id="final-stats" class="text-slate-600 mb-6 max-w-md mx-auto font-semibold text-base sm:text-lg"></p>        
+    <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg cursor-pointer">Reiniciar Práctica</button>    
+  </div>
 
-<!-- Unified Internal Header -->
-<div class="flex justify-between items-center mb-6">
-  <a href="index-eng.html" class="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50/90 hover:bg-blue-100 border border-blue-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs" style="text-decoration: none;">
-    &larr; Return to teachercris.online
-  </a>
-  <div class="flex items-center gap-2">
-    <button id="btn-audio-sentence" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Listen in British English">
-      <i class="fas fa-volume-up"></i> <span>Listen (UK ♀)</span>
+  <!-- Top Bar -->
+  <div class="flex justify-between items-center mb-6">
+    <a href="index.html" class="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50/90 hover:bg-blue-100 border border-blue-200/70 rounded-full px-4 py-1.5 transition inline-flex items-center gap-1.5 shadow-xs">
+      &larr; Volver a teachercris.online
+    </a>
+    <div class="flex items-center gap-2">
+      <button id="btn-audio-sentence" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] px-3.5 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition cursor-pointer" title="Escuchar en inglés británico">
+        <i class="fas fa-volume-up"></i> <span>Escuchar (UK ♀)</span>
+      </button>
+      <button id="btn-restart" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition cursor-pointer" title="Reiniciar">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz A / Quiz B Tabs unificados -->
+  <div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
+    <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer">
+      Quiz A (Tareas 1-22)
     </button>
-    <button id="btn-restart" class="action-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#334155] border border-[#cbd5e1] p-2 rounded-full text-xs font-semibold inline-flex items-center justify-center transition cursor-pointer" title="Reset">
-      <i class="fas fa-redo-alt"></i>
+    <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+      Quiz B (Tareas 23-45)
     </button>
   </div>
-</div>
 
-<!-- Quiz A / Quiz B Tabs -->
-<div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
-  <button id="tab-quiz-a" onclick="switchQuizMode('A')" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-blue-600 shadow-sm transition cursor-pointer">
-    Quiz A (Tasks 1-22)
-  </button>
-  <button id="tab-quiz-b" onclick="switchQuizMode('B')" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
-    Quiz B (Tasks 23-45)
-  </button>
-</div>
-
-<!-- Title -->
-<div class="text-center mb-6">
-  <h1 class="text-blue-600 font-extrabold text-3xl sm:text-4xl tracking-tight">Teacher Cris</h1>
-  <p id="subtitulo-quiz" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">Essential Gerunds vs Infinitives Practice (QUIZ A)</p>
-</div>
-
-<!-- Progress Stats -->
-<div class="flex justify-between items-center mb-2 text-xs sm:text-sm font-semibold">
-  <span id="progreso-texto" class="text-slate-500">Task 1 of 22</span>
-  <div class="flex items-center gap-4">
-    <span class="text-slate-700">Correct: <strong id="puntuacion" class="text-emerald-600 font-bold">0</strong></span>
-    <span class="text-slate-700">Streak: <strong id="streak-badge" class="text-amber-600 font-bold">0</strong></span>
+  <!-- Title -->
+  <div class="text-center mb-6">
+    <h1 class="text-blue-600 font-extrabold text-3xl sm:text-4xl tracking-tight">Teacher Cris</h1>
+    <p id="subtitulo-quiz" class="text-slate-500 text-xs sm:text-sm font-medium mt-1">Essential Gerunds vs Infinitives Practice (QUIZ A)</p>
   </div>
-</div>
 
-<!-- Muted Green Progress Bar at the top -->
-<div class="w-full bg-slate-100 h-2.5 rounded-full mb-6 overflow-hidden">
-  <div id="barra-progreso" class="bg-emerald-600 h-2.5 w-0 transition-all duration-300"></div>
-</div>
+  <!-- Progress Stats -->
+  <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
+    <span id="progreso-texto" class="text-slate-500">Tarea 1 de 22</span>
+    <div class="flex items-center gap-4">
+      <span class="text-slate-700">Correctas: <strong id="puntuacion" class="text-emerald-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Racha: <strong id="streak-badge" class="text-amber-600 font-bold">0</strong></span>
+    </div>
+  </div>
 
-<!-- Category Pill Button -->
-<div class="flex justify-center mb-6">
-  <button id="btn-categoria" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5 cursor-pointer">
-    <span id="category-pill-text">PREPOSITIONS + GERUND</span> (CLICK FOR HINT <i class="fas fa-info-circle"></i>)
+  <!-- Category Pill Button -->
+  <div class="flex justify-center mb-6">
+    <button id="btn-categoria" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-[13px] font-bold px-5 py-2 rounded-full uppercase tracking-wider shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+      <span id="category-pill-text">PREPOSITIONS + GERUND</span> (VER REGLA ℹ️)
+    </button>
+  </div>
+
+  <!-- Question Container -->
+  <div class="border border-slate-200 rounded-2xl p-6 sm:p-9 bg-white min-h-[140px] flex items-center justify-center text-center mb-5 shadow-2xs">
+    <p id="pregunta-texto" class="text-base sm:text-lg text-slate-800 leading-relaxed font-normal text-left sm:text-center select-text">
+    </p>
+  </div>
+
+  <!-- Text Input -->
+  <input type="text" id="userInput" placeholder="Escribe tu respuesta..." autocomplete="off" class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-200 rounded-xl focus:border-blue-600 focus:outline-none mb-3 bg-slate-50 transition">
+
+  <!-- Feedback Box -->
+  <div id="feedback" class="h-8 mb-3 font-bold text-sm sm:text-base text-center"></div>
+
+  <!-- Verify Button -->
+  <button id="btn-verificar" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center cursor-pointer" onclick="checkAnswer()">
+    Verificar (Enter)
   </button>
+
+  <!-- Hint Box -->
+  <div id="hintBox" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 text-left animate-fade-in"></div>
+
+  <!-- Accepted Answer Box -->
+  <div id="a" class="hidden mb-5 bg-slate-100 border border-dashed border-slate-300 rounded-2xl p-4 text-xs sm:text-sm font-bold text-slate-700 text-left"></div>
+
+  <!-- Explanation Box -->
+  <div id="expl" class="hidden mb-5 bg-amber-50/70 border-l-4 border-amber-400 p-5 rounded-r-2xl text-xs sm:text-sm text-slate-700 text-left leading-relaxed"></div>
+
+  <!-- Unified Navigation Buttons Row -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <button id="btn-anterior" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="prev()">
+      &larr; Anterior
+    </button>
+    <button class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="showHint()">
+      Pista 💡
+    </button>
+    <button class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="revealAnswer()">
+      Ver Respuesta 👁️
+    </button>
+    <button id="btn-siguiente" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="next()">
+      Siguiente &rarr;
+    </button>
+  </div>
+
+  <!-- Footer integrado dentro de la tarjeta -->
+  <div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
+    &copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
+  </div>
+
 </div>
-
-<!-- Question Container -->
-<div class="border border-slate-200 rounded-2xl p-6 sm:p-9 bg-white min-h-[140px] flex items-center justify-center text-center mb-5 shadow-2xs">
-  <p id="pregunta-texto" class="text-base sm:text-lg text-slate-800 leading-relaxed font-normal text-left sm:text-center select-text">
-  </p>
-</div>
-
-<!-- Text Input -->
-<input type="text" id="userInput" placeholder="Type your answer..." autocomplete="off" class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-200 rounded-xl focus:border-blue-600 focus:outline-none mb-3 bg-slate-50 transition">
-
-<!-- Feedback Box -->
-<div id="feedback" class="h-8 mb-3 font-bold text-sm sm:text-base text-center"></div>
-
-<!-- Verify Button -->
-<button id="btn-verificar" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center cursor-pointer" onclick="checkAnswer()">
-  Verify (Enter)
-</button>
-
-<!-- Hint Box -->
-<div id="hintBox" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 text-left animate-fade-in"></div>
-
-<!-- Accepted Answer Box -->
-<div id="a" class="hidden mb-5 bg-slate-100 border border-dashed border-slate-300 rounded-2xl p-4 text-xs sm:text-sm font-bold text-slate-700 text-left"></div>
-
-<!-- Explanation Box -->
-<div id="expl" class="hidden mb-5 bg-amber-50/70 border-l-4 border-amber-400 p-5 rounded-r-2xl text-xs sm:text-sm text-slate-700 text-left leading-relaxed"></div>
-
-<!-- Unified Navigation Buttons Row -->
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-  <button id="btn-anterior" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="prev()">
-    &larr; Previous
-  </button>
-  <button class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="showHint()">
-    Hint 💡
-  </button>
-  <button class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="revealAnswer()">
-    Show Answer 👁️
-  </button>
-  <button id="btn-siguiente" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="next()">
-    Next &rarr;
-  </button>
-</div>
-
-<!-- Footer unificado dentro de la tarjeta -->
-<div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
-  &copy; 2026 Teacher Cris. All rights reserved. | teachercris.online
-</div>
-
-</main>
 
 <script>
 const rawDataset = [
   {
-    "q": "She is extremely interested in ___ [learn] more about international sustainable architecture.",
+    "q": "She is extremely interested in _____ [learn] more about international sustainable architecture.",
     "options": ["learning", "to learn", "learn", "learned"],
-    "h": "Identify the preposition 'in' directly preceding the blank space.",
-    "expl": "<b>Preposition + Gerund:</b> The adjective phrase <i>interested in</i> contains the preposition <b>in</b>. In English, prepositions must always be followed by a gerund (<i>-ing</i> form).",
-    "alert": "💡 Key Rule: English prepositions (in, on, at, for, about, of, before, after, without) are strictly followed by a gerund (-ing), never a to-infinitive.",
+    "h": "Identifica la preposición 'in' que precede directamente al espacio.",
+    "expl": "<b>Preposición + Gerundio:</b> La frase adjetiva <i>interested in</i> contiene la preposición <b>in</b>. En inglés, las preposiciones siempre van seguidas de un gerundio (forma en <i>-ing</i>).",
+    "alert": "💡 Regla Clave: Las preposiciones en inglés (in, on, at, for, about, of, before, after, without) van seguidas estrictamente de un gerundio (-ing), nunca de un infinitivo con 'to'.",
     "chunk": "interested in learning",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "We are all really looking forward to ___ [meet] you at the annual international conference next week.",
+    "q": "We are all really looking forward to _____ [meet] you at the annual international conference next week.",
     "options": ["meeting", "meet", "to meet", "met"],
-    "h": "Recognize that 'to' in 'look forward to' acts as a preposition, not part of an infinitive.",
-    "expl": "<b>Prepositional Phrasal Verb:</b> In <i>look forward to</i>, 'to' functions as a dependent preposition. Prepositions require a gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: When 'to' functions as a preposition (as in 'look forward to' or 'object to'), it must be followed by a gerund (-ing), not a base verb.",
+    "h": "Reconoce que el 'to' en 'look forward to' actúa como preposición, no como parte de un infinitivo.",
+    "expl": "<b>Verbo frasal preposicional:</b> En <i>look forward to</i>, el 'to' funciona como preposición dependiente. Las preposiciones exigen gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: Cuando 'to' funciona como preposición (como en 'look forward to' u 'object to'), debe ir seguido de gerundio (-ing) y no de un verbo en forma base.",
     "chunk": "look forward to meeting",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "Before ___ [submit] the final project proposal, make sure to proofread all statistical figures.",
+    "q": "Before _____ [submit] the final project proposal, make sure to proofread all statistical figures.",
     "options": ["submitting", "to submit", "submit", "submitted"],
-    "h": "Notice the time preposition 'before' standing right before the action.",
-    "expl": "<b>Time Preposition + Gerund:</b> Temporal prepositions like <i>before</i> and <i>after</i> require the gerund form when introducing a verb clause directly.",
-    "alert": "💡 Key Rule: Time prepositions like 'before' and 'after' take the gerund (-ing) when directly followed by an action verb.",
+    "h": "Observa la preposición temporal 'before' situada justo antes de la acción.",
+    "expl": "<b>Preposición temporal + Gerundio:</b> Las preposiciones temporales como <i>before</i> y <i>after</i> exigen la forma de gerundio al introducir directamente una cláusula verbal.",
+    "alert": "💡 Regla Clave: Las preposiciones temporales como 'before' y 'after' toman el gerundio (-ing) cuando van seguidas directamente de un verbo de acción.",
     "chunk": "before submitting",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "He apologized for ___ [arrive] late to the executive board meeting yesterday afternoon.",
+    "q": "He apologized for _____ [arrive] late to the executive board meeting yesterday afternoon.",
     "options": ["arriving", "to arrive", "arrive", "arrived"],
-    "h": "Spot the dependent preposition 'for' following the verb 'apologized'.",
-    "expl": "<b>Verb + Preposition:</b> The verb <i>apologize</i> pairs with the preposition <b>for</b>, which governs the gerund (<i>-ing</i>) form.",
-    "alert": "💡 Key Rule: The structure 'apologize for' is a verb-preposition combination requiring the gerund (-ing).",
+    "h": "Localiza la preposición dependiente 'for' que sigue al verbo 'apologized'.",
+    "expl": "<b>Verbo + Preposición:</b> El verbo <i>apologize</i> se combina con la preposición <b>for</b>, la cual rige la forma de gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: La estructura 'apologize for' es una combinación de verbo y preposición que requiere gerundio (-ing).",
     "chunk": "apologize for arriving",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "The corporate director succeeded in ___ [finalize] the merger agreement despite tough negotiations.",
+    "q": "The corporate director succeeded in _____ [finalize] the merger agreement despite tough negotiations.",
     "options": ["finalizing", "to finalize", "finalize", "finalized"],
-    "h": "Look at the preposition 'in' which pairs with the verb 'succeeded'.",
-    "expl": "<b>Dependent Preposition:</b> The expression <i>succeed in</i> governs the gerund (<i>-ing</i>) to express the accomplished goal.",
-    "alert": "💡 Key Rule: Always pair 'succeed in' with a gerund (-ing) to describe successful achievements.",
+    "h": "Fíjate en la preposición 'in' que acompaña al verbo 'succeeded'.",
+    "expl": "<b>Preposición dependiente:</b> La expresión <i>succeed in</i> rige el gerundio (<i>-ing</i>) para expresar el objetivo alcanzado.",
+    "alert": "💡 Regla Clave: Combina siempre 'succeed in' con gerundio (-ing) para describir logros alcanzados.",
     "chunk": "succeed in finalizing",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "After ___ [read] the detailed report, the auditor requested additional bank statements.",
+    "q": "After _____ [read] the detailed report, the auditor requested additional bank statements.",
     "options": ["reading", "to read", "read", "have read"],
-    "h": "Identify the preposition 'after' placed at the head of the sentence clause.",
-    "expl": "<b>Clause-Initial Preposition:</b> The preposition <i>after</i> introducing an abbreviated temporal clause strictly takes the gerund.",
-    "alert": "💡 Key Rule: Prepositions at the start of a clause ('after', 'before', 'by') govern the gerund (-ing).",
+    "h": "Identifica la preposición 'after' colocada al comienzo de la cláusula.",
+    "expl": "<b>Preposición inicial de cláusula:</b> La preposición <i>after</i> al introducir una cláusula temporal abreviada toma estrictamente el gerundio.",
+    "alert": "💡 Regla Clave: Las preposiciones al inicio de una cláusula ('after', 'before', 'by') rigen el gerundio (-ing).",
     "chunk": "after reading",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "She left the office without ___ [say] goodbye to her colleagues.",
+    "q": "She left the office without _____ [say] goodbye to her colleagues.",
     "options": ["saying", "to say", "say", "said"],
-    "h": "Look for the preposition 'without' describing the condition of her departure.",
-    "expl": "<b>Preposition + Gerund:</b> The preposition <i>without</i> must always be complemented by a gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: The preposition 'without' is always followed by a gerund (-ing) to express an action that did not occur.",
+    "h": "Busca la preposición 'without' que describe la condición de su marcha.",
+    "expl": "<b>Preposición + Gerundio:</b> La preposición <i>without</i> siempre debe complementarse con un gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: La preposición 'without' va siempre seguida de gerundio (-ing) para expresar una acción que no ocurrió.",
     "chunk": "without saying",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "They talked about ___ [open] a new regional branch in South America next year.",
+    "q": "They talked about _____ [open] a new regional branch in South America next year.",
     "options": ["opening", "to open", "open", "opened"],
-    "h": "Find the preposition 'about' following the verb 'talked'.",
-    "expl": "<b>Verb + Preposition:</b> <i>Talk about</i> consists of a verb and a preposition, which requires a gerund object.",
-    "alert": "💡 Key Rule: Prepositional verbs like 'talk about' require the gerund (-ing) form.",
+    "h": "Encuentra la preposición 'about' detrás del verbo 'talked'.",
+    "expl": "<b>Verbo + Preposición:</b> <i>Talk about</i> se compone de un verbo y una preposición, lo que exige un objeto en gerundio.",
+    "alert": "💡 Regla Clave: Los verbos preposicionales como 'talk about' exigen la forma de gerundio (-ing).",
     "chunk": "talk about opening",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "The manager praised the team for ___ [achieve] such outstanding results this quarter.",
+    "q": "The manager praised the team for _____ [achieve] such outstanding results this quarter.",
     "options": ["achieving", "to achieve", "achieve", "achieved"],
-    "h": "Identify 'for' as the preposition indicating the reason for praise.",
-    "expl": "<b>Prepositional Pattern:</b> The pattern <i>praise [someone] for</i> connects to a gerund (<i>-ing</i>) to state the reason for praise.",
-    "alert": "💡 Key Rule: Verbs of praise or reward followed by 'for' mandate the gerund (-ing).",
+    "h": "Identifica 'for' como la preposición que indica el motivo del elogio.",
+    "expl": "<b>Patrón preposicional:</b> La estructura <i>praise [someone] for</i> se conecta a un gerundio (<i>-ing</i>) para indicar la razón del reconocimiento.",
+    "alert": "💡 Regla Clave: Los verbos de alabanza o recompensa seguidos de 'for' exigen gerundio (-ing).",
     "chunk": "praise for achieving",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "Instead of ___ [buy] a new car, he decided to rent one for his holiday road trip.",
+    "q": "Instead of _____ [buy] a new car, he decided to rent one for his holiday road trip.",
     "options": ["buying", "to buy", "buy", "bought"],
-    "h": "Notice the prepositional phrase 'instead of' at the start of the contrast clause.",
-    "expl": "<b>Compound Preposition:</b> <i>Instead of</i> is a prepositional phrase and takes a gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: Compound prepositions like 'instead of' are followed by a gerund (-ing).",
+    "h": "Observa la locución preposicional 'instead of' al inicio de la cláusula de contraste.",
+    "expl": "<b>Preposición compuesta:</b> <i>Instead of</i> es una locución preposicional y toma gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: Las preposiciones compuestos como 'instead of' van seguidas de gerundio (-ing).",
     "chunk": "instead of buying",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "Dr. Aris is tired of ___ [hear] the same administrative excuses every single week.",
+    "q": "Dr. Aris is tired of _____ [hear] the same administrative excuses every single week.",
     "options": ["hearing", "to hear", "hear", "heard"],
-    "h": "Spot the adjective-preposition pair 'tired of'.",
-    "expl": "<b>Adjective + Preposition:</b> The predicate adjective <i>tired of</i> requires a gerund (<i>-ing</i>) complement.",
-    "alert": "💡 Key Rule: Adjectives with dependent prepositions (like 'tired of', 'fond of', 'afraid of') strictly take the gerund (-ing).",
+    "h": "Localiza la pareja adjetivo-preposición 'tired of'.",
+    "expl": "<b>Adjetivo + Preposición:</b> El adjetivo predicativo <i>tired of</i> requiere un complemento en gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: Los adjetivos con preposiciones dependientes (como 'tired of', 'fond of', 'afraid of') toman estrictamente el gerundio (-ing).",
     "chunk": "tired of hearing",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "He insists on ___ [sign] every single contract document personally.",
+    "q": "He insists on _____ [sign] every single contract document personally.",
     "options": ["signing", "to sign", "sign", "signed"],
-    "h": "Focus on the dependent preposition 'on' following 'insists'.",
-    "expl": "<b>Verb + Preposition:</b> The verb <i>insist</i> requires the dependent preposition <b>on</b>, which takes a gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: The dependent preposition 'on' after 'insist' governs the gerund (-ing).",
+    "h": "Concéntrate en la preposición dependiente 'on' que sigue a 'insists'.",
+    "expl": "<b>Verbo + Preposición:</b> El verbo <i>insist</i> requiere la preposición dependiente <b>on</b>, la cual toma un gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: La preposición dependiente 'on' tras 'insist' rige el gerundio (-ing).",
     "chunk": "insist on signing",
     "category": "Prepositions + Gerund"
   },
   {
-    "q": "Do you mind ___ [open] the window? It is getting quite warm in this room.",
+    "q": "Do you mind _____ [open] the window? It is getting quite warm in this room.",
     "options": ["opening", "to open", "open", "opened"],
-    "h": "Recall which verb form follows polite requests with 'mind'.",
-    "expl": "<b>Verb + Gerund:</b> The verb <i>mind</i> in requests is strictly followed by the gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: The verb 'mind' always patterns with a gerund (-ing) when asking for or giving permission.",
+    "h": "Recuerda qué forma verbal sigue a las peticiones de cortesía con 'mind'.",
+    "expl": "<b>Verbo + Gerundio:</b> El verbo <i>mind</i> en peticiones va estrictamente seguido de gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: El verbo 'mind' siempre se combina con gerundio (-ing) al pedir o conceder permiso.",
     "chunk": "mind opening",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "The team decided to avoid ___ [make] risky financial investments during the crisis.",
+    "q": "The team decided to avoid _____ [make] risky financial investments during the crisis.",
     "options": ["making", "to make", "make", "made"],
-    "h": "Identify the verb 'avoid' which governs the following verb form.",
-    "expl": "<b>Verb + Gerund:</b> The verb <i>avoid</i> strictly takes a gerund (<i>-ing</i>) complement, never a to-infinitive.",
-    "alert": "💡 Key Rule: Certain verbs like 'avoid', 'enjoy', and 'finish' can only be followed by a gerund (-ing).",
+    "h": "Identifica el verbo 'avoid' que rige la forma verbal siguiente.",
+    "expl": "<b>Verbo + Gerundio:</b> El verbo <i>avoid</i> toma estrictamente un complemento en gerundio (<i>-ing</i>), nunca un infinitivo con 'to'.",
+    "alert": "💡 Regla Clave: Ciertos verbos como 'avoid', 'enjoy' y 'finish' solo pueden ir seguidos de gerundio (-ing).",
     "chunk": "avoid making",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "She strongly suggested ___ [hire] a professional translator for the legal proceedings.",
+    "q": "She strongly suggested _____ [hire] a professional translator for the legal proceedings.",
     "options": ["hiring", "to hire", "hire", "hired"],
-    "h": "Look at the verb 'suggest' directly followed by an action verb.",
-    "expl": "<b>Verb + Gerund:</b> When <i>suggest</i> is immediately followed by a verb without a clause, it requires the gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: The verb 'suggest' takes a direct gerund (-ing); it does not take 'to + infinitive' directly.",
+    "h": "Observa el verbo 'suggest' seguido directamente de un verbo de acción.",
+    "expl": "<b>Verbo + Gerundio:</b> Cuando <i>suggest</i> va seguido inmediatamente de un verbo sin cláusula, requiere el gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: El verbo 'suggest' toma gerundio directo (-ing); no admite 'to + infinitive' de forma directa.",
     "chunk": "suggest hiring",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "The suspect admitted ___ [download] the confidential files from the corporate network.",
+    "q": "The suspect admitted _____ [download] the confidential files from the corporate network.",
     "options": ["downloading", "to download", "download", "downloaded"],
-    "h": "Identify the verb 'admitted' followed by an acknowledged action.",
-    "expl": "<b>Verb + Gerund:</b> The verb <i>admit</i> takes a gerund (<i>-ing</i>) when acknowledging an action.",
-    "alert": "💡 Key Rule: Verbs of confession or admission like 'admit' and 'deny' govern the gerund (-ing).",
+    "h": "Identifica el verbo 'admitted' seguido de una acción reconocida.",
+    "expl": "<b>Verbo + Gerundio:</b> El verbo <i>admit</i> toma gerundio (<i>-ing</i>) al reconocer una acción.",
+    "alert": "💡 Regla Clave: Los verbos de confesión o admisión como 'admit' y 'deny' rigen el gerundio (-ing).",
     "chunk": "admit downloading",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "I really enjoy ___ [run] in the park early in the morning before work.",
+    "q": "I really enjoy _____ [run] in the park early in the morning before work.",
     "options": ["running", "to run", "run", "ran"],
-    "h": "Focus on the preference verb 'enjoy'.",
-    "expl": "<b>Verb + Gerund:</b> <i>Enjoy</i> is a core verb that strictly requires the gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: 'Enjoy' is always followed by a gerund (-ing) without prepositions.",
+    "h": "Céntrate en el verbo de preferencia 'enjoy'.",
+    "expl": "<b>Verbo + Gerundio:</b> <i>Enjoy</i> es un verbo principal que exige estrictamente el gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: 'Enjoy' va siempre seguido de gerundio (-ing) sin preposiciones.",
     "chunk": "enjoy running",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "The company postponed ___ [launch] the new smartphone model due to technical glitches.",
+    "q": "The company postponed _____ [launch] the new smartphone model due to technical glitches.",
     "options": ["launching", "to launch", "launch", "launched"],
-    "h": "Identify the delay verb 'postponed'.",
-    "expl": "<b>Verb + Gerund:</b> Verbs signifying delay or deferral (<i>postpone</i>, <i>delay</i>, <i>put off</i>) govern the gerund.",
-    "alert": "💡 Key Rule: Verbs expressing delay ('postpone', 'defer') require the gerund (-ing).",
+    "h": "Identifica el verbo de retraso 'postponed'.",
+    "expl": "<b>Verbo + Gerundio:</b> Los verbos que significan retraso o aplazamiento (<i>postpone</i>, <i>delay</i>, <i>put off</i>) rigen el gerundio.",
+    "alert": "💡 Regla Clave: Los verbos que expresan retraso ('postpone', 'defer') exigen gerundio (-ing).",
     "chunk": "postpone launching",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "He denied ___ [have] any involvement in the financial embezzlement scheme.",
+    "q": "He denied _____ [have] any involvement in the financial embezzlement scheme.",
     "options": ["having", "to have", "have", "had"],
-    "h": "Look at the verb 'denied' governing the clause.",
-    "expl": "<b>Verb + Gerund:</b> The verb <i>deny</i> is followed by a gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: 'Deny' takes the gerund (-ing) to state that an action was not performed.",
+    "h": "Mira el verbo 'denied' que rige la cláusula.",
+    "expl": "<b>Verbo + Gerundio:</b> El verbo <i>deny</i> va seguido de un gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: 'Deny' toma el gerundio (-ing) para afirmar que una acción no se realizó.",
     "chunk": "deny having",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "She cannot help ___ [feel] nervous whenever she has to deliver a public presentation.",
+    "q": "She cannot help _____ [feel] nervous whenever she has to deliver a public presentation.",
     "options": ["feeling", "to feel", "feel", "felt"],
-    "h": "Spot the fixed idiomatic expression 'cannot help'.",
-    "expl": "<b>Idiomatic Gerund Phrase:</b> The fixed expression <i>cannot help</i> takes a gerund (<i>-ing</i>).",
-    "alert": "💡 Key Rule: The phrase 'cannot help' is an idiomatic verb pattern strictly followed by a gerund (-ing).",
+    "h": "Localiza la expresión idiomática fija 'cannot help'.",
+    "expl": "<b>Frase idiomática con gerundio:</b> La expresión fija <i>cannot help</i> toma gerundio (<i>-ing</i>).",
+    "alert": "💡 Regla Clave: La frase 'cannot help' es un patrón verbal idiomático seguido estrictamente de gerundio (-ing).",
     "chunk": "cannot help feeling",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "You should consider ___ [apply] for the senior management role before the deadline.",
+    "q": "You should consider _____ [apply] for the senior management role before the deadline.",
     "options": ["applying", "to apply", "apply", "applied"],
-    "h": "Identify the deliberation verb 'consider'.",
-    "expl": "<b>Verb + Gerund:</b> The verb <i>consider</i> requires a gerund (<i>-ing</i>) when contemplating an action.",
-    "alert": "💡 Key Rule: When 'consider' means thinking about doing something, it requires a gerund (-ing).",
+    "h": "Identifica el verbo de deliberación 'consider'.",
+    "expl": "<b>Verbo + Gerundio:</b> El verbo <i>consider</i> requiere gerundio (<i>-ing</i>) al contemplar una acción.",
+    "alert": "💡 Regla Clave: Cuando 'consider' significa pensar en hacer algo, exige gerundio (-ing).",
     "chunk": "consider applying",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "The chief executive finished ___ [write] the annual speech just before midnight.",
+    "q": "The chief executive finished _____ [write] the annual speech just before midnight.",
     "options": ["writing", "to write", "write", "wrote"],
-    "h": "Look at the completion verb 'finished'.",
-    "expl": "<b>Verb + Gerund:</b> The verb <i>finish</i> is followed by a gerund (<i>-ing</i>) to indicate the completion of an activity.",
-    "alert": "💡 Key Rule: Verbs indicating completion like 'finish' take the gerund (-ing).",
+    "h": "Observa el verbo de finalización 'finished'.",
+    "expl": "<b>Verbo + Gerundio:</b> El verbo <i>finish</i> va seguido de gerundio (<i>-ing</i>) para indicar la culminación de una actividad.",
+    "alert": "💡 Regla Clave: Los verbos que indican finalización como 'finish' toman gerundio (-ing).",
     "chunk": "finish writing",
     "category": "Verbs + Gerund"
   },
   {
-    "q": "The board of directors decided ___ [accept] the proposal for the new factory.",
+    "q": "The board of directors decided _____ [accept] the proposal for the new factory.",
     "options": ["to accept", "accepting", "accept", "accepted"],
-    "h": "Identify the decision verb 'decided'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>decide</i> is followed by a <b>to-infinitive</b> to express a choice or intention.",
-    "alert": "💡 Key Rule: Verbs of decision and intention ('decide', 'choose', 'plan') take 'to + infinitive'.",
+    "h": "Identifica el verbo de decisión 'decided'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>decide</i> va seguido de un <b>infinitivo con 'to'</b> para expresar una elección o intención.",
+    "alert": "💡 Regla Clave: Los verbos de decisión e intención ('decide', 'choose', 'plan') toman 'to + infinitive'.",
     "chunk": "decide to accept",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "She promised ___ [send] the confidential documents as soon as she arrived at her desk.",
+    "q": "She promised _____ [send] the confidential documents as soon as she arrived at her desk.",
     "options": ["to send", "sending", "send", "sent"],
-    "h": "Spot the commitment verb 'promised'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>promise</i> requires a <b>to-infinitive</b> when making a commitment.",
-    "alert": "💡 Key Rule: Verbs of promise or agreement ('promise', 'swear', 'agree') govern 'to + infinitive'.",
+    "h": "Localiza el verbo de compromiso 'promised'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>promise</i> requiere un <b>infinitivo con 'to'</b> al contraer un compromiso.",
+    "alert": "💡 Regla Clave: Los verbos de promesa o acuerdo ('promise', 'swear', 'agree') rigen 'to + infinitive'.",
     "chunk": "promise to send",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "We cannot afford ___ [purchase] such an expensive software license at this point in time.",
+    "q": "We cannot afford _____ [purchase] such an expensive software license at this point in time.",
     "options": ["to purchase", "purchasing", "purchase", "purchased"],
-    "h": "Focus on the financial verb 'afford'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>afford</i> (commonly with <i>can/cannot</i>) is followed by a <b>to-infinitive</b>.",
-    "alert": "💡 Key Rule: 'Can/cannot afford' is strictly followed by 'to + infinitive'.",
+    "h": "Céntrate en el verbo financiero 'afford'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>afford</i> (habitualmente con <i>can/cannot</i>) va seguido de un <b>infinitivo con 'to'</b>.",
+    "alert": "💡 Regla Clave: 'Can/cannot afford' va seguido estrictamente de 'to + infinitive'.",
     "chunk": "afford to purchase",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "The candidate refused ___ [answer] the controversial questions raised during the interview.",
+    "q": "The candidate refused _____ [answer] the controversial questions raised during the interview.",
     "options": ["to answer", "answering", "answer", "answered"],
-    "h": "Identify the rejection verb 'refused'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>refuse</i> takes a <b>to-infinitive</b> to express unwillingness to do an action.",
-    "alert": "💡 Key Rule: 'Refuse' takes 'to + infinitive' to decline performing an action.",
+    "h": "Identifica el verbo de rechazo 'refused'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>refuse</i> toma un <b>infinitivo con 'to'</b> para expresar falta de voluntad para realizar una acción.",
+    "alert": "💡 Regla Clave: 'Refuse' toma 'to + infinitive' para declinar la realización de una acción.",
     "chunk": "refuse to answer",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "The IT team managed ___ [restore] the server network before business hours resumed.",
+    "q": "The IT team managed _____ [restore] the server network before business hours resumed.",
     "options": ["to restore", "restoring", "restore", "restored"],
-    "h": "Look at the achievement verb 'managed'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>manage</i> (meaning to succeed in a task) requires a <b>to-infinitive</b>.",
-    "alert": "💡 Key Rule: 'Manage' (meaning succeed despite difficulty) takes 'to + infinitive'.",
+    "h": "Observa el verbo de logro 'managed'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>manage</i> (en el sentido de lograr una tarea) requiere un <b>infinitivo con 'to'</b>.",
+    "alert": "💡 Regla Clave: 'Manage' (en el sentido de tener éxito a pesar de la dificultad) toma 'to + infinitive'.",
     "chunk": "manage to restore",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "He agreed ___ [assist] the junior developers with their weekly coding assignments.",
+    "q": "He agreed _____ [assist] the junior developers with their weekly coding assignments.",
     "options": ["to assist", "assisting", "assist", "assisted"],
-    "h": "Identify the agreement verb 'agreed'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>agree</i> takes a <b>to-infinitive</b> when consenting to an action.",
-    "alert": "💡 Key Rule: 'Agree' is followed by 'to + infinitive' when accepting to do something.",
+    "h": "Identifica el verbo de acuerdo 'agreed'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>agree</i> toma un <b>infinitivo con 'to'</b> al consentir una acción.",
+    "alert": "💡 Regla Clave: 'Agree' va seguido de 'to + infinitive' al aceptar hacer algo.",
     "chunk": "agree to assist",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "The young entrepreneur hopes ___ [start] expanding her online retail business across Europe next spring.",
+    "q": "The young entrepreneur hopes _____ [start] expanding her online retail business across Europe next spring.",
     "options": ["to start", "starting", "start", "started"],
-    "h": "Notice the intention/expectation verb 'hopes'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>hope</i> expresses future expectation and requires a <b>to-infinitive</b>.",
-    "alert": "💡 Key Rule: Verbs expressing future desire ('hope', 'expect', 'wish') take 'to + infinitive'.",
+    "h": "Observa el verbo de intención/expectativa 'hopes'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>hope</i> expresa expectativa de futuro y requiere un <b>infinitivo con 'to'</b>.",
+    "alert": "💡 Regla Clave: Los verbos que expresan deseo futuro ('hope', 'expect', 'wish') toman 'to + infinitive'.",
     "chunk": "hope to start",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "They offer ___ [provide] specialized training programs for all newly hired corporate employees.",
+    "q": "They offer _____ [provide] specialized training programs for all newly hired corporate employees.",
     "options": ["to provide", "providing", "provide", "provided"],
-    "h": "Identify the willingness verb 'offer'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>offer</i> takes a <b>to-infinitive</b> when proposing assistance or action.",
-    "alert": "💡 Key Rule: 'Offer' is followed by 'to + infinitive' when volunteering an action.",
+    "h": "Identifica el verbo de voluntariedad 'offer'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>offer</i> toma un <b>infinitivo con 'to'</b> al proponer ayuda o acción.",
+    "alert": "💡 Regla Clave: 'Offer' va seguido de 'to + infinitive' al ofrecerse a realizar una acción.",
     "chunk": "offer to provide",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "The legal department advised us not ___ [sign] the contract without thorough legal review.",
+    "q": "The legal department advised us not _____ [sign] the contract without thorough legal review.",
     "options": ["to sign", "signing", "sign", "signed"],
-    "h": "Look at the recommendation verb 'advised' followed by an object pronoun and negative marker 'not'.",
-    "expl": "<b>Object + Infinitive:</b> The pattern <i>advise [someone] (not) to do [something]</i> takes a <b>to-infinitive</b>.",
-    "alert": "💡 Key Rule: Verbs like 'advise', 'tell', and 'allow' take object + '(not) to + infinitive'.",
+    "h": "Mira el verbo de recomendación 'advised' seguido de un pronombre objeto y el marcador negativo 'not'.",
+    "expl": "<b>Objeto + Infinitivo:</b> El patrón <i>advise [someone] (not) to do [something]</i> toma un <b>infinitivo con 'to'</b>.",
+    "alert": "💡 Regla Clave: Verbos como 'advise', 'tell' y 'allow' toman objeto + '(not) to + infinitive'.",
     "chunk": "advise not to sign",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "She claims ___ [have] discovered a revolutionary method for desalinating seawater efficiently.",
+    "q": "She claims _____ [have] discovered a revolutionary method for desalinating seawater efficiently.",
     "options": ["to have", "having", "have", "had"],
-    "h": "Identify the assertion verb 'claims'.",
-    "expl": "<b>Verb + Infinitive:</b> The verb <i>claim</i> takes a <b>to-infinitive</b> when asserting a statement.",
-    "alert": "💡 Key Rule: 'Claim' is followed by 'to + infinitive' (or perfect infinitive 'to have + participle').",
+    "h": "Identifica el verbo de afirmación 'claims'.",
+    "expl": "<b>Verbo + Infinitivo:</b> El verbo <i>claim</i> toma un <b>infinitivo con 'to'</b> al aseverar una declaración.",
+    "alert": "💡 Regla Clave: 'Claim' va seguido de 'to + infinitive' (o infinitivo perfecto 'to have + participio').",
     "chunk": "claim to have",
     "category": "Verbs + Infinitive"
   },
   {
-    "q": "Please remember ___ [turn] off the office lights before you leave the building tonight.",
+    "q": "Please remember _____ [turn] off the office lights before you leave the building tonight.",
     "options": ["to turn", "turning", "turn", "turned"],
-    "h": "Is this a duty/task to perform in the future, or a memory of a past event?",
-    "expl": "<b>Meaning Change:</b> <i>Remember + to-infinitive</i> means remembering to perform an obligation or future task.",
-    "alert": "💡 Key Rule: 'Remember + to + infinitive' looks forward to a task that must be done.",
+    "h": "¿Se trata de un deber/tarea a realizar en el futuro o del recuerdo de un evento pasado?",
+    "expl": "<b>Cambio de significado:</b> <i>Remember + to-infinitive</i> significa acordarse de cumplir una obligación o tarea futura.",
+    "alert": "💡 Regla Clave: 'Remember + to + infinitive' mira hacia el futuro ante una tarea que debe hacerse.",
     "chunk": "remember to turn",
     "category": "Meaning Change"
   },
   {
-    "q": "I clearly remember ___ [leave] my car keys on the kitchen table, but now they are gone.",
+    "q": "I clearly remember _____ [leave] my car keys on the kitchen table, but now they are gone.",
     "options": ["leaving", "to leave", "leave", "left"],
-    "h": "Is the speaker recalling a past memory or being reminded to do a task?",
-    "expl": "<b>Meaning Change:</b> <i>Remember + gerund (-ing)</i> means recalling a memory of an action completed in the past.",
-    "alert": "💡 Key Rule: 'Remember + -ing' looks back at a memory of a past event.",
+    "h": "¿El hablante evoca un recuerdo pasado o se le recuerda hacer una tarea?",
+    "expl": "<b>Cambio de significado:</b> <i>Remember + gerund (-ing)</i> significa evocar el recuerdo de una acción completada en el pasado.",
+    "alert": "💡 Regla Clave: 'Remember + -ing' mira hacia atrás recordando un evento pasado.",
     "chunk": "remember leaving",
     "category": "Meaning Change"
   },
   {
-    "q": "He stopped ___ [make] a quick phone call to his assistant before entering the conference hall.",
+    "q": "He stopped _____ [make] a quick phone call to his assistant before entering the conference hall.",
     "options": ["to make", "making", "make", "made"],
-    "h": "Did he pause another activity in order to make a call, or did he quit making calls altogether?",
-    "expl": "<b>Meaning Change:</b> <i>Stop + to-infinitive</i> means pausing an ongoing activity in order to perform a new action.",
-    "alert": "💡 Key Rule: 'Stop to do' means interrupting what you are doing in order to do something else.",
+    "h": "¿Pausó otra actividad para hacer una llamada o dejó de hacer llamadas por completo?",
+    "expl": "<b>Cambio de significado:</b> <i>Stop + to-infinitive</i> significa pausar una actividad en curso para realizar una nueva acción.",
+    "alert": "💡 Regla Clave: 'Stop to do' significa interrumpir lo que estás haciendo para hacer otra cosa.",
     "chunk": "stop to make",
     "category": "Meaning Change"
   },
   {
-    "q": "The doctor advised him to stop ___ [drink] sugary energy drinks if he wants to improve his health.",
+    "q": "The doctor advised him to stop _____ [drink] sugary energy drinks if he wants to improve his health.",
     "options": ["drinking", "to drink", "drink", "drank"],
-    "h": "Is he quitting the habit completely, or pausing work in order to drink?",
-    "expl": "<b>Meaning Change:</b> <i>Stop + gerund (-ing)</i> means terminating or quitting a habit or action entirely.",
-    "alert": "💡 Key Rule: 'Stop doing' means ending a habit or terminating an action.",
+    "h": "¿Está dejando el hábito por completo o pausando el trabajo para beber?",
+    "expl": "<b>Cambio de significado:</b> <i>Stop + gerund (-ing)</i> significa terminar o abandonar un hábito o acción por completo.",
+    "alert": "💡 Regla Clave: 'Stop doing' significa acabar con un hábito o finalizar una acción.",
     "chunk": "stop drinking",
     "category": "Meaning Change"
   },
   {
-    "q": "We regret ___ [inform] you that your application for the senior research fellowship was unsuccessful.",
+    "q": "We regret _____ [inform] you that your application for the senior research fellowship was unsuccessful.",
     "options": ["to inform", "informing", "inform", "informed"],
-    "h": "Is this a formal announcement of bad news, or remorse over a past mistake?",
-    "expl": "<b>Meaning Change:</b> <i>Regret + to-infinitive</i> is a formal expression used to deliver bad or disappointing news.",
-    "alert": "💡 Key Rule: 'Regret to inform/say' is used in formal communication to announce bad news.",
+    "h": "¿Es un anuncio formal de malas noticias o remordimiento por un error pasado?",
+    "expl": "<b>Cambio de significado:</b> <i>Regret + to-infinitive</i> es una fórmula formal empleada para comunicar malas o decepcionantes noticias.",
+    "alert": "💡 Regla Clave: 'Regret to inform/say' se usa en comunicación formal para dar malas noticias.",
     "chunk": "regret to inform",
     "category": "Meaning Change"
   },
   {
-    "q": "He deeply regrets ___ [say] those harsh words to his colleague during yesterday's debate.",
+    "q": "He deeply regrets _____ [say] those harsh words to his colleague during yesterday's debate.",
     "options": ["saying", "to say", "say", "said"],
-    "h": "Does he feel remorse for an action completed in the past?",
-    "expl": "<b>Meaning Change:</b> <i>Regret + gerund (-ing)</i> means feeling remorse about an action completed in the past.",
-    "alert": "💡 Key Rule: 'Regret doing' expresses remorse about past actions or words.",
+    "h": "¿Siente remordimiento por una acción completada en el pasado?",
+    "expl": "<b>Cambio de significado:</b> <i>Regret + gerund (-ing)</i> significa sentir remordimiento por una acción completada en el pasado.",
+    "alert": "💡 Regla Clave: 'Regret doing' expresa remordimiento sobre acciones o palabras pasadas.",
     "chunk": "regret saying",
     "category": "Meaning Change"
   },
   {
-    "q": "Don't forget ___ [switch] the oven off after you finish baking the cake.",
+    "q": "Don't forget _____ [switch] the oven off after you finish baking the cake.",
     "options": ["to switch", "switching", "switch", "switched"],
-    "h": "Is this a reminder for a future obligation?",
-    "expl": "<b>Meaning Change:</b> <i>Forget + to-infinitive</i> means failing to perform a necessary task or obligation.",
-    "alert": "💡 Key Rule: 'Forget to do' means failing to remember an obligation.",
+    "h": "¿Es un recordatorio de una obligación futura?",
+    "expl": "<b>Cambio de significado:</b> <i>Forget + to-infinitive</i> significa omitir o no realizar una tarea u obligación necesaria.",
+    "alert": "💡 Regla Clave: 'Forget to do' significa descuidar una obligación.",
     "chunk": "forget to switch",
     "category": "Meaning Change"
   },
   {
-    "q": "I will never forget ___ [hear] the famous Nobel laureate speak live in Stockholm.",
+    "q": "I will never forget _____ [hear] the famous Nobel laureate speak live in Stockholm.",
     "options": ["hearing", "to hear", "hear", "heard"],
-    "h": "Is this an unforgettable memory from the past?",
-    "expl": "<b>Meaning Change:</b> <i>Forget + gerund (-ing)</i> (often with <i>never</i>) refers to losing the memory of a past experience.",
-    "alert": "💡 Key Rule: 'Never forget doing' refers to an unforgettable past experience.",
+    "h": "¿Es un recuerdo inolvidable del pasado?",
+    "expl": "<b>Cambio de significado:</b> <i>Forget + gerund (-ing)</i> (a menudo con <i>never</i>) alude a conservar o perder la memoria de una experiencia pasada.",
+    "alert": "💡 Regla Clave: 'Never forget doing' alude a una experiencia pasada inolvidable.",
     "chunk": "never forget hearing",
     "category": "Meaning Change"
   },
   {
-    "q": "If the computer freezes, try ___ [restart] the system by holding down the power button for ten seconds.",
+    "q": "If the computer freezes, try _____ [restart] the system by holding down the power button for ten seconds.",
     "options": ["restarting", "to restart", "restart", "restarted"],
-    "h": "Is this testing an experimental method to solve a problem, or attempting a difficult physical task?",
-    "expl": "<b>Meaning Change:</b> <i>Try + gerund (-ing)</i> means testing an experimental method or solution to see if it works.",
-    "alert": "💡 Key Rule: 'Try doing' means experimenting with an option to test if it solves a problem.",
+    "h": "¿Se trata de probar un método experimental para resolver un problema o de intentar una tarea física difícil?",
+    "expl": "<b>Cambio de significado:</b> <i>Try + gerund (-ing)</i> significa probar un método o solución experimental para ver si funciona.",
+    "alert": "💡 Regla Clave: 'Try doing' significa experimentar con una opción para comprobar si resuelve un problema.",
     "chunk": "try restarting",
     "category": "Meaning Change"
   },
   {
-    "q": "She tried ___ [open] the heavy wooden oak door, but it was locked firmly from the inside.",
+    "q": "She tried _____ [open] the heavy wooden oak door, but it was locked firmly from the inside.",
     "options": ["to open", "opening", "open", "opened"],
-    "h": "Did she exert physical effort to accomplish a difficult task?",
-    "expl": "<b>Meaning Change:</b> <i>Try + to-infinitive</i> means making an effort or attempting to accomplish a difficult task.",
-    "alert": "💡 Key Rule: 'Try to do' means attempting to perform a difficult action.",
+    "h": "¿Ejerció esfuerzo físico para lograr una tarea difícil?",
+    "expl": "<b>Cambio de significado:</b> <i>Try + to-infinitive</i> significa esforzarse o intentar lograr una tarea difícil.",
+    "alert": "💡 Regla Clave: 'Try to do' significa intentar llevar a cabo una acción dificultosa.",
     "chunk": "try to open",
     "category": "Meaning Change"
   },
   {
-    "q": "The project proposal needs ___ [approve] by the chief financial officer before we can proceed.",
+    "q": "The project proposal needs _____ [approve] by the chief financial officer before we can proceed.",
     "options": ["approving", "to approve", "approve", "approved"],
-    "h": "Does the subject ('proposal') require a passive action performed upon it?",
-    "expl": "<b>Meaning Change / Passive Gerund:</b> <i>Need + gerund (-ing)</i> has a passive meaning equivalent to <i>need to be done</i>.",
-    "alert": "💡 Key Rule: 'Needs doing' is an active structure with a passive meaning (equivalent to 'needs to be approved').",
+    "h": "¿El sujeto ('proposal') requiere que se le aplique una acción en voz pasiva?",
+    "expl": "<b>Cambio de significado / Gerundio pasivo:</b> <i>Need + gerund (-ing)</i> posee un significado pasivo equivalente a <i>need to be done</i>.",
+    "alert": "💡 Regla Clave: 'Needs doing' es una estructura activa con sentido pasivo (equivalente a 'needs to be approved').",
     "chunk": "need approving",
     "category": "Meaning Change"
   },
   {
-    "q": "I meant ___ [call] you earlier today, but my meeting ran over by two hours.",
+    "q": "I meant _____ [call] you earlier today, but my meeting ran over by two hours.",
     "options": ["to call", "calling", "call", "called"],
-    "h": "Did the speaker intend to make a phone call?",
-    "expl": "<b>Meaning Change:</b> <i>Mean + to-infinitive</i> means intending or planning to perform an action.",
-    "alert": "💡 Key Rule: 'Mean to do' means to intend or plan to do something.",
+    "h": "¿Tenía el hablante la intención de realizar una llamada telefónica?",
+    "expl": "<b>Cambio de significado:</b> <i>Mean + to-infinitive</i> significa tener la intención o plan de realizar una acción.",
+    "alert": "💡 Regla Clave: 'Mean to do' significa tener la intención o plan de hacer algo.",
     "chunk": "mean to call",
     "category": "Meaning Change"
   },
   {
-    "q": "Taking on this international promotion will mean ___ [relocate] to another country.",
+    "q": "Taking on this international promotion will mean _____ [relocate] to another country.",
     "options": ["relocating", "to relocate", "relocate", "relocated"],
-    "h": "Does taking the promotion involve or signify a consequence?",
-    "expl": "<b>Meaning Change:</b> <i>Mean + gerund (-ing)</i> means involving or resulting in a necessary consequence.",
-    "alert": "💡 Key Rule: When 'mean' signifies involving or entailing a result, it takes a gerund (-ing).",
+    "h": "¿Implica o conlleva la promoción una consecuencia necesaria?",
+    "expl": "<b>Cambio de significado:</b> <i>Mean + gerund (-ing)</i> significa implicar o acarrear una consecuencia necesaria.",
+    "alert": "💡 Regla Clave: Cuando 'mean' significa implicar o conllevar un resultado, toma gerundio (-ing).",
     "chunk": "mean relocating",
     "category": "Meaning Change"
   }
@@ -604,7 +599,7 @@ function speakBritish() {
   const dataset = getCurrentDataset();
   const current = dataset[currentIndex];
   
-  let spokenSentence = current.q.replace(/___+\s*\[\w+\]/, 'blank');
+  let spokenSentence = current.q.replace(/____+\s*\[\w+\]/, 'blank');
   
   const utterance = new SpeechSynthesisUtterance(spokenSentence);
   utterance.lang = 'en-GB';
@@ -646,12 +641,9 @@ function loadChallenge() {
   solvedThisIdx = false;
   const current = dataset[currentIndex];
 
-  document.getElementById('progreso-texto').innerText = `Task ${currentIndex + 1} of ${dataset.length}`;
+  document.getElementById('progreso-texto').innerText = `Tarea ${currentIndex + 1} de ${dataset.length}`;
   document.getElementById('puntuacion').innerText = score;
   document.getElementById('streak-badge').innerText = streak;
-
-  const pct = Math.round(((currentIndex + 1) / dataset.length) * 100);
-  document.getElementById('barra-progreso').style.width = `${pct}%`;
 
   document.getElementById('category-pill-text').innerText = (current.category || 'Standard').toUpperCase();
   document.getElementById('pregunta-texto').innerText = current.q;
@@ -675,17 +667,17 @@ function checkAnswer() {
   const isCorrect = (u === correctAns);
 
   if (isCorrect) {
-    document.getElementById('feedback').innerText = "CORRECT! ✨";
+    document.getElementById('feedback').innerText = "¡CORRECTO! ✨";
     document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center text-emerald-600';
-    document.getElementById('a').innerText = "Accepted answer: " + current.options[0];
+    document.getElementById('a').innerText = "Formas aceptadas: " + current.options[0];
     document.getElementById('a').classList.remove('hidden');
     document.getElementById('a').classList.add('block');
-    document.getElementById('expl').innerHTML = `<strong>Explanation:</strong><br>${current.expl}<br><br><b>Key Rule:</b> ${current.alert}`;
+    document.getElementById('expl').innerHTML = `<strong>Explicación:</strong><br>${current.expl}<br><br><b>Regla Clave:</b> ${current.alert}`;
     document.getElementById('expl').classList.remove('hidden');
     document.getElementById('expl').classList.add('block');
     if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }
   } else {
-    document.getElementById('feedback').innerText = "TRY AGAIN ❌";
+    document.getElementById('feedback').innerText = "INTÉNTALO DE NUEVO ❌";
     document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center text-rose-500';
     streak = 0;
   }
@@ -702,10 +694,10 @@ function showHint() {
 
 function revealAnswer() {
   const current = getCurrentDataset()[currentIndex];
-  document.getElementById('a').innerText = "Answer: " + current.options[0];
+  document.getElementById('a').innerText = "Respuesta: " + current.options[0];
   document.getElementById('a').classList.remove('hidden');
   document.getElementById('a').classList.add('block');
-  document.getElementById('expl').innerHTML = `<strong>Explanation:</strong><br>${current.expl}<br><br><b>Key Rule:</b> ${current.alert}`;
+  document.getElementById('expl').innerHTML = `<strong>Explicación:</strong><br>${current.expl}<br><br><b>Regla Clave:</b> ${current.alert}`;
   document.getElementById('expl').classList.remove('hidden');
   document.getElementById('expl').classList.add('block');
   streak = 0;
@@ -737,13 +729,13 @@ function showFinalSummary() {
   card.innerHTML = `
     <div class="text-center py-8">
       <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Quiz Completed!</h2>
-      <p class="text-slate-600 mb-6 max-w-md mx-auto">You have successfully completed this practice module.</p>
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-2">¡Sesión Completada!</h2>
+      <p class="text-slate-600 mb-6 max-w-md mx-auto">Has completado con éxito este módulo de práctica.</p>
       <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-6 max-w-sm mx-auto shadow-xs">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Final Score</span>
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Puntuación Final</span>
         <div class="text-5xl font-black text-blue-600 tracking-tight my-1">${score} <span class="text-2xl text-slate-400 font-semibold">/ ${dataset.length}</span></div>
       </div>
-      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg cursor-pointer">Restart Practice</button>
+      <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg cursor-pointer">Reiniciar Práctica</button>
     </div>
   `;
 }

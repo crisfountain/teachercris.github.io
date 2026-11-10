@@ -60,8 +60,8 @@
   <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
     <span id="task-counter" class="text-slate-500">Task 1 of 22</span>
     <div class="flex items-center gap-4">
-      <span class="text-slate-700">Correct: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
-      <span class="text-slate-700">Streak: <strong id="streak-display" class="text-amber-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Correctas: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Racha: <strong id="streak-display" class="text-amber-600 font-bold">0</strong></span>
     </div>
   </div>
 
@@ -82,7 +82,7 @@
   <!-- Tactical Hint Box -->
   <div id="pista-box" class="hidden mb-5 bg-amber-50/90 border border-amber-200/90 rounded-2xl p-4 text-xs sm:text-sm text-slate-700">
     <div class="flex items-center gap-2 font-bold text-amber-900 mb-1">
-      <span>💡 Tactical Hint:</span>
+      <span>💡 Pista Táctica:</span>
     </div>
     <p id="pista-texto" class="italic text-slate-700"></p>
   </div>
@@ -94,7 +94,7 @@
 
   <!-- Big Green Verify Button -->
   <button id="btn-verify" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
-    Verify (Enter)
+    Verificar (Enter)
   </button>
 
   <!-- Feedback Box -->
@@ -111,16 +111,16 @@
   <!-- Bottom Buttons Row -->
   <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
     <button id="btn-prev" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
-      &larr; Previous
+      &larr; Anterior
     </button>
     <button id="btn-hint" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
-      Hint 💡
+      Pista 💡
     </button>
     <button id="btn-show-answer" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
-      Show Answer 👁
+      Ver Respuesta 👁
     </button>
     <button id="btn-next" class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer">
-      Next &rarr;
+      Siguiente &rarr;
     </button>
   </div>
 
@@ -137,7 +137,7 @@
     <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-blue-50/50">
       <div class="flex items-center gap-2">
         <span id="modal-aspect-badge" class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-        <span class="text-xs text-slate-500 font-semibold">Aspect Overview</span>
+        <span class="text-xs text-slate-500 font-semibold">Resumen del Tiempos Verbales</span>
       </div>
       <button id="btn-close-modal" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-full transition cursor-pointer">
         <i class="fas fa-times"></i>
@@ -146,7 +146,7 @@
     <div id="modal-content" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-700"></div>
     <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-100 flex justify-end">
       <button id="btn-modal-return" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition cursor-pointer">
-        Got it (Return to Task)
+        Entendido (Volver al Reto)
       </button>
     </div>
   </div>
@@ -757,7 +757,7 @@ function renderTask() {
   // Feedback Box & Verify Button
   document.getElementById('feedback-box').classList.add('hidden');
   const btnVerify = document.getElementById('btn-verify');
-  btnVerify.innerText = 'Verify (Enter)';
+  btnVerify.innerText = 'Verificar (Enter)';
   btnVerify.disabled = true;
 
   // Render Options
@@ -846,14 +846,14 @@ function verifyAnswer() {
 
   if (isCorrect) {
     feedbackBox.className = 'p-5 rounded-2xl mb-5 border bg-emerald-50/90 border-emerald-200 block transition-all';
-    feedbackTitulo.innerText = 'Excellent!';
+    feedbackTitulo.innerText = '¡Excelente!';
     feedbackTitulo.className = 'font-bold text-base sm:text-lg text-emerald-800';
     feedbackTarget.classList.add('hidden');
   } else {
     feedbackBox.className = 'p-5 rounded-2xl mb-5 border bg-rose-50/90 border-rose-200 block transition-all';
-    feedbackTitulo.innerText = 'Key Distinction / Take Note!';
+    feedbackTitulo.innerText = '¡Toma Nota / Distinción Clave!';
     feedbackTitulo.className = 'font-bold text-base sm:text-lg text-rose-800';
-    feedbackTarget.innerText = `Target: ${current.options[current.correct]}`;
+    feedbackTarget.innerText = `Correcta: ${current.options[current.correct]}`;
     feedbackTarget.classList.remove('hidden');
   }
 
@@ -863,7 +863,7 @@ function verifyAnswer() {
 
   // Update button to Next
   const btnVerify = document.getElementById('btn-verify');
-  btnVerify.innerText = 'Next Challenge → (Enter)';
+  btnVerify.innerText = 'Siguiente Reto → (Enter)';
   btnVerify.disabled = false;
 }
 
@@ -874,11 +874,11 @@ function nextTask() {
     renderTask();
   } else {
     if (currentQuizMode === 'A') {
-      if (confirm('Quiz A completed! Ready to move to Quiz B (Tasks 23-45)?')) {
+      if (confirm('¡Quiz A completado! ¿Quieres pasar al Quiz B (Tareas 23-45)?')) {
         switchQuiz('B');
       }
     } else {
-      alert(`Congratulations! You completed all 45 tasks! Final Score: ${score} / 45.`);
+      alert(`¡Enhorabuena! ¡Has completado las 45 tareas! Puntuación final: ${score} / 45.`);
     }
   }
 }
@@ -956,38 +956,38 @@ document.getElementById('btn-category').onclick = () => {
   if (aspect === 'PRESENT PERFECT') {
     content.innerHTML = `
       <div>
-        <h3 class="font-bold text-slate-900 text-base mb-1">Present Perfect (have / has + past participle)</h3>
-        <p class="text-xs text-slate-600 leading-relaxed">Used when an action occurred in the past but has a <strong>direct connection to the present moment</strong>, accumulated life experience, or an unfinished timeframe.</p>
+        <h3 class="font-bold text-slate-900 text-base mb-1">Present Perfect (have / has + participio)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">Se usa cuando una acción ocurrió en el pasado pero tiene una <strong>conexión directa con el momento presente</strong>, experiencia acumulada de vida o un periodo de tiempo que aún no ha terminado.</p>
       </div>
       <div class="bg-blue-50/60 p-4 rounded-2xl border border-blue-100 space-y-2 text-xs">
-        <p class="font-bold text-blue-950 uppercase tracking-wider text-[11px]">Key Cambridge Triggers:</p>
-        <p class="text-slate-700">• <strong>Unfinished Time:</strong> <em>this week, this year, so far today</em></p>
-        <p class="text-slate-700">• <strong>Life Experience:</strong> <em>ever, never, in my life, three times</em></p>
-        <p class="text-slate-700">• <strong>Present Result:</strong> <em>"I have lost my passport!" (it is missing right now)</em></p>
-        <p class="text-slate-700">• <strong>Immediate Past:</strong> <em>have just finished, recently</em></p>
-        <p class="text-slate-700">• <strong>Starting Point / Duration:</strong> <em>since Monday, for ten years (ongoing)</em></p>
+        <p class="font-bold text-blue-950 uppercase tracking-wider text-[11px]">Marcadores Clave:</p>
+        <p class="text-slate-700">• <strong>Tiempo Abierto:</strong> <em>this week, this year, so far today</em></p>
+        <p class="text-slate-700">• <strong>Experiencia de Vida:</strong> <em>ever, never, in my life, three times</em></p>
+        <p class="text-slate-700">• <strong>Resultado Presente:</strong> <em>"I have lost my passport!" (no lo tengo ahora mismo)</em></p>
+        <p class="text-slate-700">• <strong>Pasado Inmediato:</strong> <em>have just finished, recently</em></p>
+        <p class="text-slate-700">• <strong>Duración / Inicio:</strong> <em>since Monday, for ten years (continúa)</em></p>
       </div>
       <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200 text-xs text-amber-950">
-        <p class="font-bold mb-1">💡 Key Cambridge Rule:</p>
-        <p class="leading-relaxed">Never use the Present Perfect with finished past time markers like <em>yesterday</em>, <em>last week</em>, or <em>ago</em>!</p>
+        <p class="font-bold mb-1">💡 Regla de Oro:</p>
+        <p class="leading-relaxed">¡Nunca uses el Present Perfect con marcadores de tiempo pasado cerrado como <em>yesterday</em>, <em>last week</em> o <em>ago</em>!</p>
       </div>
     `;
   } else {
     content.innerHTML = `
       <div>
-        <h3 class="font-bold text-slate-900 text-base mb-1">Past Simple (V2 / did + base form)</h3>
-        <p class="text-xs text-slate-600 leading-relaxed">Used for actions completed in a <strong>closed, finished time period</strong>. The connection to the present is completely severed.</p>
+        <h3 class="font-bold text-slate-900 text-base mb-1">Past Simple (V2 / did + forma base)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">Se utiliza para acciones completadas en un <strong>periodo de tiempo cerrado y finalizado</strong>. La conexión con el presente está totalmente rota.</p>
       </div>
       <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
-        <p class="font-bold text-slate-900 uppercase tracking-wider text-[11px]">Strict Past Simple Markers:</p>
-        <p class="text-slate-700">• <strong>Explicit Past Markers:</strong> <em>yesterday, last month, last autumn</em></p>
-        <p class="text-slate-700">• <strong>The "-ago" Law:</strong> <em>two days ago, ten minutes ago</em></p>
-        <p class="text-slate-700">• <strong>Specific Dates/Years:</strong> <em>in 2019, in 1845, at 5:00 AM yesterday</em></p>
-        <p class="text-slate-700">• <strong>Completed Life Stage:</strong> <em>when I was a student, during his lifetime</em></p>
+        <p class="font-bold text-slate-900 uppercase tracking-wider text-[11px]">Marcadores Estrictos de Past Simple:</p>
+        <p class="text-slate-700">• <strong>Pasado Explícito:</strong> <em>yesterday, last month, last autumn</em></p>
+        <p class="text-slate-700">• <strong>La ley del "-ago":</strong> <em>two days ago, ten minutes ago</em></p>
+        <p class="text-slate-700">• <strong>Fechas / Años Específicos:</strong> <em>in 2019, in 1845, at 5:00 AM yesterday</em></p>
+        <p class="text-slate-700">• <strong>Etapa de Vida Concluida:</strong> <em>when I was a student, during his lifetime</em></p>
       </div>
       <div class="bg-blue-50/60 p-3.5 rounded-2xl border border-blue-100 text-xs text-blue-900">
-        <p class="font-bold mb-1">Cambridge Formula:</p>
-        <p class="font-mono text-slate-700">Subject + Verb-ed / Irregular 2nd form (e.g. discovered, went, held, struck)</p>
+        <p class="font-bold mb-1">Fórmula:</p>
+        <p class="font-mono text-slate-700">Sujeto + Verbo en pasado / 2ª forma irregular (ej. discovered, went, held, struck)</p>
       </div>
     `;
   }

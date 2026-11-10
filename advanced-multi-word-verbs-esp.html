@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Cris | Advanced Multi-Word Verbs Practice</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,8 +17,25 @@
 </head>
 <body class="bg-[#eef2f6] text-slate-800 font-sans antialiased min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex flex-col justify-start items-center selection:bg-indigo-100">
 
-<!-- Main Card con borde superior en índigo corporativo para avanzado -->
+<!-- Rule Reference Modal -->
+<div id="ruleModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+  <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full text-left relative shadow-2xl border border-slate-200">
+    <span class="absolute top-4 right-5 text-slate-400 hover:text-slate-700 text-2xl font-bold cursor-pointer" onclick="closeModal()">&times;</span>
+    <h3 id="modalTitle" class="text-lg font-bold text-slate-900 mb-3">Category Reference</h3>
+    <p id="modalText" class="text-sm text-slate-700 leading-relaxed"></p>
+  </div>
+</div>
+
+<!-- Main Card con borde superior en índigo corporativo -->
 <div class="max-w-[760px] w-full bg-white rounded-3xl shadow-xl border-x border-b border-slate-200/90 p-5 sm:p-9 relative transition-all" style="border-top: 8px solid #4f46e5 !important;">
+
+  <!-- Final Screen Overlay -->
+  <div id="final-screen" style="display: none;" class="absolute inset-0 bg-white rounded-3xl flex-col justify-center items-center z-10 p-6 box-border text-center">        
+    <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-inner">🏆</div>
+    <h2 class="text-3xl font-extrabold text-slate-900 mb-2">¡Sesión Completada!</h2>
+    <p id="final-stats" class="text-slate-600 mb-6 max-w-md mx-auto font-semibold text-base sm:text-lg"></p>        
+    <button onclick="location.reload()" class="w-full max-w-sm mx-auto bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg cursor-pointer">Reiniciar Práctica</button>    
+  </div>
 
   <!-- Top Bar -->
   <div class="flex justify-between items-center mb-6">
@@ -37,9 +54,9 @@
   </div>
 
   <!-- Quiz Selector Tabs -->
-  <div class="flex gap-2 mb-6 bg-slate-100 p-1.5 rounded-xl">
-    <button id="tabA" class="flex-1 py-2.5 px-3 border-none bg-white font-semibold text-xs sm:text-sm text-indigo-600 rounded-lg cursor-pointer transition shadow-xs" onclick="switchQuiz('A')">Quiz A (List A - 45 Verbs)</button>
-    <button id="tabB" class="flex-1 py-2.5 px-3 border-none bg-transparent font-semibold text-xs sm:text-sm text-slate-600 rounded-lg cursor-pointer transition" onclick="switchQuiz('B')">Quiz B (List B - 45 Verbs)</button>
+  <div class="bg-[#f1f5f9] p-1.5 rounded-2xl flex items-center justify-between mb-8">
+    <button id="tabA" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-indigo-600 shadow-sm transition cursor-pointer" onclick="switchQuiz('A')">Quiz A (List A - 45 Verbs)</button>
+    <button id="tabB" class="py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer" onclick="switchQuiz('B')">Quiz B (List B - 45 Verbs)</button>
   </div>
 
   <!-- Center Brand Title -->
@@ -54,10 +71,10 @@
 
   <!-- Task progress & Score row -->
   <div class="flex justify-between items-center mb-4 text-xs sm:text-sm font-semibold">
-    <span id="pg" class="text-slate-500">Task 1 of 45</span>
+    <span id="pg" class="text-slate-500">Tarea 1 de 45</span>
     <div class="flex items-center gap-4">
-      <span class="text-slate-700">Correct: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
-      <span class="text-slate-700">Streak: <strong id="streak-count" class="text-amber-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Correctas: <strong id="score-display" class="text-emerald-600 font-bold">0</strong></span>
+      <span class="text-slate-700">Racha: <strong id="streak-count" class="text-amber-600 font-bold">0</strong></span>
     </div>
   </div>
 
@@ -74,14 +91,14 @@
   </div>
 
   <!-- Text Input -->
-  <input type="text" id="userInput" placeholder="Type answer(s)..." autocomplete="off" class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-200 rounded-xl focus:border-indigo-600 focus:outline-none mb-3 bg-slate-50 transition">
+  <input type="text" id="userInput" placeholder="Escribe tu respuesta..." autocomplete="off" class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-200 rounded-xl focus:border-indigo-600 focus:outline-none mb-3 bg-slate-50 transition">
 
   <!-- Feedback Box -->
   <div id="feedback" class="h-8 mb-3 font-bold text-sm sm:text-base text-center"></div>
 
   <!-- Verify Button -->
   <button class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-4 rounded-xl text-lg sm:text-xl transition shadow-sm mb-5 flex items-center justify-center cursor-pointer" onclick="checkAnswer()">
-    Verify (Enter)
+    Verificar (Enter)
   </button>
 
   <!-- Hint Box -->
@@ -96,42 +113,24 @@
   <!-- Bottom Buttons Row -->
   <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
     <button id="pBtn" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="prev()">
-      &larr; Previous
+      &larr; Anterior
     </button>
     <button class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="showHint()">
-      Hint 💡
+      Pista 💡
     </button>
     <button class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="revealAnswer()">
-      Show Answer 👁️
+      Ver Respuesta 👁️
     </button>
     <button id="nBtn" class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold py-3.5 px-3 rounded-xl text-sm sm:text-base flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer" onclick="next()">
-      Next &rarr;
+      Siguiente &rarr;
     </button>
   </div>
 
-  <!-- Footer integrado dentro de la tarjeta (al pie de la app) -->
+  <!-- Footer integrado dentro de la tarjeta -->
   <div class="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400">
     &copy; 2026 Teacher Cris. Todos los derechos reservados. | teachercris.online
   </div>
 
-</div>
-
-<!-- Final Screen Modal / Overlay -->
-<div id="final-screen" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-    <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-slate-200">
-        <h1 class="text-2xl font-extrabold text-emerald-600 mb-2">Session Complete! 🎓</h1>
-        <p id="final-stats" class="text-base text-slate-700 mb-6 font-semibold"></p>
-        <button onclick="location.reload()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Restart Practice</button>
-    </div>
-</div>
-
-<!-- Rule Reference Modal -->
-<div id="ruleModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full text-left relative shadow-2xl border border-slate-200">
-        <span class="absolute top-4 right-5 text-slate-400 hover:text-slate-700 text-2xl font-bold cursor-pointer" onclick="closeModal()">&times;</span>        
-        <h3 id="modalTitle" class="text-lg font-bold text-slate-900 mb-3">Category Reference</h3>        
-        <p id="modalText" class="text-sm text-slate-700 leading-relaxed"></p>    
-    </div>
 </div>
 
 <script>    
@@ -245,6 +244,7 @@
     let score = 0; 
     let solvedThisIdx = false;    
 
+    // Selector robusto de voz femenina británica (UK ♀)
     function getBritishFemaleVoice() {
       if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices();
@@ -289,32 +289,17 @@
     function speakCurrentSentence() {
       if (!('speechSynthesis' in window)) return;
       window.speechSynthesis.cancel();
-      
       const card = currentData[idx];
       const sentence = card.q.replace(/___+/g, 'blank').replace(/\([^)]+\)/g, ' ').replace(/[\/]/g, ' ');
       const utterance = new SpeechSynthesisUtterance(sentence);
       utterance.lang = 'en-GB';
+      const voice = getBritishFemaleVoice();
+      if (voice) {
+        utterance.voice = voice;
+      }
       utterance.rate = 0.98;
       utterance.pitch = 1.05;
-
-      const executeSpeech = () => {
-        const voice = getBritishFemaleVoice();
-        if (voice) {
-          utterance.voice = voice;
-        }
-        window.speechSynthesis.speak(utterance);
-      };
-
-      let voices = window.speechSynthesis.getVoices();
-      if (!voices || voices.length === 0) {
-        window.speechSynthesis.onvoiceschanged = () => {
-          executeSpeech();
-        };
-        window.speechSynthesis.getVoices();
-        setTimeout(executeSpeech, 150);
-      } else {
-        executeSpeech();
-      }
+      window.speechSynthesis.speak(utterance);
     }
 
     function openModal() {        
@@ -331,17 +316,17 @@
     function update() {        
         if (idx >= currentData.length) {            
             document.getElementById('final-screen').style.display = 'flex';            
-            document.getElementById('final-stats').innerText = `Tasks completed: ${score}/${currentData.length} | Streak: ${streak}`;            
+            document.getElementById('final-stats').innerText = `Tareas completadas: ${score}/${currentData.length} | Racha: ${streak}`;            
             return;        
         }        
         const card = currentData[idx];        
         document.getElementById('q').innerText = card.q;        
-        document.getElementById('a').innerText = "Accepted: " + card.a.join(' / ');        
-        document.getElementById('expl').innerHTML = "<strong>The Logic Behind the Answer:</strong><br>" + card.expl;        
+        document.getElementById('a').innerText = "Aceptada: " + card.a.join(' / ');        
+        document.getElementById('expl').innerHTML = "<strong>Explicación de la respuesta:</strong><br>" + card.expl;        
         
         let tagName = card.tag.split('-')[1].toUpperCase();
         let tagBgColor = card.tag === 'tag-phrasal' ? 'bg-sky-600' : (card.tag === 'tag-nuance' ? 'bg-amber-600' : (card.tag === 'tag-preposition' ? 'bg-purple-600' : 'bg-emerald-600'));
-        document.getElementById('tagDisplay').innerHTML = `<span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider ${tagBgColor} cursor-pointer shadow-xs">${tagName} (Click for Category ℹ️)</span>`;        
+        document.getElementById('tagDisplay').innerHTML = `<span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider ${tagBgColor} cursor-pointer shadow-xs">${tagName} (Click para ver regla ℹ️)</span>`;        
         
         document.getElementById('a').classList.remove('visible', 'block');
         document.getElementById('a').classList.add('hidden');
@@ -352,7 +337,7 @@
         
         document.getElementById('feedback').innerText = '';        
         document.getElementById('userInput').value = '';        
-        document.getElementById('pg').innerText = `Task ${idx + 1} of ${currentData.length}`;        
+        document.getElementById('pg').innerText = `Tarea ${idx + 1} de ${currentData.length}`;        
         solvedThisIdx = false;        
         document.getElementById('pBtn').disabled = idx === 0;    
     }    
@@ -365,16 +350,16 @@
             const normalizedAns = ans.toLowerCase().replace(/[\/\,]/g, ' ').replace(/\s+/g, ' ').trim();            
             return u === normalizedAns;        });        
         if (isCorrect) {            
-            document.getElementById('feedback').innerText = "CORRECT! ✨";            
-            document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center correct';            
+            document.getElementById('feedback').innerText = "¡CORRECTO! ✨";            
+            document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center text-emerald-600';            
             document.getElementById('a').classList.remove('hidden');
             document.getElementById('a').classList.add('block');            
             document.getElementById('expl').classList.remove('hidden');
             document.getElementById('expl').classList.add('block');            
             if (!solvedThisIdx) { streak++; score++; solvedThisIdx = true; }        
         } else {            
-            document.getElementById('feedback').innerText = "TRY AGAIN ❌";            
-            document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center wrong';            
+            document.getElementById('feedback').innerText = "INTÉNTALO DE NUEVO ❌";            
+            document.getElementById('feedback').className = 'h-8 mb-3 font-bold text-sm sm:text-base text-center text-rose-500';            
             streak = 0;        
         }        
         document.getElementById('streak-count').innerText = streak;        
@@ -421,17 +406,13 @@
         streak = 0;
         solvedThisIdx = false;
 
-        document.getElementById("tabA").className = (type === 'A') ? "flex-1 py-2.5 px-3 border-none bg-white font-semibold text-xs sm:text-sm text-indigo-600 rounded-lg cursor-pointer transition shadow-xs" : "flex-1 py-2.5 px-3 border-none bg-transparent font-semibold text-xs sm:text-sm text-slate-600 rounded-lg cursor-pointer transition";
-        document.getElementById("tabB").className = (type === 'B') ? "flex-1 py-2.5 px-3 border-none bg-white font-semibold text-xs sm:text-sm text-indigo-600 rounded-lg cursor-pointer transition shadow-xs" : "flex-1 py-2.5 px-3 border-none bg-transparent font-semibold text-xs sm:text-sm text-slate-600 rounded-lg cursor-pointer transition";
-        document.getElementById("subTitle").innerText = `Advanced Multi-Word Verbs Practice (Quiz ${type})`;
+        document.getElementById("tabA").className = (type === 'A') ? "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-indigo-600 shadow-sm transition cursor-pointer" : "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer";
+        document.getElementById("tabB").className = (type === 'B') ? "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold bg-white text-indigo-600 shadow-sm transition cursor-pointer" : "py-3 px-4 rounded-xl flex-1 text-center text-sm sm:text-base font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer";
         
+        document.getElementById("subTitle").innerText = `Advanced Multi-Word Verbs Practice (Quiz ${type})`;
         document.getElementById('final-screen').style.display = 'none';
         update();
     }
-
-    document.getElementById('userInput').addEventListener('keypress', (e) => { 
-        if (e.key === 'Enter') checkAnswer(); 
-    });    
 
     document.getElementById('btn-audio').onclick = speakCurrentSentence;
     document.getElementById('btn-reset').onclick = () => {
@@ -443,6 +424,10 @@
         update();
       }
     };
+
+    document.getElementById('userInput').addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') checkAnswer(); 
+    });
 
     update();
 </script>
